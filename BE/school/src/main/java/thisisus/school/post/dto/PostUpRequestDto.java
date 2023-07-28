@@ -1,13 +1,14 @@
 package thisisus.school.post.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Setter;
 import thisisus.school.post.category.PostCategory;
 import thisisus.school.post.domain.Post;
 
 import java.time.LocalDateTime;
 
-@Setter
+@Data
 public class PostUpRequestDto {
 
     private String title;

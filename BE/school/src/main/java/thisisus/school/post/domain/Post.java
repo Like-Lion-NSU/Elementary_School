@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import thisisus.school.domain.Member;
 import thisisus.school.post.category.PostCategory;
+import thisisus.school.post.dto.PostUpRequestDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Post {
 
     @Id
@@ -34,5 +36,17 @@ public class Post {
         this.content=content;
         this.category=category;
         this.createAt=createAt;
+    }
+
+    public void update(PostUpRequestDto postUpRequestDto){
+        if(postUpRequestDto.getTitle()!= null){
+            this.title = postUpRequestDto.getTitle();
+        }
+        if(postUpRequestDto.getContent()!=null){
+            this.content=postUpRequestDto.getContent();
+        }
+        if(postUpRequestDto.getCategory()!=null){
+            this.category=postUpRequestDto.getCategory();
+        }
     }
 }
