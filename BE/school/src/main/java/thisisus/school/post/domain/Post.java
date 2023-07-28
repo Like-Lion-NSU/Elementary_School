@@ -1,17 +1,18 @@
 package thisisus.school.post.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import thisisus.school.domain.Member;
 import thisisus.school.post.category.PostCategory;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Post {
 
     @Id
@@ -24,6 +25,14 @@ public class Post {
     private Long viewCount;
     private LocalDateTime createAt;
 
+    @ManyToOne
     private Member member;
-    private PostLike postLike;
+
+    @Builder
+    public Post(String title, String content, PostCategory category, LocalDateTime createAt){
+        this.title=title;
+        this.content=content;
+        this.category=category;
+        this.createAt=createAt;
+    }
 }

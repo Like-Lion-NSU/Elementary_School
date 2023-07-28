@@ -6,4 +6,5 @@ import thisisus.school.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByEmail(String email);
+    String findByEmail(String email);
 }
