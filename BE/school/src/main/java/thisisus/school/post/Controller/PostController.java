@@ -15,6 +15,8 @@ import thisisus.school.domain.Member;
 import thisisus.school.post.dto.PostResponseDto;
 import thisisus.school.post.service.PostService;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequestMapping("/post")
@@ -57,7 +59,7 @@ public class PostController {
     @GetMapping("/post/{category}")
     public String findPostsByCategory(@PathVariable("category") String category, Model model){
         log.info("[findPostsByCategory] 게시물 카테고리 동작.");
-        Page<Post> postList =  postService.findPostsByCategory(PostCategory.valueOf(category));
+        List<Post> postList =  postService.findPostsByCategory(PostCategory.valueOf(category));
 
         model.addAttribute("postList", postList);
 

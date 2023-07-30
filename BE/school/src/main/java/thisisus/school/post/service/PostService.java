@@ -11,10 +11,13 @@ import thisisus.school.domain.Member;
 import thisisus.school.post.category.PostCategory;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.dto.DetailPostDto;
+import thisisus.school.post.dto.PostListDto;
 import thisisus.school.post.dto.PostUpRequestDto;
 import thisisus.school.post.dto.PostResponseDto;
 import thisisus.school.post.repository.PostRepository;
 import thisisus.school.repository.MemberRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -113,15 +116,15 @@ public class PostService {
         }
 
     }
-
-    public Page<Post> findPostsByCategory(PostCategory category){
-        Page<Post> posts = postRepository.findPostByCategory(category);
+    @Transactional(readOnly = true)
+    public List<Post> findPostsByCategory(PostCategory category){
+        List<Post> posts = postRepository.findPostByCategory(category);
 
         return posts;
 
     }
 
-
+    @Transactional(readOnly = true)
     public DetailPostDto detailPost(Long postId, String category){
         Post post = postRepository.findById(postId).get();
 
@@ -137,5 +140,16 @@ public class PostService {
                 .build();
         return detailPostDto;
     }
+
+
+    /**-----------------------------회원 관련 post--------------------------------------**/
+    @Transactional(readOnly = true)
+    public List<Post> findPostsByUser(Long userId){
+
+        List<Post> posts = postRepository.findPostsByUserId(userId).get();
+        return posts;
+    }
+
+
 
 }
