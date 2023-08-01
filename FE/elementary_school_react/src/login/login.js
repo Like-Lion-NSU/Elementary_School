@@ -1,6 +1,6 @@
 import Lo_J_KakaoLogin from './img/kakao_login.png'
 import Lo_J_GoogleLogin from './img/google_login.png'
-import style from './login.module.css'
+import style from '../css/login.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
