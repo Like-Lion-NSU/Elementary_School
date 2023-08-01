@@ -1,0 +1,31 @@
+.loJFlex{
+    display: flex;
+    flex-direction: column;
+}
+.loJCenter{
+    text-align: center;
+    position: relative;
+}
+.loJLogin_Btn{
+    margin-bottom: 20px;
+}
+.loJInfo {
+    position: absolute;
+    bottom: calc(100% - 120px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4682A9;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+    pointer-events: none; /* 툴팁은 이벤트를 받지 않도록 설정 (아이콘 아래로 위치할 수 있도록 함) */
+  } 
+  .loJLoginTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h2, h3{
+    margin: 10px 5px;
+  }
