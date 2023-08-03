@@ -8,6 +8,7 @@ import Question from "./question/question";
 import Mypage from "./mypage/mypage";
 import Community from "./community/community";
 import PracticeType from "./kiosk/practiceType";
+import MainPage from './main/main';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/community" element={<Community />} />
         <Route path="/practiceType" element={<PracticeType />} />
+        <Route path="/main" element={<PracticeType />} />
       </Routes>
     </>
   );
