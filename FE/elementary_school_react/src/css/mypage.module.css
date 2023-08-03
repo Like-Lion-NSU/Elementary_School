@@ -1,0 +1,42 @@
+.myJCenter{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    height: 95vh; 
+}
+.myJUser{
+    width:8vw;
+}
+.myJFlex{
+    display: flex;
+}
+.myJFlexColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.myJ15Font div{
+    font-size:120%;
+}
+.myJButton{
+    background-color: #91C8E4;
+    border-radius: 10px;
+    width:15vw;
+    height: 10vh;
+    margin:0.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.myJBottom{
+    color:#828080;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #749BC2; 
+}
