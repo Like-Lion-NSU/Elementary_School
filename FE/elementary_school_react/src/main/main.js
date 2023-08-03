@@ -5,7 +5,7 @@ import '../css/main.css';
 const MainPage = () => {
   return (
     <div className="main-page" id="mainE-container">
-      <h1 id="mainE-title">역할을 선택해주세요.</h1>
+      <h1 id="mainE-title">환영합니다.</h1>
       <div className="main-buttons-wrapper">
         <div className="main-buttons">
           <Link to="#" className="mainE-button">
