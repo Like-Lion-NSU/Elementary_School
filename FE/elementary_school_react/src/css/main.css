@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   gap: 3vh;
-  margin-bottom: 3vh;
+  margin-bottom: 5vh;
 }
 
 .mainE-button {
@@ -23,7 +23,7 @@
   width: 30vh;
   height: 30vh;
   border-radius: 5vh;
-  background-color: #f0f0f0;
+  background-color: #F6F4EB;
   border: none;
   cursor: pointer;
   display: flex;

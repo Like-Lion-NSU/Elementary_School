@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/main.css';
+import Sidebar from '../sidebar/sidebar';
 
 const MainPage = () => {
   return (
     <div className="main-page" id="mainE-container">
+      <Sidebar />
       <h1 id="mainE-title">환영합니다.</h1>
       <div className="main-buttons-wrapper">
         <div className="main-buttons">
