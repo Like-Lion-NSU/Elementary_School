@@ -3,19 +3,29 @@
     flex-direction: column;
 }
 .loJCenter{
-    text-align: center;
-    position: relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    height: 100vh; 
+}
+.loJLogo{
+  width:8vw;
 }
 .loJLogin_Btn{
-    margin-bottom: 20px;
+    margin-top: 2vh;
+    display: inline-block;
+    text-align: center;
 }
 .loJInfo {
     position: absolute;
-    bottom: calc(100% - 120px);
-    left: 50%;
     transform: translateX(-50%);
     background-color: #4682A9;
+    left:50%;
     color: #fff;
+    top:70px;
+    width:20vw;
+    text-align: center;
     padding: 10px;
     border-radius: 5px;
     z-index: 1;
@@ -25,7 +35,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
-  h2, h3{
-    margin: 10px 5px;
+  .loJImgWidth{
+    width:20vw;
+  }
+  h1, h2{
+    margin: 0.5vw;
+  }
+  h1{
+    font-size: 2rem;
   }
