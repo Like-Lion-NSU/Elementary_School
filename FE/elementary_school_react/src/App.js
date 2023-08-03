@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./login/login";
 import Role from "./role/role";
 import Kiosk from "./kiosk/kiosk";
@@ -11,7 +11,7 @@ import Community from "./community/community";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/role" element={<Role />} />
@@ -21,7 +21,7 @@ function App() {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/community" element={<Community />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
