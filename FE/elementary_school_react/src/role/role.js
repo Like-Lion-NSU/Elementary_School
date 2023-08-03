@@ -11,7 +11,7 @@ const RolePage = () => {
           <span role="img" aria-label="Teacher">👩‍🏫</span>
           <div className='roleE-role'>선생님</div>
         </Link>
-        <Link to="#" className="roleE-button">
+        <Link to="/main" className="roleE-button">
           <span role="img" aria-label="Student">👩‍🎓</span>
           <div className='roleE-role'>학생</div>
         </Link>
