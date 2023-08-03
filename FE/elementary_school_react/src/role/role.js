@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './role.css';
+import '../css/role.css';
 
 const RolePage = () => {
   const roleEGoToTeacherPage = () => {
