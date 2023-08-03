@@ -7,7 +7,7 @@
 }
 
 #roleE-title {
-  font-size: 3vh;
+  font-size: 4vh;
   margin-bottom: 3vh;
 }
 
@@ -19,9 +19,9 @@
 
 .roleE-button {
   font-size: 10vh;
-  width: 30vh;
-  height: 30vh;
-  border-radius: 10px;
+  width: 32vh;
+  height: 32vh;
+  border-radius: 5vh;
   background-color: #f0f0f0;
   border: none;
   cursor: pointer;
@@ -36,6 +36,6 @@
 }
 
 .roleE-role {
-  font-size: 3vh;
+  font-size: 4vh;
   margin-top: 1vh;
 }
