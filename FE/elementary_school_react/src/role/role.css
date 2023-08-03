@@ -1,32 +1,41 @@
 #roleE-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; 
-  }
-  
-  #roleE-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .role-buttons {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .roleE-button {
-    font-size: 50px;
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .roleE-button span {
-    display: block;
-    margin: auto;
-  }  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#roleE-title {
+  font-size: 3vh;
+  margin-bottom: 3vh;
+}
+
+.role-buttons {
+  display: flex;
+  align-items: center;
+  gap: 3vh;
+}
+
+.roleE-button {
+  font-size: 10vh;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.roleE-button span {
+  display: block;
+}
+
+.roleE-role {
+  font-size: 3vh;
+  margin-top: 1vh;
+}
