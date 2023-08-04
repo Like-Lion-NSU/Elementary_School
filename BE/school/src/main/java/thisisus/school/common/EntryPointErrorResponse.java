@@ -1,4 +1,4 @@
-package thisisus.school.post.dto;
+package thisisus.school.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BaseResponseDto {
-    private boolean success;
-
-    private int code;
-
+public class EntryPointErrorResponse {
     private String msg;
 }
