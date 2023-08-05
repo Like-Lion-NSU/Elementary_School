@@ -7,10 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import thisisus.school.exception.CustomException;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
+import thisisus.school.post.domain.PostLiked;
 import thisisus.school.post.dto.PostRequestDto;
+import thisisus.school.post.repository.PostLikeRepository;
 import thisisus.school.post.repository.PostRepository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static thisisus.school.exception.ExceptionCode.SERVER_ERROR;
@@ -21,6 +24,7 @@ import static thisisus.school.exception.ExceptionCode.SERVER_ERROR;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostLikeRepository postLikeRepository;
 
     /*
     * 게시글 등록
@@ -108,15 +112,55 @@ public class PostService {
         }
 
     }
-    @Transactional
-    public Boolean validatedMemberAndPost(Long postId, Long memberId){
-        Post post = postRepository.findById(postId).get();
-        Post user = postRepository.findByMemberId(memberId);
-        if(post.getMemberId().equals(user.getMemberId())){
-            return true;
-        }else{
-            return false;
+    /*
+     * 좋아요한 게시글 다건 조회
+     * 500(SERVER_ERROR)
+     * */
+    @Transactional(readOnly = true)
+    public List<Post> findAllLikedPostsByUser(Long memberId){
+        List<Post> posts = new ArrayList<>();
+        try{
+            List<PostLiked> postLikes = postLikeRepository.findByMemberIdAndIsDeletedIsFalse(memberId);
+
+             postLikes.stream().map(postLike->posts.add(postLike.getPost()));
+
+            return posts;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
         }
+
     }
 
+    @Transactional
+    public Post saveLike(Long postId, Long memberId){
+        try{
+            Post post = postRepository.findById(postId).get();
+            PostLiked postLiked = PostLiked.builder()
+                    .post(post)
+                    .memberId(memberId)
+                    .build();
+            postLikeRepository.save(postLiked);
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+
+    }
+
+
+    @Transactional
+    public Post deletedLike(Long likeId){
+        try{
+            PostLiked postLiked = postLikeRepository.findById(likeId).get();
+            postLiked.delete();
+            Post post = postRepository.findById(postLiked.getPost().getId()).get();
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+
+    }
 }

@@ -1,7 +1,10 @@
 package thisisus.school.post.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import thisisus.school.post.domain.PostLike;
+import thisisus.school.post.domain.PostLiked;
 
-public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
+import java.util.List;
+
+public interface PostLikeRepository extends JpaRepository<PostLiked, Long> {
+    List<PostLiked> findByMemberIdAndIsDeletedIsFalse(Long memberId);
 }
