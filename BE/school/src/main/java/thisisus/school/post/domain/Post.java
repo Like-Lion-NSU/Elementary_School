@@ -27,7 +27,9 @@ public class Post extends BaseEntity {
     private Long viewCount;
     private Long memberId;
     @OneToMany(mappedBy = "post")
-    private List<PostLike> postLike = new ArrayList<>();
+    private List<PostLiked> likes = new ArrayList<>();
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
 
 
     @Builder
