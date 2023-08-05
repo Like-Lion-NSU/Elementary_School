@@ -2,154 +2,121 @@ package thisisus.school.post.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import thisisus.school.domain.Member;
-import thisisus.school.post.category.PostCategory;
+import thisisus.school.exception.CustomException;
 import thisisus.school.post.domain.Post;
-import thisisus.school.post.dto.DetailPostDto;
-import thisisus.school.post.dto.PostListDto;
-import thisisus.school.post.dto.PostUpRequestDto;
-import thisisus.school.post.dto.PostResponseDto;
+import thisisus.school.post.domain.PostCategory;
+import thisisus.school.post.dto.PostRequestDto;
 import thisisus.school.post.repository.PostRepository;
-import thisisus.school.repository.MemberRepository;
+
 
 import java.util.List;
 
+import static thisisus.school.exception.ExceptionCode.SERVER_ERROR;
+
 @Service
 @Slf4j
-@Transactional
 @RequiredArgsConstructor
 public class PostService {
-    private final MemberRepository memberRepository;
 
     private final PostRepository postRepository;
 
-    // 게시글 작성
-    public PostResponseDto savePost(PostUpRequestDto postUpRequestDto) throws Exception{
-        log.info("[savePost] 현재 사용자 정보 조회");
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-
-        Member member = (Member) principal;
-        log.info("User uid : {}", member.getEmail());
-
-        Member user = memberRepository.findByEmail(member.getEmail()).orElse(null);
-        log.info("[savePost] 게시글 저장 로직 시작합니다. id : {}", user.getEmail());
-
-        Post post = postUpRequestDto.toEntity();
-        post.setMember(user);
-
-        postRepository.save(post);
-
-        PostResponseDto postResponseDto = PostResponseDto.builder()
-                .title(post.getTitle())
-                .content("게시글 올리기 성공")
-                .build();
-
-        return postResponseDto;
-    }
-
-    //게시글 수정
-    public PostResponseDto updatePost(Long postId, PostUpRequestDto postUpRequestDto){
-        log.info("[savePost] 현재 사용자 정보 조회");
-
-        Post post = postRepository.findById(postId).get();
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-
-        Member member = (Member) principal;
-        log.info("User uid : {}", member.getEmail());
-        log.info("[savePost] 게시글 수정 로직 시작합니다. id : {}", member.getEmail());
-
-        if(member.getEmail().equals(post.getMember().getEmail())){
-            post.update(postUpRequestDto);
+    /*
+    * 게시글 등록
+    * 500(SERVER_ERROR)
+    * */
+    @Transactional
+    public Post savePost(PostRequestDto postRequestDto){
+        try{
+            Post post = Post.builder()
+                    .title(postRequestDto.getTitle())
+                    .content(postRequestDto.getContent())
+                    .category(PostCategory.valueOf(postRequestDto.getCategory()))
+                    .build();
             postRepository.save(post);
-
-            PostResponseDto postResponseDto = PostResponseDto.builder()
-                    .title(post.getTitle())
-                    .content("게시글 수정 성공")
-                    .build();
-            return postResponseDto;
-        }else {
-
-            PostResponseDto postResponseDto = PostResponseDto.builder()
-                    .title(post.getTitle())
-                    .content("게시글 수정 실패, 본인의 게시글이 아닙니다.")
-                    .build();
-
-            return postResponseDto;
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
         }
+
     }
 
+    /*
+     * 내가 쓴 게시글 다건 조회
+     * 500(SERVER_ERROR)
+     * */
+    @Transactional(readOnly = true)
+    public List<Post> findAllPostsByUser(Long memberId){
+        try{
+           List<Post> posts = postRepository.findAllByMemberIdAndIsDeletedIsFalse(memberId);
+            return posts;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
 
-    public PostResponseDto deletePost(Long postId){
-        log.info("[savePost] 현재 사용자 정보 조회");
+    }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
+    /*
+     * 게시글 단건 조회
+     * 500(SERVER_ERROR)
+     * */
+    @Transactional(readOnly = true)
+    public Post findOnePost(Long postId){
+        try{
+            Post post = postRepository.findById(postId).get();
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
 
-        Member member = (Member) principal;
+    }
 
+    /*
+     * 게시글 수정
+     * 500(SERVER_ERROR)
+     * */
+    @Transactional
+    public Post updatePost(Long postId, PostRequestDto postRequestDto){
+        try{
+            Post post = postRepository.findById(postId).get();
+            post.updatePost(postRequestDto);
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+
+    }
+
+    /*
+     * 게시글 삭제
+     * 500(SERVER_ERROR)
+     * */
+    @Transactional
+    public Post deletePost(Long postId){
+        try{
+            Post post = postRepository.findById(postId).get();
+            post.delete();
+            return post;
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+
+    }
+    @Transactional
+    public Boolean validatedMemberAndPost(Long postId, Long memberId){
         Post post = postRepository.findById(postId).get();
-        if(post.getMember().getEmail().equals(member.getEmail())){
-            postRepository.delete(post);
-
-            PostResponseDto postResponseDto = PostResponseDto.builder()
-                    .title(post.getTitle())
-                    .content("게시글 삭제 성공")
-                    .build();
-
-            return postResponseDto;
+        Post user = postRepository.findByMemberId(memberId);
+        if(post.getMemberId().equals(user.getMemberId())){
+            return true;
         }else{
-            PostResponseDto postResponseDto = PostResponseDto.builder()
-                    .title(post.getTitle())
-                    .content("게시글 삭제 실패, 본인의 게시글이 아닙니다.")
-                    .build();
-
-            return postResponseDto;
+            return false;
         }
-
     }
-    @Transactional(readOnly = true)
-    public List<Post> findPostsByCategory(PostCategory category){
-        List<Post> posts = postRepository.findPostByCategory(category);
-
-        return posts;
-
-    }
-
-    @Transactional(readOnly = true)
-    public DetailPostDto detailPost(Long postId, String category){
-        Post post = postRepository.findById(postId).get();
-
-        Member member = post.getMember();
-        log.info("[detailPost] 게시물 세부사항 조회 로직 시작 PostId : {}, Member : {}", postId, member.getEmail());
-
-        DetailPostDto detailPostDto = DetailPostDto.builder()
-                .title(post.getTitle())
-                .content(post.getContent())
-                .category(category)
-                .email(member.getEmail())
-                .postId(post.getId())
-                .build();
-        return detailPostDto;
-    }
-
-
-    /**-----------------------------회원 관련 post--------------------------------------**/
-    @Transactional(readOnly = true)
-    public List<Post> findPostsByUser(Long userId){
-
-        List<Post> posts = postRepository.findPostsByUserId(userId).get();
-        return posts;
-    }
-
-
 
 }

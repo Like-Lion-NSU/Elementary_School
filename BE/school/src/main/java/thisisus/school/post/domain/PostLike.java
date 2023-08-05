@@ -2,7 +2,6 @@ package thisisus.school.post.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import thisisus.school.domain.Member;
 
 import javax.persistence.*;
 
@@ -15,10 +14,7 @@ public class PostLike {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
    private boolean like;
-
-   @ManyToOne
-   private Member member;
-
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "post_id")
    private Post post;
 }

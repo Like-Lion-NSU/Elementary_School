@@ -1,77 +1,173 @@
 package thisisus.school.post.Controller;
 
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import thisisus.school.post.category.PostCategory;
+import thisisus.school.common.DefaultResponseDto;
 import thisisus.school.post.domain.Post;
-import thisisus.school.post.dto.DetailPostDto;
-import thisisus.school.post.dto.PostUpRequestDto;
-import thisisus.school.domain.Member;
-import thisisus.school.post.dto.PostResponseDto;
+import thisisus.school.post.dto.PostDefaultResponseDto;
+import thisisus.school.post.dto.PostRequestDto;
 import thisisus.school.post.service.PostService;
 
+
+import javax.validation.Valid;
+import java.lang.reflect.Member;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
-@RequestMapping("/post")
+@Api(tags = "Post")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
-    //게시물 작성
-    @PostMapping("/write")
-    public PostResponseDto postWrite(PostUpRequestDto postUpRequestDto) throws Exception{
-        log.info("[postWrite] 게시물 작성 동작");
+    @ApiOperation(value="게시글 등록")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POST_SAVE",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POST_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+})
+    @GetMapping("/post")
+    public ResponseEntity<DefaultResponseDto> savePost(/*HttpServletRequest request,*/ PostRequestDto postRequestDto){
 
-        PostResponseDto postResponseDto = postService.savePost(postUpRequestDto);
+        Post post = postService.savePost(postRequestDto);
 
-        log.info("[postWrite] 게시물 작성 성공");
-
-        return postResponseDto;
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POST_REGISTERED")
+                        .responseMessage("게시글 등록 완료")
+                        .data(response)
+                        .build());
     }
 
-    //게시물 수정
-    @PostMapping("/{postId}/update")
-    public PostResponseDto updatePost(@PathVariable("postId")Long postId, PostUpRequestDto postUpRequestDto){
-        log.info("[updatePost] 게시물 수정 동작");
 
-        PostResponseDto postResponseDto = postService.updatePost(postId, postUpRequestDto);
+    @ApiOperation(value="내가 쓴 게시글 다건 조회")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POSTS_FOUND",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POSTS_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @GetMapping("/user/posts")
+    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(/*HttpServletRequest request,*/@RequestParam("memberId")Long memberId){
+        List<Post> posts = postService.findAllPostsByUser(memberId);
 
-        return postResponseDto;
+        List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
+
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POSTS_FOUND")
+                        .responseMessage("내가 쓴 게시글 다건 조회 완료")
+                        .data(response)
+                        .build());
     }
 
-    //게시물 삭제
-    @DeleteMapping("/post/{postId}/delete")
-    public PostResponseDto deletePost(@PathVariable("postId")Long postId){
-        log.info("[deletePost] 게시물 삭제 동작.");
-
-        return postService.deletePost(postId);
-    }
-
-    //카테고리별로 게시물 조회
-    @GetMapping("/post/{category}")
-    public String findPostsByCategory(@PathVariable("category") String category, Model model){
-        log.info("[findPostsByCategory] 게시물 카테고리 동작.");
-        List<Post> postList =  postService.findPostsByCategory(PostCategory.valueOf(category));
-
-        model.addAttribute("postList", postList);
-
-        return "/";
-    }
-
-    //특정 게시글 1개 조회
+    @ApiOperation(value="게시물 단건 조회")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POST_FOUND",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POST_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
     @GetMapping("/post/{category}/{postId}")
-    public String detailPost(@PathVariable("category")String category, @PathVariable("postId")Long postId, Model model){
-        log.info("[detailPost] 특정 게시물 조회 동작.");
-        DetailPostDto detailPost = postService.detailPost(postId,category);
-        return "/";
+    public ResponseEntity<DefaultResponseDto> findOnePost(@RequestParam("postId") Long postId){
+
+        Post post = postService.findOnePost(postId);
+
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POST_FOUND")
+                        .responseMessage("게시물 단건 조회 완료")
+                        .data(response)
+                        .build());
     }
+
+    @ApiOperation(value="게시글 수정")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POST_UPDATEED",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POST_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @PutMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> updatePost(@RequestParam("postId") Long postId,@RequestParam("memberId") Long memberId, PostRequestDto postRequestDto ){
+
+        Post post = postService.updatePost(postId, postRequestDto);
+
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POST_UPDATEED")
+                        .responseMessage("게시글 수정 완료")
+                        .data(response)
+                        .build());
+    }
+
+    @ApiOperation(value="게시글 삭제")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POST_DELETED",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POST_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @PostMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> deletePost(@RequestParam("postId") Long postId, @RequestParam("memberId") Long memberId ){
+
+        Post post = postService.deletePost(postId);
+
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POST_DELETED")
+                        .responseMessage("게시글 삭제 완료")
+                        .data(response)
+                        .build());
+    }
+
+
+
 
 }

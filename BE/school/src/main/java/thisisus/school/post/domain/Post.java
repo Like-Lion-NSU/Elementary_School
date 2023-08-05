@@ -1,52 +1,56 @@
 package thisisus.school.post.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import thisisus.school.domain.Member;
-import thisisus.school.post.category.PostCategory;
-import thisisus.school.post.dto.PostUpRequestDto;
+import lombok.*;
+import org.springframework.context.support.BeanDefinitionDsl;
+import thisisus.school.common.BaseEntity;
+import thisisus.school.post.dto.PostRequestDto;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Post {
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
     private String title;
     private String content;
+    @Enumerated(EnumType.STRING)
     private PostCategory category;
     private Long likeCount;
     private Long viewCount;
-    private LocalDateTime createAt;
+    private Long memberId;
+    @OneToMany(mappedBy = "post")
+    private List<PostLike> postLike = new ArrayList<>();
 
-    @ManyToOne
-    private Member member;
 
     @Builder
-    public Post(String title, String content, PostCategory category, LocalDateTime createAt){
+    public Post(String title, String content, PostCategory category){
         this.title=title;
         this.content=content;
         this.category=category;
-        this.createAt=createAt;
+        this.setDeleted(false);
     }
 
-    public void update(PostUpRequestDto postUpRequestDto){
-        if(postUpRequestDto.getTitle()!= null){
-            this.title = postUpRequestDto.getTitle();
-        }
-        if(postUpRequestDto.getContent()!=null){
-            this.content=postUpRequestDto.getContent();
-        }
-        if(postUpRequestDto.getCategory()!=null){
-            this.category=postUpRequestDto.getCategory();
-        }
+    public void updatePost(PostRequestDto postRequestDto){
+        this.title=postRequestDto.getTitle();
+        this.content=postRequestDto.getContent();
+        this.category= PostCategory.valueOf(postRequestDto.getCategory());
+
     }
+
+    public void delete(){
+        this.title=null;
+        this.content=null;
+        this.category=null;
+        this.setDeleted(true);
+    }
+
+
 }
