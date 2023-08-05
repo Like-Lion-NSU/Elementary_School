@@ -13,21 +13,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.common.DefaultResponseDto;
 import thisisus.school.post.domain.Post;
+import thisisus.school.post.dto.CommentDefaultResponseDto;
 import thisisus.school.post.dto.PostDefaultResponseDto;
 import thisisus.school.post.dto.PostRequestDto;
+import thisisus.school.post.repository.PostLikeRepository;
 import thisisus.school.post.service.PostService;
 
 
-import javax.validation.Valid;
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
-@Api(tags = "Post")
+@Api(tags = "게시글")
 @RequiredArgsConstructor
 public class PostController {
+    private final PostLikeRepository postLikeRepository;
 
     private final PostService postService;
 
@@ -44,7 +45,7 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
 })
-    @GetMapping("/post")
+    @PostMapping("/post")
     public ResponseEntity<DefaultResponseDto> savePost(/*HttpServletRequest request,*/ PostRequestDto postRequestDto){
 
         Post post = postService.savePost(postRequestDto);
@@ -153,7 +154,7 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PostMapping("/user/{memberId}/post/{category}/{postId}")
+    @DeleteMapping("/user/{memberId}/post/{category}/{postId}")
     public ResponseEntity<DefaultResponseDto> deletePost(@RequestParam("postId") Long postId, @RequestParam("memberId") Long memberId ){
 
         Post post = postService.deletePost(postId);
@@ -167,7 +168,86 @@ public class PostController {
                         .build());
     }
 
+    @ApiOperation(value = "좋아요한 게시글 다건 조회")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "LIKE_FOUND",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "COMMENT_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @GetMapping("/user/posts/likes")
+    public ResponseEntity<DefaultResponseDto> findAllLikedPostsByUser(Long userId) {
 
+        List<Post> posts = postService.findAllLikedPostsByUser(userId);
+
+        List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("LIKE_FOUND")
+                        .responseMessage("내가 쓴 댓글 조회 완료")
+                        .data(response)
+                        .build());
+    }
+
+    @ApiOperation(value = "좋아요 등록")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "LIKE_WORK",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "COMMENT_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @PostMapping("/post/{category}/{postId}/like")
+    public ResponseEntity<DefaultResponseDto> saveLike(@RequestParam("postId") Long postId, Long memberId) {
+
+        Post post = postService.saveLike(postId, memberId);
+
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("LIKE_WORK")
+                        .responseMessage("좋아요 등록/취소")
+                        .data(response)
+                        .build());
+    }
+
+    @ApiOperation(value = "좋아요 취소")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "LIKE_WORK",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "COMMENT_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @DeleteMapping("/post/{category}/{postId}/like/{likeId}")
+    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId, Long memberId, @RequestParam("likeId") Long likeId) {
+
+        Post post = postService.deletedLike(likeId);
+
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("LIKE_WORK")
+                        .responseMessage("좋아요 등록/취소")
+                        .data(response)
+                        .build());
+    }
 
 
 }
