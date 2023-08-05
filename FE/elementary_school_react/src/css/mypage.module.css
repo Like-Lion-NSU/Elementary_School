@@ -39,4 +39,38 @@
     justify-content: center;
     align-items: center;
     border-top: 1px solid #749BC2; 
+    cursor: pointer;
+}
+.myJdropUser{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(70, 130, 169, 0.8); /* 배경 어둡게 처리 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myJuserDropContent{
+    background-color: #F6F4EB;
+    padding:2vw;
+    border-radius: 30px;
+    box-shadow: 10px 10px 0 rgb(53, 103, 136, 0.8);
+}
+.myJdropFlex{
+    display: flex;
+    justify-content: space-between;
+}
+.myJdropButton{
+    font-size:30px;
+    width:12vw;
+    border-radius: 10px;
+    padding:0.4vw;
+    text-align: center;
+    margin-top:1vw;
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+    font-weight: bold;
 }
