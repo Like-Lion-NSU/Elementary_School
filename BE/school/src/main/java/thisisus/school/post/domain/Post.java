@@ -1,7 +1,6 @@
 package thisisus.school.post.domain;
 
 import lombok.*;
-import org.springframework.context.support.BeanDefinitionDsl;
 import thisisus.school.common.BaseEntity;
 import thisisus.school.post.dto.PostRequestDto;
 
@@ -23,20 +22,23 @@ public class Post extends BaseEntity {
     private String content;
     @Enumerated(EnumType.STRING)
     private PostCategory category;
-    private Long likeCount;
-    private Long viewCount;
+    private int likeCount;
+    private int viewCount;
     private Long memberId;
     @OneToMany(mappedBy = "post")
     private List<PostLiked> likes = new ArrayList<>();
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
-
+    @OneToMany(mappedBy = "post")
+    private List<PostPhoto> postPhotos = new ArrayList<>();
 
     @Builder
     public Post(String title, String content, PostCategory category){
         this.title=title;
         this.content=content;
         this.category=category;
+        this.likeCount=0;
+        this.viewCount=0;
         this.setDeleted(false);
     }
 

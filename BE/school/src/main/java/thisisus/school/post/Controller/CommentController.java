@@ -44,8 +44,8 @@ public class CommentController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PostMapping("/post/{category}/{postId}/comment")
-    public ResponseEntity<DefaultResponseDto> saveComment(@RequestParam("category") String category, @RequestParam("postId") Long postId, CommentRequestDto commentRequestDto) {
+    @PostMapping(value="/post/{category}/{postId}/comment",consumes = "multipart/form-data")
+    public ResponseEntity<DefaultResponseDto> saveComment(@RequestParam("category") String category, @RequestParam("postId") Long postId, @ModelAttribute CommentRequestDto commentRequestDto) throws Exception{
 
         Comment comment = commentService.saveComment(postId, commentRequestDto);
 
@@ -71,9 +71,9 @@ public class CommentController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PutMapping("/post/{category}/{postId}/comment/{commentId}")
+    @PutMapping(value="/post/{category}/{postId}/comment/{commentId}",consumes = "multipart/form-data")
     public ResponseEntity<DefaultResponseDto> updateComment(@RequestParam("category") String category, @RequestParam("postId") Long postId,
-                                                            CommentRequestDto commentRequestDto, @RequestParam("commentId") Long commentId) {
+                                                            @ModelAttribute CommentRequestDto commentRequestDto, @RequestParam("commentId") Long commentId)throws Exception {
         Comment comment = commentService.updateComment(commentId, commentRequestDto);
 
         CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);

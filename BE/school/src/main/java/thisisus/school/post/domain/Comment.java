@@ -6,6 +6,8 @@ import thisisus.school.common.BaseEntity;
 import thisisus.school.post.dto.CommentRequestDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,6 +24,9 @@ public class Comment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name="post_id")
     private Post post;
+
+    @OneToMany(mappedBy = "comment")
+    private List<CommentPhoto> commentPhoto = new ArrayList<>();
 
     private Long memberId;
 
