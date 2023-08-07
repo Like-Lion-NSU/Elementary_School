@@ -1,15 +1,21 @@
 package thisisus.school.member.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Member {
 
     @Id
@@ -23,17 +29,40 @@ public class Member {
 
     private String email;       // 회원 이메일
 
-    private String birth;
-
     /**
      * 회원 가입 후 선택에 따라 role 정해짐
      */
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     /**
      * 기본 point 값 얼마?
      */
     private Long point;
 
-    private Calendar lastLogin;
+    private LocalDateTime lastLogin;
+
+    private String provider;
+
+    public Member update(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
+
+    @Builder
+    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, String provider) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.point = point;
+        this.lastLogin = lastLogin;
+        this.provider = provider;
+    }
+
+
 }
