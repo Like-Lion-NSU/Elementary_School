@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/question.css";
+import "../css/policy.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,22 +9,32 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Sidebar from "../sidebar/sidebar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Question = () => {
+const Policy = () => {
   return (
     <div className="questionJ-page" id="questionJ-container">
       <div className="questionJ-devide">
         <div className="questionJ-Upside">
           <div className="questionJ-title">
-            <h2>질문 게시판</h2>
+            <h2>정책 정보</h2>
           </div>
-          <div className="questionJ-search">
-            <h2 style={{ color: "black" }}>
-              <FontAwesomeIcon icon={faSearch} />
-            </h2>
-            <input className="search" placeholder="검색어를 입력하세요" />
+          <div className="policyJ-category">
+            <div>
+              <input type="radio" name="category" value="노년층" />{" "}
+              <span>노년층</span>
+            </div>
+            <div>
+              <input type="radio" name="category" value="사회취약층" />{" "}
+              <span>사회취약층</span>
+            </div>
+            <div>
+              <input type="radio" name="category" value="농어촌" />{" "}
+              <span>농어촌</span>
+            </div>
+            <div>
+              <input type="radio" name="category" value="장애인" />{" "}
+              <span>장애인</span>
+            </div>
           </div>
         </div>
         <div className="questionJ-table" border>
@@ -32,9 +42,10 @@ const Question = () => {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">게시물 제목</TableCell>
-                  <TableCell align="center">작성자</TableCell>
-                  <TableCell align="right">조회수</TableCell>
+                  <TableCell align="left">정책명</TableCell>
+                  <TableCell align="center">정책내용요약</TableCell>
+                  <TableCell align="right">대상자</TableCell>
+                  <TableCell align="right">디데이</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -42,15 +53,18 @@ const Question = () => {
                   <TableCell>1</TableCell>
                   <TableCell align="center">2</TableCell>
                   <TableCell align="right">3</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>1</TableCell>
-                  <TableCell align="center">2</TableCell>
                   <TableCell align="right">3</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>1</TableCell>
                   <TableCell align="center">2</TableCell>
+                  <TableCell align="right">3</TableCell>
+                  <TableCell align="right">3</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>1</TableCell>
+                  <TableCell align="center">2</TableCell>
+                  <TableCell align="right">3</TableCell>
                   <TableCell align="right">3</TableCell>
                 </TableRow>
               </TableBody>
@@ -64,4 +78,4 @@ const Question = () => {
     </div>
   );
 };
-export default Question;
+export default Policy;

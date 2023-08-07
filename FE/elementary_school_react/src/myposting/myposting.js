@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/question.css";
+import "../css/mine.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,22 +9,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Sidebar from "../sidebar/sidebar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Question = () => {
+const Posting = () => {
   return (
     <div className="questionJ-page" id="questionJ-container">
       <div className="questionJ-devide">
         <div className="questionJ-Upside">
           <div className="questionJ-title">
-            <h2>질문 게시판</h2>
-          </div>
-          <div className="questionJ-search">
-            <h2 style={{ color: "black" }}>
-              <FontAwesomeIcon icon={faSearch} />
-            </h2>
-            <input className="search" placeholder="검색어를 입력하세요" />
+            <h2>내가 쓴 글</h2>
           </div>
         </div>
         <div className="questionJ-table" border>
@@ -33,7 +25,7 @@ const Question = () => {
               <TableHead>
                 <TableRow>
                   <TableCell align="left">게시물 제목</TableCell>
-                  <TableCell align="center">작성자</TableCell>
+                  <TableCell align="center">작성일</TableCell>
                   <TableCell align="right">조회수</TableCell>
                 </TableRow>
               </TableHead>
@@ -64,4 +56,4 @@ const Question = () => {
     </div>
   );
 };
-export default Question;
+export default Posting;
