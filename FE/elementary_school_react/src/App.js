@@ -7,16 +7,12 @@ import Main from "./main/main";
 import Question from "./question/question";
 import Mypage from "./mypage/mypage";
 import PracticeType from "./kiosk/practiceType";
-<<<<<<< HEAD
 import MainPage from "./main/main";
-import Sidebar from "./sidebar/sidebar";
 import Posting from "./myposting/myposting";
 import Comment from "./mycomment/mycomment";
 import Policy from "./policy/policy";
-=======
-import Sidebar from './sidebar/sidebar';
-import Write from './write/write';
->>>>>>> feature-community-E
+import Sidebar from "./sidebar/sidebar";
+import Write from "./write/write";
 
 function App() {
   return (
@@ -30,13 +26,10 @@ function App() {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/practiceType" element={<PracticeType />} />
         <Route path="/sidebar" element={<Sidebar />} />
-<<<<<<< HEAD
         <Route path="/posting" element={<Posting />} />
         <Route path="/comment" element={<Comment />} />
         <Route path="/policy" element={<Policy />} />
-=======
         <Route path="/write" element={<Write />} />
->>>>>>> feature-community-E
       </Routes>
     </>
   );
