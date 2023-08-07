@@ -10,6 +10,7 @@ import Community from "./community/community";
 import PracticeType from "./kiosk/practiceType";
 import MainPage from './main/main';
 import Sidebar from './sidebar/sidebar';
+import Shop from './shop/shop';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/practiceType" element={<PracticeType />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
     </>
   );
