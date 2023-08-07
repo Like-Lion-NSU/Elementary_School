@@ -1,0 +1,32 @@
+.sidebar {
+    background-color: #f6f4eb;
+    padding: 2vh;
+    border-radius: 3vh;
+    width: 12vh;
+    position: fixed;
+    top: 50vh;
+    right: 10vh;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  
+  .sidebarE-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebarE-list li {
+    margin-bottom: 3vh;
+    margin-top: 2.5vh;
+  }
+  
+  .sidebarE-list li a {
+    text-decoration: none;
+    color: black;
+    font-size: 2.5vh;
+  }
+  
+  .sidebarE-list li a:hover {
+    color: #4682A9;
+  }  
