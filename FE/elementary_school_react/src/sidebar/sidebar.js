@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../css/sidebar.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../css/sidebar.css";
 
 const Sidebar = () => {
   return (
@@ -16,10 +16,10 @@ const Sidebar = () => {
           <Link to="/practiceType">연습하기</Link>
         </li>
         <li>
-          <Link to="#">정책정보</Link>
+          <Link to="/policy">정책정보</Link>
         </li>
         <li>
-          <Link to="#">질문게시판</Link>
+          <Link to="/question">질문게시판</Link>
         </li>
         <li>
           <Link to="/mypage">마이페이지</Link>
