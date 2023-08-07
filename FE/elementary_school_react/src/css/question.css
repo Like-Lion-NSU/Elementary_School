@@ -1,0 +1,32 @@
+/* 사이드바와 영역 나눔 */
+.questionJ-devide {
+  width: 80vw;
+}
+
+.questionJ-sidebar {
+  width: 20vw;
+}
+/* 소통해요 페이지 상단 */
+.questionJ-Upside {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5vh;
+}
+/* 상단-검색창영역 */
+.questionJ-search {
+  width: 45vh;
+  border: 1px solid black;
+  display: flex;
+}
+/* 상단-검색창-input */
+.questionJ-search input {
+  height: 90%;
+  width: 70%;
+  margin: auto;
+  border: none;
+}
+
+/* 소통해요 게시판 글이 나올 영역 */
+.questionJ-table {
+  width: 80vw;
+}
