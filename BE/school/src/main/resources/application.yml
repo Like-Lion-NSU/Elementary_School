@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/elementarySchool?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: hyeon4643!!@
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: false
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
