@@ -12,13 +12,13 @@ import Sidebar from "../sidebar/sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Question = () => {
+const Community = () => {
   return (
     <div className="questionJ-page" id="questionJ-container">
       <div className="questionJ-devide">
         <div className="questionJ-Upside">
           <div className="questionJ-title">
-            <h2>질문해요</h2>
+            <h2>소통해요</h2>
           </div>
           <div className="questionJ-search">
             <h2 style={{ color: "black" }}>
@@ -64,4 +64,4 @@ const Question = () => {
     </div>
   );
 };
-export default Question;
+export default Community;

@@ -13,6 +13,7 @@ import Comment from "./mycomment/mycomment";
 import Policy from "./policy/policy";
 import Sidebar from "./sidebar/sidebar";
 import Write from "./write/write";
+import Community from "./community/community";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/comment" element={<Comment />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/community" element={<Community />} />
       </Routes>
     </>
   );
