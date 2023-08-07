@@ -112,32 +112,32 @@ function ShJShop() {
 
   return (
     <div>
-      <div className={style.productWrapper}>
-      <h1>매점</h1>
-        <div className={style.columns}>
+      <div className={style.shJproductWrapper}>
+      <h1 className={style.shJTitle}>매점</h1>
+        <div className={style.shJcolumns}>
           {shJcurrentProducts.map((product, index) => (
-            <div className={style.card} key={index}>
+            <div className={style.shJcard} key={index}>
               <img src={product.image} alt="상품" />
-              <div className={style.name}>
-                <div className={style.title}>{product.name}</div>
-                <div className={style.point}>{product.price} Point</div>
+              <div className={style.shJname}>
+                <div className={style.shJtitle}>{product.name}</div>
+                <div className={style.shJpoint}>{product.price} Point</div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div id={style.productFoot}>
+      <div id={style.shJproductFoot}>
         <FontAwesomeIcon
           icon={faAngleLeft}
           onClick={() => shJhandlePageChange(shJcurrentPage - 1)} // <을 클릭하면 현재 페이지 -1
           disabled={shJcurrentPage === 1} //현재 페이지가 1 일때는 동작을 막음
-          className={style.icon}
+          className={style.shJicon}
         />
         
         {[...Array(shJtotalPages)].map((_, index) => ( //크기가 shJtotalPages인 배열 만들기, _ : 변수 존재X
           <div
             key={index}
-            className={`${style.box} ${shJcurrentPage === index + 1 ? style.active : ''}`}
+            className={`${style.shJbox} ${shJcurrentPage === index + 1 ? style.shJactive : ''}`}
             onClick={() => shJhandlePageChange(index + 1)} 
             //클릭이 발생한 index+1 값 (클릭이 발생한 페이지 숫자)을 넘김 -> 지정한 범위 내라면 그것을 현재 페이지로
           >
@@ -150,7 +150,7 @@ function ShJShop() {
           icon={faAngleRight}
           onClick={() => shJhandlePageChange(shJcurrentPage + 1)} // > 을 클릭하면 현재 페이지 +1
           disabled={shJcurrentPage === shJtotalProducts} //현제 페이지가 마지막 페이지라면 동작 막음
-          className={style.icon}
+          className={style.shJicon}
         />
       </div>
     </div>

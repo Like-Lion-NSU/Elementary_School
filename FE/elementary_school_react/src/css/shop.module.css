@@ -1,52 +1,52 @@
-.productWrapper {
+.shJproductWrapper {
 	width: 80vw;
 	margin: 1vw auto;
 }
 
-.columns {
+.shJcolumns {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 0px;
 	justify-content: center;
 }
 
-.card {
+.shJcard {
 	display: inline-block;
 	box-shadow: 0px 1px 3px #91C8E4;
-	width:17vw;
+	width:18vw;
 	text-align: center;
 	margin:1vw auto;
 	padding:0.5vw;
 }
 
-.card img {
-	width: 15vw;
-	height: 15vw;
+.shJcard img {
+	width: 16vw;
+	height: 16vw;
 	border-bottom: 1.5px solid #91C8E4;
 	margin: 1vw;
 }
 
-.name {
+.shJname {
 	text-align: center;
 }
-.name div{
+.shJname div{
 	margin-bottom:0.5vw;
 }
-.title{
+.shJtitle{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1vw;
 }
-.point{
+.shJpoint{
 	font-size: 1vw;
 }
-#productFoot{
+#shJproductFoot{
 	display: flex;
 	align-items: center;
     justify-content: center;
 }
-.box {
+.shJbox {
     cursor: pointer;
 	width:1vw;
 	height: 1vw;
@@ -58,14 +58,14 @@
     border: 1px solid #4682A9;
 }
   
-.box.active {
+.shJbox.shJactive {
     background-color: #4682A9;
     color: #fff;
 }
-.icon{
+.shJicon{
 	cursor: pointer;
 	margin: 0.5vw
 }
-h1{
+.shJTitle{
 	font-size: 2vw;
 }
