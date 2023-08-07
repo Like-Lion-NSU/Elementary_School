@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../css/main.css';
 import Sidebar from '../sidebar/sidebar';
 
-const MainPage = () => {
+const Main = () => {
   return (
     <div className="main-page" id="mainE-container">
       <Sidebar />
@@ -20,7 +20,7 @@ const MainPage = () => {
           </Link>
         </div>
         <div className="main-buttons">
-          <Link to="#" className="mainE-button">
+          <Link to="/practiceType" className="mainE-button">
             <span role="img" aria-label="practice">📱</span>
             <div className='mainE-role'>연습하기</div>
           </Link>
@@ -34,4 +34,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Main;

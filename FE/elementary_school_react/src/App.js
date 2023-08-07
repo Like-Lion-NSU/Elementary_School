@@ -6,10 +6,9 @@ import Kiosk from "./kiosk/kiosk";
 import Main from "./main/main";
 import Question from "./question/question";
 import Mypage from "./mypage/mypage";
-import Community from "./community/community";
 import PracticeType from "./kiosk/practiceType";
-import MainPage from './main/main';
 import Sidebar from './sidebar/sidebar';
+import Write from './write/write';
 
 function App() {
   return (
@@ -21,10 +20,9 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/question" element={<Question />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/community" element={<Community />} />
         <Route path="/practiceType" element={<PracticeType />} />
-        <Route path="/main" element={<MainPage />} />
         <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/write" element={<Write />} />
       </Routes>
     </>
   );

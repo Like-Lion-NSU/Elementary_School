@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.write-container {
+    max-width: 100vh; 
+    margin: 0 auto; 
+    margin-top: 15vh;
+    padding: 2vh; 
+}
+
+.write-input {
+    width: 100%;
+    padding: 2vh; 
+    border: none;
+    border-radius: 5px; 
+    /* margin-bottom: 2vh;  */
+    font-size: 3vh; 
+    outline: none; 
+}
+
+.write-content {
+    width: 100%; 
+    padding: 2vh; 
+    border: none; 
+    margin-bottom: 2vh; 
+    font-size: 3vh; 
+    resize: none; 
+    min-height: 30vh;
+    outline: none; 
+    border-top: 1px solid #ccc; 
+    border-bottom: 1px solid #ccc; 
+}
+
+.write-button {
+    padding: 2vh 4vh; 
+    background-color: #4682A9; 
+    color: #fff; 
+    border: none; 
+    border-radius: 3vh; 
+    cursor: pointer;
+    font-size: 3vh; 
+}
+
+.write-input::placeholder,
+.write-content::placeholder {
+    color: #aaa; 
+}
