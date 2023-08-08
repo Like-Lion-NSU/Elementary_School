@@ -9,7 +9,7 @@ const PracticeTypePage = () => {
     <div className="type-page" id="typeE-container">
       <h1 id="typeE-title">연습 종류를 선택해주세요.</h1>
       <div className="type-buttons">
-        <Link to="#" className="typeE-button">
+        <Link to="/kiosk" className="typeE-button">
           <img src={megacoffeeImage} alt="Mega Coffee" />
           <div className='typeE-type'>메가커피</div>
         </Link>
