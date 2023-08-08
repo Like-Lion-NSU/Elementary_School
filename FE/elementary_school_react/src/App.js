@@ -13,7 +13,8 @@ import Policy from "./policy/policy";
 import Sidebar from "./sidebar/sidebar";
 import Write from "./write/write";
 import Community from "./community/community";
-import Shop from './shop/shop';
+import Shop from "./shop/shop";
+import Megabody from "./kiosk/megabody";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/community" element={<Community />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/megabody" element={<Megabody />} />
       </Routes>
     </>
   );

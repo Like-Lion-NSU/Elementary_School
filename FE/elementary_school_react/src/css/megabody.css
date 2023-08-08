@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  justify-content: space-evenly;
+}
+.row_last {
+  display: flex;
+  justify-content: space-evenly;
+}
+table {
+  display: flex;
+  justify-content: center;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.bev_name {
+  margin: 0;
+  font-size: 1.4vw;
+  font-weight: bolder;
+}
+.price {
+  margin: 0;
+  color: red;
+  font-size: 1.3vw;
+}
