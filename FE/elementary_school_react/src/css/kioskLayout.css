@@ -1,0 +1,21 @@
+/* KioskLayout.css */
+.kiosk-layout {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: #f6f4eb;
+  }
+  
+  .left-panel,
+  .right-panel {
+    flex: 1;
+    background-color: #4682A9;
+  }
+  
+  .center-panel {
+    flex: 3;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }  

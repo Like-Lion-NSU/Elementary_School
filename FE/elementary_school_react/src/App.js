@@ -7,12 +7,13 @@ import Main from "./main/main";
 import Question from "./question/question";
 import Mypage from "./mypage/mypage";
 import PracticeType from "./kiosk/practiceType";
-import MainPage from "./main/main";
 import Posting from "./myposting/myposting";
 import Comment from "./mycomment/mycomment";
 import Policy from "./policy/policy";
 import Sidebar from "./sidebar/sidebar";
 import Write from "./write/write";
+import MegaHeader from './kiosk/megaHeader';
+import KioskLayout from './kiosk/kioskLayout';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path="/comment" element={<Comment />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/header" element={<MegaHeader />} />
+        <Route path="/layout" element={<KioskLayout />} />
       </Routes>
     </>
   );
