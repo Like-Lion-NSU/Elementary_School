@@ -9,16 +9,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Sidebar from "../sidebar/sidebar";
+
 const Comment = () => {
   return (
-    <div className="questionJ-page" id="questionJ-container">
-      <div className="questionJ-devide">
-        <div className="questionJ-Upside">
-          <div className="questionJ-title">
+    <div className="mineJ-page" id="mineJ-container">
+      <div className="mineJ-devide">
+        <div className="mineJ-Upside">
+          <div className="mineJ-title">
             <h2>댓글 단 글</h2>
           </div>
         </div>
-        <div className="questionJ-table" border>
+        <div className="mineJ-table" border>
           <TableContainer component={Paper}>
             <Table aria-label="simple table">
               <TableHead>

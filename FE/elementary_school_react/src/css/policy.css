@@ -1,10 +1,10 @@
 /* myposting 과 mycomment의 css */
 /* 사이드바와 영역 나눔 */
-.questionJ-devide {
+.policyJ-devide {
   width: 80vw;
 }
 /* 소통해요 페이지 상단 */
-.questionJ-Upside {
+.policyJ-Upside {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5vh;
@@ -19,6 +19,6 @@
   margin-right: 1vw;
 }
 /* 소통해요 게시판 글이 나올 영역 */
-.questionJ-table {
+.policyJ-table {
   width: 80vw;
 }

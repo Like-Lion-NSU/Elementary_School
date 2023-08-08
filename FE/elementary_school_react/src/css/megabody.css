@@ -18,11 +18,15 @@ table {
 
 .bev_name {
   margin: 0;
-  font-size: 1.4vw;
+  font-size: 1vw;
   font-weight: bolder;
 }
 .price {
   margin: 0;
   color: red;
-  font-size: 1.3vw;
+  font-size: 0.9vw;
+}
+img {
+  width: 13vw;
+  height: 25vh;
 }
