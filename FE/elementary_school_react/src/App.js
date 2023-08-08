@@ -15,6 +15,7 @@ import Write from "./write/write";
 import Community from "./community/community";
 import Shop from "./shop/shop";
 import Megabody from "./kiosk/megabody";
+import MegaMenu from "./kiosk/megaMenu";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/community" element={<Community />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/menu" element={<MegaMenu />} />
         <Route path="/megabody" element={<Megabody />} />
       </Routes>
     </>

@@ -1,10 +1,8 @@
-.row {
-  display: flex;
-  justify-content: space-evenly;
-}
-.row_last {
-  display: flex;
-  justify-content: space-evenly;
+.bodySection {
+  position: relative;
+  bottom: 3.1vh;
+  overflow: auto;
+  height: 50vh;
 }
 table {
   display: flex;
@@ -29,4 +27,14 @@ table {
 img {
   width: 13vw;
   height: 25vh;
+}
+tbody {
+  background-color: #ffc519;
+}
+td {
+  border: 1px solid #ffc519;
+  background-color: white;
+}
+.info {
+  background-color: white;
 }

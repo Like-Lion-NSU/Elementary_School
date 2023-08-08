@@ -2,6 +2,8 @@ import { useState } from "react";
 import style from "../css/mypage.module.css";
 import My_J_userImg from "./img/userImg.png";
 import { Link } from "react-router-dom";
+import Sidebar from "../sidebar/sidebar";
+
 function MyJMypage() {
   const [myJuserDropShow, setmyJUserDropShow] = useState(false);
   const myJdropClick = () => {
@@ -13,8 +15,9 @@ function MyJMypage() {
 
   return (
     <div>
+      <Sidebar />
       <div className={style.myJCenter}>
-        <h1 style={{ marginBottom: "3vh" }}>마이페이지</h1>
+        <h1 style={{ marginBottom: "3vh" }}>나의정보</h1>
         <div className={style.myJFlex} style={{ marginBottom: "3vh" }}>
           <img src={My_J_userImg} className={style.myJUser} alt="유저" />
           <div className={`${style.myJFlexColumn} ${style.myJ15Font}`}>
