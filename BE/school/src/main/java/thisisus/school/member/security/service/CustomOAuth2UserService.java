@@ -1,4 +1,4 @@
-package thisisus.school.member.service;
+package thisisus.school.member.security.service;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
