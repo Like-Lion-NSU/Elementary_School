@@ -1,0 +1,69 @@
+.E-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 2vh;
+    background-color: #ffc519;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.E-left-box {
+    flex: 3;
+    background-color: white;
+    padding: 1vh;
+    margin-right: 1vh;
+    height: 21vh;
+}
+
+.E-right-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.E-delete-button {
+    padding: 2vh 6vh;
+    background-color: #333;
+    color: white;
+    border-radius: 1vh;
+    cursor: pointer;
+    margin-bottom: 2vh;
+    font-size: 2.5vh;
+}
+
+.E-cart-info {
+    display: flex;
+    align-items: center;
+    font-size: 2.5vh;
+}
+
+.E-card-icon {
+    font-size: 2vh;
+    margin-bottom: 0.5vh;
+}
+
+.E-amount {
+    margin-bottom: 0.5vh;
+}
+
+.E-payment-box {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    background-color: #333;
+    color: white;
+    border-radius: 1vh;
+    cursor: pointer;
+    padding: 1vh 6vh;
+    margin-top: 2vh;
+    font-size: 2.5vh;
+}
+
+.E-payment-box-btn {
+    text-decoration: none;
+}

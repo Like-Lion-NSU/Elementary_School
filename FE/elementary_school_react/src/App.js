@@ -15,6 +15,7 @@ import Write from "./write/write";
 import Community from "./community/community";
 import Shop from './shop/shop';
 import MegaMenu from './kiosk/megaMenu';
+import MegaFooter from './kiosk/megaFooter';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/menu" element={<MegaMenu />} />
+        <Route path="/footer" element={<MegaFooter />} />
       </Routes>
     </>
   );
