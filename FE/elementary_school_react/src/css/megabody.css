@@ -1,8 +1,9 @@
 .bodySection {
   position: relative;
   bottom: 3.1vh;
-  overflow: auto;
-  height: 50vh;
+  overflow-x: none;
+  overflow-y: scroll;
+  height: 51vh;
 }
 table {
   display: flex;

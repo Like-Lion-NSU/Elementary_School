@@ -5,5 +5,4 @@ import "../css/kioskLayout.css";
 function KioskLayout({ children }) {
   return <div className="kiosk-layout">{children}</div>;
 }
-
 export default KioskLayout;

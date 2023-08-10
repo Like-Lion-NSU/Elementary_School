@@ -1,14 +1,14 @@
 import React from "react";
 import "../css/megabody.css";
-import img1 from "./img/mega_body/americano_ice.jpg";
-import img3 from "./img/mega_body/cafelatte_ice.jpg";
-import img4 from "./img/mega_body/caramel_ice.jpg";
-import img5 from "./img/mega_body/cubelatte_ice.jpg";
-import img6 from "./img/mega_body/moca_ice.jpg";
-import img7 from "./img/mega_body/cappu_ice.jpg";
-import img8 from "./img/mega_body/tiramisu_ice.jpg";
+import img1 from "./img/mega_body_ice/americano_ice.jpg";
+import img3 from "./img/mega_body_ice/cafelatte_ice.jpg";
+import img4 from "./img/mega_body_ice/caramel_ice.jpg";
+import img5 from "./img/mega_body_ice/cubelatte_ice.jpg";
+import img6 from "./img/mega_body_ice/moca_ice.jpg";
+import img7 from "./img/mega_body_ice/cappu_ice.jpg";
+import img8 from "./img/mega_body_ice/tiramisu_ice.jpg";
 
-const Megabody = () => {
+const Megabody_ice = () => {
   return (
     <>
       <div className="bodySection">
@@ -118,4 +118,4 @@ const Megabody = () => {
   );
 };
 
-export default Megabody;
+export default Megabody_ice;

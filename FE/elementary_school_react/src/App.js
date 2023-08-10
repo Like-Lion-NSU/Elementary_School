@@ -14,8 +14,9 @@ import Sidebar from "./sidebar/sidebar";
 import Write from "./write/write";
 import Community from "./community/community";
 import Shop from "./shop/shop";
-import Megabody from "./kiosk/megabody";
+import Megabody from "./kiosk/megabody_ice";
 import MegaMenu from "./kiosk/megaMenu";
+import MegaFooter from "./kiosk/megaFooter";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/menu" element={<MegaMenu />} />
         <Route path="/megabody" element={<Megabody />} />
+        <Route path="/footer" element={<MegaFooter />} />
       </Routes>
     </>
   );
