@@ -34,7 +34,7 @@ public class CookieAuthorizationRequestRepository implements AuthorizationReques
         CookieUtils.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, CookieUtils.serialize(authorizationRequest), COOKIE_EXPIRE_SECONDS);
         String redirectUriAfterLogin = request.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME);
 
-        if (StringUtils.isNotBlank(redirectUriAfterLogin)) {        // 프론트와 작업 시 인증 작업 확인 피룡
+        if (StringUtils.isNotBlank(redirectUriAfterLogin)) {        // 프론트와 작업 시 인증 작업 확인 필요
             CookieUtils.addCookie(response, REDIRECT_URI_PARAM_COOKIE_NAME, redirectUriAfterLogin, COOKIE_EXPIRE_SECONDS);
         }
     }

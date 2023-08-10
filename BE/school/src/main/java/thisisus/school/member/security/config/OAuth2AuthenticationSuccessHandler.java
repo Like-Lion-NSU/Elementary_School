@@ -3,6 +3,7 @@ package thisisus.school.member.security.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import thisisus.school.member.security.dto.MemberResponseDto;
 import thisisus.school.member.security.jwt.JwtTokenProvider;

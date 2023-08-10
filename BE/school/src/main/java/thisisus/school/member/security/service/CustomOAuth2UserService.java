@@ -30,16 +30,19 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
+        // DefaultOAuth2UserService 객체를 성공정보를 바탕으로 만듦
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
+        // 생성된 객체로부터 User를 받는다
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
+        // 받은 User로부터 정보를 받는다
         String provider = userRequest.getClientRegistration().getRegistrationId();
-
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
         OAuthAttributes attributes = null;
 
+        // 요청된 곳에 따라 다르게 작업
         if (provider.equals("google")) {
             log.info("구글 로그인 요청");
              attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
