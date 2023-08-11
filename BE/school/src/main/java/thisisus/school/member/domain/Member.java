@@ -1,13 +1,12 @@
 package thisisus.school.member.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import thisisus.school.member.security.util.AuthProvider;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,7 +18,9 @@ import java.util.stream.Collectors;
 
 @Entity
 @Data
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Member implements UserDetails{
 
     @Id
@@ -48,12 +49,13 @@ public class Member implements UserDetails{
         return this.role.getKey();
     }
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
+
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @Builder.Default
+//    private List<String> roles = new ArrayList<>();
 
     @Builder
-    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, String provider) {
+    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, String provider, AuthProvider authProvider) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,11 +63,17 @@ public class Member implements UserDetails{
         this.point = point;
         this.lastLogin = lastLogin;
         this.provider = provider;
+        this.authProvider = authProvider;
     }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return null;
     }
 
     @Override
@@ -102,4 +110,10 @@ public class Member implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
+
+    private String refreshToken;
+
 }

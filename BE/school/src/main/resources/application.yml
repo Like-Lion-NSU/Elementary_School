@@ -52,6 +52,8 @@ spring:
             # user-name-attribute: sub
   mvc:
     static-path-pattern: /static/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -64,7 +66,18 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create
+
+  jwt:
+    secret: flature!@#
+
+  main:
+    allow-bean-definition-overriding: true
+
+
 oauth:
+  secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  refresh-cookie-key: refresh
   jwt:
     secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   authorizedRedirectUri: http://localhost:8081
+

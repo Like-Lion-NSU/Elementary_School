@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import thisisus.school.member.security.OAuthAttributes;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.etc.OAuthProcessingException;
+import thisisus.school.member.security.util.AuthProvider;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -29,6 +31,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+
 
         // DefaultOAuth2UserService 객체를 성공정보를 바탕으로 만듦
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
@@ -53,6 +56,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         Member member = null;
         Optional<Member> memberEntity = memberRepository.findByEmail(attributes.getEmail());
+
+
         if (memberEntity.isEmpty()) {
             member = attributes.toEntity();
             memberRepository.save(member);

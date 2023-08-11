@@ -1,25 +1,38 @@
 package thisisus.school.member.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import thisisus.school.member.domain.Member;
-import thisisus.school.member.security.dto.CustomMemberDetails;
-import thisisus.school.member.security.dto.MemberResponseDto;
+import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.service.CustomUserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 public class MemberController {
 
+    private final MemberRepository memberRepository;
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('STUDENT')")
+    public Member getCurrentUser(@AuthenticationPrincipal CustomUserDetails user) {
+        return memberRepository.findByEmail(user.getEmail()).orElseThrow(() -> new IllegalStateException("not found user"));
+    }
+
     @GetMapping("/test2")
-    public String index(Model model, @AuthenticationPrincipal CustomMemberDetails customMemberDetails) {
+    public String index(Model model, @AuthenticationPrincipal CustomUserDetails customMemberDetails) {
 
         String view = "test2";
 
@@ -28,22 +41,17 @@ public class MemberController {
             String memberName = customMemberDetails.getName();
 
             model.addAttribute("user", memberName);
-            model.addAttribute("provider", customMemberDetails.getMember().getProvider());
 //            System.out.println(memberName + customMemberDetails.getMember().getProvider());
-            return customMemberDetails.getName() + customMemberDetails.getMember().getProvider();
+            return customMemberDetails.getName();
         }
 
         return "Fail";
     }
 
     @GetMapping("/api/user")
-    public Authentication user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
-        System.out.println("authentication = " + authentication + ", oAuth2User = " + oAuth2User);
+    public Authentication user(Authentication authentication, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println("authentication = " + authentication + ", CustomMemberDetails = " + customUserDetails);
         return authentication;
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 }

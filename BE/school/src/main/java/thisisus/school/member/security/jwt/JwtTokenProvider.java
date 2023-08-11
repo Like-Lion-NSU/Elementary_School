@@ -1,52 +1,150 @@
 package thisisus.school.member.security.jwt;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import thisisus.school.member.domain.Member;
-import thisisus.school.member.security.dto.CustomMemberDetails;
-import thisisus.school.member.security.dto.MemberResponseDto;
-import thisisus.school.member.security.config.ExpireTime;
+import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.security.service.impl.UserDetailsServiceImpl;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 //@NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class JwtTokenProvider {
 
+    private final String SECRET_KEY;
+    private final String COOKIE_REFRESH_TOKEN_KEY;
+    private final Long ACCESS_TOKEN_EXPIRE_LENGTH = 1000L * 60 * 60;
+    private final Long REFRESH_TOKEN_EXPIRE_LENGTH = 1000L * 60 * 60 * 24 * 7;
+    private final String AUTHORITIES_KEY = "role";
+
     private final Logger LOGGER = LoggerFactory.getLogger(JwtTokenProvider.class);
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    public JwtTokenProvider(@Value("${oauth.secret-key}") String secretKey, @Value("${oauth.refresh-cookie-key}") String cookieKey) {
+        this.SECRET_KEY = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        this.COOKIE_REFRESH_TOKEN_KEY = cookieKey;
+    }
+
+    public String createAccessToken(Authentication authentication) {
+        LOGGER.info("[createAccessToken] 토큰 생성 시작");
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_LENGTH);
+
+        CustomUserDetails member = (CustomUserDetails) authentication.getPrincipal();
+
+        String memberId = member.getName();
+        String role = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining());
+
+        LOGGER.info("[createAceessToken] 토큰 생성 완료");
+
+        return Jwts.builder()
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .setSubject(memberId)
+                .claim(AUTHORITIES_KEY, role)
+                .setIssuer("debrains")
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .compact();
+    }
+
+    public void createRefreshToken(Authentication authentication, HttpServletResponse response) {
+        LOGGER.info("[createRefreshToken] 토큰 생성 시작");
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_LENGTH);
+
+        String refreshToken = Jwts.builder()
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .setIssuer("debrains")
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .compact();
+
+        saveRefreshToken(authentication, refreshToken);
+
+        ResponseCookie cookie = ResponseCookie.from(COOKIE_REFRESH_TOKEN_KEY, refreshToken)
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("Lax")
+                .maxAge(REFRESH_TOKEN_EXPIRE_LENGTH/1000)
+                .path("/")
+                .build();
+        LOGGER.info("[createRefreshToken] 토큰 생성 완료");
+        response.addHeader("Set-Cookie", cookie.toString());
+    }
+
+    private void saveRefreshToken(Authentication authentication, String refreshToken) {
+        CustomUserDetails member = (CustomUserDetails) authentication.getPrincipal();
+        Long id = Long.valueOf(member.getName());
+
+        memberRepository.updateRefreshToken(id, refreshToken);
+    }
+
+    // AccessToken을 검사하고 얻은 정보로 Authentication 객체 생성
+    public Authentication getAuthentication(String accessToken) {
+        Claims claims = parseClaims(accessToken);
+
+        Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+
+        CustomUserDetails principal = new CustomUserDetails(Long.valueOf(claims.getSubject()), "", authorities);
+
+//        CustomUserDetails principal2 = userDetailsService.loadMemberbyEmail(claims.getSubject());
+        return new UsernamePasswordAuthenticationToken(principal, "Bearer", authorities);
+    }
+
+    public Boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
+            return true;
+        } catch (ExpiredJwtException e) {
+            log.info("만료된 JWT 토큰입니다.");
+        } catch (UnsupportedJwtException e) {
+            log.info("지원되지 않는 JWT 토큰입니다.");
+        } catch (IllegalStateException e) {
+            log.info("JWT 토큰이 잘못되었습니다.");
+        }
+        return false;
+    }
+
+    private Claims parseClaims(String accessToken) {
+        try {
+            return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(accessToken).getBody();
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        }
+    }
+
+    /*private final Logger LOGGER = LoggerFactory.getLogger(JwtTokenProvider.class);
     private final UserDetailsServiceImpl userDetailsService;
 
     @Value("${springboot.jwt.secret}")
     private String secretKey = "secretKey";
     private final long tokenValidMillisecond = 1000L * 60 * 60;
 
-    @PostConstruct
+    @PostConstruct      // 빈 객체로 주입 된 이후 수행되는 메서드
     protected void init() {
         LOGGER.info("[init] JwtTokenProvider 내 secretKey 초기화 시작");
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -70,6 +168,11 @@ public class JwtTokenProvider {
         return token;
     }
 
+    *//**
+     * 필터에서 인증 성공 시 SecurityContextHolder에 저장할 Authenticaiton을 생성하는 역할
+     * @param token
+     * @return
+     *//*
     public Authentication getAuthentication(String token) {
         LOGGER.info("[getAuthentication] 토큰 인증 정보 조회 시작");
         UserDetails userDetails = userDetailsService.loadUserByEmail(this.getUseremail(token));
@@ -99,7 +202,7 @@ public class JwtTokenProvider {
             LOGGER.info("[validateToken] 토큰 유효 체크 예외 발생");
             return false;
         }
-    }
+    }*/
 
 //    private UserDetailsServiceImpl userDetailsService;
 //
