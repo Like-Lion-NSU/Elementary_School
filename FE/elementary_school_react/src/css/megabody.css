@@ -1,41 +1,39 @@
-.bodySection {
+.C-bodySection {
   position: relative;
   bottom: 3.1vh;
   overflow-x: none;
   overflow-y: scroll;
   height: 51vh;
 }
-table {
+.mega-C-table {
   display: flex;
   justify-content: center;
 }
-.info {
+.mega-C-info {
   display: flex;
   flex-direction: column;
   text-align: center;
+  background-color: white;
 }
 
-.bev_name {
+.C-bev_name {
   margin: 0;
   font-size: 1vw;
   font-weight: bolder;
 }
-.price {
+.mega-C-price {
   margin: 0;
   color: red;
   font-size: 0.9vw;
 }
-img {
+.mega-C-img {
   width: 13vw;
   height: 25vh;
 }
-tbody {
+.mega-C-tbody {
   background-color: #ffc519;
 }
-td {
+.mega-C-td {
   border: 1px solid #ffc519;
-  background-color: white;
-}
-.info {
   background-color: white;
 }
