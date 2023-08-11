@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import thisisus.school.common.DefaultResponseDto;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.dto.CommentDefaultResponseDto;
@@ -45,8 +46,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
 })
-    @PostMapping("/post")
-    public ResponseEntity<DefaultResponseDto> savePost(/*HttpServletRequest request,*/ PostRequestDto postRequestDto){
+    @PostMapping(value="/post",consumes = "multipart/form-data")
+    public ResponseEntity<DefaultResponseDto> savePost(@ModelAttribute PostRequestDto postRequestDto)throws Exception{
 
         Post post = postService.savePost(postRequestDto);
 
