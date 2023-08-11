@@ -4,8 +4,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    width: 60vw;
-    height: 100vh; 
+    width: 51.5vw;
+    height: 95vh; 
 }
 .opJHead{
     font-weight: bold;
@@ -123,6 +123,7 @@
     cursor: pointer;
     margin: 0 0.5vw;
     border-radius: 10px;
+    margin-bottom: 2vw;
 }
 .opJCancel{
     background-color: black;

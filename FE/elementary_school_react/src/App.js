@@ -18,6 +18,9 @@ import Megabody from "./kiosk/megabody_ice";
 import MegaMenu from "./kiosk/megaMenu";
 import MegaFooter from "./kiosk/megaFooter";
 import MegaPay from "./kiosk/kioskpay";
+import MegaIceTea from "./kiosk/modalIceTea"
+import MegaAmericano from "./kiosk/modalAmericano"
+import MegaChoco from "./kiosk/modalChoco"
 
 function App() {
   return (
@@ -41,6 +44,9 @@ function App() {
         <Route path="/megabody" element={<Megabody />} />
         <Route path="/footer" element={<MegaFooter />} />
         <Route path="/megapay" element={<MegaPay />} />
+        <Route path="/MegaIceTea" element={<MegaIceTea />} />
+        <Route path="/MegaAmericano" element={<MegaAmericano />} />
+        <Route path="/MegaChoco" element={<MegaChoco />} />
       </Routes>
     </>
   );
