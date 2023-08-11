@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/megabody.css";
+import IceTeaOption from "./modalIceTea";
 import img1 from "./img/mega_body_tea/bok.jpg";
 import img2 from "./img/mega_body_tea/nok_i.jpg";
 import img3 from "./img/mega_body_tea/pe_i.jpg";
@@ -21,13 +22,19 @@ import img18 from "./img/mega_body_tea/chamo.jpg";
 import img19 from "./img/mega_body_tea/ul.jpg";
 
 const Megabody_tea = () => {
+  const [teaModalIsOpen, setTeaModalIsOpen] = useState(false);
   return (
     <>
       <div className="C-bodySection">
         <table className="mega-C-table">
           <tbody className="mega-C-tbody">
             <tr>
-              <td className="mega-C-td">
+              <td
+                className="mega-C-td"
+                onClick={() => {
+                  setTeaModalIsOpen(true);
+                }}
+              >
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">복숭아 아이스티</p>
@@ -169,6 +176,10 @@ const Megabody_tea = () => {
             </tr>
           </tbody>
         </table>
+        <IceTeaOption
+          teaModalIsOpen={teaModalIsOpen}
+          setTeaModalIsOpen={setTeaModalIsOpen}
+        />
       </div>
     </>
   );

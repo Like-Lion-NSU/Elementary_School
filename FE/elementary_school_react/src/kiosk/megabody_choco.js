@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/megabody.css";
+import IceChocoOption from "./modalChoco";
 import img1 from "./img/mega_body_choco/uja.jpg";
 import img2 from "./img/mega_body_choco/naju.jpg";
 import img3 from "./img/mega_body_choco/kokonut.png";
@@ -20,6 +21,7 @@ import img17 from "./img/mega_body_choco/syo.jpg";
 import img18 from "./img/mega_body_choco/myo.jpg";
 
 const Megabody_choco = () => {
+  const [chocoModalIsOpen, setChocoModalIsOpen] = useState(false);
   return (
     <>
       <div className="C-bodySection">
@@ -121,7 +123,12 @@ const Megabody_choco = () => {
                   <p className="mega-C-price">4,800원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td
+                className="mega-C-td"
+                onClick={() => {
+                  setChocoModalIsOpen(true);
+                }}
+              >
                 <img src={img14} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">리얼초코프라페</p>
@@ -161,6 +168,10 @@ const Megabody_choco = () => {
             </tr>
           </tbody>
         </table>
+        <IceChocoOption
+          chocoModalIsOpen={chocoModalIsOpen}
+          setChocoModalIsOpen={setChocoModalIsOpen}
+        />
       </div>
     </>
   );

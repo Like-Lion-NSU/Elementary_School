@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import IceAmeOption from "./modalAmericano";
 import "../css/megabody.css";
 import img1 from "./img/mega_body_ice/americano_ice.jpg";
 import img3 from "./img/mega_body_ice/cafelatte_ice.jpg";
@@ -9,13 +10,19 @@ import img7 from "./img/mega_body_ice/cappu_ice.jpg";
 import img8 from "./img/mega_body_ice/tiramisu_ice.jpg";
 
 const Megabody_ice = () => {
+  const [iceModalIsOpen, setIceModalIsOpen] = useState(false);
   return (
     <>
       <div className="C-bodySection">
         <table className="mega-C-table">
           <tbody className="mega-C-tbody">
             <tr>
-              <td className="mega-C-td">
+              <td
+                className="mega-C-td"
+                onClick={() => {
+                  setIceModalIsOpen(true);
+                }}
+              >
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)아메리카노</p>
@@ -113,6 +120,10 @@ const Megabody_ice = () => {
             </tr>
           </tbody>
         </table>
+        <IceAmeOption
+          iceModalIsOpen={iceModalIsOpen}
+          setIceModalIsOpen={setIceModalIsOpen}
+        />
       </div>
     </>
   );

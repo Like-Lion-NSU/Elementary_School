@@ -15,7 +15,14 @@
   text-align: center;
   background-color: white;
 }
-
+.mega-C-td {
+  border: 1px solid #ffc519;
+  background-color: white;
+  cursor: pointer;
+}
+.mega-C-td:hover {
+  border: 1.5px solid red;
+}
 .C-bev_name {
   margin: 0;
   font-size: 1vw;
@@ -32,8 +39,4 @@
 }
 .mega-C-tbody {
   background-color: #ffc519;
-}
-.mega-C-td {
-  border: 1px solid #ffc519;
-  background-color: white;
 }

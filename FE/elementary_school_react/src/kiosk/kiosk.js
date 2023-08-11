@@ -10,6 +10,7 @@ import MegaFooter from "./megaFooter";
 
 const Kiosk = () => {
   const [selectedCategory, setSelectedCategory] = useState("커피(Ice)");
+  const [selectedMenu, setSelectedMenu] = useState("");
   return (
     <KioskLayout>
       <Sidebar />
