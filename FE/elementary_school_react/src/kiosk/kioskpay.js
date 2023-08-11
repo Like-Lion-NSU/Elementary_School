@@ -123,7 +123,7 @@ const MegaPay = ({ price }) => {
       <Pay_event img_link={img12} name={"쿠폰사용"} />
       <Pay_event img_link={img13} name={"메가선불페이"} />
       <div className="pricecresult" price={"4000"}>
-        <span>주문금액 : {price}원 - 할인금액 : 0원</span>
+        <span className="priceccal">주문금액 : {price}원 - 할인금액 : 0원</span>
         <span className="pricectotal">결제금액 : {price}원</span>
       </div>
     </Modal>

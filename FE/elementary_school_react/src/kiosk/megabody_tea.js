@@ -23,147 +23,147 @@ import img19 from "./img/mega_body_tea/ul.jpg";
 const Megabody_tea = () => {
   return (
     <>
-      <div className="bodySection">
-        <table>
-          <tbody>
+      <div className="C-bodySection">
+        <table className="mega-C-table">
+          <tbody className="mega-C-tbody">
             <tr>
-              <td>
-                <img src={img1}></img>
-                <div className="info">
-                  <p className="bev_name">복숭아 아이스티</p>
-                  <p className="price">3,000원</p>
+              <td className="mega-C-td">
+                <img src={img1} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">복숭아 아이스티</p>
+                  <p className="mega-C-price">3,000원</p>
                 </div>
               </td>
-              <td>
-                <img src={img2}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)녹차</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img2} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)녹차</p>
+                  <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td>
-                <img src={img3}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)페퍼민트</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img3} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)페퍼민트</p>
+                  <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td>
-                <img src={img4}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)캐모마일</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img4} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)캐모마일</p>
+                  <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td>
-                <img src={img5}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)얼그레이</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img5} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)얼그레이</p>
+                  <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
             </tr>
             <tr>
-              <td>
-                <img src={img6}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)허니자몽블랙티</p>
-                  <p className="price">3,700원</p>
+              <td className="mega-C-td">
+                <img src={img6} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)허니자몽블랙티</p>
+                  <p className="mega-C-price">3,700원</p>
                 </div>
               </td>
-              <td>
-                <img src={img7}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)사과유자차</p>
-                  <p className="price">3,500원</p>
+              <td className="mega-C-td">
+                <img src={img7} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)사과유자차</p>
+                  <p className="mega-C-price">3,500원</p>
                 </div>
               </td>
-              <td>
-                <img src={img8}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)유자차</p>
-                  <p className="price">3,300원</p>
+              <td className="mega-C-td">
+                <img src={img8} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)유자차</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td>
-                <img src={img9}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)레몬차</p>
-                  <p className="price">3,300원</p>
+              <td className="mega-C-td">
+                <img src={img9} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)레몬차</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td>
-                <img src={img10}></img>
-                <div className="info">
-                  <p className="bev_name">(ICE)자몽차</p>
-                  <p className="price">3,300원</p>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src={img11}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)허니자몽블랙티</p>
-                  <p className="price">3,300원</p>
-                </div>
-              </td>
-              <td>
-                <img src={img12}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)사과유자차</p>
-                  <p className="price">3,300원</p>
-                </div>
-              </td>
-              <td>
-                <img src={img13}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)유자차</p>
-                  <p className="price">3,300원</p>
-                </div>
-              </td>
-              <td>
-                <img src={img14}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)레몬차</p>
-                  <p className="price">3,300원</p>
-                </div>
-              </td>
-              <td>
-                <img src={img15}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)자몽차</p>
-                  <p className="price">3,300원</p>
+              <td className="mega-C-td">
+                <img src={img10} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(ICE)자몽차</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
             </tr>
             <tr>
-              <td>
-                <img src={img16}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)녹차</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img11} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)허니자몽블랙티</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td>
-                <img src={img17}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)패퍼민트</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img12} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)사과유자차</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td>
-                <img src={img18}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)캐모마일</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img13} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)유자차</p>
+                  <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td>
-                <img src={img19}></img>
-                <div className="info">
-                  <p className="bev_name">(HOT)얼그레이</p>
-                  <p className="price">2,500원</p>
+              <td className="mega-C-td">
+                <img src={img14} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)레몬차</p>
+                  <p className="mega-C-price">3,300원</p>
+                </div>
+              </td>
+              <td className="mega-C-td">
+                <img src={img15} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)자몽차</p>
+                  <p className="mega-C-price">3,300원</p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="mega-C-td">
+                <img src={img16} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)녹차</p>
+                  <p className="mega-C-price">2,500원</p>
+                </div>
+              </td>
+              <td className="mega-C-td">
+                <img src={img17} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)패퍼민트</p>
+                  <p className="mega-C-price">2,500원</p>
+                </div>
+              </td>
+              <td className="mega-C-td">
+                <img src={img18} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)캐모마일</p>
+                  <p className="mega-C-price">2,500원</p>
+                </div>
+              </td>
+              <td className="mega-C-td">
+                <img src={img19} className="mega-C-img"></img>
+                <div className="mega-C-info">
+                  <p className="C-bev_name">(HOT)얼그레이</p>
+                  <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
             </tr>
