@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.jwt.JwtTokenProvider;
 import thisisus.school.member.security.service.CustomUserDetails;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 public class MemberController {
 
     private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+
+//    @GetMapping("/")
+//    public String index() {
+//        return "/index";
+//    }
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('STUDENT')")

@@ -5,12 +5,9 @@
     <title>Button Page</title>
 </head>
 <body>
-<h1>로그인 창</h1>
+<h1>Click the button to go to Google</h1>
 <form th:action="@{/oauth2/authorization/google}" method="get">
-    <button type="submit">구글 로그인</button>
-</form>
-<form th:action="@{/oauth2/authorization/kakao}" method="get">
-    <button type="submit">카카오 로그인</button>
+    <button type="submit">Go to Google</button>
 </form>
 </body>
 </html>

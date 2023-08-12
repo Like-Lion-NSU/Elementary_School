@@ -13,10 +13,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.dto.MemberResponseDto;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.security.service.impl.UserDetailsServiceImpl;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,61 +40,83 @@ public class JwtTokenProvider {
     @Autowired
     private MemberRepository memberRepository;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+//    @Autowired
+//    private UserDetailsServiceImpl userDetailsService;
 
     public JwtTokenProvider(@Value("${oauth.secret-key}") String secretKey, @Value("${oauth.refresh-cookie-key}") String cookieKey) {
         this.SECRET_KEY = Base64.getEncoder().encodeToString(secretKey.getBytes());
         this.COOKIE_REFRESH_TOKEN_KEY = cookieKey;
     }
 
-    public String createAccessToken(Authentication authentication) {
-        LOGGER.info("[createAccessToken] 토큰 생성 시작");
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_LENGTH);
+    public Map<String, String> generateToken(Authentication authentication) {
+        Map<String, String> tokens = new HashMap<String, String>();
+        LOGGER.info("[JWT] JWT 토큰 생성 시작");
+        LOGGER.info("Authentication Principal: {}", authentication.getPrincipal());
+        LOGGER.info("[AccessToken] Access 토큰 생성 시작");
+        String accessToken = createAccessToken(authentication);
+        LOGGER.info("[AccessToken] Access 토큰 생성 완료");
 
+        LOGGER.info("[AccessToken] refresh 토큰 생성 시작");
+        String refreshToken = createRefreshToken(authentication);
+        LOGGER.info("[AccessToken] refresh 토큰 생성 완료");
+
+        tokens.put("accessToken", accessToken);
+        tokens.put("refreshToken", refreshToken);
+        return tokens;
+
+//        return MemberResponseDto.TokenInfo.builder()
+//                .grantType("Bearer")
+//                .accessToken(accessToken)
+//                .accessTokenExpirationTime(ACCESS_TOKEN_EXPIRE_LENGTH)
+//                .refreshToken(refreshToken)
+//                .refreshTokenExpirationTime(REFRESH_TOKEN_EXPIRE_LENGTH)
+//                .build();
+    }
+
+    public String createAccessToken(Authentication authentication) {
+        Date now = new Date();
+        Date accessValidity = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_LENGTH);
         CustomUserDetails member = (CustomUserDetails) authentication.getPrincipal();
 
-        String memberId = member.getName();
+        String memberEmail = member.getEmail();
         String role = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining());
 
-        LOGGER.info("[createAceessToken] 토큰 생성 완료");
-
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                .setSubject(memberId)
+                .setSubject(memberEmail)
                 .claim(AUTHORITIES_KEY, role)
                 .setIssuer("debrains")
                 .setIssuedAt(now)
-                .setExpiration(validity)
+                .setExpiration(accessValidity)
                 .compact();
     }
 
-    public void createRefreshToken(Authentication authentication, HttpServletResponse response) {
-        LOGGER.info("[createRefreshToken] 토큰 생성 시작");
+    public String createRefreshToken(Authentication authentication) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_LENGTH);
+        Date refreshValidity = new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_LENGTH);
 
         String refreshToken = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .setIssuer("debrains")
                 .setIssuedAt(now)
-                .setExpiration(validity)
+                .setExpiration(refreshValidity)
                 .compact();
 
         saveRefreshToken(authentication, refreshToken);
 
-        ResponseCookie cookie = ResponseCookie.from(COOKIE_REFRESH_TOKEN_KEY, refreshToken)
-                .httpOnly(true)
-                .secure(true)
-                .sameSite("Lax")
-                .maxAge(REFRESH_TOKEN_EXPIRE_LENGTH/1000)
-                .path("/")
-                .build();
-        LOGGER.info("[createRefreshToken] 토큰 생성 완료");
-        response.addHeader("Set-Cookie", cookie.toString());
+//        ResponseCookie cookie = ResponseCookie.from(COOKIE_REFRESH_TOKEN_KEY, refreshToken)
+//                .httpOnly(true)
+//                .secure(true)
+//                .sameSite("Lax")
+//                .maxAge(REFRESH_TOKEN_EXPIRE_LENGTH/1000)
+//                .path("/")
+//                .build();
+//        response.addHeader("Set-Cookie", cookie.toString());
+
+        return refreshToken;
+
     }
 
     private void saveRefreshToken(Authentication authentication, String refreshToken) {
@@ -104,7 +129,7 @@ public class JwtTokenProvider {
     // AccessToken을 검사하고 얻은 정보로 Authentication 객체 생성
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
-
+        LOGGER.info("[JWT] Creating Authentication from AccessToken");
         Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
@@ -117,7 +142,10 @@ public class JwtTokenProvider {
 
     public Boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
+            byte[] decodedSecretKey = Base64.getDecoder().decode(SECRET_KEY);
+            System.out.println("Decoded SECRET_KEY: " + new String(decodedSecretKey, StandardCharsets.UTF_8));
+            Jwts.parserBuilder().setSigningKey(new SecretKeySpec(decodedSecretKey, SignatureAlgorithm.HS256.getJcaName())).build().parseClaimsJws(token).getBody();
+//            Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");

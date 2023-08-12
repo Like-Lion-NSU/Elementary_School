@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.jwt.JwtAuthenticationFilter;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
 import thisisus.school.member.security.repository.CookieAuthorizationRequestRepository;
@@ -34,11 +35,14 @@ public class SecurityConfig{
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final MemberRepository memberRepository;
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
     @Bean
@@ -53,9 +57,11 @@ public class SecurityConfig{
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/api/member", "/oauth/login/**", "/login").permitAll()
+                .antMatchers("/api/example", "/oauth/login/**", "/social/**", "/me", "/").permitAll()
+                .anyRequest().authenticated()
         .and()
                 .oauth2Login()
+//                .defaultSuccessUrl("/home/token",true)
                 .authorizationEndpoint()
                 .authorizationRequestRepository(cookieAuthorizationRequestRepository)
         .and()
@@ -73,13 +79,12 @@ public class SecurityConfig{
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
         ;
-                http.logout()
+        http.logout()
                 .clearAuthentication(true)
                 .deleteCookies("JESSIONID")
         ;
-
         http.
-                addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
             return http.build();
 
     }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
+import thisisus.school.member.repository.MemberRepository;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,6 +28,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
@@ -35,11 +37,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = parseBearerToken(request);
 
+        LOGGER.info("Received token: " + token);
+
         // Validation Access Token
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
+            /**
+             * 디버깅 코드
+             */
+            LOGGER.info("Valid access token found. Trying to get authentication...");
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
+            if (authentication != null) {
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                LOGGER.info(authentication.getName() + "의 인증정보 저장");
+            } else {
+                LOGGER.warn("Authentication is null after getting from token.");
+            }
+            /*Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            LOGGER.info(authentication.getName() + "의 인증정보 저장");
+            LOGGER.info(authentication.getName() + "의 인증정보 저장");*/
         } else {
             LOGGER.info("유효한 JWT 토큰이 없습니다.");
         }
@@ -51,7 +66,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String bearerToken = request.getHeader("Authorization");
         System.out.println(request.getHeader("Authorization"));
 
-        if (bearerToken != null && bearerToken.startsWith("Bearer")) {
+        if (bearerToken != null && bearerToken.startsWith("Bearer e")) {
             return bearerToken.substring(7);
         }
         return null;

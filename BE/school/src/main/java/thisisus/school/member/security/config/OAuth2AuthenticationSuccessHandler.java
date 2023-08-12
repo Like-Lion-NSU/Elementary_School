@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import thisisus.school.member.security.dto.MemberResponseDto;
 import thisisus.school.member.security.jwt.JwtAuthenticationFilter;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
@@ -22,7 +23,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.util.Map;
 import java.util.Optional;
 
 import static thisisus.school.member.security.repository.CookieAuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
@@ -50,7 +54,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
-    protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
@@ -61,13 +65,39 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         //JWT 생성
         LOGGER.info("[JWT 생성]");
-        String accessToken = jwtTokenProvider.createAccessToken(authentication);
-        jwtTokenProvider.createRefreshToken(authentication, response);
-        LOGGER.info("[JWT 생성 완료]");
+//        String accessToken = jwtTokenProvider.createAccessToken(authentication);
+//        jwtTokenProvider.createRefreshToken(authentication, response);
 
-        return UriComponentsBuilder.fromUriString(targetUrl)
-                .queryParam("accessToken", accessToken)
+        Map<String, String> tokens = jwtTokenProvider.generateToken(authentication);
+        try {
+            String accessToken = URLEncoder.encode(tokens.get("accessToken"), "utf-8");
+            String refreshToken = URLEncoder.encode(tokens.get("refreshToken"), "utf-8");
+
+            Cookie accessTokenCookie = new Cookie("Authorization", "Bearer" + accessToken);
+            accessTokenCookie.setPath("/");
+            accessTokenCookie.setMaxAge(60 * 60 * 24 * 1);
+            accessTokenCookie.setHttpOnly(true);
+            response.addCookie(accessTokenCookie);
+
+            Cookie refreshTokenCookie = new Cookie("Refresh-Token", refreshToken);
+            refreshTokenCookie.setPath("/");
+            refreshTokenCookie.setMaxAge(60 * 60 * 24 * 7); // Set the appropriate expiration for the refresh token
+            refreshTokenCookie.setHttpOnly(true);
+            response.addCookie(refreshTokenCookie);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+//         본 코드
+//        MemberResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication, response);
+        LOGGER.info("[JWT 생성 완료]");
+        return UriComponentsBuilder.fromUriString("/")
+//                .queryParam("TOKEN", tokenInfo.getAccessToken())
+//                .queryParam("REFRESH_TOKEN", tokenInfo.getRefreshToken())
                 .build().toString();
+
+
         /* 08-10 본 코드
         MemberResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
         log.info("JWT Token 생성 완료");

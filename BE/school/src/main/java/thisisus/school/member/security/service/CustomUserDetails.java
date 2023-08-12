@@ -28,7 +28,7 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
 
     public static CustomUserDetails create(Member member) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_TEACHER"));
+                singletonList(new SimpleGrantedAuthority("ROLE_STUDENT"));
 
         return new CustomUserDetails(
                 member.getId(),
