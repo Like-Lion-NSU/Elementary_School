@@ -21,6 +21,7 @@ import MegaPay from "./kiosk/kioskpay";
 import MegaIceTea from "./kiosk/modalIceTea"
 import MegaAmericano from "./kiosk/modalAmericano"
 import MegaChoco from "./kiosk/modalChoco"
+import MegaBasket from "./kiosk/modalbasket"
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/MegaIceTea" element={<MegaIceTea />} />
         <Route path="/MegaAmericano" element={<MegaAmericano />} />
         <Route path="/MegaChoco" element={<MegaChoco />} />
+        <Route path="/MegaBasket" element={<MegaBasket />} />
       </Routes>
     </>
   );
