@@ -17,16 +17,6 @@ import img11 from "./img/mega_pay/kbpay.png";
 import img12 from "./img/mega_pay/coupon.png";
 import img13 from "./img/mega_pay/megapay.png";
 
-const Pay_header = () => {
-  return (
-    <div className="Pay_header">
-      <h3>결제 수단 선택 (원)</h3>
-      <button>
-        <FontAwesomeIcon icon={faX} />
-      </button>
-    </div>
-  );
-};
 const Pay_step = ({ num, comment, img_link_1, name_1, img_link_2, name_2 }) => {
   return (
     <div className="Pay_step">
@@ -61,7 +51,22 @@ const Pay_event = ({ img_link, name }) => {
     </button>
   );
 };
-const MegaPay = ({ price }) => {
+const MegaPay = ({ payModalIsOpen, setPayModalIsOpen }) => {
+  const Pay_header = () => {
+    return (
+      <div className="Pay_header">
+        <h3>결제 수단 선택 (원)</h3>
+        <button>
+          <FontAwesomeIcon
+            icon={faX}
+            onClick={() => {
+              setPayModalIsOpen(false);
+            }}
+          />
+        </button>
+      </div>
+    );
+  };
   const customModalStyles = {
     overlay: {
       backgroundColor: " rgba(0, 0, 0, 0.4)",
@@ -90,7 +95,7 @@ const MegaPay = ({ price }) => {
   };
   return (
     <Modal
-      isOpen={true}
+      isOpen={payModalIsOpen}
       shouldCloseOnOverlayClick={false}
       style={customModalStyles}
     >
@@ -122,9 +127,9 @@ const MegaPay = ({ price }) => {
       <br />
       <Pay_event img_link={img12} name={"쿠폰사용"} />
       <Pay_event img_link={img13} name={"메가선불페이"} />
-      <div className="pricecresult" price={"4000"}>
-        <span className="priceccal">주문금액 : {price}원 - 할인금액 : 0원</span>
-        <span className="pricectotal">결제금액 : {price}원</span>
+      <div className="pricecresult">
+        <span className="priceccal">주문금액 : 9400원 - 할인금액 : 0원</span>
+        <span className="pricectotal">결제금액 : 9400원</span>
       </div>
     </Modal>
   );
