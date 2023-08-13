@@ -1,3 +1,4 @@
+/*
 package thisisus.school.member.security;
 
 import lombok.Builder;
@@ -62,3 +63,4 @@ public class OAuthAttributes {
     }
 
 }
+*/

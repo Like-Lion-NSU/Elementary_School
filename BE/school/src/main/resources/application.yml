@@ -86,8 +86,3 @@ my:
   api:
     token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnLmcuaG9yb0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9TVFVERU5UIiwiaXNzIjoiZGVicmFpbnMiLCJpYXQiOjE2OTE4NjgwMzAsImV4cCI6MTY5MTg3MTYzMH0.o5Ygl3Wo_0Qkz-ysTJWHfiUtD3goklbLiBS-qbZjJPq1pWsMZjQ7Ogt2VZRqoScYAAZmdirYdIOLRb1l29jUpQ
     url: http://localhost:8081/me
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG

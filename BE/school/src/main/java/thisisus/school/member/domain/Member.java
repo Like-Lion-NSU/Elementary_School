@@ -1,5 +1,6 @@
 package thisisus.school.member.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member implements UserDetails{
+public class Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,11 @@ public class Member implements UserDetails{
 
     private String email;       // 회원 이메일
 
+    @JsonIgnore     // 양뱡향 관계에서는 한쪽에 JsonIgnor를 하지 않으면 무한루프에 걸림!
+    @OneToMany(mappedBy = "Role")
+    @Enumerated(EnumType.STRING)
+    private List<Role> roles = new ArrayList<>(); // List로 역할(Role)을 담을 수 있도록 추가
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -38,7 +44,14 @@ public class Member implements UserDetails{
 
     private LocalDateTime lastLogin;
 
-    private String provider;
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+    private String refreshToken;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
 
     public Member update(String name) {
         this.name = name;
@@ -46,16 +59,14 @@ public class Member implements UserDetails{
     }
 
     public String getRoleKey() {
-        return this.role.getKey();
+//        return this.role.getKey();
+        return this.role != null ? this.role.getKey() : null;
     }
 
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @Builder.Default
-//    private List<String> roles = new ArrayList<>();
 
     @Builder
-    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, String provider, AuthProvider authProvider) {
+    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, AuthProvider provider) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -63,7 +74,6 @@ public class Member implements UserDetails{
         this.point = point;
         this.lastLogin = lastLogin;
         this.provider = provider;
-        this.authProvider = authProvider;
     }
 
 //    @Override
@@ -71,49 +81,15 @@ public class Member implements UserDetails{
 //        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 //    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        if (this.role != null) {
+//            authorities.add(new SimpleGrantedAuthority(this.role.getKey()));
+//        }
+//        return authorities;
+////        return null;
+//    }
 
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    @Enumerated(EnumType.STRING)
-    private AuthProvider authProvider;
-
-    private String refreshToken;
 
 }

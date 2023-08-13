@@ -34,17 +34,6 @@ public class UserDetailsServiceImpl implements UserDetailService {
         }
         return CustomUserDetails.create(member);
     }
-//    @Override
-//    public CustomMemberDetails loadMemberbyEmail(String email) throws UsernameNotFoundException {
-//
-//        Member member = memberRepository.findByEmail(email).get();
-//        LOGGER.info("[loadMemberByEmail] loadMemberByEmail 수행, email : {}", email);
-//
-//        if (member == null) {
-//            throw new UsernameNotFoundException(email);
-//        }
-//        return CustomMemberDetails.create(member);
-//    }
 
     @Override
     public UserDetails loadUserByEmail(String email) {

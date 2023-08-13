@@ -1,4 +1,5 @@
-package thisisus.school.member.security.dto;
+/*
+package thisisus.school.member.no;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -34,3 +35,4 @@ public class OAuth2CustomUser implements OAuth2User, Serializable {
         return email;
     }
 }
+*/

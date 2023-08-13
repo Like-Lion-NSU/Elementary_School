@@ -34,6 +34,8 @@ public class MemberController {
     @GetMapping("/me")
     @PreAuthorize("hasRole('STUDENT')")
     public Member getCurrentUser(@AuthenticationPrincipal CustomUserDetails user) {
+//        Member member = memberRepository.findByEmail(user.getEmail())
+        System.out.println(user);
         return memberRepository.findByEmail(user.getEmail()).orElseThrow(() -> new IllegalStateException("not found user"));
     }
 

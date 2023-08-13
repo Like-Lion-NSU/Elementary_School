@@ -1,15 +1,11 @@
 package thisisus.school.member.security.config;
 
 
-import com.nimbusds.jwt.JWT;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import thisisus.school.member.security.dto.MemberResponseDto;
-import thisisus.school.member.security.jwt.JwtAuthenticationFilter;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;

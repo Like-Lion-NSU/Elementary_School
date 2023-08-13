@@ -1,4 +1,5 @@
-package thisisus.school.member.security.service;
+/*
+package thisisus.school.member.no;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -87,3 +88,4 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
 }
+*/

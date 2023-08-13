@@ -1,8 +1,8 @@
-package thisisus.school.member.security.dto;
+/*
+package thisisus.school.member.no;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -92,3 +92,4 @@ public class CustomMemberDetails implements UserDetails, OAuth2User{
         return member.getName();
     }
 }
+*/

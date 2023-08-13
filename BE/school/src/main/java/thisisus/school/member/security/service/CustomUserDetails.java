@@ -43,6 +43,10 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
         return userDetails;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     // UserDetail Override
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
