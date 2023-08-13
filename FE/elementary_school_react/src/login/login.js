@@ -23,8 +23,8 @@ function LoJLogin() {
       <img src={Lo_J_Logo} className={style.loJLogo} alt='로고'/>
         {/*좌표 메인으로 잡아야됨*/} 
       <div className={style.loJLoginTitle}>
-        <h1>로그인</h1>
-        <h2 style={{ color: '#4682A9' }}><FontAwesomeIcon
+        <h1 className={style.loJLogin}>로그인</h1>
+        <h2 style={{ color: '#4682A9' }} className={style.loJIcon}><FontAwesomeIcon
           icon={faInfoCircle}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave} /></h2>

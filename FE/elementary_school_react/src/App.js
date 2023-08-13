@@ -22,10 +22,12 @@ import MegaIceTea from "./kiosk/modalIceTea"
 import MegaAmericano from "./kiosk/modalAmericano"
 import MegaChoco from "./kiosk/modalChoco"
 import MegaBasket from "./kiosk/modalbasket"
+import Footer from "./footer/footer";
 
 function App() {
   return (
-    <>
+    <div className="wrapper">
+    <div className="contentWrapper">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/role" element={<Role />} />
@@ -50,7 +52,9 @@ function App() {
         <Route path="/MegaChoco" element={<MegaChoco />} />
         <Route path="/MegaBasket" element={<MegaBasket />} />
       </Routes>
-    </>
+      </div>
+      <Footer/>
+    </div>
   );
 }
 

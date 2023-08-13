@@ -40,9 +40,13 @@
   .loJImgWidth{
     width:20vw;
   }
-  h1, h2{
-    margin: 0.5vw;
+
+.loJLogin{
+    font-size: 2vw;
   }
-  h1{
-    font-size: 2rem;
+  .loJIcon{
+    font-size: 1.5vw;
+  }
+  .loJLogin, .loJIcon{
+    margin:0.5vw;
   }

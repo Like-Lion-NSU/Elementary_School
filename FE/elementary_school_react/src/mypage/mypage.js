@@ -1,8 +1,10 @@
 import { useState } from "react";
-import style from "../css/mypage.module.css";
+import "../css/mypage.css";
 import My_J_userImg from "./img/userImg.png";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/sidebar";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket, faFileLines, faComments } from '@fortawesome/free-solid-svg-icons';
 
 function MyJMypage() {
   const [myJuserDropShow, setmyJUserDropShow] = useState(false);
@@ -16,50 +18,46 @@ function MyJMypage() {
   return (
     <div>
       <Sidebar />
-      <div className={style.myJCenter}>
-        <h1 style={{ marginBottom: "3vh" }}>나의정보</h1>
-        <div className={style.myJFlex} style={{ marginBottom: "3vh" }}>
-          <img src={My_J_userImg} className={style.myJUser} alt="유저" />
-          <div className={`${style.myJFlexColumn} ${style.myJ15Font}`}>
-            <div className={style.myJFlex}>
-              <div>아이디 : </div>&nbsp;<div>milkDiet@gmail.com</div>
-            </div>
-            <div className={style.myJFlex}>
-              <div>역할 : </div>&nbsp;<div>선생님</div>
-            </div>
-            <div className={style.myJFlex}>
-              <div>포인트 : </div>&nbsp;<div>1004 Point</div>
-            </div>
-          </div>
+      
+      <div className="myJCenter">
+        <div className="myJContainer">
+          <div className="myJRole">학생</div>
+          <img src={My_J_userImg}/>
+          <div className="myJMail">hwangpadark@gmail.com</div>
+          <span className="myJPoint">포인트 : 1004p</span>
+
+          <div className="myJCommu">
+              <div className="myJButtonTop">
+                <Link to="/posting"><FontAwesomeIcon icon={faFileLines}/> 내가 쓴 게시글</Link>
+              </div>
+              <div className="myJButtonMiddle">
+                <Link to="/comment"><FontAwesomeIcon icon={faComments}/> 내가 쓴 댓글</Link>
+              </div>
+              <div className="myJLogout">
+                <Link to="/"><FontAwesomeIcon icon={faRightFromBracket}/> 로그아웃</Link>
+              </div>
+          </div>  
+          <span className="myJDrop" onClick={myJshowClick}>
+            회원 탈퇴
+          </span>
         </div>
-        <div className={`${style.myJFlex} ${style.myJ15Font}`}>
-          <div className={style.myJButton}>
-            <Link to="/posting">내가 쓴 게시글</Link>
-          </div>
-          <div className={style.myJButton}>
-            <Link to="/comment">내가 쓴 댓글</Link>
-          </div>
-        </div>
-        <div className={style.myJBottom} onClick={myJshowClick}>
-          회원 탈퇴
-        </div>
-      </div>
+      
       {myJuserDropShow && (
-        <div className={`${style.myJCenter} ${style.myJdropUser}`}>
-          <div className={style.myJuserDropContent}>
+        <div className="myJCenter myJdropUser">
+          <div className="myJuserDropContent">
             <div>
               <h1>국민학교를 자퇴하시겠습니까?</h1>
             </div>
-            <div className={style.myJdropFlex}>
+            <div className="myJdropFlex">
               <Link
                 to="/"
-                className={style.myJdropButton}
+                className="myJdropButton"
                 style={{ backgroundColor: "#91C8E4" }}
               >
                 예
               </Link>
               <div
-                className={style.myJdropButton}
+                className="myJdropButton"
                 style={{ backgroundColor: "#4682A9", color: "white" }}
                 onClick={myJdropClick}
               >
@@ -69,6 +67,7 @@ function MyJMypage() {
           </div>
         </div>
       )}
+      </div> 
     </div>
   );
 }

@@ -19,6 +19,7 @@ import shJOlive from './img/올영.png';
 import shJCake from './img/아이스박스.png';
 import shJBing from './img/인절미 설빙.png';
 import shJChicken from './img/황올.png';
+import Sidebar from "../sidebar/sidebar";
 
 function ShJShop() {
   const shJproducts = [
@@ -112,6 +113,7 @@ function ShJShop() {
 
   return (
     <div>
+      <Sidebar/>
       <div className={style.shJproductWrapper}>
       <h1 className={style.shJTitle}>매점</h1>
         <div className={style.shJcolumns}>
