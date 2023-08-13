@@ -11,6 +11,11 @@ import img8 from "./img/mega_body_ice/tiramisu_ice.jpg";
 
 const Megabody_ice = () => {
   const [iceModalIsOpen, setIceModalIsOpen] = useState(false);
+
+  const handleOtherIceClick = () => {
+    alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
+  };
+
   return (
     <>
       <div className="C-bodySection">
@@ -29,28 +34,28 @@ const Megabody_ice = () => {
                   <p className="mega-C-price">2,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)꿀아메리카노</p>
                   <p className="mega-C-price">2,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)헤이즐넛아메리카노</p>
                   <p className="mega-C-price">2,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)바닐라아메리카노</p>
                   <p className="mega-C-price">2,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)메가리카노</p>
@@ -59,35 +64,35 @@ const Megabody_ice = () => {
               </td>
             </tr>
             <tr>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img3} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)카페라떼</p>
                   <p className="mega-C-price">2,900원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img3} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)바닐라라떼</p>
                   <p className="mega-C-price">3,400원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img4} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)카라멜마끼야또</p>
                   <p className="mega-C-price">3,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img5} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)큐브라떼</p>
                   <p className="mega-C-price">4,200원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img6} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)카페모카</p>
@@ -96,21 +101,21 @@ const Megabody_ice = () => {
               </td>
             </tr>
             <tr>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img7} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)카푸치노</p>
                   <p className="mega-C-price">2,900원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img3} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)헤이즐넛라떼</p>
                   <p className="mega-C-price">3,400원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherIceClick}>
                 <img src={img8} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)티라미수</p>

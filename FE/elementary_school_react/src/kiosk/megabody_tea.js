@@ -23,6 +23,9 @@ import img19 from "./img/mega_body_tea/ul.jpg";
 
 const Megabody_tea = () => {
   const [teaModalIsOpen, setTeaModalIsOpen] = useState(false);
+  const handleOtherTeaClick = () => {
+    alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
+  };
   return (
     <>
       <div className="C-bodySection">
@@ -41,28 +44,28 @@ const Megabody_tea = () => {
                   <p className="mega-C-price">3,000원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img2} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)녹차</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img3} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)페퍼민트</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img4} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)캐모마일</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img5} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)얼그레이</p>
@@ -71,35 +74,35 @@ const Megabody_tea = () => {
               </td>
             </tr>
             <tr>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img6} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)허니자몽블랙티</p>
                   <p className="mega-C-price">3,700원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img7} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)사과유자차</p>
                   <p className="mega-C-price">3,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img8} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)유자차</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img9} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)레몬차</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img10} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)자몽차</p>
@@ -108,35 +111,35 @@ const Megabody_tea = () => {
               </td>
             </tr>
             <tr>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img11} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)허니자몽블랙티</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img12} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)사과유자차</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img13} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)유자차</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img14} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)레몬차</p>
                   <p className="mega-C-price">3,300원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img15} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)자몽차</p>
@@ -145,28 +148,28 @@ const Megabody_tea = () => {
               </td>
             </tr>
             <tr>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img16} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)녹차</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img17} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)패퍼민트</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img18} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)캐모마일</p>
                   <p className="mega-C-price">2,500원</p>
                 </div>
               </td>
-              <td className="mega-C-td">
+              <td className="mega-C-td" onClick={handleOtherTeaClick}>
                 <img src={img19} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(HOT)얼그레이</p>
