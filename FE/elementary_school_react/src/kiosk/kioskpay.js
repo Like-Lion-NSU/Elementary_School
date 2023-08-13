@@ -51,7 +51,7 @@ const Pay_event = ({ img_link, name }) => {
     </button>
   );
 };
-const MegaPay = ({ price, payModalIsOpen, setPayModalIsOpen }) => {
+const MegaPay = ({ payModalIsOpen, setPayModalIsOpen }) => {
   const Pay_header = () => {
     return (
       <div className="Pay_header">
@@ -127,9 +127,9 @@ const MegaPay = ({ price, payModalIsOpen, setPayModalIsOpen }) => {
       <br />
       <Pay_event img_link={img12} name={"쿠폰사용"} />
       <Pay_event img_link={img13} name={"메가선불페이"} />
-      <div className="pricecresult" price={"4000"}>
-        <span className="priceccal">주문금액 : 9300원 - 할인금액 : 0원</span>
-        <span className="pricectotal">결제금액 : 9300원</span>
+      <div className="pricecresult">
+        <span className="priceccal">주문금액 : 9400원 - 할인금액 : 0원</span>
+        <span className="pricectotal">결제금액 : 9400원</span>
       </div>
     </Modal>
   );

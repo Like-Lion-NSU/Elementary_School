@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import BasketModal from "./modalbasket";
 import MegaPay from "./kioskpay";
 import "../css/megaFooter.css";
 import { Link } from "react-router-dom";
 
 function MegaFooter() {
   const [payModalIsOpen, setPayModalIsOpen] = useState(false);
+  const [bascketModalIsOpen, setBascketModalIsOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState("");
   const [selectedProductsCount, setSelectedProductsCount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -18,6 +20,7 @@ function MegaFooter() {
   return (
     <div className="E-footer">
       <div className="E-left-box">
+        <div>뭘봐</div>
         {selectedMenu ? `선택한 메뉴: ${selectedMenu}` : ""}
       </div>
       <div className="E-right-box">
@@ -27,7 +30,7 @@ function MegaFooter() {
           <div
             className="E-payment-box"
             onClick={() => {
-              setPayModalIsOpen(true);
+              setBascketModalIsOpen(true);
             }}
           >
             <div className="E-amount">{totalAmount}원</div>
@@ -35,6 +38,12 @@ function MegaFooter() {
           </div>
         </Link>
       </div>
+      <BasketModal
+        bascketModalIsOpen={bascketModalIsOpen}
+        setBascketModalIsOpen={setBascketModalIsOpen}
+        payModalIsOpen={payModalIsOpen}
+        setPayModalIsOpen={setPayModalIsOpen}
+      />
       <MegaPay
         payModalIsOpen={payModalIsOpen}
         setPayModalIsOpen={setPayModalIsOpen}

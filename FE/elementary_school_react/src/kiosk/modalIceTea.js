@@ -13,7 +13,7 @@ const IceTeaOption = ({ teaModalIsOpen, setTeaModalIsOpen }) => {
     shot: null,
     honey: null,
   });
-
+  console.log(opJselectedOptions);
   const opJhandleShotSelect = (option) => {
     setopJSelectedOptions((prev) => ({
       ...prev,
@@ -145,7 +145,21 @@ const IceTeaOption = ({ teaModalIsOpen, setTeaModalIsOpen }) => {
           >
             취소
           </div>
-          <div className="opJBtnStyle opJPut">주문담기</div>
+          <div
+            className="opJBtnStyle opJPut"
+            onClick={() => {
+              if (
+                opJselectedOptions.shot === "샷 추가" &&
+                opJselectedOptions.honey === null
+              ) {
+                console.log("주문담기 성공");
+              } else {
+                alert("다시한번생각해보세요");
+              }
+            }}
+          >
+            주문담기
+          </div>
         </div>
       </div>
     </Modal>

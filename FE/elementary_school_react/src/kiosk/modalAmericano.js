@@ -13,10 +13,8 @@ const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({
     shot: null,
     stevia: null,
-    honey: null,
-    cream: null,
   });
-
+  console.log(opJselectedOptions);
   const opJhandleShotSelect = (option) => {
     setopJSelectedOptions((prev) => ({
       ...prev,
@@ -35,8 +33,6 @@ const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
     setopJSelectedOptions({
       shot: null,
       stevia: null,
-      honey: null,
-      cream: null,
     });
   };
   const customModalStyles = {
@@ -65,6 +61,7 @@ const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
       padding: "0",
     },
   };
+
   return (
     <Modal
       isOpen={iceModalIsOpen}
@@ -165,7 +162,22 @@ const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
           >
             취소
           </div>
-          <div className="opJBtnStyle opJPut">주문담기</div>
+          <div
+            className="opJBtnStyle opJPut"
+            onClick={() => {
+              if (
+                opJselectedOptions.shot === "연하게" &&
+                opJselectedOptions.stevia === null
+              ) {
+                console.log("주문담기 성공");
+                setIceModalIsOpen(false);
+              } else {
+                alert("다시한번생각해보세요");
+              }
+            }}
+          >
+            주문담기
+          </div>
         </div>
       </div>
     </Modal>

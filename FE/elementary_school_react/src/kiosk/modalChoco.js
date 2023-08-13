@@ -8,7 +8,7 @@ import "../css/option.css";
 
 const IceChocoOption = ({ chocoModalIsOpen, setChocoModalIsOpen }) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({ cream: null });
-
+  console.log(opJselectedOptions);
   const opJhandleCreamSelect = (option) => {
     setopJSelectedOptions((prev) => ({
       ...prev,
@@ -107,7 +107,18 @@ const IceChocoOption = ({ chocoModalIsOpen, setChocoModalIsOpen }) => {
           >
             취소
           </div>
-          <div className="opJBtnStyle opJPut">주문담기</div>
+          <div
+            className="opJBtnStyle opJPut"
+            onClick={() => {
+              if (opJselectedOptions.cream === "휘핑O") {
+                console.log("주문담기 성공");
+              } else {
+                alert("다시한번생각해보세요");
+              }
+            }}
+          >
+            주문담기
+          </div>
         </div>
       </div>
     </Modal>
