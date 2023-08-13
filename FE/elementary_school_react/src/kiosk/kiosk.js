@@ -13,7 +13,7 @@ const Kiosk = () => {
   const [selectedMenu, setSelectedMenu] = useState("");
   return (
     <KioskLayout>
-      <Sidebar />
+      <Sidebar/>
       <div className="left-panel"></div>
       <div className="center-panel">
         <MegaHeader />

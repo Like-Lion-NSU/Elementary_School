@@ -1,0 +1,138 @@
+.baJBasket{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 51.5vw;
+    height: 95vh;
+    font-weight: bold;
+}
+.opJHead{
+    font-size:1.5vw;
+    background-color: #FDD000;
+    padding:0.5vw 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.baJMenu{
+    font-size: 1.2vw;
+    display: grid;
+	grid-template-columns: 3fr 1fr 1fr;
+    padding: 1vw 2vw;
+    background-color: rgb(233, 231, 231);
+}
+.baJOption{
+    font-size: 1.2vw;
+    display: grid;
+	grid-template-columns: 3fr 1fr 1fr;
+    padding: 1vw 2vw;
+    background-color: rgb(233, 231, 231);
+}
+.baJRight{
+    text-align: end;
+}
+.baJLeftMargin{
+    margin-left: 2vw;
+}
+.baJRef{
+    font-size: 1.5vw;
+    color:red;
+    font-weight: bold;
+    text-align: end;
+    margin:0.5vw 1.5vw;
+}
+.baJCountCost{
+    margin:0 1.5vw;
+    border:3px solid rgb(233, 231, 231); 
+    border-radius: 10px;
+    padding: 1vw;
+    font-size: 1.2vw;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+}
+.baJSpaceBetween{
+    display: flex;
+    justify-content: space-between;
+    margin:0 1vw;
+    align-items: center;
+}
+.baJFlex{
+    display: flex;
+    align-items: center;
+}
+.baJFontRed{
+    font-size: 2vw;
+    color:red;
+}
+.baJButton{
+    margin:0 1.5vw;
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
+    color:white;
+    font-size:1.3vw;
+}
+.baJButton > div{
+    height: 6vw;
+    border-radius: 5px;
+    cursor:pointer
+}
+.baJBack{
+    display: flex;
+    text-align: center;
+    margin-right: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+.baJShop{
+    background-color: #FDD000;
+    margin: 0 0.5vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.baJPack{
+    background-color: red;
+    margin-left:0.5vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.baJShopIcon{
+    background-color: white;
+    border-radius: 50%;
+    font-size: 2.0vw;
+    padding: 1vw;
+    margin:0.5vw;
+    color:#FDD000;
+}
+.baJGlassIcon{
+    background-color: white;
+    border-radius: 50%;
+    font-size: 2.0vw;
+    padding: 1vw;
+    margin:0.5vw;
+    color:red;
+}
+.baJBtnFlex{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.baJBtnColumn{
+    margin:0.5vw;
+    color:white;
+    font-size:1.3vw;
+}
+.baJBottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+    padding-bottom: 1.5vw;
+    background-color: white;
+}

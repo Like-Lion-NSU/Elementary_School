@@ -31,7 +31,7 @@ const Megabody_ice = () => {
                 <img src={img1} className="mega-C-img"></img>
                 <div className="mega-C-info">
                   <p className="C-bev_name">(ICE)아메리카노</p>
-                  <p className="mega-C-price">2,700원</p>
+                  <p className="mega-C-price">2,000원</p>
                 </div>
               </td>
               <td className="mega-C-td" onClick={handleOtherIceClick}>
