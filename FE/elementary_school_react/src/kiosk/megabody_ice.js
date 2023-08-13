@@ -9,11 +9,17 @@ import img6 from "./img/mega_body_ice/moca_ice.jpg";
 import img7 from "./img/mega_body_ice/cappu_ice.jpg";
 import img8 from "./img/mega_body_ice/tiramisu_ice.jpg";
 
-const Megabody_ice = ({ setSelectedIceMenu, setIce }) => {
+const Megabody_ice = ({ setSelectedIceMenu, setIce, setScore, lastScore }) => {
   const [iceModalIsOpen, setIceModalIsOpen] = useState(false);
 
   const handleOtherIceClick = () => {
     alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
+    if (lastScore > 0) {
+      setScore(lastScore - 10);
+    } else {
+      return;
+    }
+    console.log(lastScore);
   };
 
   return (
@@ -130,6 +136,8 @@ const Megabody_ice = ({ setSelectedIceMenu, setIce }) => {
           setIceModalIsOpen={setIceModalIsOpen}
           setSelectedIceMenu={setSelectedIceMenu}
           setIce={setIce}
+          setScore={setScore}
+          lastScore={lastScore}
         />
       </div>
     </>

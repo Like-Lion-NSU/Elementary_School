@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,8 @@ const IceChocoOption = ({
   setSelectedChoMenu,
   chocoModalIsOpen,
   setChocoModalIsOpen,
+  setScore,
+  lastScore,
 }) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({ cream: null });
   console.log(opJselectedOptions);
@@ -121,7 +123,13 @@ const IceChocoOption = ({
                 setSelectedChoMenu(true);
                 setCho(1);
               } else {
-                alert("다시한번생각해보세요");
+                alert("다시 한번 생각해 보세요");
+                if (lastScore > 0) {
+                  setScore(lastScore - 10);
+                } else {
+                  return;
+                }
+                console.log(lastScore);
               }
             }}
           >

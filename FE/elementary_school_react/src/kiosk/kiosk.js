@@ -27,23 +27,31 @@ const Kiosk = () => {
         <MegaMenu
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
+          setScore={setScore}
+          lastScore={lastScore}
         />
         {selectedCategory === "커피(Ice)" && (
           <Megabody_ice
             setSelectedIceMenu={setSelectedIceMenu}
             setIce={setIce}
+            setScore={setScore}
+            lastScore={lastScore}
           />
         )}
         {selectedCategory === "스무디&프라페" && (
           <Megabody_choco
             setSelectedChoMenu={setSelectedChoMenu}
             setCho={setCho}
+            setScore={setScore}
+            lastScore={lastScore}
           />
         )}
         {selectedCategory === "티(Tea)" && (
           <Megabody_tea
             setSelectedBokMenu={setSelectedBokMenu}
             setBok={setBok}
+            setScore={setScore}
+            lastScore={lastScore}
           />
         )}
         <MegaFooter

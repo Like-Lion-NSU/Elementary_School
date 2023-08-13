@@ -16,6 +16,8 @@ const BasketModal = ({
   setBascketModalIsOpen,
   payModalIsOpen,
   setPayModalIsOpen,
+  lastScore,
+  setScore,
 }) => {
   const customModalStyles = {
     overlay: {
@@ -132,6 +134,12 @@ const BasketModal = ({
                   className="baJBtnColumn"
                   onClick={() => {
                     alert("포장하려고 했을걸요?");
+                    if (lastScore > 0) {
+                      setScore(lastScore - 10);
+                    } else {
+                      return;
+                    }
+                    console.log(lastScore);
                   }}
                 >
                   <div>먹고가기</div>

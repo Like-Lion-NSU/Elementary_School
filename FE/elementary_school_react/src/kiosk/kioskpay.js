@@ -18,17 +18,25 @@ import img12 from "./img/mega_pay/coupon.png";
 import img13 from "./img/mega_pay/megapay.png";
 import axios from "axios";
 
-const Pay_step = ({ num, comment, img_link_1, name_1, img_link_2, name_2 }) => {
+const Pay_step = ({
+  num,
+  comment,
+  img_link_1,
+  name_1,
+  img_link_2,
+  name_2,
+  clickEvent,
+}) => {
   return (
     <div className="Pay_step">
       <span className="stepcInfo">STEP{num}</span>
       <span className="stepcComment">{comment}</span>
       <div className="btncSection">
-        <button>
+        <button onClick={clickEvent}>
           <img src={img_link_1} />
           <p>{name_1}</p>
         </button>
-        <button>
+        <button onClick={clickEvent}>
           <img src={img_link_2} />
           <p>{name_2}</p>
         </button>
@@ -36,17 +44,17 @@ const Pay_step = ({ num, comment, img_link_1, name_1, img_link_2, name_2 }) => {
     </div>
   );
 };
-const Pay_how = ({ img_link, name }) => {
+const Pay_how = ({ img_link, name, clickEvent }) => {
   return (
-    <button className="Pay_how">
+    <button className="Pay_how" onClick={clickEvent}>
       <img src={img_link} />
       <p>{name}</p>
     </button>
   );
 };
-const Pay_event = ({ img_link, name }) => {
+const Pay_event = ({ img_link, name, clickEvent }) => {
   return (
-    <button className="Pay_event">
+    <button className="Pay_event" onClick={clickEvent}>
       <img src={img_link} />
       <p>{name}</p>
     </button>
@@ -58,6 +66,16 @@ const MegaPay = ({
   lastScore,
   setScore,
 }) => {
+  const handleOtherClick = () => {
+    alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
+    if (lastScore > 0) {
+      setScore(lastScore - 10);
+    } else {
+      return;
+    }
+    console.log(lastScore);
+  };
+
   const Pay_header = () => {
     return (
       <div className="Pay_header">
@@ -113,38 +131,61 @@ const MegaPay = ({
         name_1={"KT VIP초이스(통합 월1회)"}
         img_link_2={img2}
         name_2={"SKT우주패스"}
+        clickEvent={handleOtherClick}
       />
       <br></br>
-      <Pay_step
-        num={"2"}
-        comment={"결제수단을 선택해주세요"}
-        img_link_1={img3}
-        name_1={"카드결제(삼성페이/LG페이)"}
-        img_link_2={img4}
-        name_2={"앱카드(QR/바코드)"}
-        onClick={() => {
-          axios({
-            url: "/practice/point",
-            method: "post",
-            data: {
-              score: lastScore,
-            },
-            baseURL: "http://localhost:8080",
-          }).then(() => {
-            console.log("good");
-          });
-        }}
+      <div className="Pay_step">
+        <span className="stepcInfo">STEP2</span>
+        <span className="stepcComment">결제수단을 선택해주세요</span>
+        <div className="btncSection">
+          <button>
+            <img src={img3} />
+            <p>카드결제(삼성페이/LG페이)</p>
+          </button>
+          <button onClick={handleOtherClick}>
+            <img src={img4} />
+            <p>앱카드(QR/바코드)</p>
+          </button>
+        </div>
+      </div>
+      <Pay_how
+        img_link={img5}
+        name={"카카오페이"}
+        clickEvent={handleOtherClick}
       />
-      <Pay_how img_link={img5} name={"카카오페이"} />
-      <Pay_how img_link={img6} name={"페이코"} />
-      <Pay_how img_link={img7} name={"네이버페이"} />
-      <Pay_how img_link={img8} name={"제로페이"} />
-      <Pay_how img_link={img9} name={"BC페이북"} />
-      <Pay_how img_link={img10} name={"하나 Pay"} />
-      <Pay_how img_link={img11} name={"KB pay"} />
+      <Pay_how img_link={img6} name={"페이코"} clickEvent={handleOtherClick} />
+      <Pay_how
+        img_link={img7}
+        name={"네이버페이"}
+        clickEvent={handleOtherClick}
+      />
+      <Pay_how
+        img_link={img8}
+        name={"제로페이"}
+        clickEvent={handleOtherClick}
+      />
+      <Pay_how
+        img_link={img9}
+        name={"BC페이북"}
+        clickEvent={handleOtherClick}
+      />
+      <Pay_how
+        img_link={img10}
+        name={"하나 Pay"}
+        clickEvent={handleOtherClick}
+      />
+      <Pay_how img_link={img11} name={"KB pay"} clickEvent={handleOtherClick} />
       <br />
-      <Pay_event img_link={img12} name={"쿠폰사용"} />
-      <Pay_event img_link={img13} name={"메가선불페이"} />
+      <Pay_event
+        img_link={img12}
+        name={"쿠폰사용"}
+        clickEvent={handleOtherClick}
+      />
+      <Pay_event
+        img_link={img13}
+        name={"메가선불페이"}
+        clickEvent={handleOtherClick}
+      />
       <div className="pricecresult">
         <span className="priceccal">주문금액 : 9400원 - 할인금액 : 0원</span>
         <span className="pricectotal">결제금액 : 9400원</span>

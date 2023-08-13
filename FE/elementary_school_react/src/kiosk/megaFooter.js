@@ -184,11 +184,11 @@ function MegaFooter({
                 setBascketModalIsOpen(true);
               } else if (Icecount === 0 || Chocount === 0 || Bokcount === 0) {
                 alert(
-                  "아직 메뉴를 모두 선택하지 않으셨습니다. 메뉴를 다시한번 확인해주세요."
+                  "아직 메뉴를 모두 선택하지 않으셨습니다. 메뉴를 다시 한 번 확인해 주세요."
                 );
               } else {
                 alert(
-                  "잘못된 메뉴의 갯수를 선택하셨습니다. 다시 확인해주세요."
+                  "잘못된 메뉴의 개수를 선택하셨습니다. 다시 확인해 주세요."
                 );
               }
             }}
@@ -205,6 +205,8 @@ function MegaFooter({
         setBascketModalIsOpen={setBascketModalIsOpen}
         payModalIsOpen={payModalIsOpen}
         setPayModalIsOpen={setPayModalIsOpen}
+        lastScore={lastScore}
+        setScore={setScore}
       />
       <MegaPay
         payModalIsOpen={payModalIsOpen}
