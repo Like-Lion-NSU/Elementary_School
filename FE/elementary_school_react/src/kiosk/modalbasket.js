@@ -28,7 +28,7 @@ const BasketModal = ({
       left: "0",
     },
     content: {
-      width: "51.5vw",
+      width: "52.7vw",
       height: "95vh",
       zIndex: "150",
       position: "absolute",
@@ -115,7 +115,12 @@ const BasketModal = ({
           </div>
           <div className="baJButton">
             <div className="baJBack">
-              <div className="baJBackBtn">
+              <div
+                className="baJBackBtn"
+                onClick={() => {
+                  setBascketModalIsOpen(false);
+                }}
+              >
                 <FontAwesomeIcon icon={faArrowLeft} />
                 <div>돌아가기</div>
               </div>
@@ -123,7 +128,12 @@ const BasketModal = ({
             <div className="baJShop">
               <div className="baJBtnFlex">
                 <FontAwesomeIcon icon={faStore} className="baJShopIcon" />
-                <div className="baJBtnColumn">
+                <div
+                  className="baJBtnColumn"
+                  onClick={() => {
+                    alert("포장하려고 했을걸요?");
+                  }}
+                >
                   <div>먹고가기</div>
                   <div>(다회용컵)</div>
                 </div>

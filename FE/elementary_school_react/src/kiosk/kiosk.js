@@ -9,6 +9,7 @@ import Megabody_tea from "./megabody_tea";
 import MegaFooter from "./megaFooter";
 
 const Kiosk = () => {
+  const [score, setScore] = useState(100);
   const [selectedCategory, setSelectedCategory] = useState("커피(Ice)");
   const [selectedIceMenu, setSelectedIceMenu] = useState(false);
   const [selectedBokMenu, setSelectedBokMenu] = useState(false);

@@ -1,12 +1,12 @@
-.Footer{
-    background-color: #749BC2;
-    color:white;
-    padding: 1vw;
-    bottom : 0vh;
-    width:100vw;
-    display: flex;
-    justify-content: center;
+.Footer {
+  background-color: #749bc2;
+  color: white;
+  padding: 1vw;
+  bottom: 0vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.Jlogo{
-    width:2vw;
+.Jlogo {
+  width: 2vw;
 }

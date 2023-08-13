@@ -35,7 +35,7 @@ const IceChocoOption = ({
       left: "0",
     },
     content: {
-      width: "51.5vw",
+      width: "52.7vw",
       height: "95vh",
       zIndex: "150",
       position: "absolute",

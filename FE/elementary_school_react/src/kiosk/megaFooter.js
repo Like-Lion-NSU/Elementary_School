@@ -40,6 +40,7 @@ function MegaFooter({
                 className="selectedCDbtn"
                 onClick={() => {
                   setSelectedIceMenu(false);
+                  setIce(0);
                 }}
               >
                 X
@@ -79,6 +80,7 @@ function MegaFooter({
                 className="selectedCDbtn"
                 onClick={() => {
                   setSelectedBokMenu(false);
+                  setBok(0);
                 }}
               >
                 X
@@ -118,6 +120,7 @@ function MegaFooter({
                 className="selectedCDbtn"
                 onClick={() => {
                   setSelectedChoMenu(false);
+                  setCho(0);
                 }}
               >
                 X
@@ -172,7 +175,20 @@ function MegaFooter({
           <div
             className="E-payment-box"
             onClick={() => {
-              setBascketModalIsOpen(true);
+              if (
+                Icecount * 2000 + Chocount * 3900 + Bokcount * 3500 ===
+                9400
+              ) {
+                setBascketModalIsOpen(true);
+              } else if (Icecount === 0 || Chocount === 0 || Bokcount === 0) {
+                alert(
+                  "아직 메뉴를 모두 선택하지 않으셨습니다. 메뉴를 다시한번 확인해주세요."
+                );
+              } else {
+                alert(
+                  "잘못된 메뉴의 갯수를 선택하셨습니다. 다시 확인해주세요."
+                );
+              }
             }}
           >
             <div className="E-amount">
