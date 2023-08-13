@@ -17,6 +17,8 @@ function MegaFooter({
   setCho,
   Bokcount,
   setBok,
+  lastScore,
+  setScore,
 }) {
   const [payModalIsOpen, setPayModalIsOpen] = useState(false);
   const [bascketModalIsOpen, setBascketModalIsOpen] = useState(false);
@@ -207,6 +209,8 @@ function MegaFooter({
       <MegaPay
         payModalIsOpen={payModalIsOpen}
         setPayModalIsOpen={setPayModalIsOpen}
+        lastScore={lastScore}
+        setScore={setScore}
       />
     </div>
   );

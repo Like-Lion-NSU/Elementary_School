@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
 import "../css/kioskpayment_1.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,6 +16,7 @@ import img10 from "./img/mega_pay/hana.jfif";
 import img11 from "./img/mega_pay/kbpay.png";
 import img12 from "./img/mega_pay/coupon.png";
 import img13 from "./img/mega_pay/megapay.png";
+import axios from "axios";
 
 const Pay_step = ({ num, comment, img_link_1, name_1, img_link_2, name_2 }) => {
   return (
@@ -51,7 +52,12 @@ const Pay_event = ({ img_link, name }) => {
     </button>
   );
 };
-const MegaPay = ({ payModalIsOpen, setPayModalIsOpen }) => {
+const MegaPay = ({
+  payModalIsOpen,
+  setPayModalIsOpen,
+  lastScore,
+  setScore,
+}) => {
   const Pay_header = () => {
     return (
       <div className="Pay_header">
@@ -116,6 +122,18 @@ const MegaPay = ({ payModalIsOpen, setPayModalIsOpen }) => {
         name_1={"카드결제(삼성페이/LG페이)"}
         img_link_2={img4}
         name_2={"앱카드(QR/바코드)"}
+        onClick={() => {
+          axios({
+            url: "/practice/point",
+            method: "post",
+            data: {
+              score: lastScore,
+            },
+            baseURL: "http://localhost:8080",
+          }).then(() => {
+            console.log("good");
+          });
+        }}
       />
       <Pay_how img_link={img5} name={"카카오페이"} />
       <Pay_how img_link={img6} name={"페이코"} />
