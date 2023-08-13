@@ -8,7 +8,12 @@ import twoShot from "./img/optionImg/twoShot.png";
 import hoeny from "./img/optionImg/honey.png";
 import "../css/option.css";
 
-const IceTeaOption = ({ teaModalIsOpen, setTeaModalIsOpen }) => {
+const IceTeaOption = ({
+  setBok,
+  setSelectedBokMenu,
+  teaModalIsOpen,
+  setTeaModalIsOpen,
+}) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({
     shot: null,
     honey: null,
@@ -153,6 +158,9 @@ const IceTeaOption = ({ teaModalIsOpen, setTeaModalIsOpen }) => {
                 opJselectedOptions.honey === null
               ) {
                 console.log("주문담기 성공");
+                setTeaModalIsOpen(false);
+                setSelectedBokMenu(true);
+                setBok(1);
               } else {
                 alert("다시한번생각해보세요");
               }

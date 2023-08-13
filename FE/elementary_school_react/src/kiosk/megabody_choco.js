@@ -20,7 +20,7 @@ import img16 from "./img/mega_body_choco/yo.jpg";
 import img17 from "./img/mega_body_choco/syo.jpg";
 import img18 from "./img/mega_body_choco/myo.jpg";
 
-const Megabody_choco = () => {
+const Megabody_choco = ({ setSelectedChoMenu, setCho }) => {
   const [chocoModalIsOpen, setChocoModalIsOpen] = useState(false);
   const handleOtherChocoClick = () => {
     alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
@@ -174,6 +174,8 @@ const Megabody_choco = () => {
         <IceChocoOption
           chocoModalIsOpen={chocoModalIsOpen}
           setChocoModalIsOpen={setChocoModalIsOpen}
+          setSelectedChoMenu={setSelectedChoMenu}
+          setCho={setCho}
         />
       </div>
     </>

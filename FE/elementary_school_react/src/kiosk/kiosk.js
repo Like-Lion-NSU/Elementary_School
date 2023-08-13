@@ -10,10 +10,16 @@ import MegaFooter from "./megaFooter";
 
 const Kiosk = () => {
   const [selectedCategory, setSelectedCategory] = useState("커피(Ice)");
-  const [selectedMenu, setSelectedMenu] = useState("");
+  const [selectedIceMenu, setSelectedIceMenu] = useState(false);
+  const [selectedBokMenu, setSelectedBokMenu] = useState(false);
+  const [selectedChoMenu, setSelectedChoMenu] = useState(false);
+  const [Icecount, setIce] = useState(0);
+  const [Chocount, setCho] = useState(0);
+  const [Bokcount, setBok] = useState(0);
+
   return (
     <KioskLayout>
-      <Sidebar/>
+      <Sidebar />
       <div className="left-panel"></div>
       <div className="center-panel">
         <MegaHeader />
@@ -21,10 +27,38 @@ const Kiosk = () => {
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
         />
-        {selectedCategory === "커피(Ice)" && <Megabody_ice />}
-        {selectedCategory === "스무디&프라페" && <Megabody_choco />}
-        {selectedCategory === "티(Tea)" && <Megabody_tea />}
-        <MegaFooter />
+        {selectedCategory === "커피(Ice)" && (
+          <Megabody_ice
+            setSelectedIceMenu={setSelectedIceMenu}
+            setIce={setIce}
+          />
+        )}
+        {selectedCategory === "스무디&프라페" && (
+          <Megabody_choco
+            setSelectedChoMenu={setSelectedChoMenu}
+            setCho={setCho}
+          />
+        )}
+        {selectedCategory === "티(Tea)" && (
+          <Megabody_tea
+            setSelectedBokMenu={setSelectedBokMenu}
+            setBok={setBok}
+          />
+        )}
+        <MegaFooter
+          selectedIceMenu={selectedIceMenu}
+          selectedBokMenu={selectedBokMenu}
+          selectedChoMenu={selectedChoMenu}
+          setSelectedIceMenu={setSelectedIceMenu}
+          setSelectedBokMenu={setSelectedBokMenu}
+          setSelectedChoMenu={setSelectedChoMenu}
+          Icecount={Icecount}
+          setIce={setIce}
+          Chocount={Chocount}
+          setCho={setCho}
+          Bokcount={Bokcount}
+          setBok={setBok}
+        />
       </div>
       <div className="right-panel"></div>
     </KioskLayout>

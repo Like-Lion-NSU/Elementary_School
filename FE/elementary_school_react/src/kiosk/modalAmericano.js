@@ -9,12 +9,16 @@ import twoShot from "./img/optionImg/twoShot.png";
 import stevia from "./img/optionImg/stevia.png";
 import "../css/option.css";
 
-const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
+const IceAmeOption = ({
+  setIce,
+  setSelectedIceMenu,
+  iceModalIsOpen,
+  setIceModalIsOpen,
+}) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({
     shot: null,
     stevia: null,
   });
-  console.log(opJselectedOptions);
   const opJhandleShotSelect = (option) => {
     setopJSelectedOptions((prev) => ({
       ...prev,
@@ -171,6 +175,8 @@ const IceAmeOption = ({ iceModalIsOpen, setIceModalIsOpen }) => {
               ) {
                 console.log("주문담기 성공");
                 setIceModalIsOpen(false);
+                setSelectedIceMenu(true);
+                setIce(1);
               } else {
                 alert("다시한번생각해보세요");
               }

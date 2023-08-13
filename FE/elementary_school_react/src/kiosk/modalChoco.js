@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +6,12 @@ import opJChoco from "./img/optionImg/optionChoco.png";
 import cream from "./img/optionImg/cream.png";
 import "../css/option.css";
 
-const IceChocoOption = ({ chocoModalIsOpen, setChocoModalIsOpen }) => {
+const IceChocoOption = ({
+  setCho,
+  setSelectedChoMenu,
+  chocoModalIsOpen,
+  setChocoModalIsOpen,
+}) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({ cream: null });
   console.log(opJselectedOptions);
   const opJhandleCreamSelect = (option) => {
@@ -112,6 +117,9 @@ const IceChocoOption = ({ chocoModalIsOpen, setChocoModalIsOpen }) => {
             onClick={() => {
               if (opJselectedOptions.cream === "휘핑O") {
                 console.log("주문담기 성공");
+                setChocoModalIsOpen(false);
+                setSelectedChoMenu(true);
+                setCho(1);
               } else {
                 alert("다시한번생각해보세요");
               }

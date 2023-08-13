@@ -21,7 +21,7 @@ import img17 from "./img/mega_body_tea/pe.jpg";
 import img18 from "./img/mega_body_tea/chamo.jpg";
 import img19 from "./img/mega_body_tea/ul.jpg";
 
-const Megabody_tea = () => {
+const Megabody_tea = ({ setSelectedBokMenu, setBok }) => {
   const [teaModalIsOpen, setTeaModalIsOpen] = useState(false);
   const handleOtherTeaClick = () => {
     alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
@@ -182,6 +182,8 @@ const Megabody_tea = () => {
         <IceTeaOption
           teaModalIsOpen={teaModalIsOpen}
           setTeaModalIsOpen={setTeaModalIsOpen}
+          setSelectedBokMenu={setSelectedBokMenu}
+          setBok={setBok}
         />
       </div>
     </>

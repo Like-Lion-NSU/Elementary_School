@@ -9,7 +9,7 @@ import img6 from "./img/mega_body_ice/moca_ice.jpg";
 import img7 from "./img/mega_body_ice/cappu_ice.jpg";
 import img8 from "./img/mega_body_ice/tiramisu_ice.jpg";
 
-const Megabody_ice = () => {
+const Megabody_ice = ({ setSelectedIceMenu, setIce }) => {
   const [iceModalIsOpen, setIceModalIsOpen] = useState(false);
 
   const handleOtherIceClick = () => {
@@ -128,6 +128,8 @@ const Megabody_ice = () => {
         <IceAmeOption
           iceModalIsOpen={iceModalIsOpen}
           setIceModalIsOpen={setIceModalIsOpen}
+          setSelectedIceMenu={setSelectedIceMenu}
+          setIce={setIce}
         />
       </div>
     </>
