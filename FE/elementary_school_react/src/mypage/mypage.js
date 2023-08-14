@@ -4,7 +4,7 @@ import My_J_userImg from "./img/userImg.png";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/sidebar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket, faFileLines, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 
 function MyJMypage() {
   const [myJuserDropShow, setmyJUserDropShow] = useState(false);
@@ -28,10 +28,10 @@ function MyJMypage() {
 
           <div className="myJCommu">
               <div className="myJButtonTop">
-                <Link to="/posting"><FontAwesomeIcon icon={faFileLines}/> 내가 쓴 게시글</Link>
+                <Link to="/posting">내가 쓴 게시글</Link>
               </div>
               <div className="myJButtonMiddle">
-                <Link to="/comment"><FontAwesomeIcon icon={faComments}/> 내가 쓴 댓글</Link>
+                <Link to="/comments">내가 쓴 댓글</Link>
               </div>
               <div className="myJLogout">
                 <Link to="/"><FontAwesomeIcon icon={faRightFromBracket}/> 로그아웃</Link>

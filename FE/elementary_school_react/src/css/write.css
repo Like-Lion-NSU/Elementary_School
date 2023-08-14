@@ -14,17 +14,17 @@ body {
     width: 100%;
     padding: 2vh; 
     border: none;
-    border-radius: 5px; 
-    font-size: 3vh; 
+    border-radius: 2vh; 
+    font-size: 2vh; 
     outline: none; 
 }
 
 .write-content {
-    width: 100%; 
+    width: 100vh; 
     padding: 2vh; 
     border: none; 
     margin-bottom: 2vh; 
-    font-size: 3vh; 
+    font-size: 2vh; 
     resize: none; 
     min-height: 30vh;
     outline: none; 
@@ -33,13 +33,14 @@ body {
 }
 
 .write-button {
-    padding: 2vh 4vh; 
-    background-color: #4682A9; 
+    padding: 2vh 3vh; 
+    background-color: #749BC2; 
     color: #fff; 
     border: none; 
-    border-radius: 3vh; 
+    border-radius: 1vh; 
     cursor: pointer;
-    font-size: 3vh; 
+    font-size: 2vh; 
+    margin-left: 83vh;
 }
 
 .write-input::placeholder,

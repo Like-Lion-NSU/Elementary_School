@@ -1,0 +1,30 @@
+/* BoardHeader.css */
+.board-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10vh;
+    width: 170vh;
+    margin: 0 auto;
+  }
+  
+  .board-title {
+    margin: 0;
+    font-size: 3vh;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input-icon {
+    color: #5c5c5c;
+    margin-right: 1vh;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+  }
