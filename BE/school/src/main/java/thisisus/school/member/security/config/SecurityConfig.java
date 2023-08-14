@@ -58,6 +58,7 @@ public class SecurityConfig{
                 .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/api/example", "/oauth/login/**", "/social/**", "/", "/login").permitAll()
+//                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
         .and()
                 .oauth2Login()

@@ -26,10 +26,10 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
-//    @GetMapping("/")
-//    public String index() {
-//        return "/index";
-//    }
+/*    @GetMapping("/")
+    public String index() {
+        return "/index";
+    }*/
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('STUDENT')")

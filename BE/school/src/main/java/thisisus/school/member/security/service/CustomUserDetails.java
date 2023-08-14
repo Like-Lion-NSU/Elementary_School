@@ -3,7 +3,6 @@ package thisisus.school.member.security.service;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import thisisus.school.member.domain.Member;
@@ -17,6 +16,7 @@ import java.util.Map;
 public class CustomUserDetails implements UserDetails, OAuth2User {
     private Long id;
     private String email;
+    private Long point;
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
@@ -28,7 +28,7 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
 
     public static CustomUserDetails create(Member member) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_STUDENT"));
+                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new CustomUserDetails(
                 member.getId(),

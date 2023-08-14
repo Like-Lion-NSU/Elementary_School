@@ -24,32 +24,32 @@ public class AuthService {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public String refreshToken(HttpServletRequest request, HttpServletResponse response, String oldAccessToken) {
-        // 1. validation Refresh Token
-        String oldRefreshToken = CookieUtils.getCookie(request, cookieKey)
-                .map(Cookie::getValue).orElseThrow(() -> new RuntimeException("No Refresh Token Cookie"));
+        public String refreshToken(HttpServletRequest request, HttpServletResponse response, String oldAccessToken) {
+            // 1. validation Refresh Token
+            String oldRefreshToken = CookieUtils.getCookie(request, cookieKey)
+                    .map(Cookie::getValue).orElseThrow(() -> new RuntimeException("No Refresh Token Cookie"));
 
-        if (!jwtTokenProvider.validateToken(oldAccessToken)) {
-            throw new RuntimeException("Not Validated Refresh Token");
+            if (!jwtTokenProvider.validateToken(oldAccessToken)) {
+                throw new RuntimeException("Not Validated Refresh Token");
+            }
+
+            // 2. 유저 정보 얻기
+            Authentication authentication = jwtTokenProvider.getAuthentication(oldAccessToken);
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+
+            Long id = Long.valueOf(customUserDetails.getName());
+
+            // 3. Match Refresh Token
+            String savedToken = memberRepository.getRefreshTokenById(id);
+
+            if (!savedToken.equals(oldAccessToken)) {
+                throw new RuntimeException("Not Matched Refresh Token");
+            }
+
+            // 4. Jwt 갱신
+            String accessToken = jwtTokenProvider.createAccessToken(authentication);
+            jwtTokenProvider.createRefreshToken(authentication/*, response*/);
+
+            return accessToken;
         }
-
-        // 2. 유저 정보 얻기
-        Authentication authentication = jwtTokenProvider.getAuthentication(oldAccessToken);
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-
-        Long id = Long.valueOf(customUserDetails.getName());
-
-        // 3. Match Refresh Token
-        String savedToken = memberRepository.getRefreshTokenById(id);
-
-        if (!savedToken.equals(oldAccessToken)) {
-            throw new RuntimeException("Not Matched Refresh Token");
-        }
-
-        // 4. Jwt 갱신
-        String accessToken = jwtTokenProvider.createAccessToken(authentication);
-        jwtTokenProvider.createRefreshToken(authentication/*, response*/);
-
-        return accessToken;
-    }
 }

@@ -24,7 +24,6 @@ import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
 import thisisus.school.member.security.service.AuthService;
 import thisisus.school.member.security.service.CustomUserDetails;
-import thisisus.school.member.domain.Role;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +64,7 @@ public class ApiControllerTest {
         Member member = new Member();
         member.setId(1L);
         member.setEmail("g.g.horo@gmail.com");
-        member.setRole(Role.STUDENT);
+        member.setRole("STUDENT");
 
 
         memberRepository.save(member);        // Create a CustomUserDetails object or fetch it from your user repository
@@ -98,11 +97,15 @@ public class ApiControllerTest {
         member.setEmail("g.g.horo@gmail.com");
         when(memberRepository.findByEmail("g.g.horo@gmail.com")).thenReturn(java.util.Optional.of(member));
 
+        String expectedJson = "{\"email\": \"g.g.horo@gmail.com\"}";
+
         // Perform the request with the JWT token
         mockMvc.perform(get("/me")
                         .header("Authorization", "Bearer " + jwtToken))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("g.g.horo@gmail.com"));
+                .andExpect(jsonPath("$.email").value("g.g.horo@gmail.com"))
+                .andExpect(content().json(expectedJson));
+
     }
 
     @Test

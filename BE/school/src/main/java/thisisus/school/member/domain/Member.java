@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member{
 
     @Id
@@ -32,13 +31,7 @@ public class Member{
 
     private String email;       // 회원 이메일
 
-    @JsonIgnore     // 양뱡향 관계에서는 한쪽에 JsonIgnor를 하지 않으면 무한루프에 걸림!
-    @OneToMany(mappedBy = "Role")
-    @Enumerated(EnumType.STRING)
-    private List<Role> roles = new ArrayList<>(); // List로 역할(Role)을 담을 수 있도록 추가
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     private Long point;
 
@@ -49,24 +42,19 @@ public class Member{
 
     private String refreshToken;
 
-    public List<Role> getRoles() {
-        return roles;
-    }
 
     public Member update(String name) {
         this.name = name;
         return this;
     }
 
-    public String getRoleKey() {
-//        return this.role.getKey();
-        return this.role != null ? this.role.getKey() : null;
+    public Member setRole(String role) {
+        this.role = role;
+        return this;
     }
 
-
-
     @Builder
-    public Member(Long id, String name, String email, Role role, Long point, LocalDateTime lastLogin, AuthProvider provider) {
+    public Member(Long id, String name, String email, String role, Long point, LocalDateTime lastLogin, AuthProvider provider) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -75,6 +63,25 @@ public class Member{
         this.lastLogin = lastLogin;
         this.provider = provider;
     }
+
+
+//    @JsonIgnore     // 양뱡향 관계에서는 한쪽에 JsonIgnor를 하지 않으면 무한루프에 걸림!
+//    @OneToMany(mappedBy = "member")
+//    private List<Role> roles = new ArrayList<>(); // List로 역할(Role)을 담을 수 있도록 추가
+
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+
+    //    public List<Role> getRoles() {
+//        return roles;
+//    }
+
+
+    //    public String getRoleKey() {
+////        return this.role.getKey();
+//        return this.role != null ? this.role.getKey() : null;
+//    }
+
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

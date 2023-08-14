@@ -6,8 +6,11 @@
 </head>
 <body>
 <h1>Click the button to go to Google</h1>
-<form th:action="@{/oauth2/authorization/google}" method="get">
-    <button type="submit">Go to Google</button>
+<form th:action="@{/social/google}" method="get">
+    <button type="submit">구글 로그인</button>
+</form>
+<form th:action="@{/social/kakao}" method="get">
+    <button type="submit">카카오 로그인</button>
 </form>
 </body>
 </html>

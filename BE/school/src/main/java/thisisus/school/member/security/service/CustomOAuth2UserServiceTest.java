@@ -10,7 +10,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import thisisus.school.member.domain.Member;
-import thisisus.school.member.domain.Role;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.etc.OAuthProcessingException;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
@@ -20,7 +19,6 @@ import thisisus.school.member.security.util.OAuth2UserInfoFactory;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 
 @Log4j2
 @Service
@@ -54,10 +52,13 @@ public class CustomOAuth2UserServiceTest extends DefaultOAuth2UserService {
             if (authProvider != member.getProvider()) {
                 throw new OAuthProcessingException("Wrong Match Auth Provider");
             }
+            LOGGER.info("[유저] 정보 업데이트");
             member = memberUpdate(userInfo);    // 유저 정보 업데이트
 
         } else {			// 가입되지 않은 경우
+            LOGGER.info("[유저] 신규 유저 저장");
             member = createUser(userInfo, authProvider);
+            LOGGER.info("[유저] 신규 유저 정보 : {}", member);
         }
         return CustomUserDetails.create(member, oAuth2User.getAttributes());
     }
@@ -74,7 +75,7 @@ public class CustomOAuth2UserServiceTest extends DefaultOAuth2UserService {
         Member member = Member.builder()
                 .name(userInfo.getName())
                 .email(userInfo.getEmail())
-                .role(Role.STUDENT)
+                .role("STUDENT")
                 .point(100L)
                 .provider(authProvider)
                 .lastLogin(LocalDateTime.now())
@@ -82,3 +83,4 @@ public class CustomOAuth2UserServiceTest extends DefaultOAuth2UserService {
         return memberRepository.save(member);
     }
 }
+
