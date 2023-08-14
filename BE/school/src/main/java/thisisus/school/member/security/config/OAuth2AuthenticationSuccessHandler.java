@@ -69,16 +69,16 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             String accessToken = URLEncoder.encode(tokens.get("accessToken"), "utf-8");
             String refreshToken = URLEncoder.encode(tokens.get("refreshToken"), "utf-8");
 
-            Cookie accessTokenCookie = new Cookie("Authorization", "Bearer" + accessToken);
+            Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
             accessTokenCookie.setPath("/");
             accessTokenCookie.setMaxAge(60 * 60 * 24 * 1);
-            accessTokenCookie.setHttpOnly(true);
+            accessTokenCookie.setHttpOnly(false);
             response.addCookie(accessTokenCookie);
 
-            Cookie refreshTokenCookie = new Cookie("Refresh-Token", refreshToken);
+            Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
             refreshTokenCookie.setPath("/");
             refreshTokenCookie.setMaxAge(60 * 60 * 24 * 7); // Set the appropriate expiration for the refresh token
-            refreshTokenCookie.setHttpOnly(true);
+            refreshTokenCookie.setHttpOnly(false);
             response.addCookie(refreshTokenCookie);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
@@ -88,7 +88,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 //         본 코드
 //        MemberResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication, response);
         LOGGER.info("[JWT 생성 완료]");
-        return UriComponentsBuilder.fromUriString("/")
+        return UriComponentsBuilder.fromUriString("http://localhost:3000/main")
 //                .queryParam("TOKEN", tokenInfo.getAccessToken())
 //                .queryParam("REFRESH_TOKEN", tokenInfo.getRefreshToken())
                 .build().toString();

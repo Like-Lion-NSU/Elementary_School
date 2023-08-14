@@ -1,4 +1,4 @@
-package thisisus.school.member.controller;
+package com.example.thisisustest.member.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 //@RequestMapping("/social")
 public class SocialLoginController {

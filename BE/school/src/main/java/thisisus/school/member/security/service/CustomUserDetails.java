@@ -20,6 +20,11 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
+    public CustomUserDetails(String email, Collection<? extends GrantedAuthority> authorities) {
+        this.email = email;
+        this.authorities = authorities;
+    }
+
     public CustomUserDetails(Long id, String email, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;

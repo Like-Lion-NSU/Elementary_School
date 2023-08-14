@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import thisisus.school.member.dto.MemberInfoDto;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class MypageController {
 
     private final MemberService memberService;
 
 
-    @GetMapping("/mypage")
+    @GetMapping(value = "/mypage")
     public ResponseEntity<MemberInfoDto> getMyPage( @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
         try {
             MemberInfoDto memberInfo = memberService.getMemberInfo(customUserDetails);
             return ResponseEntity.ok(memberInfo);       // Json 형태로 전달됨

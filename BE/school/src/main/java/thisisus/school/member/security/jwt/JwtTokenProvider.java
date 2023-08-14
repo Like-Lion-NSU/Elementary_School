@@ -74,7 +74,9 @@ public class JwtTokenProvider {
         String memberEmail = member.getEmail();
         String role = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining(","));
+
+        LOGGER.info("[role] JWT 생성 시 role : {}", role);
 
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
@@ -122,12 +124,19 @@ public class JwtTokenProvider {
     // AccessToken을 검사하고 얻은 정보로 Authentication 객체 생성
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
+
         LOGGER.info("[JWT] Creating Authentication from AccessToken");
+
+        if (claims.get(AUTHORITIES_KEY) == null) {
+            throw new RuntimeException("권한 정보가 없는 토큰입니다.");
+        }
+
         Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
-        CustomUserDetails principal = new CustomUserDetails(Long.valueOf(claims.getSubject()), "", authorities);
+        CustomUserDetails principal = new CustomUserDetails(claims.getSubject(), authorities);
+        LOGGER.info("[principal] principal : {}", principal);
 
 //        CustomUserDetails principal2 = userDetailsService.loadMemberbyEmail(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(principal, "Bearer", authorities);
@@ -135,10 +144,11 @@ public class JwtTokenProvider {
 
     public Boolean validateToken(String token) {
         try {
-            byte[] decodedSecretKey = Base64.getDecoder().decode(SECRET_KEY);
+//            byte[] decodedSecretKey = Base64.getDecoder().decode(SECRET_KEY);
 //            System.out.println("Decoded SECRET_KEY: " + new String(decodedSecretKey, StandardCharsets.UTF_8));
-            Jwts.parserBuilder().setSigningKey(new SecretKeySpec(decodedSecretKey, SignatureAlgorithm.HS512.getJcaName())).build().parseClaimsJws(token).getBody();
+//            Jwts.parserBuilder().setSigningKey(new SecretKeySpec(decodedSecretKey, SignatureAlgorithm.HS512.getJcaName())).build().parseClaimsJws(token).getBody();
 //            Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
@@ -152,7 +162,8 @@ public class JwtTokenProvider {
 
     private Claims parseClaims(String accessToken) {
         try {
-            return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(accessToken).getBody();
+//            return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(accessToken).getBody();
+            return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(accessToken).getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
