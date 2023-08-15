@@ -1,0 +1,113 @@
+.E-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vh 2vh;
+  background-color: #ffc519;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.E-left-box {
+  flex: 3;
+  background-color: white;
+  padding: 1vh;
+  margin-right: 1vh;
+  height: 21vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.E-right-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.E-delete-button {
+  padding: 2vh 6vh;
+  background-color: #333;
+  color: white;
+  border-radius: 1vh;
+  cursor: pointer;
+  margin-bottom: 2vh;
+  font-size: 2.5vh;
+}
+
+.E-cart-info {
+  display: flex;
+  align-items: center;
+  font-size: 2.5vh;
+}
+
+.E-card-icon {
+  font-size: 2vh;
+  margin-bottom: 0.5vh;
+}
+
+.E-amount {
+  margin-bottom: 0.5vh;
+}
+
+.E-payment-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  border-radius: 1vh;
+  cursor: pointer;
+  padding: 1vh 6vh;
+  margin-top: 2vh;
+  font-size: 2.5vh;
+}
+
+.E-payment-box-btn {
+  text-decoration: none;
+}
+
+.C-Bok-selected,
+.C-Ame-selected,
+.C-Cho-selected {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 0.3vh;
+  font-weight: bold;
+}
+.C-First {
+  display: flex;
+  width: 30%;
+}
+.C-Second {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.selectedCDbtn {
+  background-color: #c8c8c8;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  border: none;
+  margin-right: 30%;
+  cursor: pointer;
+}
+
+.minusCbtn,
+.plusCbtn {
+  background-color: #ff1616;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  margin-left: 10%;
+  margin-right: 10%;
+  cursor: pointer;
+}

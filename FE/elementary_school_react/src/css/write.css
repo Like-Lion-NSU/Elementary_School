@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.write-container {
+    max-width: 100vh; 
+    margin: 0 auto; 
+    margin-top: 15vh;
+    padding: 2vh; 
+}
+
+.write-input {
+    width: 100%;
+    padding: 2vh; 
+    border: none;
+    border-radius: 2vh; 
+    font-size: 2vh; 
+    outline: none; 
+}
+
+.write-content {
+    width: 100vh; 
+    padding: 2vh; 
+    border: none; 
+    margin-bottom: 2vh; 
+    font-size: 2vh; 
+    resize: none; 
+    min-height: 30vh;
+    outline: none; 
+    border-top: 1px solid #ccc; 
+    border-bottom: 1px solid #ccc; 
+}
+
+.write-button {
+    padding: 2vh 3vh; 
+    background-color: #749BC2; 
+    color: #fff; 
+    border: none; 
+    border-radius: 1vh; 
+    cursor: pointer;
+    font-size: 2vh; 
+    margin-left: 80vh;
+}
+
+.write-input::placeholder,
+.write-content::placeholder {
+    color: #aaa; 
+}

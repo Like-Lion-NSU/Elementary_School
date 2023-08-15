@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
@@ -5,4 +6,21 @@
     <file type="web" url="file://$PROJECT_DIR$/school" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="temurin-17 (3)" project-jdk-type="JavaSDK" />
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+
+    <file type="web" url="file://$PROJECT_DIR$/school" />
+  </component>
+
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK" />
+
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
 </project>

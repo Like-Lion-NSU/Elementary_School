@@ -1,0 +1,27 @@
+.E-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 5vh; 
+    background-color: #ffc519;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .center-panel {
+    flex: 1;
+    position: relative; 
+  }
+  
+  .E-logo, .E-language {
+    font-size: 3.6vh;
+    text-decoration: none; 
+    color: black;
+  }
+  
+  .E-brand {
+    font-size: 3.8vh;
+    font-weight: bold;
+  }
