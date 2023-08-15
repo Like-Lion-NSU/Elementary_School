@@ -5,51 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Docs] readme 문서 수정">
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/BaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/DefaultResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/EntryPointErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/CustomException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/ExceptionCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostDefaultResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/AccountController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/BaseException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/BaseResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/Constant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GetSocialOAuthRes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleOAuthToken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleOauth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/OAuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/RestTemplateConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SocialOauth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/domain/Member.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/SchoolApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/SchoolApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/category/PostCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/BaseResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/DetailPostDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostListDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostUpRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostPhoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostPhoto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/repository/MemberRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/1bcec841-b09b-4780-8247-2777b721e1b0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/1e0dc877-1acb-478d-a85a-28b26d59d6f3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/2f6199b7-ece6-4df5-a552-5bfb735e4ccb.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/75167be3-7b34-469c-921b-85fc24bb992b.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/9a234412-247d-491f-84b2-235f575c550e.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/BE/school">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -64,22 +83,86 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/user/Desktop/song/coding/Spring/해커톤/Elementary_School/BE",
+    "javascript.nodejs.core.library.configured.version": "18.12.1",
+    "javascript.nodejs.core.library.typings.version": "18.17.5",
+    "last_opened_file_path": "C:/Program Files/nodejs/node.exe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
+    "project.structure.last.edited": "라이브러리",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "spring.configuration.checksum": "c7770a749f8f36bcb71cf045b805f616",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Spring Boot.SchoolApplication">
+    <configuration name="복합" type="CompoundRunConfigurationType">
+      <toRun name="star" type="js.build_tools.npm" />
+      <toRun name="test" type="SpringBootApplicationConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SchoolApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="school.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="thisisus.school.SchoolApplication" />
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SPRING_BOOT_MAIN_CLASS" />
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="school.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="thisisus.school.SchoolApplication" />
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="reactStart" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/FE/elementary_school_react/package.json" />
+      <command value="star" />
+      <node-interpreter value="$PROJECT_DIR$/../../../../../../../../Program Files/nodejs/node" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.reactStart" />
+      <item itemvalue="Spring Boot.SchoolApplication" />
+      <item itemvalue="Spring Boot.test" />
+      <item itemvalue="복합.복합" />
+    </list>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
@@ -94,6 +177,9 @@
       <workItem from="1691080480937" duration="576000" />
       <workItem from="1691162047551" duration="50000" />
       <workItem from="1691171914260" duration="224000" />
+      <workItem from="1692085760916" duration="488000" />
+      <workItem from="1692086303143" duration="12909000" />
+      <workItem from="1692113448194" duration="16155000" />
     </task>
     <task id="LOCAL-00001" summary="[Docs] readme 문서 수정">
       <created>1690298287674</created>
@@ -108,8 +194,23 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Docs] readme 문서 수정" />
     <option name="LAST_COMMIT_MESSAGE" value="[Docs] readme 문서 수정" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

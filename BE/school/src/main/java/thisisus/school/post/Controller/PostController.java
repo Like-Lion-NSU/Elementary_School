@@ -46,8 +46,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
 })
-    @PostMapping(value="/post",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> savePost(@ModelAttribute PostRequestDto postRequestDto)throws Exception{
+    @PostMapping(value="/writePost",consumes = "multipart/form-data")
+    public ResponseEntity<DefaultResponseDto> savePost(/*@RequestBody*/ PostRequestDto postRequestDto)throws Exception{
 
         Post post = postService.savePost(postRequestDto);
 
@@ -59,6 +59,7 @@ public class PostController {
                         .data(response)
                         .build());
     }
+
 
 
     @ApiOperation(value="내가 쓴 게시글 다건 조회")
@@ -74,8 +75,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @GetMapping("/user/posts")
-    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(/*HttpServletRequest request,*/@RequestParam("memberId")Long memberId){
+    @GetMapping("/user/{category}/posts")
+    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(@PathVariable("memberId")Long memberId){
         List<Post> posts = postService.findAllPostsByUser(memberId);
 
         List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
@@ -86,6 +87,28 @@ public class PostController {
                         .responseMessage("내가 쓴 게시글 다건 조회 완료")
                         .data(response)
                         .build());
+    }
+
+    @ApiOperation(value="카테고리별 게시글 조회")
+    @ApiResponses(value ={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "POSTS_FOUND",
+                    content = @Content(schema = @Schema(implementation = PostDefaultResponseDto.class))),
+            @ApiResponse(responseCode = "401",
+                    description = "UNAUTHORIZED_MEMBER"),
+            @ApiResponse(responseCode = "404",
+                    description = "POSTS_NOT_FOUND"),
+            @ApiResponse(responseCode = "500",
+                    description = "SERVER_ERROR"),
+    })
+    @GetMapping("/{category}/posts")
+    public List<Post> findAllPostsByCategory(@PathVariable("category")String category){
+        List<Post> posts = postService.findAllPostsByCategory(category);
+
+        List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
+
+        return posts;
     }
 
     @ApiOperation(value="게시물 단건 조회")
@@ -102,17 +125,12 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> findOnePost(@RequestParam("postId") Long postId){
+    public Post findOnePost(@PathVariable("postId") Long postId){
 
         Post post = postService.findOnePost(postId);
 
         PostDefaultResponseDto response = new PostDefaultResponseDto(post);
-        return ResponseEntity.status(200)
-                .body(DefaultResponseDto.builder()
-                        .responseCode("POST_FOUND")
-                        .responseMessage("게시물 단건 조회 완료")
-                        .data(response)
-                        .build());
+        return post;
     }
 
     @ApiOperation(value="게시글 수정")
@@ -128,8 +146,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PutMapping("/user/{memberId}/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> updatePost(@RequestParam("postId") Long postId,@RequestParam("memberId") Long memberId, PostRequestDto postRequestDto ){
+    @PutMapping("/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId, @RequestBody PostRequestDto postRequestDto ){
 
         Post post = postService.updatePost(postId, postRequestDto);
 
@@ -155,8 +173,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @DeleteMapping("/user/{memberId}/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> deletePost(@RequestParam("postId") Long postId, @RequestParam("memberId") Long memberId ){
+    @DeleteMapping("/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> deletePost(@PathVariable("postId") Long postId ){
 
         Post post = postService.deletePost(postId);
 
@@ -237,7 +255,7 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @DeleteMapping("/post/{category}/{postId}/like/{likeId}")
-    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId, Long memberId, @RequestParam("likeId") Long likeId) {
+    public ResponseEntity<DefaultResponseDto> deletedLike(@PathVariable("postId") Long postId, Long memberId, @PathVariable("likeId") Long likeId) {
 
         Post post = postService.deletedLike(likeId);
 

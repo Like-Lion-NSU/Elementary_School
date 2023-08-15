@@ -11,10 +11,10 @@ const Sidebar = () => {
             <Link to="/home"><img src={Lo_J_Logo} className='logologo-E' alt='로고'/></Link>
           </li>
           <li>
-            <Link to="/community">소통해요</Link>
+            <Link to="/소통하기/posts">소통해요</Link>
           </li>
           <li>
-            <Link to="/question">질문해요</Link>
+            <Link to="/질문하기/posts">질문해요</Link>
           </li>
           <li>
             <Link to="/practiceType">연습하기</Link>

@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @Api(tags = "댓글")
 @RequiredArgsConstructor
 public class CommentController {
-    private final CommentRepository commentRepository;
 
     private final CommentService commentService;
 
@@ -99,7 +98,7 @@ public class CommentController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/user/{userId}/post/comments")
-    public ResponseEntity<DefaultResponseDto> findAllCommentsByUser(@RequestParam("userId") Long userId) {
+    public ResponseEntity<DefaultResponseDto> findAllCommentsByUser(@PathVariable("userId") Long userId) {
 
         List<Comment> comments = commentService.findAllCommentByUser(userId);
 

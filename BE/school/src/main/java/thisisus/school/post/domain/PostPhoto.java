@@ -1,5 +1,6 @@
 package thisisus.school.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import thisisus.school.common.BaseEntity;
 
@@ -15,7 +16,8 @@ public class PostPhoto extends BaseEntity {
     @Column(name="post_photo_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name="post_id")
     private Post post;
 

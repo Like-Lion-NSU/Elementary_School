@@ -56,6 +56,18 @@ public class PostService {
 
     }
 
+
+    public List<Post> findAllPostsByCategory(String category){
+        try{
+            List<Post> posts = postRepository.findByCategory(PostCategory.valueOf(category));
+
+            return posts;
+        }catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+    }
+
     /*
      * 내가 쓴 게시글 다건 조회
      * 500(SERVER_ERROR)
@@ -178,7 +190,7 @@ public class PostService {
     @Transactional
     public void savePhoto(Post post, List<MultipartFile> files) throws Exception {
         if (files.size() != 0) {
-            String projectPath = System.getProperty("user.dir") + "\\\\src\\\\main\\\\resources\\\\static\\\\files";
+            String projectPath = System.getProperty("user.dir") + "\\\\BE\\\\school\\\\src\\\\main\\\\resources\\\\static\\\\files";
             for (MultipartFile file : files) {
                 String filename = file.getOriginalFilename();
                 String extension = filename.substring(filename.lastIndexOf("."));

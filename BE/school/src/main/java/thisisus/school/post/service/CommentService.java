@@ -102,7 +102,7 @@ public class CommentService {
     @Transactional
     public void savePhoto(Comment comment, List<MultipartFile> files) throws Exception {
         if (files.size() != 0) {
-            String projectPath = System.getProperty("user.dir") + "\\\\src\\\\main\\\\resources\\\\static\\\\comments";
+            String projectPath = System.getProperty("user.dir") + "\\\\BE\\\\school\\\\src\\\\main\\\\resources\\\\static\\\\comments";
             for (MultipartFile file : files) {
                 String filename = file.getOriginalFilename();
                 String extension = filename.substring(filename.lastIndexOf("."));

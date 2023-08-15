@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/post.css';
 
 const PostMain = ({ content, likes, views }) => {
+
   return (
     <div className="post-main">
       <div className="post-content">
