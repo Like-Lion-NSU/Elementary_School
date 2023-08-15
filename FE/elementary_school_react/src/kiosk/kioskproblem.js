@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import "../css/kioskproblem.css";
 import img1 from "./img/megacoffee.png";
-const kioskproblem = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+const Kioskproblem = () => {
+  const [questionOpen, setQuestionOpen] = useState(true);
   const customModalStyles = {
     overlay: {
       backgroundColor: " rgba(0, 0, 0, 0.4)",
@@ -14,8 +17,8 @@ const kioskproblem = () => {
       left: "0",
     },
     content: {
-      width: "60%",
-      height: "40%",
+      width: "50vw",
+      height: "30vh",
       zIndex: "150",
       position: "absolute",
       top: "50%",
@@ -31,25 +34,38 @@ const kioskproblem = () => {
   };
   return (
     <Modal
-      isOpen={true}
+      isOpen={questionOpen}
       shouldCloseOnOverlayClick={false}
       style={customModalStyles}
     >
-      <div>
+      <div className="kioskHeader">
+        <div className="kioskFont">국민학교 제1회 학력고사</div>
+        <div className="kioskFont" id="kioskQ">
+          시험 문제
+        </div>
+        <div>
+          <div
+            className="kioskFont"
+            id="goExam"
+            onClick={() => setQuestionOpen(false)}
+          >
+            <FontAwesomeIcon icon={faPen} /> 시험장 가기
+          </div>
+        </div>
+      </div>
+      <div className="kioskQFlex">
         <img src={img1} className="kioskProblem_img"></img>
+        <div className="kioskProblem_list">
+          <ol>
+            <li>1번 문제 ) 아메리카노 연하게 1잔</li>
+            <li>2번 문제 ) 아이스티 1샷추가 1잔</li>
+            <li>3번 문제 ) 리얼초코프라페 휘핑O 1잔</li>
+            <li>4번 문제 ) 포장</li>
+            <li>5번 문제 ) 카드 결제하기 / 다른 할인 X</li>
+          </ol>
+        </div>
       </div>
-      <h2>시험 문제</h2>
-      <div className="kioskProblem_list">
-        <ul>
-          <li>아메리카노 연하게 1잔</li>
-          <li>아이스티 1샷추가 1잔</li>
-          <li>리얼초코프라페 휘핑O 1잔</li>
-          <li>포장</li>
-          <li>카드결제, 다른 할인 X</li>
-        </ul>
-      </div>
-      <button>문제 풀이 하기</button>
     </Modal>
   );
 };
-export default kioskproblem;
+export default Kioskproblem;
