@@ -150,6 +150,7 @@ public class PostService {
                     .post(post)
                     .memberId(memberId)
                     .build();
+            post.savedLikeCount(postLiked.isDeleted());
             postLikeRepository.save(postLiked);
             return post;
         } catch (RuntimeException e) {
@@ -166,6 +167,7 @@ public class PostService {
             PostLiked postLiked = postLikeRepository.findById(likeId).get();
             postLiked.delete();
             Post post = postRepository.findById(postLiked.getPost().getId()).get();
+            post.savedLikeCount(postLiked.isDeleted());
             return post;
         } catch (RuntimeException e) {
             e.printStackTrace();
