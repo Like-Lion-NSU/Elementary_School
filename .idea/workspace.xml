@@ -4,6 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="3966aa32-3f9d-41cb-9757-949631d7ab63" name="Changes" comment="" />
+=======
     <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Docs] readme 문서 수정">
       <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/BaseEntity.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/DefaultResponseDto.java" afterDir="false" />
@@ -43,21 +46,49 @@
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/repository/MemberRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
     </list>
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/BE/school">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+<<<<<<< HEAD
+  <component name="ProjectId" id="2T4b5DiBkzq1OTtmLx20xzWmZMR" />
+=======
   <component name="ProjectId" id="2T4MSyVvgVwpAUlx6OZV24ftxL8" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -67,12 +98,32 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< HEAD
+=======
     "last_opened_file_path": "C:/Users/user/Desktop/song/coding/Spring/해커톤/Elementary_School/BE",
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+<<<<<<< HEAD
+    "settings.editor.selected.configurable": "application.passwordSafe",
+    "spring.configuration.checksum": "c7770a749f8f36bcb71cf045b805f616",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3966aa32-3f9d-41cb-9757-949631d7ab63" name="Changes" comment="" />
+      <created>1690305127401</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690305127401</updated>
+      <workItem from="1690305134311" duration="2182000" />
+    </task>
+=======
     "project.structure.last.edited": "모듈",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -103,13 +154,39 @@
       <updated>1690298287674</updated>
     </task>
     <option name="localTasksCounter" value="2" />
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/feature-besettings-Y" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+=======
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Docs] readme 문서 수정" />
     <option name="LAST_COMMIT_MESSAGE" value="[Docs] readme 문서 수정" />
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
   </component>
 </project>

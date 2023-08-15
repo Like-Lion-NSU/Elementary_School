@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+=======
 # 디폴트 무시된 파일
 /shelf/
 /workspace.xml
@@ -8,3 +18,4 @@
 /dataSources.local.xml
 # Zeppelin ignored files
 /ZeppelinRemoteNotebooks/
+>>>>>>> 974a4080c73342c106cf470a3fd8503f75193db9
