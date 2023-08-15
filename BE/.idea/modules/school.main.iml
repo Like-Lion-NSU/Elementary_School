@@ -4,5 +4,6 @@
     <content url="file://$MODULE_DIR$/../../school/build/generated/sources/annotationProcessor/java/main">
       <sourceFolder url="file://$MODULE_DIR$/../../school/build/generated/sources/annotationProcessor/java/main" isTestSource="false" generated="true" />
     </content>
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
