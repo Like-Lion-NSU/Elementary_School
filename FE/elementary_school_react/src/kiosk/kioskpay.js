@@ -117,6 +117,32 @@ const MegaPay = ({
       padding: "0",
     },
   };
+  const connectBack = () => {
+    const accessToken = getCookieValue("accessToken");
+    axios({
+      method: "POST",
+      url: "/practice/point",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: {
+        result: lastScore,
+      },
+    }).then((result) => {
+      window.location.href = "/";
+    });
+  };
+  // 쿠키 값 추출 함수 예시
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
+      }
+    }
+  }
   return (
     <Modal
       isOpen={payModalIsOpen}
@@ -139,7 +165,7 @@ const MegaPay = ({
         <span className="stepcComment">결제수단을 선택해주세요</span>
         <div className="btncSection">
           <button>
-            <img src={img3} />
+            <img src={img3} onClick={connectBack} />
             <p>카드결제(삼성페이/LG페이)</p>
           </button>
           <button onClick={handleOtherClick}>

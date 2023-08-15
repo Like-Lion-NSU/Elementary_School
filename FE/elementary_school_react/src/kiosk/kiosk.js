@@ -83,7 +83,7 @@ const Kiosk = () => {
       <Sidebar />
       <div className="left-panel"></div>
       <div className="center-panel">
-        <MegaHeader />
+        <MegaHeader lastScore={lastScore} />
         <MegaMenu
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}

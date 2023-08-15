@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../css/mypage.css";
 import My_J_userImg from "./img/userImg.png";
 import { Link } from "react-router-dom";
@@ -9,62 +9,23 @@ import axios from "axios";
 
 function MyJMypage() {
   const [myJuserDropShow, setmyJUserDropShow] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-
   const myJdropClick = () => {
     setmyJUserDropShow(false);
   };
   const myJshowClick = () => {
     setmyJUserDropShow(true);
   };
-
-  useEffect(() => {
-    const fetchMyPage = async () => {
-      try {
-        const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
-        console.log("accessToken:", accessToken); // 추가된 부분
-
-        const response = await axios.get("/mypage", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            Accept: "application/json", // JSON 응답을 요청한다고 설정
-          },
-        });
-
-        setUserInfo(response.data);
-        console.log(userInfo);
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          try {
-            const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
-
-            const refreshResponse = await axios.post("/auth/refresh", null, {
-              headers: {
-                Authorization: `Bearer ${refreshToken}`,
-              },
-            });
-
-            const newAccessToken = refreshResponse.data;
-            // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
-            const refreshedResponse = await axios.get("/mypage", {
-              headers: {
-                Authorization: `Bearer ${newAccessToken}`,
-              },
-            });
-
-            setUserInfo(refreshedResponse.data);
-          } catch (refreshError) {
-            // RefreshToken으로 새로운 AccessToken 발급 실패
-            // 로그아웃 처리 등을 수행
-          }
-        }
-        // Handle other errors
-      }
-    };
-
-    fetchMyPage();
-  }, []);
-
+  const deleteMember = () => {
+    const accessToken = getCookieValue("accessToken");
+    axios({
+      method: "DELETE",
+      url: "/drop",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }).then((res) => {});
+  };
   // 쿠키 값 추출 함수 예시
   function getCookieValue(cookieName) {
     const cookies = document.cookie.split(";");
@@ -112,13 +73,14 @@ function MyJMypage() {
                 <h1>국민학교를 자퇴하시겠습니까?</h1>
               </div>
               <div className="myJdropFlex">
-                <Link
+                <div
                   to="/"
                   className="myJdropButton"
                   style={{ backgroundColor: "#91C8E4" }}
+                  onClick={deleteMember}
                 >
                   예
-                </Link>
+                </div>
                 <div
                   className="myJdropButton"
                   style={{ backgroundColor: "#4682A9", color: "white" }}
