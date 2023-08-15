@@ -8,8 +8,10 @@ import Megabody_choco from "./megabody_choco";
 import Megabody_tea from "./megabody_tea";
 import MegaFooter from "./megaFooter";
 import axios from "axios";
+import Kioskproblem from "./kioskproblem";
 
 const Kiosk = () => {
+  const [problemopen, setProblemopen] = useState(true);
   const [lastScore, setScore] = useState(100);
   const [selectedCategory, setSelectedCategory] = useState("커피(Ice)");
   const [selectedIceMenu, setSelectedIceMenu] = useState(false);
@@ -51,6 +53,7 @@ const Kiosk = () => {
             const refreshedResponse = await axios.get("/kiosk", {
               headers: {
                 Authorization: `Bearer ${newAccessToken}`,
+                Accept: "application/json", // JSON 응답을 요청한다고 설정
               },
             });
 
@@ -80,10 +83,11 @@ const Kiosk = () => {
 
   return (
     <KioskLayout>
+      <Kioskproblem problemopen={problemopen} setProblemopen={setProblemopen} />
       <Sidebar />
       <div className="left-panel"></div>
       <div className="center-panel">
-        <MegaHeader lastScore={lastScore} />
+        <MegaHeader lastScore={lastScore} setProblemopen={setProblemopen} />
         <MegaMenu
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}

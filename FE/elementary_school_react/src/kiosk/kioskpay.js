@@ -129,10 +129,38 @@ const MegaPay = ({
       data: {
         result: lastScore,
       },
-    }).then((result) => {
-      window.location.href = "/";
-    });
+    })
+      .then((result) => {
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          try {
+            const refreshToken = getCookieValue("refreshToken");
+            const refreshResponse = axios.post("/auth/refresh", null, {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            });
+            const newAccessToken = refreshResponse.data;
+            axios
+              .post("/practice/point", {
+                headers: {
+                  Authorization: `Bearer ${newAccessToken}`,
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                data: {
+                  result: lastScore,
+                },
+              })
+              .then((result) => {
+                window.location.href = "/";
+              });
+          } catch (err) {}
+        }
+      });
   };
+
   // 쿠키 값 추출 함수 예시
   function getCookieValue(cookieName) {
     const cookies = document.cookie.split(";");

@@ -4,8 +4,7 @@ import "../css/kioskproblem.css";
 import img1 from "./img/megacoffee.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-const Kioskproblem = () => {
-  const [questionOpen, setQuestionOpen] = useState(true);
+const Kioskproblem = ({ problemopen, setProblemopen }) => {
   const customModalStyles = {
     overlay: {
       backgroundColor: " rgba(0, 0, 0, 0.4)",
@@ -18,7 +17,7 @@ const Kioskproblem = () => {
     },
     content: {
       width: "50vw",
-      height: "30vh",
+      height: "35vh",
       zIndex: "150",
       position: "absolute",
       top: "50%",
@@ -34,7 +33,7 @@ const Kioskproblem = () => {
   };
   return (
     <Modal
-      isOpen={questionOpen}
+      isOpen={problemopen}
       shouldCloseOnOverlayClick={false}
       style={customModalStyles}
     >
@@ -47,7 +46,7 @@ const Kioskproblem = () => {
           <div
             className="kioskFont"
             id="goExam"
-            onClick={() => setQuestionOpen(false)}
+            onClick={() => setProblemopen(false)}
           >
             <FontAwesomeIcon icon={faPen} /> 시험장 가기
           </div>
