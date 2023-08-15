@@ -23,3 +23,37 @@ function Community() {
 }
 
 export default Community;
+
+// import React, { useEffect, useState } from 'react';
+// import Sidebar from '../sidebar/sidebar';
+// import BoardHeader from './boardHeader';
+// import BoardTable from './boardTable';
+// import axios from 'axios';
+
+// function Community() {
+//   const [posts, setPosts] = useState([]);
+//   const boardTitle = '소통해요'; // 카테고리 변경시 변경 필요
+
+//   useEffect(() => {
+//     async function fetchPosts() {
+//       try {
+//         const response = await axios.get(`/api/posts/${boardTitle}`); // API 엔드포인트에 맞게 수정
+//         setPosts(response.data);
+//       } catch (error) {
+//         console.error('게시물 데이터를 가져오는 중 에러가 발생했습니다.', error);
+//       }
+//     }
+
+//     fetchPosts();
+//   }, [boardTitle]);
+
+//   return (
+//     <div>
+//       <Sidebar />
+//       <BoardHeader boardTitle={boardTitle} />
+//       <BoardTable boardTitle={boardTitle} posts={posts} />
+//     </div>
+//   );
+// }
+
+// export default Community;

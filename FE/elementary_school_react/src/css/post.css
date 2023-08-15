@@ -132,3 +132,17 @@
   li {
     list-style: none;
   }
+
+  .post-like {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .like-button {
+    margin-top: 2vh;
+    font-size: 3vh;
+    border: none;
+    background-color: transparent;
+    font-weight: 200;
+  }
