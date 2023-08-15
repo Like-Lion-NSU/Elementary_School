@@ -30,6 +30,7 @@ import PostHeader from './postpage/postHeader';
 import PostMain from './postpage/postMain';
 import PostFooter from './postpage/postFooter';
 import PostPage from './postpage/postPage';
+import PostLike from './postpage/postLike';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="/postMain" element={<PostMain />} />
         <Route path="/postFooter" element={<PostFooter />} />
         <Route path="/post/:postId" element={<PostPage />} />
+        <Route path="/postLike" element={<PostLike />} />
       </Routes>
       </div>
       <Footer />
