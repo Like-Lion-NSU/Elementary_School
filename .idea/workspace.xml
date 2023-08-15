@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Docs] readme 문서 수정">
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/DefaultResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/common/EntryPointErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/CustomException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/ExceptionCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostDefaultResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/AccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/BaseException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/BaseResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/Constant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GetSocialOAuthRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleOAuthToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleOauth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/GoogleUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/OAuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/RestTemplateConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/config/SocialOauth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/domain/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/category/PostCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLike.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/BaseResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/DetailPostDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostListDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostUpRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/repository/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2T4MSyVvgVwpAUlx6OZV24ftxL8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/user/Desktop/song/coding/Spring/해커톤/Elementary_School/BE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="" />
+      <created>1690297902615</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690297902615</updated>
+      <workItem from="1690297904334" duration="3647000" />
+      <workItem from="1690345540457" duration="98000" />
+      <workItem from="1690348366224" duration="1549000" />
+      <workItem from="1691080480937" duration="576000" />
+      <workItem from="1691162047551" duration="50000" />
+      <workItem from="1691171914260" duration="224000" />
+    </task>
+    <task id="LOCAL-00001" summary="[Docs] readme 문서 수정">
+      <created>1690298287674</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690298287674</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[Docs] readme 문서 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Docs] readme 문서 수정" />
+  </component>
+</project>

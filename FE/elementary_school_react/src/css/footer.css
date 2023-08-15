@@ -1,0 +1,12 @@
+.Footer {
+  background-color: #749bc2;
+  color: white;
+  padding: 1vw;
+  bottom: 0vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.Jlogo {
+  width: 2vw;
+}

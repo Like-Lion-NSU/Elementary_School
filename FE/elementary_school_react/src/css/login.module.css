@@ -1,0 +1,52 @@
+.loJFlex{
+    display: flex;
+    flex-direction: column;
+}
+.loJCenter{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    height: 90vh; 
+}
+.loJLogo{
+  width:8vw;
+}
+.loJLogin_Btn{
+    margin-top: 2vh;
+    display: inline-block;
+    text-align: center;
+}
+.loJInfo {
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: #4682A9;
+    left:50%;
+    color: #fff;
+    top:70px;
+    width:20vw;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+    pointer-events: none; /* 툴팁은 이벤트를 받지 않도록 설정 (아이콘 아래로 위치할 수 있도록 함) */
+  } 
+  .loJLoginTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .loJImgWidth{
+    width:20vw;
+  }
+
+.loJLogin{
+    font-size: 2vw;
+  }
+  .loJIcon{
+    font-size: 1.5vw;
+  }
+  .loJLogin, .loJIcon{
+    margin:0.5vw;
+  }
