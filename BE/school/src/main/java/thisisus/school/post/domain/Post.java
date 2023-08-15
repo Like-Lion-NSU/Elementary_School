@@ -49,6 +49,18 @@ public class Post extends BaseEntity {
 
     }
 
+    public void savedLikeCount(boolean like){
+        if(like==false) {
+            this.likeCount++;
+        }else if(like==true){
+            this.likeCount--;
+        }else if(this.likeCount<=0){
+            this.likeCount=0;
+
+        }
+    }
+
+
     public void delete(){
         this.title=null;
         this.content=null;
