@@ -30,3 +30,9 @@
   .sidebarE-list li a:hover {
     color: #4682A9;
   }  
+
+  .logologo-E {
+    width: 6vh;
+    height: 6vh;
+    margin-top: 1vh;
+  }
