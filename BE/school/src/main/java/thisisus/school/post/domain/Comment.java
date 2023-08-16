@@ -3,6 +3,7 @@ package thisisus.school.post.domain;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.*;
 import thisisus.school.common.BaseEntity;
+import thisisus.school.member.domain.Member;
 import thisisus.school.post.dto.CommentRequestDto;
 
 import javax.persistence.*;
@@ -28,12 +29,15 @@ public class Comment extends BaseEntity {
     @OneToMany(mappedBy = "comment")
     private List<CommentPhoto> commentPhoto = new ArrayList<>();
 
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Builder
-    public Comment(String content){
+    public Comment(String content, Member member){
         this.content=content;
         this.setDeleted(false);
+        this.member = member;
     }
 
     public void update(CommentRequestDto commentRequestDto){

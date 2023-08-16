@@ -19,5 +19,6 @@ public class PostDefaultResponseDto {
 
     public PostDefaultResponseDto(Post post){
         this.postId=post.getId();
+
     }
 }

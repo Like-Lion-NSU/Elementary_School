@@ -10,14 +10,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import thisisus.school.common.DefaultResponseDto;
+import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.member.service.MemberService;
 import thisisus.school.post.domain.Post;
-import thisisus.school.post.dto.CommentDefaultResponseDto;
 import thisisus.school.post.dto.PostDefaultResponseDto;
 import thisisus.school.post.dto.PostRequestDto;
 import thisisus.school.post.repository.PostLikeRepository;
+import thisisus.school.post.repository.PostRepository;
 import thisisus.school.post.service.PostService;
 
 
@@ -29,8 +31,10 @@ import java.util.stream.Collectors;
 @Api(tags = "게시글")
 @RequiredArgsConstructor
 public class PostController {
-    private final PostLikeRepository postLikeRepository;
 
+    private final PostRepository postRepository;
+    private final MemberService memberService;
+    private final PostLikeRepository postLikeRepository;
     private final PostService postService;
 
     @ApiOperation(value="게시글 등록")
@@ -45,18 +49,25 @@ public class PostController {
                     description = "POST_NOT_FOUND"),
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
-})
+    })
     @PostMapping(value="/writePost",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> savePost(/*@RequestBody*/ PostRequestDto postRequestDto)throws Exception{
+    public ResponseEntity<DefaultResponseDto> savePost(/*@RequestBody*/ PostRequestDto postRequestDto, @AuthenticationPrincipal CustomUserDetails customUserDetails)throws Exception{
 
-        Post post = postService.savePost(postRequestDto);
+        if(customUserDetails != null) {
+            Post post = postService.savePost(postRequestDto, customUserDetails);
 
-        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
-        return ResponseEntity.status(200)
+
+            PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("POST_REGISTERED")
+                            .responseMessage("게시글 등록 완료")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(401)
                 .body(DefaultResponseDto.builder()
-                        .responseCode("POST_REGISTERED")
-                        .responseMessage("게시글 등록 완료")
-                        .data(response)
+                        .responseMessage("해당 유저를 찾을 수 없습니다.")
                         .build());
     }
 
@@ -75,9 +86,22 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @GetMapping("/user/{category}/posts")
-    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(@PathVariable("memberId")Long memberId){
+/*    @GetMapping("/user/{memberId}/{category}/posts")
+    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(*//*HttpServletRequest request,*//*@PathVariable("memberId")Long memberId){
         List<Post> posts = postService.findAllPostsByUser(memberId);
+
+        List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
+
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POSTS_FOUND")
+                        .responseMessage("내가 쓴 게시글 다건 조회 완료")
+                        .data(response)
+                        .build());
+    }*/
+    @GetMapping("/user/{category}/posts")
+    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(/*HttpServletRequest request,*/@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        List<Post> posts = postService.findAllPostsByUser(customUserDetails);
 
         List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
 
@@ -103,12 +127,17 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/{category}/posts")
-    public List<Post> findAllPostsByCategory(@PathVariable("category")String category){
+    public ResponseEntity<DefaultResponseDto> findAllPostsByCategory(@PathVariable("category")String category){
         List<Post> posts = postService.findAllPostsByCategory(category);
 
         List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
 
-        return posts;
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POSTS_FOUND")
+                        .responseMessage("카테고리별 게시글 조회")
+                        .data(response)
+                        .build());
     }
 
     @ApiOperation(value="게시물 단건 조회")
@@ -146,8 +175,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PutMapping("/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId, @RequestBody PostRequestDto postRequestDto ){
+/*    @PutMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId,@PathVariable("memberId") Long memberId, @RequestBody PostRequestDto postRequestDto ){
 
         Post post = postService.updatePost(postId, postRequestDto);
 
@@ -157,6 +186,26 @@ public class PostController {
                         .responseCode("POST_UPDATEED")
                         .responseMessage("게시글 수정 완료")
                         .data(response)
+                        .build());
+    }*/
+    @PutMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestBody PostRequestDto postRequestDto ){
+
+        if (postService.postMatchMember(postId, customUserDetails)) {
+
+            Post post = postService.updatePost(postId, postRequestDto);
+
+            PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("POST_UPDATEED")
+                            .responseMessage("게시글 수정 완료")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(400)
+                .body(DefaultResponseDto.builder()
+                        .responseMessage("유저를 찾을 수 없습니다.")
                         .build());
     }
 
@@ -173,8 +222,8 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @DeleteMapping("/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> deletePost(@PathVariable("postId") Long postId ){
+/*    @DeleteMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> deletePost(@PathVariable("postId") Long postId, @PathVariable("memberId") Long memberId ){
 
         Post post = postService.deletePost(postId);
 
@@ -184,6 +233,24 @@ public class PostController {
                         .responseCode("POST_DELETED")
                         .responseMessage("게시글 삭제 완료")
                         .data(response)
+                        .build());
+    }*/
+    @DeleteMapping("/user/{memberId}/post/{category}/{postId}")
+    public ResponseEntity<DefaultResponseDto> deletePost(@PathVariable("postId") Long postId, @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        if (postService.postMatchMember(postId, customUserDetails)) {
+            Post post = postService.deletePost(postId);
+
+            PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("POST_DELETED")
+                            .responseMessage("게시글 삭제 완료")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(400)
+                .body(DefaultResponseDto.builder()
+                        .responseMessage("유저를 찾을 수 없습니다.")
                         .build());
     }
 
@@ -255,7 +322,7 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @DeleteMapping("/post/{category}/{postId}/like/{likeId}")
-    public ResponseEntity<DefaultResponseDto> deletedLike(@PathVariable("postId") Long postId, Long memberId, @PathVariable("likeId") Long likeId) {
+    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId, Long memberId, @RequestParam("likeId") Long likeId) {
 
         Post post = postService.deletedLike(likeId);
 

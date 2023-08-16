@@ -2,6 +2,7 @@ package thisisus.school.post.domain;
 
 import lombok.*;
 import thisisus.school.common.BaseEntity;
+import thisisus.school.member.domain.Member;
 import thisisus.school.post.dto.PostRequestDto;
 
 import javax.persistence.*;
@@ -24,7 +25,9 @@ public class Post extends BaseEntity {
     private PostCategory category;
     private int likeCount;
     private int viewCount;
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
     @OneToMany(mappedBy = "post")
     private List<PostLiked> likes = new ArrayList<>();
     @OneToMany(mappedBy = "post")
@@ -32,13 +35,15 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post")
     private List<PostPhoto> postPhotos = new ArrayList<>();
 
+
     @Builder
-    public Post(String title, String content, PostCategory category){
+    public Post(String title, String content, PostCategory category, Member member){
         this.title=title;
         this.content=content;
         this.category=category;
         this.likeCount=0;
         this.viewCount=0;
+        this.member=member;
         this.setDeleted(false);
     }
 

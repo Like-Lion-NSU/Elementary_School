@@ -20,9 +20,8 @@ function BoardTable({ posts }) {
                     {posts.map((post) => (
                         <tr key={post.id}>
                             <td>
-                                <Link to={`/post/${post.category}/${post.id}`}>{post.title}</Link>
+                                <Link to={`/post/${post.category}/${post.id}`}>{post.id}</Link>
                             </td>
-                            <td>{post.id}</td>
                             <td>{post.title}</td>
                             <td>{post.memberId}</td>
                             <td>{post.updateAt}</td>

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import thisisus.school.exception.CustomException;
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.member.service.MemberService;
 import thisisus.school.post.domain.PostPhoto;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
@@ -27,6 +30,8 @@ import static thisisus.school.exception.ExceptionCode.SERVER_ERROR;
 @Slf4j
 @RequiredArgsConstructor
 public class PostService {
+
+    private final MemberService memberService;
     private final PostPhotoRepository postPhotoRepository;
 
     private final PostRepository postRepository;
@@ -37,12 +42,15 @@ public class PostService {
      * 500(SERVER_ERROR)
      * */
     @Transactional
-    public Post savePost(PostRequestDto postRequestDto) throws Exception {
+    public Post savePost(PostRequestDto postRequestDto, CustomUserDetails customUserDetails) throws Exception {
         try {
+            Member member =  memberService.findMember(customUserDetails);
+
             Post post = Post.builder()
                     .title(postRequestDto.getTitle())
                     .content(postRequestDto.getContent())
                     .category(PostCategory.valueOf(postRequestDto.getCategory()))
+                    .member(member)
                     .build();
             if(postRequestDto.getFiles().size()!=0) {
                 savePhoto(post, postRequestDto.getFiles());
@@ -72,10 +80,22 @@ public class PostService {
      * 내가 쓴 게시글 다건 조회
      * 500(SERVER_ERROR)
      * */
-    @Transactional(readOnly = true)
+/*    @Transactional(readOnly = true)
     public List<Post> findAllPostsByUser(Long memberId) {
         try {
             List<Post> posts = postRepository.findAllByMemberIdAndIsDeletedIsFalse(memberId);
+            return posts;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+
+    }*/
+    @Transactional(readOnly = true)
+    public List<Post> findAllPostsByUser(CustomUserDetails customUserDetails) {
+        try {
+            Member member = memberService.findMember(customUserDetails);
+            List<Post> posts = postRepository.findAllByMemberIdAndIsDeletedIsFalse(member.getId());
             return posts;
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -207,5 +227,12 @@ public class PostService {
             }
 
         }
+    }
+
+    public boolean postMatchMember(Long postId, CustomUserDetails customUserDetails) {
+        Post post = postRepository.findById(postId).get();
+        Member member = memberService.findMember(customUserDetails);
+
+        return post.getMember().getId().equals(member.getId());
     }
 }
