@@ -32,6 +32,7 @@ import PostFooter from "./postpage/postFooter";
 import PostPage from "./postpage/postPage";
 import PostLike from "./postpage/postLike";
 import Kioskproblem from "./kiosk/kioskproblem";
+import ErrorPage from "./error/404";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route path="/post/:category/:postId" element={<PostPage />} />
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
+          <Route path="/elementary404" element={<ErrorPage />} />
         </Routes>
       </div>
       <Footer />
