@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BasketModal from "./modalbasket";
 import MegaPay from "./kioskpay";
+import KioskResult from "./kioskResult";
 import "../css/megaFooter.css";
 import { Link } from "react-router-dom";
 
@@ -22,15 +23,7 @@ function MegaFooter({
 }) {
   const [payModalIsOpen, setPayModalIsOpen] = useState(false);
   const [bascketModalIsOpen, setBascketModalIsOpen] = useState(false);
-  // const [selectedMenu, setSelectedMenu] = useState("");
-  // const [selectedProductsCount, setSelectedProductsCount] = useState(0);
-  // const [totalAmount, setTotalAmount] = useState(0);
-
-  // const handleProductSelection = (menu, price) => {
-  //   setSelectedMenu(menu);
-  //   setSelectedProductsCount(selectedProductsCount + 1);
-  //   setTotalAmount(totalAmount + price);
-  // };
+  const [resultopen, setResultopen] = useState(false);
 
   return (
     <div className="E-footer">
@@ -211,6 +204,14 @@ function MegaFooter({
       <MegaPay
         payModalIsOpen={payModalIsOpen}
         setPayModalIsOpen={setPayModalIsOpen}
+        resultopen={resultopen}
+        setResultopen={setResultopen}
+        lastScore={lastScore}
+        setScore={setScore}
+      />
+      <KioskResult
+        resultopen={resultopen}
+        setResultopen={setResultopen}
         lastScore={lastScore}
         setScore={setScore}
       />

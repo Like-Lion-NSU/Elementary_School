@@ -16,10 +16,12 @@ function MegaHeader({ lastScore, setProblemopen }) {
       </Link>
       <div className="E-brand">메가커피</div>
       <div>
-        <button onClick={seeProblem}>문제보기</button>
-        <sapn>
+        <button className="problemButton" onClick={seeProblem}>
+          문제보기
+        </button>
+        <span className="nowScore">
           현재 점수 <span>{lastScore}</span>점
-        </sapn>
+        </span>
       </div>
     </div>
   );
