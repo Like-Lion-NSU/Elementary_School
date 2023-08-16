@@ -47,7 +47,7 @@ function App() {
           <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/posting" element={<Posting />} />
           <Route path="/comments" element={<Comments />} />
-          <Route path="/write" element={<Write />} />
+          <Route path="/writePost" element={<Write />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/menu" element={<MegaMenu />} />
           <Route path="/megabody" element={<Megabody />} />
@@ -59,13 +59,13 @@ function App() {
           <Route path="/MegaBasket" element={<MegaBasket />} />
           <Route path="/boardHeader" element={<BoardHeader />} />
           <Route path="/boardTable" element={<BoardTable />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/소통하기/posts" element={<Community />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/question" element={<Question />} />
+          <Route path="/질문하기/posts" element={<Question />} />
           <Route path="/postHeader" element={<PostHeader />} />
           <Route path="/postMain" element={<PostMain />} />
           <Route path="/postFooter" element={<PostFooter />} />
-          <Route path="/post/:postId" element={<PostPage />} />
+          <Route path="/post/:category/:postId" element={<PostPage />} />
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
         </Routes>
