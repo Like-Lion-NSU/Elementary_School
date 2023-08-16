@@ -126,8 +126,8 @@ const MegaPay = ({
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      data: {
-        result: lastScore,
+      params: {
+        result: String(lastScore),
       },
     })
       .then((result) => {
@@ -149,7 +149,7 @@ const MegaPay = ({
                   Authorization: `Bearer ${newAccessToken}`,
                   "Content-Type": "application/x-www-form-urlencoded",
                 },
-                data: {
+                params: {
                   result: lastScore,
                 },
               })
