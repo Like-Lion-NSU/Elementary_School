@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PostLikeRepository extends JpaRepository<PostLiked, Long> {
     List<PostLiked> findByMemberIdAndIsDeletedIsFalse(Long memberId);
+    PostLiked findByMemberIdAndPostIdAndIsDeletedIsFalse(Long memberId, Long postId);
 }

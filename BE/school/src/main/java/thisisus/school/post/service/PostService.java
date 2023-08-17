@@ -50,7 +50,7 @@ public class PostService {
                     .category(PostCategory.valueOf(postRequestDto.getCategory()))
                     .member(member)
                     .build();
-            if(postRequestDto.getFiles().size()!=0) {
+            if(postRequestDto.getFiles()!=null) {
                 savePhoto(post, postRequestDto.getFiles());
             }
             postRepository.save(post);
@@ -117,15 +117,28 @@ public class PostService {
         }
 
     }
+    @Transactional
+    public PostLiked isLikedPost(CustomUserDetails customUserDetails, Post post){
+        try{
+            Member member = memberService.findMember(customUserDetails);
+            return postLikeRepository.findByMemberIdAndPostIdAndIsDeletedIsFalse(member.getId(),post.getId());
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            throw new CustomException(SERVER_ERROR);
+        }
+    }
 
     /*
      * 게시글 수정
      * 500(SERVER_ERROR)
      * */
     @Transactional
-    public Post updatePost(Long postId, PostRequestDto postRequestDto) {
+    public Post updatePost(Long postId, PostRequestDto postRequestDto) throws Exception{
         try {
             Post post = postRepository.findById(postId).get();
+            if(postRequestDto.getFiles().size()!=0) {
+                savePhoto(post, postRequestDto.getFiles());
+            }
             post.updatePost(postRequestDto);
             return post;
         } catch (RuntimeException e) {
@@ -174,7 +187,7 @@ public class PostService {
     }
 
     @Transactional
-    public Post saveLike(Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public PostLiked saveLike(Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         try {
             Member member = memberService.findMember(customUserDetails);
             Post post = postRepository.findById(postId).get();
@@ -182,9 +195,9 @@ public class PostService {
                     .post(post)
                     .member(member)
                     .build();
-            post.savedLikeCount(postLiked.isDeleted());
+
             postLikeRepository.save(postLiked);
-            return post;
+            return postLiked;
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new CustomException(SERVER_ERROR);
@@ -194,13 +207,12 @@ public class PostService {
 
 
     @Transactional
-    public Post deletedLike(Long likeId) {
+    public PostLiked deletedLike(Long likeId) {
         try {
             PostLiked postLiked = postLikeRepository.findById(likeId).get();
             postLiked.delete();
-            Post post = postRepository.findById(postLiked.getPost().getId()).get();
-            post.savedLikeCount(postLiked.isDeleted());
-            return post;
+
+            return postLiked;
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new CustomException(SERVER_ERROR);

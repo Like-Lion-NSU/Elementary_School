@@ -8,6 +8,7 @@ import thisisus.school.post.dto.CommentRequestDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,7 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+
     @Builder
     public Comment(String content, Member member){
         this.content=content;
@@ -45,7 +47,11 @@ public class Comment extends BaseEntity {
     }
 
     public void delete(){
-        this.content=null;
+    /*     this.content=null;
+       this.setMember(null);
+        this.setPost(null);
+        this.setUpdateAt(null);
+        this.setCreateAt(null);*/
         this.setDeleted(true);
     }
 

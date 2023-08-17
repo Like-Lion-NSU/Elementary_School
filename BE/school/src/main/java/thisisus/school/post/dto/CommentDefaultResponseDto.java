@@ -12,7 +12,7 @@ import thisisus.school.post.domain.PostCategory;
 
 import java.time.LocalDateTime;
 
-@ApiModel(value = "Post 기본 응답")
+@ApiModel(value = "Comment 기본 응답")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -24,11 +24,13 @@ public class CommentDefaultResponseDto {
     private String email;
     private String body;
     private PostCategory category;
+    private boolean CommentDeleted;
     private LocalDateTime updateAt;
 
     public CommentDefaultResponseDto(Comment comment){
         this.commentId=comment.getId();
         this.postId=comment.getPost().getId();
+        this.CommentDeleted=comment.isDeleted();
         this.category=comment.getPost().getCategory();
         this.email=comment.getMember().getEmail();
         this.updateAt=comment.getUpdateAt();

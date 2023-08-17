@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import "../css/write.css";
 
 const Write = () => {
+  const [postId, setPostId] = useState("");
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -13,13 +13,20 @@ const Write = () => {
   const location = useLocation();
   const userContent = location.state;
   useEffect(() => {
+    const updateBtn = document.querySelector(".update-button");
+    const wrtieBtn = document.querySelector(".write-button");
     if (userContent) {
+      setPostId(userContent.postId);
       setCategory(userContent.category);
       setTitle(userContent.title);
       setContent(userContent.content);
       setSelectedFile(userContent.imageUrl);
+      wrtieBtn.style.display = "none";
+      updateBtn.style.display = "block";
     } else {
       console.log("아무것도 안들어왔쥬?");
+      wrtieBtn.style.display = "block";
+      updateBtn.style.display = "none";
     }
   }, []);
 
@@ -45,6 +52,7 @@ const Write = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       }).then((result) => {
         console.log(result);
+        window.location.href = `/${category}/posts`;
       });
     } catch (error) {
       console.error("글 등록 중 에러가 발생했습니다.", error);
@@ -61,7 +69,31 @@ const Write = () => {
       }
     }
   }
+  const updatePost = () => {
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("title", title);
+    formData.append("content", content);
+    if (selectedFile) {
+      formData.append("files", selectedFile);
+    }
 
+    try {
+      const accessToken = getCookieValue("accessToken");
+      axios({
+        method: "PUT",
+        //송현이 api 작성하기
+        url: `/post/${category}/${postId}`,
+        data: formData,
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }).then((result) => {
+        console.log(result);
+      });
+    } catch (error) {
+      console.error("글 수정 중 에러가 발생했습니다.", error);
+      setError("글 수정 중 에러가 발생했습니다.");
+    }
+  };
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -118,6 +150,14 @@ const Write = () => {
           <div>{error && <div className="error-message">{error}</div>}</div>
           <button type="submit" className="write-button">
             글쓰기 완료
+          </button>
+          <button
+              type="button"
+              className="update-button"
+              style={{ display: "none" }}
+              onClick={updatePost}
+          >
+            수정 완료
           </button>
         </form>
       </div>

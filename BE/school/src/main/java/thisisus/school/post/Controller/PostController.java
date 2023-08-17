@@ -16,6 +16,8 @@ import thisisus.school.common.DefaultResponseDto;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 import thisisus.school.post.domain.Post;
+import thisisus.school.post.domain.PostLiked;
+import thisisus.school.post.dto.LikedDefaultResponseDto;
 import thisisus.school.post.dto.PostDefaultResponseDto;
 import thisisus.school.post.dto.PostRequestDto;
 import thisisus.school.post.repository.PostLikeRepository;
@@ -57,8 +59,6 @@ public class PostController {
 
         if(customUserDetails != null) {
             Post post = postService.savePost(postRequestDto, customUserDetails);
-
-
             PostDefaultResponseDto response = new PostDefaultResponseDto(post);
             return ResponseEntity.status(200)
                     .body(DefaultResponseDto.builder()
@@ -159,11 +159,12 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> findOnePost(@PathVariable("postId") Long postId){
+    public ResponseEntity<DefaultResponseDto> findOnePost(@AuthenticationPrincipal CustomUserDetails customUserDetails, @PathVariable("postId") Long postId){
 
         Post post = postService.findOnePost(postId);
-
-        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        /*PostDefaultResponseDto response = new PostDefaultResponseDto(post);*/
+        PostLiked isLiked = postService.isLikedPost(customUserDetails, post);
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post,isLiked);
         return ResponseEntity.status(200)
                 .body(DefaultResponseDto.builder()
                         .responseCode("POST_FOUND")
@@ -198,8 +199,10 @@ public class PostController {
                         .data(response)
                         .build());
     }*/
-    @PutMapping("/post/{category}/{postId}")
-    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestBody PostRequestDto postRequestDto ){
+    @PutMapping(value="/post/{category}/{postId}",consumes = "multipart/form-data")
+    public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId,
+                                                         @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                                         PostRequestDto postRequestDto )throws Exception{
 
         if (postService.postMatchMember(postId, customUserDetails)) {
 
@@ -310,17 +313,17 @@ public class PostController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PostMapping("/post/{category}/{postId}/like")
-    public ResponseEntity<DefaultResponseDto> saveLike(@RequestParam("postId") Long postId,
+    @PutMapping("/post/{category}/{postId}/like")
+    public ResponseEntity<DefaultResponseDto> saveLike(@PathVariable("postId") Long postId,
                                                        @AuthenticationPrincipal CustomUserDetails customUserDetails ) {
 
-        Post post = postService.saveLike(postId,customUserDetails);
+        PostLiked postLiked = postService.saveLike(postId,customUserDetails);
 
-        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+        LikedDefaultResponseDto response = new LikedDefaultResponseDto(postLiked);
         return ResponseEntity.status(200)
                 .body(DefaultResponseDto.builder()
                         .responseCode("LIKE_WORK")
-                        .responseMessage("좋아요 등록/취소")
+                        .responseMessage("좋아요 등록")
                         .data(response)
                         .build());
     }
@@ -339,13 +342,13 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @DeleteMapping("/post/{category}/{postId}/like/{likeId}")
-    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId,
-                                                          @RequestParam("likeId") Long likeId,
+    public ResponseEntity<DefaultResponseDto> deletedLike(@PathVariable("postId") Long postId,
+                                                          @PathVariable("likeId") Long likeId,
                                                           @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if (postService.likeMatchMember(likeId, customUserDetails)) {
-            Post post = postService.deletedLike(likeId);
+            PostLiked postLiked = postService.deletedLike(likeId);
 
-            PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+            LikedDefaultResponseDto response = new LikedDefaultResponseDto(postLiked);
             return ResponseEntity.status(200)
                     .body(DefaultResponseDto.builder()
                             .responseCode("LIKE_WORK")

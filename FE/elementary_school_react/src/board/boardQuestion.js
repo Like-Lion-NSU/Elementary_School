@@ -7,7 +7,7 @@ import axios from "axios";
 function Question() {
     const [res, setResponse] = useState();
     const category = "질문해요";
-
+    let table_view;
     useEffect(() => {
         async function fetchPosts() {
             try {
@@ -48,7 +48,7 @@ function Question() {
         <div>
             <Sidebar />
             <BoardHeader boardTitle={category} />
-            <BoardTable response={res} />
+            <BoardTable res={res} />
         </div>
     );
 }

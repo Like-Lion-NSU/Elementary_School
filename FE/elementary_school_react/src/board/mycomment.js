@@ -47,7 +47,7 @@ function Usercomments() {
         <div>
             <Sidebar />
             <BoardHeader boardTitle={category} />
-            <BoardTableC response={res} />
+            <BoardTableC res={res} />
         </div>
     );
 }

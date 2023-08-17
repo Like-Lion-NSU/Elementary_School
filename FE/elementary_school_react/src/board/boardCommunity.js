@@ -7,7 +7,6 @@ import axios from "axios";
 function Community() {
     const [res, setResponse] = useState();
     const category = "소통해요";
-
     useEffect(() => {
         async function fetchPosts() {
             try {
@@ -48,7 +47,7 @@ function Community() {
         <div>
             <Sidebar />
             <BoardHeader boardTitle={category} />
-            <BoardTable response={res} />
+            <BoardTable res={res} />
         </div>
     );
 }

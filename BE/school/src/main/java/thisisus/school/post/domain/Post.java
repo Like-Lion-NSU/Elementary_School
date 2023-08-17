@@ -8,6 +8,7 @@ import thisisus.school.post.dto.PostRequestDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -37,6 +38,14 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post")
     private List<PostPhoto> postPhotos = new ArrayList<>();
 
+    public List<Comment> getComments(){
+        int size = this.comments.size();
+        if(size<1) return null;
+        List<Comment> comments = new ArrayList<>(this.comments);
+        comments.removeIf(comment -> comment.isDeleted()==true);
+        Collections.reverse(comments);
+        return comments;
+    }
 
     @Builder
     public Post(String title, String content, PostCategory category, Member member){
@@ -69,9 +78,6 @@ public class Post extends BaseEntity {
 
 
     public void delete(){
-        this.title=null;
-        this.content=null;
-        this.category=null;
         this.setDeleted(true);
     }
 

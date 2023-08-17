@@ -1,12 +1,22 @@
 import React from "react";
 import "../css/post.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const PostMain = ({ category, title, content, likes, views, imageUrl }) => {
+const PostMain = ({
+                      postId,
+                      category,
+                      title,
+                      content,
+                      likes,
+                      views,
+                      imageUrl,
+                  }) => {
     const navigate = useNavigate();
     const postUpdate = () => {
         navigate("/writePost", {
             state: {
+                postId: postId,
                 category: category,
                 title: title,
                 content: content,
@@ -15,6 +25,25 @@ const PostMain = ({ category, title, content, likes, views, imageUrl }) => {
             },
         });
     };
+    const postdelete = () => {
+        const accessToken = getCookieValue("accessToken");
+        axios({
+            method: "DELETE",
+            url: `/post/${category}/${postId}`,
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }).then((result) => {
+            window.location.href = `/${category}/posts`;
+        });
+    };
+    function getCookieValue(cookieName) {
+        const cookies = document.cookie.split(";");
+        for (const cookie of cookies) {
+            const [name, value] = cookie.trim().split("=");
+            if (name === cookieName) {
+                return value;
+            }
+        }
+    }
     return (
         <div className="post-main">
             <div className="post-content">{content}</div>
@@ -26,6 +55,7 @@ const PostMain = ({ category, title, content, likes, views, imageUrl }) => {
                 <p>추천수: {likes}</p>
                 <p>조회수: {views}</p>
                 <p onClick={postUpdate}>수정</p>
+                <p onClick={postdelete}>삭제</p>
             </div>
         </div>
     );

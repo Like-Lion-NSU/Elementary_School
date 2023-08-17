@@ -75,11 +75,14 @@ public class CommentController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PutMapping(value="/post/{category}/{postId}/comment/{commentId}",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> updateComment(@PathVariable("category") String category, @PathVariable("postId") Long postId,
-                                                            CommentRequestDto commentRequestDto, @PathVariable("commentId") Long commentId,
+    @PutMapping(value="/post/{category}/{postId}/comment/{commentId}")
+    public ResponseEntity<DefaultResponseDto> updateComment(@PathVariable("category") String category,
+                                                            @PathVariable("postId") Long postId,
+                                                            @RequestBody CommentRequestDto commentRequestDto,
+                                                            @PathVariable("commentId") Long commentId,
     @AuthenticationPrincipal CustomUserDetails customUserDetails)throws Exception {
-        if (commentService.commentMatchMember(postId, customUserDetails)) {
+        if (commentService.commentMatchMember(commentId, customUserDetails)) {
+            log.info("body : {}",commentRequestDto.getContent());
             Comment comment = commentService.updateComment(commentId, commentRequestDto);
 
             CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
@@ -144,7 +147,7 @@ public class CommentController {
                                                             @PathVariable("commentId") Long commentId,
                                                             @PathVariable("postId") Long postId,
     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        if (commentService.commentMatchMember(postId, customUserDetails)) {
+        if (commentService.commentMatchMember(commentId, customUserDetails)) {
 
             Comment comment = commentService.deleteComment(commentId);
 

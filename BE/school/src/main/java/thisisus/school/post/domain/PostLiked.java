@@ -26,13 +26,20 @@ public class PostLiked extends BaseEntity {
    @JoinColumn(name = "post_id")
    private Post post;
 
+
   @Builder
    public PostLiked(Post post, Member member){
       this.post=post;
       this.member=member;
+      this.setDeleted(false);
+
+      post.savedLikeCount(isDeleted());
+      post.getLikes().add(this);
+      member.getLikes().add(this);
   }
+
 
   public void delete(){
       this.setDeleted(true);
-  }
+      post.savedLikeCount(isDeleted());}
 }

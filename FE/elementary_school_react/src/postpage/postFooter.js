@@ -15,8 +15,8 @@ function PostFooter({ comments, userIsAuthor }) {
   formData.append("content", newCommentText);
 
   const handleEdit = (comment) => {
-    setEditCommentId(comment.id);
-    setEditedCommentText(comment.text);
+    setEditCommentId(comment.commentId);
+    setEditedCommentText(comment.body);
   };
 
   const handleCancelEdit = () => {
@@ -24,39 +24,42 @@ function PostFooter({ comments, userIsAuthor }) {
     setEditedCommentText("");
   };
 
-  const handleSaveEdit = async (comment) => {
+  const handleSaveEdit = async () => {
     try {
+      const data = editedCommentText;
       const accessToken = getCookieValue("accessToken");
-      const response = await axios({
-        method: "put",
-        url: `/post/${category}/${postId}/comment/${comment.id}`,
-        data: {
-          body: editedCommentText, // 수정된 댓글 내용
-        },
+      await axios({
+        method: "PUT",
+        url: `/post/${category}/${postId}/comment/${editCommentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+        data: { content: data },
+      }).then((response) => {
+        console.log("댓글 수정 결과:", response);
+        setEditCommentId(null);
+        setEditedCommentText("");
+        window.location.reload();
       });
-      console.log("댓글 수정 결과:", response);
-
-      setEditCommentId(null);
-      setEditedCommentText("");
     } catch (error) {
       console.error("댓글 수정 오류:", error);
     }
   };
 
-  const handleDelete = async (comment) => {
+  const handleDelete = async (comments) => {
     try {
       const accessToken = getCookieValue("accessToken");
-      const response = await axios({
+      await axios({
         method: "delete",
-        url: `/post/${category}/${postId}/comment/${comment.id}`,
+        url: `/post/${category}/${postId}/comment/${comments.commentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+      }).then((response) => {
+        console.log("댓글 삭제 결과:", response);
+        console.log("comments", comments);
+        window.location.reload();
       });
-      console.log("댓글 삭제 결과:", response);
     } catch (error) {
       console.error("댓글 삭제 오류:", error);
     }
@@ -66,18 +69,19 @@ function PostFooter({ comments, userIsAuthor }) {
     try {
       console.log("newCommentText:", newCommentText);
       const accessToken = getCookieValue("accessToken");
-      const response = await axios({
-        method: "post",
+      await axios({
+        method: "POST",
         url: `/post/${category}/${postId}/comment`,
         data: formData,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+      }).then((response) => {
+        console.log("댓글 추가 결과:", response);
+        setNewCommentText("");
+        setShowCommentButton(false);
+        window.location.reload();
       });
-      console.log("댓글 추가 결과:", response);
-
-      setNewCommentText("");
-      setShowCommentButton(false);
     } catch (error) {
       console.error("댓글 추가 오류:", error);
     }
@@ -106,7 +110,10 @@ function PostFooter({ comments, userIsAuthor }) {
               onClick={() => setShowCommentButton(true)}
           />
             {showCommentButton && (
-                <button className="comment-submit-button" onClick={handleAddComment}>
+                <button
+                    className="comment-submit-button"
+                    onClick={handleAddComment}
+                >
                   댓글 등록
                 </button>
             )}
@@ -123,15 +130,15 @@ function PostFooter({ comments, userIsAuthor }) {
                   <p>{comment.body}</p>
                   <p>{comment.updateAt}</p>
                 </div>
-                {editCommentId === comment.id ? (
+                {editCommentId === comment.commentId ? (
                     <div>
-                      <p className="comment-content">{comment.text}</p>
+                      <p className="comment-content">{comment.body}</p>
                       <textarea
                           value={editedCommentText}
                           onChange={(e) => setEditedCommentText(e.target.value)}
                       />
                       <div className="comment-actions">
-                        <button onClick={() => handleSaveEdit(comment)}>저장</button>
+                        <button onClick={handleSaveEdit}>저장</button>
                         <button onClick={handleCancelEdit}>취소</button>
                       </div>
                     </div>

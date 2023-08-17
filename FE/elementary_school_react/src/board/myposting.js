@@ -47,7 +47,7 @@ function Userpost() {
         <div>
             <Sidebar />
             <BoardHeader boardTitle={category} />
-            <BoardTable response={res} />
+            <BoardTable res={res} />
         </div>
     );
 }
