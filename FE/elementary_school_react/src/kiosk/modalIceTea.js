@@ -13,6 +13,8 @@ const IceTeaOption = ({
   setSelectedBokMenu,
   teaModalIsOpen,
   setTeaModalIsOpen,
+  setScore,
+  lastScore,
 }) => {
   const [opJselectedOptions, setopJSelectedOptions] = useState({
     shot: null,
@@ -162,7 +164,13 @@ const IceTeaOption = ({
                 setSelectedBokMenu(true);
                 setBok(1);
               } else {
-                alert("다시한번생각해보세요");
+                alert("다시 한번 생각해 보세요");
+                if (lastScore > 0) {
+                  setScore(lastScore - 10);
+                } else {
+                  return;
+                }
+                console.log(lastScore);
               }
             }}
           >

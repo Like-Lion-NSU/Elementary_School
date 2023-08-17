@@ -2,6 +2,7 @@ package thisisus.school.post.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,10 +10,7 @@ import thisisus.school.exception.CustomException;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
-import thisisus.school.post.domain.PostPhoto;
-import thisisus.school.post.domain.Post;
-import thisisus.school.post.domain.PostCategory;
-import thisisus.school.post.domain.PostLiked;
+import thisisus.school.post.domain.*;
 import thisisus.school.post.dto.PostRequestDto;
 import thisisus.school.post.repository.PostPhotoRepository;
 import thisisus.school.post.repository.PostLikeRepository;
@@ -159,10 +157,11 @@ public class PostService {
      * 500(SERVER_ERROR)
      * */
     @Transactional(readOnly = true)
-    public List<Post> findAllLikedPostsByUser(Long memberId) {
+    public List<Post> findAllLikedPostsByUser(CustomUserDetails customUserDetails) {
         List<Post> posts = new ArrayList<>();
         try {
-            List<PostLiked> postLikes = postLikeRepository.findByMemberIdAndIsDeletedIsFalse(memberId);
+            Member member= memberService.findMember(customUserDetails);
+            List<PostLiked> postLikes = postLikeRepository.findByMemberIdAndIsDeletedIsFalse(member.getId());
 
             postLikes.stream().map(postLike -> posts.add(postLike.getPost()));
 
@@ -175,12 +174,13 @@ public class PostService {
     }
 
     @Transactional
-    public Post saveLike(Long postId, Long memberId) {
+    public Post saveLike(Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         try {
+            Member member = memberService.findMember(customUserDetails);
             Post post = postRepository.findById(postId).get();
             PostLiked postLiked = PostLiked.builder()
                     .post(post)
-                    .memberId(memberId)
+                    .member(member)
                     .build();
             post.savedLikeCount(postLiked.isDeleted());
             postLikeRepository.save(postLiked);
@@ -234,5 +234,12 @@ public class PostService {
         Member member = memberService.findMember(customUserDetails);
 
         return post.getMember().getId().equals(member.getId());
+    }
+
+    public boolean likeMatchMember(Long likeId, CustomUserDetails customUserDetails) {
+        PostLiked like = postLikeRepository.findById(likeId).get();
+        Member member = memberService.findMember(customUserDetails);
+
+        return like.getMember().getId().equals(member.getId());
     }
 }

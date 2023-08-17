@@ -14,5 +14,4 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentRequestDto {
     private String content;
-    private List<MultipartFile> files = new ArrayList<>();
 }

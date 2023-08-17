@@ -2,7 +2,7 @@ import React from "react";
 import "../css/boardTable.css";
 import { Link } from "react-router-dom";
 
-function BoardTable({ posts }) {
+function BoardTable({ response }) {
     return (
         <div>
             <div className='board-table-container'>
@@ -17,19 +17,20 @@ function BoardTable({ posts }) {
                     </tr>
                     </thead>
                     <tbody className='board-table-body'>
-                    {posts.map((post) => (
-                        <tr key={post.id}>
+                    {response && response.map((response) => (
+                        <tr key={response.id}>
                             <td>
-                                <Link to={`/post/${post.category}/${post.id}`}>{post.id}</Link>
+                                <Link to={`/post/${response.category}/${response.postId}`}>
+                                    {response.postId}
+                                </Link>
                             </td>
-                            <td>{post.title}</td>
-                            <td>{post.memberId}</td>
-                            <td>{post.updateAt}</td>
-                            <td>{post.viewCount}</td>
+                            <td>{response.title}</td>
+                            <td>{response.email}</td>
+                            <td>{response.updateAt}</td>
+                            <td>{response.viewCount}</td>
                         </tr>
                     ))}
                     </tbody>
-
                 </table>
             </div>
             <Link to='/writePost' className='board-write-button'>

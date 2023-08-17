@@ -48,6 +48,7 @@
 }
 .btncSection > button {
   background-color: white;
+  cursor: pointer;
   width: 14vw;
   height: 11vh;
   margin: 1vh 1vh 0 0;
@@ -70,6 +71,7 @@
   height: 12vh;
   background-color: white;
   margin: 1vh 0 0 1vh;
+  cursor: pointer;
 }
 .Pay_how > img {
   width: 8.5vw;
@@ -89,6 +91,7 @@
   height: 11vh;
   background-color: white;
   margin: 1vh 0 0 1vh;
+  cursor: pointer;
 }
 .Pay_event > img {
   width: 8.5vw;

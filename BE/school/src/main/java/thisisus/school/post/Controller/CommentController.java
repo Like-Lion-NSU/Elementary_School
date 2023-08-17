@@ -9,8 +9,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.common.DefaultResponseDto;
+import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.post.domain.Comment;
 import thisisus.school.post.dto.CommentDefaultResponseDto;
 import thisisus.school.post.dto.PostDefaultResponseDto;
@@ -43,10 +45,13 @@ public class CommentController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @PostMapping(value="/post/{category}/{postId}/comment",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> saveComment(@RequestParam("category") String category, @RequestParam("postId") Long postId, @ModelAttribute CommentRequestDto commentRequestDto) throws Exception{
+    @PostMapping(value="/post/{category}/{postId}/comment")
+    public ResponseEntity<DefaultResponseDto> saveComment(@PathVariable("category") String category,
+                                                          @PathVariable("postId") Long postId,
+                                                          CommentRequestDto commentRequestDto,
+    @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception{
 
-        Comment comment = commentService.saveComment(postId, commentRequestDto);
+        Comment comment = commentService.saveComment(postId, commentRequestDto,customUserDetails);
 
         CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
         return ResponseEntity.status(200)
@@ -71,16 +76,25 @@ public class CommentController {
                     description = "SERVER_ERROR"),
     })
     @PutMapping(value="/post/{category}/{postId}/comment/{commentId}",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> updateComment(@RequestParam("category") String category, @RequestParam("postId") Long postId,
-                                                            @ModelAttribute CommentRequestDto commentRequestDto, @RequestParam("commentId") Long commentId)throws Exception {
-        Comment comment = commentService.updateComment(commentId, commentRequestDto);
+    public ResponseEntity<DefaultResponseDto> updateComment(@PathVariable("category") String category, @PathVariable("postId") Long postId,
+                                                            CommentRequestDto commentRequestDto, @PathVariable("commentId") Long commentId,
+    @AuthenticationPrincipal CustomUserDetails customUserDetails)throws Exception {
+        if (commentService.commentMatchMember(postId, customUserDetails)) {
+            Comment comment = commentService.updateComment(commentId, commentRequestDto);
 
-        CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
-        return ResponseEntity.status(200)
+            CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("COMMENT_UPDATE")
+                            .responseMessage("댓글 수정")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(400)
                 .body(DefaultResponseDto.builder()
-                        .responseCode("COMMENT_UPDATE")
-                        .responseMessage("댓글 수정")
-                        .data(response)
+                        .responseCode("NOT_MATCH")
+                        .responseMessage("회원님의 댓글이 아닙니다.")
+                        .data(null)
                         .build());
     }
 
@@ -97,10 +111,10 @@ public class CommentController {
             @ApiResponse(responseCode = "500",
                     description = "SERVER_ERROR"),
     })
-    @GetMapping("/user/{userId}/post/comments")
-    public ResponseEntity<DefaultResponseDto> findAllCommentsByUser(@PathVariable("userId") Long userId) {
+    @GetMapping("/user/comments")
+    public ResponseEntity<DefaultResponseDto> findAllCommentsByUser(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        List<Comment> comments = commentService.findAllCommentByUser(userId);
+        List<Comment> comments = commentService.findAllCommentByUser(customUserDetails);
 
         List<CommentDefaultResponseDto> response = comments.stream().map(comment -> new CommentDefaultResponseDto(comment)).collect(Collectors.toList());
         return ResponseEntity.status(200)
@@ -126,17 +140,28 @@ public class CommentController {
                     description = "SERVER_ERROR"),
     })
     @DeleteMapping("/post/{category}/{postId}/comment/{commentId}")
-    public ResponseEntity<DefaultResponseDto> deleteComment(@RequestParam("category") String category,@RequestParam("commentId") Long commentId,@RequestParam("postId") Long postId) {
+    public ResponseEntity<DefaultResponseDto> deleteComment(@PathVariable("category") String category,
+                                                            @PathVariable("commentId") Long commentId,
+                                                            @PathVariable("postId") Long postId,
+    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (commentService.commentMatchMember(postId, customUserDetails)) {
 
-        Comment comment = commentService.deleteComment(commentId);
+            Comment comment = commentService.deleteComment(commentId);
 
 
-        CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
-        return ResponseEntity.status(200)
+            CommentDefaultResponseDto response = new CommentDefaultResponseDto(comment);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("COMMENT_DELETED")
+                            .responseMessage("내가 쓴 댓글 삭제")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(400)
                 .body(DefaultResponseDto.builder()
-                        .responseCode("COMMENT_DELETED")
-                        .responseMessage("내가 쓴 댓글 삭제")
-                        .data(response)
+                        .responseCode("NOT_MATCH")
+                        .responseMessage("회원님의 댓글이 아닙니다.")
+                        .data(null)
                         .build());
     }
 

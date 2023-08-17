@@ -4,22 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] 프론트 연결 - 게시글 작성, 게시글 목록, 게시글 디테일">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] 프론트 연결 - 유저 및 포스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLiked.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/domain/PostLiked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/CommentDefaultResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/CommentDefaultResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/CommentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/CommentRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostDefaultResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/dto/PostDefaultResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/1bcec841-b09b-4780-8247-2777b721e1b0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/1e0dc877-1acb-478d-a85a-28b26d59d6f3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/2f6199b7-ece6-4df5-a552-5bfb735e4ccb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/75167be3-7b34-469c-921b-85fc24bb992b.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/static/files/9a234412-247d-491f-84b2-235f575c550e.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/mycomment.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/mycomment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/myposting.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/myposting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/css/kioskpayment_1.css" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/css/kioskpayment_1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/css/megaHeader.css" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/css/megaHeader.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/css/megabody.css" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/css/megabody.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/kiosk.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/kiosk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/kioskpay.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/kioskpay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaFooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megaMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_choco.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_choco.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_ice.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_ice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_tea.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/megabody_tea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalAmericano.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalAmericano.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalChoco.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalChoco.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalIceTea.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalIceTea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalbasket.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/kiosk/modalbasket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postFooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/role/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/role/role.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,6 +204,10 @@
       <workItem from="1692086303143" duration="12909000" />
       <workItem from="1692113448194" duration="18033000" />
       <workItem from="1692183630151" duration="6260000" />
+      <workItem from="1692190182946" duration="562000" />
+      <workItem from="1692190897088" duration="17944000" />
+      <workItem from="1692209788021" duration="13447000" />
+      <workItem from="1692250296461" duration="1000000" />
     </task>
     <task id="LOCAL-00001" summary="[Docs] readme 문서 수정">
       <created>1690298287674</created>
@@ -192,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692130042049</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[Feat] 프론트 연결 - 유저 및 포스트">
+      <created>1692190226569</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692190226569</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +250,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Docs] readme 문서 수정" />
     <MESSAGE value="[Feat] 프론트 연결 - 게시글 작성, 게시글 목록, 게시글 디테일" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Feat] 프론트 연결 - 게시글 작성, 게시글 목록, 게시글 디테일" />
+    <MESSAGE value="[Feat] 프론트 연결 - 유저 및 포스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Feat] 프론트 연결 - 유저 및 포스트" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java</url>
+          <line>238</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -12,7 +12,12 @@ const categories = [
   "에스프레소",
 ];
 
-function MegaMenu({ selectedCategory, setSelectedCategory }) {
+function MegaMenu({
+  selectedCategory,
+  setSelectedCategory,
+  setScore,
+  lastScore,
+}) {
   const handleCategoryClick = (category) => {
     if (
       category === "커피(Ice)" ||
@@ -22,6 +27,12 @@ function MegaMenu({ selectedCategory, setSelectedCategory }) {
       setSelectedCategory(category);
     } else {
       alert("잘못 고르셨습니다. 감점 처리됩니다. 다른 버튼을 선택해주세요");
+      if (lastScore > 0) {
+        setScore(lastScore - 10);
+        console.log(lastScore);
+      } else {
+        return;
+      }
     }
   };
 

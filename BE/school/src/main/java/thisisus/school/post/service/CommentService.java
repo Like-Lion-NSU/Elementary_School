@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import thisisus.school.exception.CustomException;
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.member.service.MemberService;
 import thisisus.school.post.domain.Comment;
 import thisisus.school.post.domain.CommentPhoto;
 import thisisus.school.post.domain.Post;
@@ -26,6 +29,7 @@ public class CommentService {
     private final CommentPhotoRepository commentPhotoRepository;
    private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final MemberService memberService;
 
 
     /*
@@ -33,16 +37,17 @@ public class CommentService {
    * 500(SERVER_ERROR)
     */
     @Transactional
-    public Comment saveComment(Long postId, CommentRequestDto commentRequestDto) throws Exception{
+    public Comment saveComment(Long postId, CommentRequestDto commentRequestDto,
+    CustomUserDetails customUserDetails) throws Exception{
         try{
+            Member member = memberService.findMember(customUserDetails);
             Post post = postRepository.findById(postId).get();
             Comment comment = Comment.builder()
                     .content(commentRequestDto.getContent())
                     .build();
             comment.setPost(post);
-            if(commentRequestDto.getFiles().size()!=0) {
-                savePhoto(comment, commentRequestDto.getFiles());
-            }
+            comment.setMember(member);
+          
             commentRepository.save(comment);
             return comment;
         }catch(RuntimeException e){
@@ -73,9 +78,10 @@ public class CommentService {
      * 500(SERVER_ERROR)
      * */
     @Transactional(readOnly = true)
-    public List<Comment> findAllCommentByUser(Long userId){
+    public List<Comment> findAllCommentByUser(CustomUserDetails customUserDetails){
         try{
-            List<Comment> comments = commentRepository.findByMemberIdAndIsDeletedIsFalse(userId);
+            Member member = memberService.findMember(customUserDetails);
+            List<Comment> comments = commentRepository.findByMemberIdAndIsDeletedIsFalse(member.getId());
             return comments;
         }catch(RuntimeException e){
             e.printStackTrace();
@@ -119,5 +125,12 @@ public class CommentService {
             }
 
         }
+    }
+
+    public boolean commentMatchMember(Long commentId, CustomUserDetails customUserDetails) {
+        Comment comment = commentRepository.findById(commentId).get();
+        Member member = memberService.findMember(customUserDetails);
+
+        return comment.getMember().getId().equals(member.getId());
     }
 }

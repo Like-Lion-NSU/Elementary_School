@@ -3,6 +3,7 @@ package thisisus.school.post.domain;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import thisisus.school.common.BaseEntity;
+import thisisus.school.member.domain.Member;
 
 import javax.persistence.*;
 
@@ -17,15 +18,18 @@ public class PostLiked extends BaseEntity {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   private Long memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "post_id")
    private Post post;
 
   @Builder
-   public PostLiked(Post post, Long memberId){
+   public PostLiked(Post post, Member member){
       this.post=post;
-      this.memberId=memberId;
+      this.member=member;
   }
 
   public void delete(){

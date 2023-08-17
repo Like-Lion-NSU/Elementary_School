@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../css/write.css";
@@ -10,8 +10,18 @@ const Write = () => {
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
+  const location = useLocation();
+  const userContent = location.state;
+  useEffect(() => {
+    if (userContent) {
+      setCategory(userContent.category);
+      setTitle(userContent.title);
+      setContent(userContent.content);
+      setSelectedFile(userContent.imageUrl);
+    } else {
+      console.log("아무것도 안들어왔쥬?");
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,21 +37,30 @@ const Write = () => {
     }
 
     try {
-      const response = await axios({
+      const accessToken = getCookieValue("accessToken");
+      axios({
         method: "POST",
         url: "/writePost",
         data: formData,
-        headers: {
-          // 필요한 헤더 추가
-
-        },
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }).then((result) => {
+        console.log(result);
       });
-
     } catch (error) {
       console.error("글 등록 중 에러가 발생했습니다.", error);
       setError("글 등록 중 에러가 발생했습니다.");
     }
   };
+
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
+      }
+    }
+  }
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -59,8 +78,8 @@ const Write = () => {
                 onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">카테고리를 입력해주세요</option>
-              <option value="소통하기">소통하기</option>
-              <option value="질문하기">질문하기</option>
+              <option value="소통해요">소통해요</option>
+              <option value="질문해요">질문해요</option>
             </select>
           </div>
           <div>

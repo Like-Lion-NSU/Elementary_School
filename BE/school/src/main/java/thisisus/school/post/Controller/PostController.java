@@ -51,7 +51,9 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @PostMapping(value="/writePost",consumes = "multipart/form-data")
-    public ResponseEntity<DefaultResponseDto> savePost(/*@RequestBody*/ PostRequestDto postRequestDto, @AuthenticationPrincipal CustomUserDetails customUserDetails)throws Exception{
+    public ResponseEntity<DefaultResponseDto> savePost(PostRequestDto postRequestDto,
+                                                       @AuthenticationPrincipal CustomUserDetails customUserDetails)
+            throws Exception{
 
         if(customUserDetails != null) {
             Post post = postService.savePost(postRequestDto, customUserDetails);
@@ -99,11 +101,13 @@ public class PostController {
                         .data(response)
                         .build());
     }*/
-    @GetMapping("/user/{category}/posts")
-    public ResponseEntity<DefaultResponseDto> findAllPostsByUser(/*HttpServletRequest request,*/@AuthenticationPrincipal CustomUserDetails customUserDetails){
+    @GetMapping("/user/posts")
+    public /*List<Post>*/ResponseEntity<DefaultResponseDto> findAllPostsByUser(/*HttpServletRequest request,*/@AuthenticationPrincipal CustomUserDetails customUserDetails){
         List<Post> posts = postService.findAllPostsByUser(customUserDetails);
 
         List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
+
+        /*return posts;*/
 
         return ResponseEntity.status(200)
                 .body(DefaultResponseDto.builder()
@@ -140,6 +144,7 @@ public class PostController {
                         .build());
     }
 
+
     @ApiOperation(value="게시물 단건 조회")
     @ApiResponses(value ={
             @ApiResponse(
@@ -154,12 +159,17 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/post/{category}/{postId}")
-    public Post findOnePost(@PathVariable("postId") Long postId){
+    public ResponseEntity<DefaultResponseDto> findOnePost(@PathVariable("postId") Long postId){
 
         Post post = postService.findOnePost(postId);
 
         PostDefaultResponseDto response = new PostDefaultResponseDto(post);
-        return post;
+        return ResponseEntity.status(200)
+                .body(DefaultResponseDto.builder()
+                        .responseCode("POST_FOUND")
+                        .responseMessage("게시물 단건 조회")
+                        .data(response)
+                        .build());
     }
 
     @ApiOperation(value="게시글 수정")
@@ -188,7 +198,7 @@ public class PostController {
                         .data(response)
                         .build());
     }*/
-    @PutMapping("/user/{memberId}/post/{category}/{postId}")
+    @PutMapping("/post/{category}/{postId}")
     public ResponseEntity<DefaultResponseDto> updatePost(@PathVariable("postId") Long postId,@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestBody PostRequestDto postRequestDto ){
 
         if (postService.postMatchMember(postId, customUserDetails)) {
@@ -205,9 +215,13 @@ public class PostController {
         }
         return ResponseEntity.status(400)
                 .body(DefaultResponseDto.builder()
+                        .responseCode("USER_NOT_FOUND")
                         .responseMessage("유저를 찾을 수 없습니다.")
+                        .data(null)
                         .build());
     }
+
+
 
     @ApiOperation(value="게시글 삭제")
     @ApiResponses(value ={
@@ -235,7 +249,7 @@ public class PostController {
                         .data(response)
                         .build());
     }*/
-    @DeleteMapping("/user/{memberId}/post/{category}/{postId}")
+    @DeleteMapping("/post/{category}/{postId}")
     public ResponseEntity<DefaultResponseDto> deletePost(@PathVariable("postId") Long postId, @AuthenticationPrincipal CustomUserDetails customUserDetails){
         if (postService.postMatchMember(postId, customUserDetails)) {
             Post post = postService.deletePost(postId);
@@ -250,7 +264,9 @@ public class PostController {
         }
         return ResponseEntity.status(400)
                 .body(DefaultResponseDto.builder()
+                        .responseCode("USER_NOT_FOUND")
                         .responseMessage("유저를 찾을 수 없습니다.")
+                        .data(null)
                         .build());
     }
 
@@ -268,9 +284,9 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @GetMapping("/user/posts/likes")
-    public ResponseEntity<DefaultResponseDto> findAllLikedPostsByUser(Long userId) {
+    public ResponseEntity<DefaultResponseDto> findAllLikedPostsByUser(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        List<Post> posts = postService.findAllLikedPostsByUser(userId);
+        List<Post> posts = postService.findAllLikedPostsByUser(customUserDetails);
 
         List<PostDefaultResponseDto> response = posts.stream().map(post -> new PostDefaultResponseDto(post)).collect(Collectors.toList());
         return ResponseEntity.status(200)
@@ -295,9 +311,10 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @PostMapping("/post/{category}/{postId}/like")
-    public ResponseEntity<DefaultResponseDto> saveLike(@RequestParam("postId") Long postId, Long memberId) {
+    public ResponseEntity<DefaultResponseDto> saveLike(@RequestParam("postId") Long postId,
+                                                       @AuthenticationPrincipal CustomUserDetails customUserDetails ) {
 
-        Post post = postService.saveLike(postId, memberId);
+        Post post = postService.saveLike(postId,customUserDetails);
 
         PostDefaultResponseDto response = new PostDefaultResponseDto(post);
         return ResponseEntity.status(200)
@@ -322,18 +339,29 @@ public class PostController {
                     description = "SERVER_ERROR"),
     })
     @DeleteMapping("/post/{category}/{postId}/like/{likeId}")
-    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId, Long memberId, @RequestParam("likeId") Long likeId) {
+    public ResponseEntity<DefaultResponseDto> deletedLike(@RequestParam("postId") Long postId,
+                                                          @RequestParam("likeId") Long likeId,
+                                                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (postService.likeMatchMember(likeId, customUserDetails)) {
+            Post post = postService.deletedLike(likeId);
 
-        Post post = postService.deletedLike(likeId);
-
-        PostDefaultResponseDto response = new PostDefaultResponseDto(post);
-        return ResponseEntity.status(200)
+            PostDefaultResponseDto response = new PostDefaultResponseDto(post);
+            return ResponseEntity.status(200)
+                    .body(DefaultResponseDto.builder()
+                            .responseCode("LIKE_WORK")
+                            .responseMessage("좋아요 등록/취소")
+                            .data(response)
+                            .build());
+        }
+        return ResponseEntity.status(400)
                 .body(DefaultResponseDto.builder()
-                        .responseCode("LIKE_WORK")
-                        .responseMessage("좋아요 등록/취소")
-                        .data(response)
+                        .responseCode("like_NOT_FOUND")
+                        .responseMessage("좋아요를 찾을수 없습니다.")
+                        .data(null)
                         .build());
     }
+
+
 
 
 }

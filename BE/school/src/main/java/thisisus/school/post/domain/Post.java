@@ -1,5 +1,6 @@
 package thisisus.school.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import thisisus.school.common.BaseEntity;
 import thisisus.school.member.domain.Member;
@@ -27,6 +28,7 @@ public class Post extends BaseEntity {
     private int viewCount;
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
     @OneToMany(mappedBy = "post")
     private List<PostLiked> likes = new ArrayList<>();

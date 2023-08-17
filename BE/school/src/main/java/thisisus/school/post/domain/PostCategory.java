@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum PostCategory {
-    질문하기,
-    소통하기;
+    질문해요,
+    소통해요;
 
 
 
