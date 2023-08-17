@@ -52,6 +52,7 @@ const Write = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       }).then((result) => {
         console.log(result);
+        window.location.href = `/${category}/posts`;
       });
     } catch (error) {
       console.error("글 등록 중 에러가 발생했습니다.", error);
