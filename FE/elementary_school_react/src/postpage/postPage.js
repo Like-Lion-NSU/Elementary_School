@@ -9,8 +9,9 @@ import axios from "axios";
 import "../css/post.css";
 
 const PostPage = () => {
-  const { category, postId, likeId } = useParams();
+  const { category, postId } = useParams();
   const [selectedPost, setSelectedPost] = useState(null);
+  let checkedLike;
 
   useEffect(() => {
     async function fetchPostData() {
@@ -23,6 +24,7 @@ const PostPage = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }).then((response) => {
+          checkedLike = response.data.data;
           console.log(response.data.data);
           console.log(response.data.data.photos);
           setSelectedPost(response.data.data);
@@ -74,7 +76,7 @@ const PostPage = () => {
             category={category}
             postId={postId}
             initialLikes={likeCount}
-            likeId={likeId}
+            checkedLike={checkedLike}
           />
         ) : null}
         <PostFooter comments={comments} />

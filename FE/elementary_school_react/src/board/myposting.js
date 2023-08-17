@@ -1,25 +1,55 @@
-import React from 'react';
-import Sidebar from '../sidebar/sidebar';
-import BoardHeader from './boardHeader';
-import BoardTable from './boardTable';
+import React, { useEffect, useState } from "react";
+import Sidebar from "../sidebar/sidebar";
+import BoardHeader from "./boardHeader";
+import BoardTable from "./boardTable";
+import axios from "axios";
 
-const posts = [
-  // 더미 데이터
-  { id: 1, title: '첫 번째 게시물', author: '글쓴이1', date: '2023-08-15', views: 10 },
-  { id: 2, title: '두 번째 게시물', author: '글쓴이2', date: '2023-08-16', views: 20 },
-  { id: 3, title: '세 번째 게시물', author: '글쓴이3', date: '2023-08-17', views: 30 },
-  { id: 4, title: '네 번째 게시물', author: '글쓴이4', date: '2023-08-18', views: 40 },
-  { id: 5, title: '다섯 번째 게시물', author: '글쓴이5', date: '2023-08-19', views: 50 },
-];
+function Userpost() {
+  const [res, setResponse] = useState();
+  const category = "내가 쓴 게시글";
 
-function Posting() {
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const accessToken = getCookieValue("accessToken");
+        axios({
+          method: "GET",
+          url: `/user/posts`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }).then((response) => {
+          console.log(response.data.data);
+          setResponse(response.data.data);
+        });
+      } catch (error) {
+        console.error(
+          "게시물 데이터를 가져오는 중 에러가 발생했습니다.",
+          error
+        );
+      }
+    }
+
+    function getCookieValue(cookieName) {
+      const cookies = document.cookie.split(";");
+      for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split("=");
+        if (name === cookieName) {
+          return value;
+        }
+      }
+    }
+
+    fetchPosts();
+  }, [category]);
+
   return (
     <div>
       <Sidebar />
-      <BoardHeader boardTitle="내가 쓴 게시물" />
-      <BoardTable boardTitle="내가 쓴 게시물" posts={posts} />
+      <BoardHeader boardTitle={category} />
+      <BoardTable res={res} />
     </div>
   );
 }
 
-export default Posting;
+export default Userpost;
