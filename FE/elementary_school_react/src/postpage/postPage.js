@@ -15,15 +15,34 @@ const PostPage = () => {
   useEffect(() => {
     async function fetchPostData() {
       try {
-        const response = await axios.get(`/post/${category}/${postId}`); // URL 형식 변경
-        console.log(response.data);
-        setSelectedPost(response.data); // setPost 대신 setSelectedPost 사용
+        const accessToken = getCookieValue("accessToken");
+        axios({
+          method: "GET",
+          url: `/post/${category}/${postId}`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }).then((response) => {
+          console.log(response.data.data);
+          console.log(response.data.data.photos);
+          setSelectedPost(response.data.data);
+        });
       } catch (error) {
         console.error(
           "게시물 데이터를 가져오는 중 에러가 발생했습니다.",
           error
         );
         setSelectedPost(null);
+      }
+    }
+
+    function getCookieValue(cookieName) {
+      const cookies = document.cookie.split(";");
+      for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split("=");
+        if (name === cookieName) {
+          return value;
+        }
       }
     }
 
@@ -34,22 +53,23 @@ const PostPage = () => {
     return <div>게시물을 불러오는 중 오류가 발생했습니다.</div>;
   }
 
-  const { title, memberId, content, likeCount, viewCount, comments } =
+  const { title, memberId, content, likeCount, viewCount, comments, photos } =
     selectedPost;
-
   return (
     <div>
       <Sidebar />
       <div className="post-container">
         <PostHeader title={title} authorEmail={memberId} />
         <PostMain
+          postId={postId}
+          category={category}
+          title={title}
           content={content}
           likes={likeCount}
           views={viewCount}
-          category={category}
-          postId={postId}
+          imageUrl={photos[0].photoUrl}
         />
-        {category === "소통하기" || category === "질문하기" ? (
+        {category === "소통해요" || category === "질문해요" ? (
           <PostLike postId={postId} /*initialLikes={selectedPost.likes}*/ />
         ) : null}
         <PostFooter comments={comments} />
