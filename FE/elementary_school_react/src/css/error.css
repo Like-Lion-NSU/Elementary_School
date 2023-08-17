@@ -1,0 +1,16 @@
+.ErrorSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5vw;
+  height: 90vh;
+}
+.errorBtn {
+  border: 0.5vw solid #4682a9;
+  border-radius: 1vw;
+  padding: 0.5vw;
+  margin: 1vw 0;
+  display: inline-block;
+  color: #4682a9;
+  font-weight: bold;
+}

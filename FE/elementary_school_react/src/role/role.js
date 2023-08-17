@@ -55,6 +55,8 @@ const RolePage = () => {
 
           setUserInfo(refreshedResponse.data);
         } catch (refreshError) {}
+      } else if (error.response && error.response.status === 404) {
+        window.location.href = "/elementary404";
       }
     }
   };

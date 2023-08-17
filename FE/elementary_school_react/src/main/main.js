@@ -50,6 +50,8 @@ const Main = () => {
             // RefreshToken으로 새로운 AccessToken 발급 실패
             // 로그아웃 처리 등을 수행
           }
+        } else if (error.response && error.response.status === 404) {
+          window.location.href = "/elementary404";
         }
         // Handle other errors
       }
