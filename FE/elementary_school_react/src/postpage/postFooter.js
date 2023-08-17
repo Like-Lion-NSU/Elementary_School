@@ -1,80 +1,104 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import '../css/post.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+import "../css/post.css";
 
 function PostFooter({ comments, userIsAuthor }) {
   const [editCommentId, setEditCommentId] = useState(null);
-  const [editedCommentText, setEditedCommentText] = useState('');
-  const [newCommentText, setNewCommentText] = useState('');
+  const [editedCommentText, setEditedCommentText] = useState("");
+  const [newCommentText, setNewCommentText] = useState("");
   const [showCommentButton, setShowCommentButton] = useState(true);
 
+  const { category, postId } = useParams();
+  const formData = new FormData();
+  formData.append("content", newCommentText);
+
   const handleEdit = (comment) => {
-    setEditCommentId(comment.id);
-    setEditedCommentText(comment.text);
+    setEditCommentId(comment.commentId);
+    setEditedCommentText(comment.body);
   };
 
   const handleCancelEdit = () => {
     setEditCommentId(null);
-    setEditedCommentText('');
+    setEditedCommentText("");
   };
 
-  const handleSaveEdit = async (comment) => {
+  const handleSaveEdit = async () => {
     try {
-      await axios.put(`/api/comments/${comment.id}`, {
-        text: editedCommentText,
+      const data = editedCommentText;
+      const accessToken = getCookieValue("accessToken");
+      await axios({
+        method: "PUT",
+        url: `/post/${category}/${postId}/comment/${editCommentId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        //프론트랑 백이랑 data안의 값 맞추기
+        data: { content: data },
+      }).then((response) => {
+        console.log("댓글 수정 결과:", response);
+        setEditCommentId(null);
+        setEditedCommentText("");
+        window.location.reload();
       });
-      setEditCommentId(null);
-      setEditedCommentText('');
     } catch (error) {
-      console.error('댓글 수정 오류:', error);
+      console.error("댓글 수정 오류:", error);
     }
   };
 
-  const handleDelete = async (comment) => {
+  const handleDelete = async (comments) => {
     try {
-      await axios.delete(`/api/comments/${comment.id}`);
+      const accessToken = getCookieValue("accessToken");
+      await axios({
+        method: "delete",
+        url: `/post/${category}/${postId}/comment/${comments.commentId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then((response) => {
+        console.log("댓글 삭제 결과:", response);
+        console.log("comments", comments);
+        window.location.reload();
+      });
     } catch (error) {
-      console.error('댓글 삭제 오류:', error);
-    }
-  };
-
-  const handleAccept = async (comment) => {
-    try {
-      await axios.post(`/api/comments/${comment.id}/accept`);
-    } catch (error) {
-      console.error('댓글 채택 오류:', error);
+      console.error("댓글 삭제 오류:", error);
     }
   };
 
   const handleAddComment = async () => {
     try {
-      await axios.post('/api/comments', {
-        text: newCommentText,
+      console.log("newCommentText:", newCommentText);
+      const accessToken = getCookieValue("accessToken");
+      await axios({
+        method: "POST",
+        url: `/post/${category}/${postId}/comment`,
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then((response) => {
+        console.log("댓글 추가 결과:", response);
+        setNewCommentText("");
+        setShowCommentButton(false);
+        window.location.reload();
       });
-      setNewCommentText('');
-      setShowCommentButton(false);
     } catch (error) {
-      console.error('댓글 추가 오류:', error);
+      console.error("댓글 추가 오류:", error);
     }
   };
 
-  const dummyComments = [
-    {
-      id: 1,
-      authorEmail: 'user1@example.com',
-      date: '2023-08-15',
-      text: '첫 번째 댓글입니다.',
-      isAccepted: false,
-    },
-    {
-      id: 2,
-      authorEmail: 'user2@example.com',
-      date: '2023-08-16',
-      text: '두 번째 댓글입니다.',
-      isAccepted: true,
-    },
-  ];
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
+      }
+    }
+  }
 
+  console.log("댓글 데이터:", comments);
   return (
     <div className="post-footer">
       <div className="comment-input">
@@ -87,54 +111,50 @@ function PostFooter({ comments, userIsAuthor }) {
             onClick={() => setShowCommentButton(true)}
           />
           {showCommentButton && (
-            <button className="comment-submit-button" onClick={handleAddComment}>
+            <button
+              className="comment-submit-button"
+              onClick={handleAddComment}
+            >
               댓글 등록
             </button>
           )}
         </div>
       </div>
-      {(comments && comments.length > 0) || dummyComments.length > 0 ? (
-        <ul className="comment-list">
-          {comments.concat(dummyComments).map((comment, index) => (
-            <li
-              key={index}
-              className={`comment-item ${userIsAuthor ? 'my-comment' : ''}`}
-            >
-              <div className="comment-meta">
-                <p>{comment.authorEmail}</p>
-                <p>{comment.date}</p>
+      <ul className="comment-list">
+        {comments.map((comment, index) => (
+          <li
+            key={index}
+            className={`comment-item ${userIsAuthor ? "my-comment" : ""}`}
+          >
+            <div className="comment-meta">
+              <p>{comment.email}</p>
+              <p>{comment.body}</p>
+              <p>{comment.updateAt}</p>
+            </div>
+            {editCommentId === comment.commentId ? (
+              <div>
+                <p className="comment-content">{comment.body}</p>
+                <textarea
+                  value={editedCommentText}
+                  onChange={(e) => setEditedCommentText(e.target.value)}
+                />
+                <div className="comment-actions">
+                  <button onClick={handleSaveEdit}>저장</button>
+                  <button onClick={handleCancelEdit}>취소</button>
+                </div>
               </div>
-              {editCommentId === comment.id ? (
-                <div>
-                  <textarea
-                    value={editedCommentText}
-                    onChange={(e) => setEditedCommentText(e.target.value)}
-                  />
-                  <div className="comment-actions">
-                    <button onClick={() => handleSaveEdit(comment)}>저장</button>
-                    <button onClick={handleCancelEdit}>취소</button>
-                  </div>
+            ) : (
+              <div>
+                <p className="comment-content">{comment.text}</p>
+                <div className="comment-actions">
+                  <button onClick={() => handleDelete(comment)}>삭제</button>
+                  <button onClick={() => handleEdit(comment)}>수정</button>
                 </div>
-              ) : (
-                <div>
-                  <p className="comment-content">{comment.text}</p>
-                  {userIsAuthor && (
-                    <div className="comment-actions">
-                      <button onClick={() => handleDelete(comment)}>삭제</button>
-                      {!comment.isAccepted && (
-                        <button onClick={() => handleAccept(comment)}>채택</button>
-                      )}
-                      <button onClick={() => handleEdit(comment)}>수정</button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No comments yet.</p>
-      )}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

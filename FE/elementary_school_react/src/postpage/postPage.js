@@ -9,7 +9,7 @@ import axios from "axios";
 import "../css/post.css";
 
 const PostPage = () => {
-  const { category, postId } = useParams();
+  const { category, postId, likeId } = useParams();
   const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
@@ -70,7 +70,12 @@ const PostPage = () => {
           imageUrl={photos[0].photoUrl}
         />
         {category === "소통해요" || category === "질문해요" ? (
-          <PostLike postId={postId} /*initialLikes={selectedPost.likes}*/ />
+          <PostLike
+            category={category}
+            postId={postId}
+            initialLikes={likeCount}
+            likeId={likeId}
+          />
         ) : null}
         <PostFooter comments={comments} />
       </div>
