@@ -9,18 +9,16 @@ const PostLike = ({ category, postId, checkedLike }) => {
   //liked 값을 가져올수 있음
   const [liked, setLiked] = useState(false);
   const [currentLikeId, setCurrentLikeId] = useState(null);
-  useEffect(
-    {
-      // if(checkedLike.liked === false){
-      //   setLiked(true)
-      // }else{
-      //   setLiked(false);
-      // }
-    },
-    []
-  );
 
-  const handleLike = async () => {
+  useEffect(() => {
+    if (checkedLike === false) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, []);
+
+  const handleLiked = async () => {
     const accessToken = getCookieValue("accessToken");
     if (!liked) {
       await axios({
@@ -67,18 +65,17 @@ const PostLike = ({ category, postId, checkedLike }) => {
       }
       return "";
     }
-
-    return (
-      <div className="post-like">
-        <button className="like-button" onClick={handleLike}>
-          {liked ? (
-            <FontAwesomeIcon icon={faHeart} />
-          ) : (
-            <FontAwesomeIcon icon={faHeartRegular} />
-          )}
-        </button>
-      </div>
-    );
   };
+  return (
+    <div className="post-like">
+      <button className="like-button" onClick={handleLiked}>
+        {liked ? (
+          <FontAwesomeIcon icon={faHeart} />
+        ) : (
+          <FontAwesomeIcon icon={faHeartRegular} />
+        )}
+      </button>
+    </div>
+  );
 };
 export default PostLike;
