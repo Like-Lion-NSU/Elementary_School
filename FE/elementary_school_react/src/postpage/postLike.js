@@ -11,10 +11,10 @@ const PostLike = ({ category, postId, checkedLike }) => {
   const [currentLikeId, setCurrentLikeId] = useState(null);
 
   useEffect(() => {
-    if (checkedLike === false) {
-      setLiked(true);
-    } else {
+    if (checkedLike === true || checkedLike === null) {
       setLiked(false);
+    } else {
+      setLiked(true);
     }
   }, []);
 
