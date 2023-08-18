@@ -39,17 +39,17 @@ function App() {
     <div className="wrapper">
       <div className="contentWrapper">
         <Routes>
-          <Route path="/v1" element={<Login />} />
-          <Route path="/v1/role" element={<Role />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/role" element={<Role />} />
           <Route path="/v1/kiosk" element={<Kiosk />} />
-          <Route path="/v1/home" element={<Main />} />
+          <Route path="/home" element={<Main />} />
           <Route path="/v1/mypage" element={<Mypage />} />
           <Route path="/v1/practiceType" element={<PracticeType />} />
           <Route path="/v1/sidebar" element={<Sidebar />} />
           <Route path="/v1/posting" element={<Posting />} />
           <Route path="/v1/comments" element={<Comments />} />
           <Route path="/v1/writePost" element={<Write />} />
-          <Route path="/v1/shop" element={<Shop />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/v1/menu" element={<MegaMenu />} />
           <Route path="/v1/megabody" element={<Megabody />} />
           <Route path="/v1/footer" element={<MegaFooter />} />

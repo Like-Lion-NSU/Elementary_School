@@ -24,7 +24,7 @@ const RolePage = () => {
       );
 
       if (response.status === 200) {
-        window.location.href = "/v1/home";
+        window.location.href = "/home";
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -39,18 +39,18 @@ const RolePage = () => {
             })
             .then((result) => {
               if (result === "403") {
-                window.location.href = "/v1/403";
+                window.location.href = "/403";
               }
             });
           const newAccessToken = refreshResponse.data;
-          const refreshedResponse = await axios.get("/v1/role", {
+          const refreshedResponse = await axios.get("/v1/role/decide", {
             headers: {
               Authorization: `Bearer ${newAccessToken}`,
             },
           });
 
           if (refreshedResponse.status === 200) {
-            window.location.href = "/v1/home";
+            window.location.href = "/home";
           }
 
           setUserInfo(refreshedResponse.data);
