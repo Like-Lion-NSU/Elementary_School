@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Api(tags = "게시글")
 @RequiredArgsConstructor
+@RequestMapping("/v1")
 public class PostController {
 
     private final PostRepository postRepository;

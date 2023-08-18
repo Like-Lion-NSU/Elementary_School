@@ -39,21 +39,21 @@ function App() {
     <div className="wrapper">
       <div className="contentWrapper">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/role" element={<Role />} />
-          <Route path="/kiosk" element={<Kiosk />} />
-          <Route path="/home" element={<Main />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/practiceType" element={<PracticeType />} />
+          <Route path="/v1" element={<Login />} />
+          <Route path="/v1/role" element={<Role />} />
+          <Route path="/v1/kiosk" element={<Kiosk />} />
+          <Route path="/v1/home" element={<Main />} />
+          <Route path="/v1/mypage" element={<Mypage />} />
+          <Route path="/v1/practiceType" element={<PracticeType />} />
           <Route path="/sidebar" element={<Sidebar />} />
-          <Route path='/user/posts' element={<Userpost />} />
-          <Route path="/user/comments" element={<Comments />} />
+          <Route path='/v1/user/posts' element={<Userpost />} />
+          <Route path="/v1/user/comments" element={<Comments />} />
           <Route path='/boardTableC' element={<BoardTableC />} />
-          <Route path="/writePost" element={<Write />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/v1/writePost" element={<Write />} />
+          <Route path="/v1/shop" element={<Shop />} />
           <Route path="/menu" element={<MegaMenu />} />
           <Route path="/megabody" element={<Megabody />} />
-          <Route path="/post/:category/:postId/comment" element={<MegaFooter />} />
+          <Route path="/v1/post/:category/:postId/comment" element={<MegaFooter />} />
           <Route path="/megapay" element={<MegaPay />} />
           <Route path="/MegaIceTea" element={<MegaIceTea />} />
           <Route path="/MegaAmericano" element={<MegaAmericano />} />
@@ -61,13 +61,13 @@ function App() {
           <Route path="/MegaBasket" element={<MegaBasket />} />
           <Route path="/boardHeader" element={<BoardHeader />} />
           <Route path="/boardTable" element={<BoardTable />} />
-          <Route path="/소통해요/posts" element={<Community />} />
+          <Route path="/v1/소통해요/posts" element={<Community />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/질문해요/posts" element={<Question />} />
+          <Route path="/v1/질문해요/posts" element={<Question />} />
           <Route path="/postHeader" element={<PostHeader />} />
           <Route path="/postMain" element={<PostMain />} />
           <Route path="/postFooter" element={<PostFooter />} />
-          <Route path="/post/:category/:postId" element={<PostPage />} />
+          <Route path="/v1/post/:category/:postId" element={<PostPage />} />
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
         </Routes>

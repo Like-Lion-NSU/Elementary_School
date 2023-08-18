@@ -19,7 +19,7 @@ const PostPage = () => {
                 const accessToken = getCookieValue("accessToken");
                 const response = await axios({
                     method: "GET",
-                    url: `/post/${category}/${postId}`,
+                    url: `/v1/post/${category}/${postId}`,
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },

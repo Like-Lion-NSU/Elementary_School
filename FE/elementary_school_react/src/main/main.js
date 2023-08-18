@@ -12,7 +12,7 @@ const Main = () => {
         const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
         console.log("accessToken:", accessToken); // 추가된 부분
 
-        const response = await axios.get("/home", {
+        const response = await axios.get("/v1/home", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             Accept: "application/json", // JSON 응답을 요청한다고 설정
@@ -26,7 +26,7 @@ const Main = () => {
             const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
             const refreshResponse = await axios
-              .post("/auth/refresh", null, {
+              .post("/v1/auth/refresh", null, {
                 headers: {
                   Authorization: `Bearer ${refreshToken}`,
                 },
@@ -39,7 +39,7 @@ const Main = () => {
 
             const newAccessToken = refreshResponse.data;
             // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
-            const refreshedResponse = await axios.get("/home", {
+            const refreshedResponse = await axios.get("/v1/home", {
               headers: {
                 Authorization: `Bearer ${newAccessToken}`,
               },

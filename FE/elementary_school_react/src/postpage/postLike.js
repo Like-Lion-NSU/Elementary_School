@@ -12,7 +12,6 @@ const PostLike = ({ category, postId, checkedLike }) => {
     useEffect(() => {
         if (checkedLike === false) {
             setLiked(true);
-            setCurrentLikeId(null);
         } else {
             setLiked(checkedLike);
         }
@@ -24,12 +23,11 @@ const PostLike = ({ category, postId, checkedLike }) => {
             try {
                 const response = await axios({
                     method: "put",
-                    url: `/post/${category}/${postId}/like`,
+                    url: `/v1/post/${category}/${postId}/like`,
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
                 });
-                setCurrentLikeId(response.data.likeId);
                 setLiked(!liked);
                 console.log("좋아요 처리 완료");
             } catch (error) {
@@ -40,7 +38,7 @@ const PostLike = ({ category, postId, checkedLike }) => {
                 try {
                     await axios({
                         method: "DELETE",
-                        url: `/post/${category}/${postId}/like/${currentLikeId}`,
+                        url: `/v1/post/${category}/${postId}/like/${currentLikeId}`,
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },

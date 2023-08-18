@@ -10,7 +10,7 @@ spring:
           google:
             client-id: 756406117386-pjmmrsvugblm8s9procms8m4k00bhsqr.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: http://localhost:8081/login/oauth2/code/google
+            redirect-uri: http://localhost:8081/v1/login/oauth2/code/google
             scope: profile,email
 
           naver:
@@ -18,7 +18,7 @@ spring:
             client-secret: Mszk_WjjEh
             authorization-grant-type: authorization_code
             client-name: client
-            redirect-uri: http://localhost:8081/login/oauth2/code/naver
+            redirect-uri: http://localhost:8081/v1/login/oauth2/code/naver
             scope: profile,email
 
           kakao:
@@ -27,7 +27,7 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             client-name: ThisIsUs
-            redirect-uri: http://localhost:8081/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8081/v1/login/oauth2/code/kakao
             #                        scope: openid,profile_nickname,profile_image,account_email
             scope: profile_nickname,profile_image,account_email,gender,birthday
 
@@ -83,9 +83,9 @@ oauth:
   refresh-cookie-key: refresh
   jwt:
     secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  authorizedRedirectUri: http://localhost:3000/main
+  authorizedRedirectUri: http://localhost:3000/v1/home
 
 my:
   api:
     token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnLmcuaG9yb0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9TVFVERU5UIiwiaXNzIjoiZGVicmFpbnMiLCJpYXQiOjE2OTE4NjgwMzAsImV4cCI6MTY5MTg3MTYzMH0.o5Ygl3Wo_0Qkz-ysTJWHfiUtD3goklbLiBS-qbZjJPq1pWsMZjQ7Ogt2VZRqoScYAAZmdirYdIOLRb1l29jUpQ
-    url: http://localhost:8081/me
+    url: http://localhost:8081/v1/me

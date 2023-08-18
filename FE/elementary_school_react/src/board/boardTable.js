@@ -21,7 +21,7 @@ function BoardTable({ res }) {
                         res.map((response, index) => (
                             <tr key={response.id}>
                                 <td>
-                                    <Link to={`/post/${response.category}/${response.postId}`}>
+                                    <Link to={`/v1/post/${response.category}/${response.postId}`}>
                                         {index + 1}
                                     </Link>
                                 </td>
