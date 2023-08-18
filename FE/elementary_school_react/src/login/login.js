@@ -50,16 +50,6 @@ function LoJLogin() {
             alt="카카오 로그인 버튼"
           />
         </a>
-        <a
-          className={style.loJLogin_Btn}
-          href="http://localhost:8081/oauth2/authorization/google"
-        >
-          <img
-            src={Lo_J_GoogleLogin}
-            className={style.loJImgWidth}
-            alt="구글 로그인 버튼"
-          />
-        </a>
       </div>
     </div>
   );

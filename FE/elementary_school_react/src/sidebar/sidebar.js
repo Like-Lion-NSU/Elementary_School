@@ -13,19 +13,19 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/v1/community">소통해요</Link>
+          <Link to="/community">소통해요</Link>
         </li>
         <li>
-          <Link to="/v1/question">질문해요</Link>
+          <Link to="/question">질문해요</Link>
         </li>
         <li>
-          <Link to="/v1/practiceType">연습하기</Link>
+          <Link to="/practiceType">연습하기</Link>
         </li>
         <li>
-          <Link to="/v1/policy">정책정보</Link>
+          <Link to="/policy">정책정보</Link>
         </li>
         <li>
-          <Link to="/v1/mypage">나의정보</Link>
+          <Link to="/mypage">나의정보</Link>
         </li>
         <li>
           <Link to="/shop">매점가기</Link>

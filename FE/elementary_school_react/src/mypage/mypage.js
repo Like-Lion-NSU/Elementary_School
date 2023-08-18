@@ -80,7 +80,7 @@ function MyJMypage() {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = "/v1/";
+        window.location.href = "/";
       })
       .catch((error) => {
         console.error(error);
