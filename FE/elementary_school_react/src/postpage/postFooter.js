@@ -52,7 +52,7 @@ function PostFooter({ comments, userIsAuthor }) {
       const accessToken = getCookieValue("accessToken");
       await axios({
         method: "delete",
-        url: `/post/${category}/${postId}/comment/${comments.commentId}`,
+        url: `/v1/post/${category}/${postId}/comment/${comments.commentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -72,7 +72,7 @@ function PostFooter({ comments, userIsAuthor }) {
       const accessToken = getCookieValue("accessToken");
       await axios({
         method: "POST",
-        url: `/post/${category}/${postId}/comment`,
+        url: `/v1/post/${category}/${postId}/comment`,
         data: formData,
         headers: {
           Authorization: `Bearer ${accessToken}`,

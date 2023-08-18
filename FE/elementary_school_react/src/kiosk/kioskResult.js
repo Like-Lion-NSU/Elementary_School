@@ -40,7 +40,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
     const accessToken = getCookieValue("accessToken");
     axios({
       method: "POST",
-      url: "/practice/point",
+      url: "/v1/practice/point",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -50,7 +50,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
       },
     })
       .then((result) => {
-        window.location.href = "/home";
+        window.location.href = "/v1/home";
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -63,7 +63,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
             });
             const newAccessToken = refreshResponse.data;
             axios
-              .post("/practice/point", {
+              .post("/v1/practice/point", {
                 headers: {
                   Authorization: `Bearer ${newAccessToken}`,
                   "Content-Type": "application/x-www-form-urlencoded",
@@ -73,7 +73,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
                 },
               })
               .then((result) => {
-                window.location.href = "/home";
+                window.location.href = "/v1/home";
               });
           } catch (err) {}
         }

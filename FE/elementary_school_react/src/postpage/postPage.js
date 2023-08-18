@@ -19,14 +19,14 @@ const PostPage = () => {
         const accessToken = getCookieValue("accessToken");
         axios({
           method: "GET",
-          url: `/post/${category}/${postId}`,
+          url: `/v1/post/${category}/${postId}`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }).then((response) => {
           checkedLike = response.data.data.postLiked.delete;
-          // console.log(response.data.data);
-          // console.log(response.data.data.photos);
+          console.log(response.data.data);
+          console.log(response.data.data.photos);
           setSelectedPost(response.data.data);
         });
       } catch (error) {

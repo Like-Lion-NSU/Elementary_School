@@ -39,37 +39,37 @@ function App() {
     <div className="wrapper">
       <div className="contentWrapper">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/role" element={<Role />} />
-          <Route path="/kiosk" element={<Kiosk />} />
-          <Route path="/home" element={<Main />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/practiceType" element={<PracticeType />} />
-          <Route path="/sidebar" element={<Sidebar />} />
-          <Route path="/posting" element={<Posting />} />
-          <Route path="/comments" element={<Comments />} />
-          <Route path="/writePost" element={<Write />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/menu" element={<MegaMenu />} />
-          <Route path="/megabody" element={<Megabody />} />
-          <Route path="/footer" element={<MegaFooter />} />
-          <Route path="/megapay" element={<MegaPay />} />
-          <Route path="/MegaIceTea" element={<MegaIceTea />} />
-          <Route path="/MegaAmericano" element={<MegaAmericano />} />
-          <Route path="/MegaChoco" element={<MegaChoco />} />
-          <Route path="/MegaBasket" element={<MegaBasket />} />
-          <Route path="/boardHeader" element={<BoardHeader />} />
-          <Route path="/boardTable" element={<BoardTable />} />
-          <Route path="/소통하기/posts" element={<Community />} />
-          <Route path="/policy" element={<Policy />} />
-          <Route path="/질문하기/posts" element={<Question />} />
-          <Route path="/postHeader" element={<PostHeader />} />
-          <Route path="/postMain" element={<PostMain />} />
-          <Route path="/postFooter" element={<PostFooter />} />
-          <Route path="/post/:category/:postId" element={<PostPage />} />
-          <Route path="/postLike" element={<PostLike />} />
-          <Route path="/kioskproblem" element={<Kioskproblem />} />
-          <Route path="/elementary404" element={<ErrorPage />} />
+          <Route path="/v1" element={<Login />} />
+          <Route path="/v1/role" element={<Role />} />
+          <Route path="/v1/kiosk" element={<Kiosk />} />
+          <Route path="/v1/home" element={<Main />} />
+          <Route path="/v1/mypage" element={<Mypage />} />
+          <Route path="/v1/practiceType" element={<PracticeType />} />
+          <Route path="/v1/sidebar" element={<Sidebar />} />
+          <Route path="/v1/posting" element={<Posting />} />
+          <Route path="/v1/comments" element={<Comments />} />
+          <Route path="/v1/writePost" element={<Write />} />
+          <Route path="/v1/shop" element={<Shop />} />
+          <Route path="/v1/menu" element={<MegaMenu />} />
+          <Route path="/v1/megabody" element={<Megabody />} />
+          <Route path="/v1/footer" element={<MegaFooter />} />
+          <Route path="/v1/megapay" element={<MegaPay />} />
+          <Route path="/v1/MegaIceTea" element={<MegaIceTea />} />
+          <Route path="/v1/MegaAmericano" element={<MegaAmericano />} />
+          <Route path="/v1/MegaChoco" element={<MegaChoco />} />
+          <Route path="/v1/MegaBasket" element={<MegaBasket />} />
+          <Route path="/v1/boardHeader" element={<BoardHeader />} />
+          <Route path="/v1/boardTable" element={<BoardTable />} />
+          <Route path="/v1/소통하기/posts" element={<Community />} />
+          <Route path="/v1/policy" element={<Policy />} />
+          <Route path="/v1/질문하기/posts" element={<Question />} />
+          <Route path="/v1/postHeader" element={<PostHeader />} />
+          <Route path="/v1/postMain" element={<PostMain />} />
+          <Route path="/v1/postFooter" element={<PostFooter />} />
+          <Route path="/v1/post/:category/:postId" element={<PostPage />} />
+          <Route path="/v1/postLike" element={<PostLike />} />
+          <Route path="/v1/kioskproblem" element={<Kioskproblem />} />
+          <Route path="/v1/elementary404" element={<ErrorPage />} />
         </Routes>
       </div>
       <Footer />

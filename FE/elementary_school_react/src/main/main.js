@@ -12,7 +12,7 @@ const Main = () => {
         const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
         console.log("accessToken:", accessToken); // 추가된 부분
 
-        const response = await axios.get("/home", {
+        const response = await axios.get("/v1/home", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             Accept: "application/json", // JSON 응답을 요청한다고 설정
@@ -26,20 +26,20 @@ const Main = () => {
             const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
             const refreshResponse = await axios
-              .post("/auth/refresh", null, {
+              .post("/v1/auth/refresh", null, {
                 headers: {
                   Authorization: `Bearer ${refreshToken}`,
                 },
               })
               .then((result) => {
                 if (result === "403") {
-                  window.location.href = "/403";
+                  window.location.href = "/v1/403";
                 }
               });
 
             const newAccessToken = refreshResponse.data;
             // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
-            const refreshedResponse = await axios.get("/home", {
+            const refreshedResponse = await axios.get("/v1/home", {
               headers: {
                 Authorization: `Bearer ${newAccessToken}`,
               },
@@ -76,13 +76,13 @@ const Main = () => {
           <h1 id="mainE-title">환영합니다</h1>
           <div className="main-buttons-wrapper">
             <div className="main-buttons">
-              <Link to="/community" className="mainE-button">
+              <Link to="/v1/community" className="mainE-button">
                 <span role="img" aria-label="communication">
                   📣
                 </span>
                 <div className="mainE-role">소통해요</div>
               </Link>
-              <Link to="/question" className="mainE-button">
+              <Link to="/v1/question" className="mainE-button">
                 <span role="img" aria-label="qna">
                   📝
                 </span>
@@ -90,13 +90,13 @@ const Main = () => {
               </Link>
             </div>
             <div className="main-buttons">
-              <Link to="/practiceType" className="mainE-button">
+              <Link to="/v1/practiceType" className="mainE-button">
                 <span role="img" aria-label="practice">
                   📱
                 </span>
                 <div className="mainE-role">연습하기</div>
               </Link>
-              <Link to="/policy" className="mainE-button">
+              <Link to="/v1/policy" className="mainE-button">
                 <span role="img" aria-label="information">
                   🗞️
                 </span>

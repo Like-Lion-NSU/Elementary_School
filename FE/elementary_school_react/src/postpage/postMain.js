@@ -29,10 +29,10 @@ const PostMain = ({
     const accessToken = getCookieValue("accessToken");
     axios({
       method: "DELETE",
-      url: `/post/${category}/${postId}`,
+      url: `/v1/post/${category}/${postId}`,
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((result) => {
-      window.location.href = `/${category}/posts`;
+      window.location.href = `/v1/${category}/posts`;
     });
   };
   function getCookieValue(cookieName) {

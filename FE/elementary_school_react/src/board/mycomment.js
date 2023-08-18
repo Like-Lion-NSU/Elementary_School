@@ -14,7 +14,7 @@ function Usercomments() {
         const accessToken = getCookieValue("accessToken");
         axios({
           method: "GET",
-          url: `/user/comments`,
+          url: `/v1/user/comments`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

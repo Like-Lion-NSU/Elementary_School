@@ -14,7 +14,7 @@ function Userpost() {
         const accessToken = getCookieValue("accessToken");
         axios({
           method: "GET",
-          url: `/user/posts`,
+          url: `/v1/user/posts`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

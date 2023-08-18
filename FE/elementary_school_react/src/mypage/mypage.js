@@ -27,7 +27,7 @@ function MyJMypage() {
         const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
         console.log("accessToken:", accessToken); // 추가된 부분
 
-        const response = await axios.get("/mypage", {
+        const response = await axios.get("/v1/mypage", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             Accept: "application/json", // JSON 응답을 요청한다고 설정
@@ -41,7 +41,7 @@ function MyJMypage() {
           try {
             const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
-            const refreshResponse = await axios.post("/auth/refresh", null, {
+            const refreshResponse = await axios.post("/v1/auth/refresh", null, {
               headers: {
                 Authorization: `Bearer ${refreshToken}`,
               },
@@ -49,7 +49,7 @@ function MyJMypage() {
 
             const newAccessToken = refreshResponse.data;
             // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
-            const refreshedResponse = await axios.get("/mypage", {
+            const refreshedResponse = await axios.get("/v1/mypage", {
               headers: {
                 Authorization: `Bearer ${newAccessToken}`,
               },
@@ -72,7 +72,7 @@ function MyJMypage() {
     const accessToken = getCookieValue("accessToken");
     axios({
       method: "DELETE",
-      url: "/drop",
+      url: "/v1/drop",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -80,7 +80,7 @@ function MyJMypage() {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = "/";
+        window.location.href = "/v1/";
       })
       .catch((error) => {
         console.error(error);
@@ -113,17 +113,17 @@ function MyJMypage() {
 
             <div className="myJCommu">
               <div className="myJButtonTop">
-                <Link to="/posting">
+                <Link to="/v1/posting">
                   <FontAwesomeIcon icon={faFileLines} /> 내가 쓴 게시글
                 </Link>
               </div>
               <div className="myJButtonMiddle">
-                <Link to="/comment">
+                <Link to="/v1/comment">
                   <FontAwesomeIcon icon={faComments} /> 내가 쓴 댓글
                 </Link>
               </div>
               <div className="myJLogout">
-                <Link to="/">
+                <Link to="/v1/">
                   <FontAwesomeIcon icon={faRightFromBracket} /> 로그아웃
                 </Link>
               </div>

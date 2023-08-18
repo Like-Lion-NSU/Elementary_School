@@ -47,7 +47,7 @@ const Write = () => {
       const accessToken = getCookieValue("accessToken");
       axios({
         method: "POST",
-        url: "/writePost",
+        url: "/v1/writePost",
         data: formData,
         headers: { Authorization: `Bearer ${accessToken}` },
       }).then((result) => {
@@ -83,7 +83,7 @@ const Write = () => {
       axios({
         method: "PUT",
         //송현이 api 작성하기
-        url: `/post/${category}/${postId}`,
+        url: `/v1/post/${category}/${postId}`,
         data: formData,
         headers: { Authorization: `Bearer ${accessToken}` },
       }).then((result) => {

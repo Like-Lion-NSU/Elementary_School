@@ -23,7 +23,7 @@ const PostLike = ({ category, postId, checkedLike }) => {
     if (!liked) {
       await axios({
         method: "POST",
-        url: `/post/${category}/${postId}/like`,
+        url: `/v1/post/${category}/${postId}/like`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -40,7 +40,7 @@ const PostLike = ({ category, postId, checkedLike }) => {
     } else {
       await axios({
         method: "DELETE",
-        url: `/post/${category}/${postId}/like/${currentLikeId}`,
+        url: `/v1/post/${category}/${postId}/like/${currentLikeId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

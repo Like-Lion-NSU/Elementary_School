@@ -13,7 +13,7 @@ const RolePage = () => {
       const accessToken = getCookieValue("accessToken");
       console.log("accessToken:", accessToken);
       const response = await axios.post(
-        "/role/decide",
+        "/v1/role/decide",
         { role },
         {
           headers: {
@@ -24,7 +24,7 @@ const RolePage = () => {
       );
 
       if (response.status === 200) {
-        window.location.href = "/home";
+        window.location.href = "/v1/home";
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -32,25 +32,25 @@ const RolePage = () => {
           const refreshToken = getCookieValue("refreshToken");
 
           const refreshResponse = await axios
-            .post("/auth/refresh", null, {
+            .post("/v1/auth/refresh", null, {
               headers: {
                 Authorization: `Bearer ${refreshToken}`,
               },
             })
             .then((result) => {
               if (result === "403") {
-                window.location.href = "/403";
+                window.location.href = "/v1/403";
               }
             });
           const newAccessToken = refreshResponse.data;
-          const refreshedResponse = await axios.get("/role", {
+          const refreshedResponse = await axios.get("/v1/role", {
             headers: {
               Authorization: `Bearer ${newAccessToken}`,
             },
           });
 
           if (refreshedResponse.status === 200) {
-            window.location.href = "/home";
+            window.location.href = "/v1/home";
           }
 
           setUserInfo(refreshedResponse.data);

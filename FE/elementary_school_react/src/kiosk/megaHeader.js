@@ -8,7 +8,7 @@ function MegaHeader({ lastScore, setProblemopen }) {
   };
   return (
     <div className="E-header">
-      <Link to="/practiceType" div className="E-logo">
+      <Link to="/v1/practiceType" div className="E-logo">
         <span role="img" aria-label="홈 아이콘">
           🏠
         </span>

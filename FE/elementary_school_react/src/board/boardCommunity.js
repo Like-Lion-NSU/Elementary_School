@@ -13,7 +13,7 @@ function Community() {
         const accessToken = getCookieValue("accessToken");
         axios({
           method: "GET",
-          url: `/${category}/posts
+          url: `/v1/${category}/posts
 `,
           headers: {
             Authorization: `Bearer ${accessToken}`,
