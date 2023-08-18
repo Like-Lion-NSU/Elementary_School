@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] 좋아요 전까지 연결">
+    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] v1 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/Controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardCommunity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardQuestion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/boardTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/mycomment.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/mycomment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/board/myposting.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/board/myposting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postFooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postLike.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postLike.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/postpage/postPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/role/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/role/role.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/sidebar/sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/write/write.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,6 +166,7 @@
       <workItem from="1692190897088" duration="17944000" />
       <workItem from="1692209788021" duration="13447000" />
       <workItem from="1692250296461" duration="40458000" />
+      <workItem from="1692340478818" duration="1001000" />
     </task>
     <task id="LOCAL-00001" summary="[Docs] readme 문서 수정">
       <created>1690298287674</created>
@@ -221,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692304038004</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[Feat] v1 수정">
+      <created>1692340756894</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1692340756894</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +233,8 @@
     <MESSAGE value="[Feat] 프론트 연결 - 유저 및 포스트" />
     <MESSAGE value="[Feat] 최신버전" />
     <MESSAGE value="[Feat] 좋아요 전까지 연결" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Feat] 좋아요 전까지 연결" />
+    <MESSAGE value="[Feat] v1 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Feat] v1 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
