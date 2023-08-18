@@ -50,7 +50,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
       },
     })
       .then((result) => {
-        window.location.href = "/v1/home";
+        window.location.href = "/home";
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {

@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/role" element={<Role />} />
           <Route path="/kiosk" element={<Kiosk />} />
-          <Route path="/v1/home" element={<Main />} />
+          <Route path="/home" element={<Main />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/practiceType" element={<PracticeType />} />
           <Route path="/sidebar" element={<Sidebar />} />

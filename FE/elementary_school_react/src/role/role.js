@@ -4,9 +4,9 @@ import axios from "axios";
 
 const RolePage = () => {
   const [userInfo, setUserInfo] = useState(null);
-  useEffect(() => {
-    roleselect();
-  }, []);
+  // useEffect(() => {
+  //   roleselect();
+  // }, []);
 
   const roleselect = async (role) => {
     try {
@@ -22,7 +22,6 @@ const RolePage = () => {
           },
         }
       );
-
       if (response.status === 200) {
         window.location.href = "/home";
       }
@@ -58,7 +57,6 @@ const RolePage = () => {
       }
     }
   };
-  roleselect();
 
   function getCookieValue(cookieName) {
     const cookies = document.cookie.split(";");
