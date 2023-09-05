@@ -60,14 +60,14 @@ function App() {
           <Route path="/MegaBasket" element={<MegaBasket />} />
           <Route path="/boardHeader" element={<BoardHeader />} />
           <Route path="/boardTable" element={<BoardTable />} />
-          <Route path="/v1/소통하기/posts" element={<Community />} />
+          <Route path="/소통하기/posts" element={<Community />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/v1/질문하기/posts" element={<Question />} />
+          <Route path="/질문하기/posts" element={<Question />} />
           <Route path="/postHeader" element={<PostHeader />} />
           <Route path="/postMain" element={<PostMain />} />
           <Route path="/postFooter" element={<PostFooter />} />
-          <Route path="/v1/post/:category/:postId" element={<PostPage />} />
-          <Route path="/v1/postLike" element={<PostLike />} />
+          <Route path="/post/:category/:postId" element={<PostPage />} />
+          <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
           <Route path="/elementary404" element={<ErrorPage />} />
         </Routes>

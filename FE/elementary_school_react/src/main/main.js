@@ -75,13 +75,13 @@ const Main = () => {
         <h1 id="mainE-title">환영합니다</h1>
         <div className="main-buttons-wrapper">
           <div className="main-buttons">
-            <Link to="/community" className="mainE-button">
+            <Link to="/소통해요/posts" className="mainE-button">
               <span role="img" aria-label="communication">
                 📣
               </span>
               <div className="mainE-role">소통해요</div>
             </Link>
-            <Link to="/question" className="mainE-button">
+            <Link to="/질문해요/posts" className="mainE-button">
               <span role="img" aria-label="qna">
                 📝
               </span>

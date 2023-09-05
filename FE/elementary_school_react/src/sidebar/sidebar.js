@@ -13,10 +13,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/community">소통해요</Link>
+          <Link to="/소통해요/posts">소통해요</Link>
         </li>
         <li>
-          <Link to="/question">질문해요</Link>
+          <Link to="/질문해요/posts">질문해요</Link>
         </li>
         <li>
           <Link to="/practiceType">연습하기</Link>
@@ -31,7 +31,7 @@ const Sidebar = () => {
           <Link to="/shop">매점가기</Link>
         </li>
         <li>
-          <Link to="/v1/">로그아웃</Link>
+          <Link to="/">로그아웃</Link>
         </li>
       </ul>
     </div>

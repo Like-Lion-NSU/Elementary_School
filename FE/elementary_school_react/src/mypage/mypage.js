@@ -123,7 +123,7 @@ function MyJMypage() {
                 </Link>
               </div>
               <div className="myJLogout">
-                <Link to="/v1/">
+                <Link to="/">
                   <FontAwesomeIcon icon={faRightFromBracket} /> 로그아웃
                 </Link>
               </div>
