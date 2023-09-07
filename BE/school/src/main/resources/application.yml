@@ -10,7 +10,7 @@ spring:
           google:
             client-id: 756406117386-pjmmrsvugblm8s9procms8m4k00bhsqr.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: http://localhost:8081/v1/login/oauth2/code/google
+            redirect-uri: http://localhost:8081/login/oauth2/code/google
             scope: profile,email
 
           naver:
@@ -18,7 +18,7 @@ spring:
             client-secret: Mszk_WjjEh
             authorization-grant-type: authorization_code
             client-name: client
-            redirect-uri: http://localhost:8081/v1/login/oauth2/code/naver
+            redirect-uri: http://localhost:8081/login/oauth2/code/naver
             scope: profile,email
 
           kakao:
@@ -27,7 +27,7 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             client-name: ThisIsUs
-            redirect-uri: http://localhost:8081/v1/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8081/login/oauth2/code/kakao
             #                        scope: openid,profile_nickname,profile_image,account_email
             scope: profile_nickname,profile_image,account_email,gender,birthday
 
@@ -60,9 +60,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/elementarySchool?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: hyeon4643!!@
+    url: jdbc:mysql://27.96.131.94:3306/school?serverTimezone=UTC&characterEncoding=UTF-8
+    username: mydb
+    password: 1234
 
   jpa:
     database: mysql

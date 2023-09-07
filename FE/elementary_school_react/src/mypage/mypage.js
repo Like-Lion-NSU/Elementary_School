@@ -72,7 +72,7 @@ function MyJMypage() {
     const accessToken = getCookieValue("accessToken");
     axios({
       method: "DELETE",
-      url: "/drop",
+      url: "/v1/drop",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/x-www-form-urlencoded",

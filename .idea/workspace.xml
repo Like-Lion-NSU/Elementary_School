@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] v1 수정">
+    <list default="true" id="adc80595-74e1-410a-9cc5-4e72baee50b4" name="변경" comment="[Feat] 시큐리티">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/ChatRoomController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/ChattController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/RoomController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/entity/ChatMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/entity/ChatRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/util/CookieUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/util/CookieUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/main/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/elementary_school_react/src/mypage/mypage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +35,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/BE/school">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="school" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="school" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="school" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -51,7 +85,6 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
@@ -93,6 +126,27 @@
     <configuration name="복합" type="CompoundRunConfigurationType">
       <toRun name="reactStart" type="js.build_tools.npm" />
       <toRun name="test" type="SpringBootApplicationConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="school [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/BE/school" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="SchoolApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -138,11 +192,17 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.school [build]" />
       <item itemvalue="npm.reactStart" />
       <item itemvalue="Spring Boot.SchoolApplication" />
       <item itemvalue="Spring Boot.test" />
       <item itemvalue="복합.복합" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.school [build]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -166,7 +226,11 @@
       <workItem from="1692190897088" duration="17944000" />
       <workItem from="1692209788021" duration="13447000" />
       <workItem from="1692250296461" duration="40458000" />
-      <workItem from="1692340478818" duration="1001000" />
+      <workItem from="1692340478818" duration="1905000" />
+      <workItem from="1692343252914" duration="10952000" />
+      <workItem from="1692365496147" duration="4503000" />
+      <workItem from="1692523075301" duration="29000" />
+      <workItem from="1694098581101" duration="1875000" />
     </task>
     <task id="LOCAL-00001" summary="[Docs] readme 문서 수정">
       <created>1690298287674</created>
@@ -210,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692340756894</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="[Feat] 시큐리티">
+      <created>1692341844018</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1692341844018</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +305,8 @@
     <MESSAGE value="[Feat] 최신버전" />
     <MESSAGE value="[Feat] 좋아요 전까지 연결" />
     <MESSAGE value="[Feat] v1 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Feat] v1 수정" />
+    <MESSAGE value="[Feat] 시큐리티" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Feat] 시큐리티" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
