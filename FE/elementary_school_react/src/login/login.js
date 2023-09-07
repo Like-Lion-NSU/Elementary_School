@@ -42,22 +42,12 @@ function LoJLogin() {
       <div className={style.loJFlex}>
         <a
           className={style.loJLogin_Btn}
-          href="http://localhost:8081/login/oauth2/authorization/kakao"
+          href="http://27.96.131.94/v1/oauth2/authorization/kakao"
         >
           <img
             src={Lo_J_KakaoLogin}
             className={style.loJImgWidth}
             alt="카카오 로그인 버튼"
-          />
-        </a>
-        <a
-          className={style.loJLogin_Btn}
-          href="http://localhost:8081/login/oauth2/authorization/google"
-        >
-          <img
-            src={Lo_J_GoogleLogin}
-            className={style.loJImgWidth}
-            alt="구글 로그인 버튼"
           />
         </a>
       </div>

@@ -50,18 +50,16 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-//                .antMatchers("/api/example", "/oauth/login/**", "/social/**", "/", "/login").permitAll()
-                .antMatchers("/login",  "/social/**", "/oauth2/**").permitAll()
-                .antMatchers("/v1/**","/role/**").hasAnyRole("ROLE_STUDENT","ROLE_TEACHER")
-//                .anyRequest().authenticated()
+                .antMatchers("/login", "/social/**", "/oauth2/**", "/home", "/role", "/").permitAll()
+//                .antMatchers("/v1/**").hasAnyRole("ROLE_STUDENT","ROLE_TEACHER")
+                .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("http://localhost:3000/v1/home")
+                .defaultSuccessUrl("http://27.96.131.94/v1/home")
                 .authorizationEndpoint()
                 .authorizationRequestRepository(cookieAuthorizationRequestRepository)
                 .and()
                 .redirectionEndpoint()
-//                .baseUri("/me")
                 .and()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
@@ -77,7 +75,7 @@ public class SecurityConfig {
         http.logout()
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "accessToken", "refreshToken")
-                .logoutSuccessUrl("http://localhost:3000/") // 로그아웃 성공시
+                .logoutSuccessUrl("http://27.96.131.94/") // 로그아웃 성공시
                 .permitAll()
         ;
         http.

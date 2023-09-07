@@ -99,68 +99,68 @@ const Write = () => {
   };
 
   return (
-      <div className="write-container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <select
-                id="write-category"
-                name="write-category"
-                className="write-input"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">카테고리를 입력해주세요</option>
-              <option value="소통해요">소통해요</option>
-              <option value="질문해요">질문해요</option>
-            </select>
-          </div>
-          <div>
-            <input
-                type="text"
-                id="write-title"
-                name="write-title"
-                className="write-input"
-                placeholder="제목을 입력하세요"
-                required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-          <textarea
-              id="write-E-content"
-              name="write-E-content"
-              className="write-content"
-              placeholder="내용을 입력하세요"
-              required
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-          />
-          </div>
-          <div>
-            <input
-                type="file"
-                id="attachments"
-                name="attachments"
-                className="write-input"
-                accept="image/*,video/*"
-                onChange={handleFileChange}
-            />
-          </div>
-          <div>{error && <div className="error-message">{error}</div>}</div>
-          <button type="submit" className="write-button">
-            글쓰기 완료
-          </button>
-          <button
-              type="button"
-              className="update-button"
-              style={{ display: "none" }}
-              onClick={updatePost}
+    <div className="write-container">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <select
+            id="write-category"
+            name="write-category"
+            className="write-input"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           >
-            수정 완료
-          </button>
-        </form>
-      </div>
+            <option value="">카테고리를 입력해주세요</option>
+            <option value="소통해요">소통해요</option>
+            <option value="질문해요">질문해요</option>
+          </select>
+        </div>
+        <div>
+          <input
+            type="text"
+            id="write-title"
+            name="write-title"
+            className="write-input"
+            placeholder="제목을 입력하세요"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <textarea
+            id="write-E-content"
+            name="write-E-content"
+            className="write-content"
+            placeholder="내용을 입력하세요"
+            required
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            type="file"
+            id="attachments"
+            name="attachments"
+            className="write-input"
+            accept="image/*,video/*"
+            onChange={handleFileChange}
+          />
+        </div>
+        <div>{error && <div className="error-message">{error}</div>}</div>
+        <button type="submit" className="write-button">
+          글쓰기 완료
+        </button>
+        <button
+          type="button"
+          className="update-button"
+          style={{ display: "none" }}
+          onClick={updatePost}
+        >
+          수정 완료
+        </button>
+      </form>
+    </div>
   );
 };
 

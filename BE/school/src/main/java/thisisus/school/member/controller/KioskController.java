@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
 public class KioskController {
 
     private final MemberService memberService;

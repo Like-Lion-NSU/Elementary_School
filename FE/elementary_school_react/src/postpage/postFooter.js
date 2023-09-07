@@ -30,10 +30,11 @@ function PostFooter({ comments, userIsAuthor }) {
       const accessToken = getCookieValue("accessToken");
       await axios({
         method: "PUT",
-        url: `/v1/post/${category}/${postId}/comment/${editCommentId}`,
+        url: `/post/${category}/${postId}/comment/${editCommentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+        //프론트랑 백이랑 data안의 값 맞추기
         data: { content: data },
       }).then((response) => {
         console.log("댓글 수정 결과:", response);
@@ -99,62 +100,62 @@ function PostFooter({ comments, userIsAuthor }) {
 
   console.log("댓글 데이터:", comments);
   return (
-      <div className="post-footer">
-        <div className="comment-input">
-          <div className="comment-E-input-container">
+    <div className="post-footer">
+      <div className="comment-input">
+        <div className="comment-E-input-container">
           <textarea
-              className="comment-E-input"
-              placeholder="댓글을 입력하세요..."
-              value={newCommentText}
-              onChange={(e) => setNewCommentText(e.target.value)}
-              onClick={() => setShowCommentButton(true)}
+            className="comment-E-input"
+            placeholder="댓글을 입력하세요..."
+            value={newCommentText}
+            onChange={(e) => setNewCommentText(e.target.value)}
+            onClick={() => setShowCommentButton(true)}
           />
-            {showCommentButton && (
-                <button
-                    className="comment-submit-button"
-                    onClick={handleAddComment}
-                >
-                  댓글 등록
-                </button>
-            )}
-          </div>
+          {showCommentButton && (
+            <button
+              className="comment-submit-button"
+              onClick={handleAddComment}
+            >
+              댓글 등록
+            </button>
+          )}
         </div>
-        <ul className="comment-list">
-          {comments.map((comment, index) => (
-              <li
-                  key={index}
-                  className={`comment-item ${userIsAuthor ? "my-comment" : ""}`}
-              >
-                <div className="comment-meta">
-                  <p>{comment.email}</p>
-                  <p>{comment.body}</p>
-                  <p>{comment.updateAt}</p>
-                </div>
-                {editCommentId === comment.commentId ? (
-                    <div>
-                      <p className="comment-content">{comment.body}</p>
-                      <textarea
-                          value={editedCommentText}
-                          onChange={(e) => setEditedCommentText(e.target.value)}
-                      />
-                      <div className="comment-actions">
-                        <button onClick={handleSaveEdit}>저장</button>
-                        <button onClick={handleCancelEdit}>취소</button>
-                      </div>
-                    </div>
-                ) : (
-                    <div>
-                      <p className="comment-content">{comment.text}</p>
-                      <div className="comment-actions">
-                        <button onClick={() => handleDelete(comment)}>삭제</button>
-                        <button onClick={() => handleEdit(comment)}>수정</button>
-                      </div>
-                    </div>
-                )}
-              </li>
-          ))}
-        </ul>
       </div>
+      <ul className="comment-list">
+        {comments.map((comment, index) => (
+          <li
+            key={index}
+            className={`comment-item ${userIsAuthor ? "my-comment" : ""}`}
+          >
+            <div className="comment-meta">
+              <p>{comment.email}</p>
+              <p>{comment.body}</p>
+              <p>{comment.updateAt}</p>
+            </div>
+            {editCommentId === comment.commentId ? (
+              <div>
+                <p className="comment-content">{comment.body}</p>
+                <textarea
+                  value={editedCommentText}
+                  onChange={(e) => setEditedCommentText(e.target.value)}
+                />
+                <div className="comment-actions">
+                  <button onClick={handleSaveEdit}>저장</button>
+                  <button onClick={handleCancelEdit}>취소</button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p className="comment-content">{comment.text}</p>
+                <div className="comment-actions">
+                  <button onClick={() => handleDelete(comment)}>삭제</button>
+                  <button onClick={() => handleEdit(comment)}>수정</button>
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -7,7 +7,7 @@ import Kiosk from "./kiosk/kiosk";
 import Main from "./main/main";
 import Mypage from "./mypage/mypage";
 import PracticeType from "./kiosk/practiceType";
-import Userpost from "./board/myposting";
+import Posting from "./board/myposting";
 import Comments from "./board/mycomment";
 import Sidebar from "./sidebar/sidebar";
 import Write from "./write/write";
@@ -32,28 +32,27 @@ import PostFooter from "./postpage/postFooter";
 import PostPage from "./postpage/postPage";
 import PostLike from "./postpage/postLike";
 import Kioskproblem from "./kiosk/kioskproblem";
-import BoardTableC from "./board/boardTableC";
+import ErrorPage from "./error/404";
 
 function App() {
   return (
     <div className="wrapper">
       <div className="contentWrapper">
         <Routes>
-          <Route path="/v1" element={<Login />} />
-          <Route path="/v1/role" element={<Role />} />
-          <Route path="/v1/kiosk" element={<Kiosk />} />
-          <Route path="/v1/home" element={<Main />} />
-          <Route path="/v1/mypage" element={<Mypage />} />
-          <Route path="/v1/practiceType" element={<PracticeType />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/role" element={<Role />} />
+          <Route path="/kiosk" element={<Kiosk />} />
+          <Route path="/home" element={<Main />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/practiceType" element={<PracticeType />} />
           <Route path="/sidebar" element={<Sidebar />} />
-          <Route path='/v1/user/posts' element={<Userpost />} />
-          <Route path="/v1/user/comments" element={<Comments />} />
-          <Route path='/boardTableC' element={<BoardTableC />} />
-          <Route path="/v1/writePost" element={<Write />} />
-          <Route path="/v1/shop" element={<Shop />} />
+          <Route path="/posting" element={<Posting />} />
+          <Route path="/comments" element={<Comments />} />
+          <Route path="/writePost" element={<Write />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/menu" element={<MegaMenu />} />
           <Route path="/megabody" element={<Megabody />} />
-          <Route path="/v1/post/:category/:postId/comment" element={<MegaFooter />} />
+          <Route path="/footer" element={<MegaFooter />} />
           <Route path="/megapay" element={<MegaPay />} />
           <Route path="/MegaIceTea" element={<MegaIceTea />} />
           <Route path="/MegaAmericano" element={<MegaAmericano />} />
@@ -61,15 +60,16 @@ function App() {
           <Route path="/MegaBasket" element={<MegaBasket />} />
           <Route path="/boardHeader" element={<BoardHeader />} />
           <Route path="/boardTable" element={<BoardTable />} />
-          <Route path="/v1/소통해요/posts" element={<Community />} />
+          <Route path="/소통하기/posts" element={<Community />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/v1/질문해요/posts" element={<Question />} />
+          <Route path="/질문하기/posts" element={<Question />} />
           <Route path="/postHeader" element={<PostHeader />} />
           <Route path="/postMain" element={<PostMain />} />
           <Route path="/postFooter" element={<PostFooter />} />
-          <Route path="/v1/post/:category/:postId" element={<PostPage />} />
+          <Route path="/post/:category/:postId" element={<PostPage />} />
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
+          <Route path="/elementary404" element={<ErrorPage />} />
         </Routes>
       </div>
       <Footer />

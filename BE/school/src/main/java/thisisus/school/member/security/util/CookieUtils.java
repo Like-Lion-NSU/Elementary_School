@@ -44,7 +44,7 @@ public class CookieUtils {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(name)) {
                     cookie.setValue("");
-                    cookie.setPath("/");
+                    cookie.setPath("/v1");
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                 }

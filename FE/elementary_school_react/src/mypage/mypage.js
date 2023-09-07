@@ -113,12 +113,12 @@ function MyJMypage() {
 
             <div className="myJCommu">
               <div className="myJButtonTop">
-                <Link to="/v1/user/posts">
+                <Link to="/v1/posting">
                   <FontAwesomeIcon icon={faFileLines} /> 내가 쓴 게시글
                 </Link>
               </div>
               <div className="myJButtonMiddle">
-                <Link to="/v1/user/comments">
+                <Link to="/v1/comment">
                   <FontAwesomeIcon icon={faComments} /> 내가 쓴 댓글
                 </Link>
               </div>

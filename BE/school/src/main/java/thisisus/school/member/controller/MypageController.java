@@ -12,7 +12,6 @@ import thisisus.school.member.service.MemberService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
 public class MypageController {
 
     private final MemberService memberService;
