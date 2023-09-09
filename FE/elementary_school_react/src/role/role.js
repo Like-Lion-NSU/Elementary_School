@@ -42,7 +42,7 @@ const RolePage = () => {
               }
             });
           const newAccessToken = refreshResponse.data;
-          const refreshedResponse = await axios.get("/v1/role/decide", {
+          const refreshedResponse = await axios.post("/v1/role/decide", {
             headers: {
               Authorization: `Bearer ${newAccessToken}`,
             },

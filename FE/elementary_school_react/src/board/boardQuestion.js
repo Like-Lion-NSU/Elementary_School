@@ -14,7 +14,7 @@ function Question() {
         axios({
           method: "GET",
           url: `/v1/${category}/posts
-`,
+  `,
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

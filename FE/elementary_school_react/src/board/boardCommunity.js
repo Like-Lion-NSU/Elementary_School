@@ -5,43 +5,64 @@ import BoardTable from "./boardTable";
 import axios from "axios";
 
 function Community() {
-  const [res, setResponse] = useState();
+  const [res, setResponse] = useState(null);
   const category = "소통해요";
   useEffect(() => {
-    async function fetchPosts() {
+    console.log("들어옴?");
+    const fetchPosts = async () => {
       try {
         const accessToken = getCookieValue("accessToken");
-        axios({
+        const response = await axios({
           method: "GET",
-          url: `/v1/${category}/posts
-`,
+          url: `/v1/${category}/posts`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
+            Accept: "application/json",
           },
-        }).then((response) => {
-          console.log(response.data.data);
-          setResponse(response.data.data);
         });
+        console.log(response.data.data);
+        setResponse(response.data.data);
       } catch (error) {
-        console.error(
-          "게시물 데이터를 가져오는 중 에러가 발생했습니다.",
-          error
-        );
-      }
-    }
+        if (error.response && error.response.status === 401) {
+          try {
+            const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
-    function getCookieValue(cookieName) {
-      const cookies = document.cookie.split(";");
-      for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split("=");
-        if (name === cookieName) {
-          return value;
+            const refreshResponse = await axios.post("/v1/auth/refresh", null, {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            });
+
+            const newAccessToken = refreshResponse.data;
+            // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
+            const refreshedResponse = await axios.get("/v1/${category}/posts", {
+              headers: {
+                Authorization: `Bearer ${newAccessToken}`,
+                Accept: "application/json",
+              },
+            });
+
+            setResponse(refreshedResponse.data.data);
+          } catch (refreshError) {
+            // RefreshToken으로 새로운 AccessToken 발급 실패
+            // 로그아웃 처리 등을 수행
+          }
         }
+        // Handle other errors
+      }
+    };
+    console.log("실행돼?");
+    fetchPosts();
+  }, []);
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
       }
     }
-
-    fetchPosts();
-  }, [category]);
+  }
 
   return (
     <div>
