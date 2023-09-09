@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Api(tags = "댓글")
 @RequiredArgsConstructor
+@RequestMapping("/v1")
 public class CommentController {
 
     private final CommentService commentService;

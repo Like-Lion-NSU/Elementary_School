@@ -93,14 +93,14 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         Member findMember = memberRepository.getByEmail(member.getEmail());
 
         if (findMember.getRole().equals("NOT_ROLE")) {
-            return UriComponentsBuilder.fromUriString("http://27.96.131.94/role")
+            return UriComponentsBuilder.fromUriString("http://115.85.183.239/role")
                     .build().toString();
         }
 
 //         본 코드
 //        MemberResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication, response);
         LOGGER.info("[JWT 생성 완료]");
-        return UriComponentsBuilder.fromUriString("http://27.96.131.94/home")
+        return UriComponentsBuilder.fromUriString("http://115.85.183.239/home")
 //                .queryParam("TOKEN", tokenInfo.getAccessToken())
 //                .queryParam("REFRESH_TOKEN", tokenInfo.getRefreshToken())
                 .build().toString();

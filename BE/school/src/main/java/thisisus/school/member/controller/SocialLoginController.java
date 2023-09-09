@@ -18,7 +18,7 @@ public class SocialLoginController {
     private final MemberService memberService;
     private final Logger LOGGER = LoggerFactory.getLogger(SocialLoginController.class);
 
-    @PostMapping("/role/decide")
+    @PostMapping("/v1/role/decide")
     public ResponseEntity<String> setRole(@RequestParam String role, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         LOGGER.info("[value] value : {}", role);
         LOGGER.info("[customUserDetails] customUserDetails : {}", customUserDetails);

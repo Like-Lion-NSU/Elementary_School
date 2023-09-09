@@ -17,6 +17,7 @@ import thisisus.school.member.security.service.CustomUserDetails;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/v1")
 public class MemberController {
 
     private final MemberRepository memberRepository;
@@ -29,9 +30,9 @@ public class MemberController {
 @GetMapping("/home")
 public String main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
     if (customUserDetails != null) {
-        return "http://27.96.131.94/home";
+        return "http://115.85.183.239/home";
     } else {
-        return "http://27.96.131.94/";
+        return "http://115.85.183.239/";
     }
 }
     @GetMapping("/me")
