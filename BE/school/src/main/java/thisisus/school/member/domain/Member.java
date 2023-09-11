@@ -1,6 +1,7 @@
 package thisisus.school.member.domain;
 
 import lombok.*;
+import thisisus.school.common.BaseEntity;
 import thisisus.school.member.security.util.AuthProvider;
 import thisisus.school.post.domain.Comment;
 import thisisus.school.post.domain.Post;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @ToString
 @NoArgsConstructor
-public class Member{
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +66,17 @@ public class Member{
         this.point = point;
         this.lastLogin = lastLogin;
         this.provider = provider;
+        this.setDeleted(false);
+    }
+
+    public void delete(){
+        this.name=null;
+        this.email=null;
+        this.role=null;
+        this.point=null;
+        this.lastLogin=null;
+        this.provider=null;
+        this.setDeleted(true);
     }
 
 

@@ -90,8 +90,8 @@ public class MemberService {
 
     public ResponseEntity<String> deleteMember(CustomUserDetails customUserDetails) {
         try {
-            Member deleteMember = findMember(customUserDetails);
-            memberRepository.deleteById(deleteMember.getId());
+            Member member = findMember(customUserDetails);
+            member.delete();
 
             return ResponseEntity.status(HttpStatus.OK).body("Member deleted successfully");
         } catch (Exception e) {

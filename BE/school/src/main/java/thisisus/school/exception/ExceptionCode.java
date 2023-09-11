@@ -17,6 +17,7 @@ public enum ExceptionCode {
 
     // 형식
     EMAIL_CHARACTER_INVALID(BAD_REQUEST, "올바른 형식의 이메일이 아닙니다."),
+    MESSAGE_CHARACTER_INVALID(BAD_REQUEST, "올바른 형식의 메시지가 아닙니다."),
     PASSWORD_CHARACTER_INVALID(BAD_REQUEST, "올바른 형식의 비밀번호가 아닙니다."),
     ROLE_CHARACTER_INVALID(BAD_REQUEST, "올바른 권한이 아닙니다."),
     // 사이즈
