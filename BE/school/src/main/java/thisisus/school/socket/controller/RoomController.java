@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "채팅방")
-@RequestMapping("/api/v1/chat")
+@RequestMapping("/chat")
 public class RoomController {
 
     private final ChatService chatService;

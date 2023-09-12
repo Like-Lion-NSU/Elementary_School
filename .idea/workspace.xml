@@ -4,31 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketChatHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/dto/request/ChatMessageRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/dto/request/RoomNameRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/model/MessageType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/service/ChatService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Elementary_School.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Elementary_School.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/school.main.iml" beforeDir="false" />
+    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="Feat : 채팅 기본 구현">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/ExceptionCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/exception/ExceptionCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/domain/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/domain/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/ChatRoomController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/ChattController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/controller/RoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/model/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/model/ChatRoom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/BE/school">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -38,6 +28,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VIelRN7kyOfFK7HceQlZOStFgK" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -57,6 +57,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "spring.configuration.checksum": "c7770a749f8f36bcb71cf045b805f616",
     "vue.rearranger.settings.migration": "true"
   }
@@ -78,11 +79,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1694443099363</updated>
-      <workItem from="1694443101670" duration="5914000" />
+      <workItem from="1694443101670" duration="5997000" />
+      <workItem from="1694528184305" duration="12820000" />
     </task>
+    <task id="LOCAL-00001" summary="Feat : 채팅 기본 구현">
+      <created>1694449118075</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1694449118076</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feat : 채팅 기본 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : 채팅 기본 구현" />
   </component>
 </project>
