@@ -20,6 +20,7 @@ public class PostDefaultResponseDto {
 
     @ApiModelProperty(position = 1, required = true, value ="Post 식별자", example = "1")
     private Long postId;
+    private Long memberId;
     private String title;
     private String content;
     private PostCategory category;
@@ -59,6 +60,7 @@ public class PostDefaultResponseDto {
     }
     public PostDefaultResponseDto(Post post){
         this.postId=post.getId();
+        this.memberId=post.getMember().getId();
         this.title=post.getTitle();
         this.content=post.getContent();
         this.category=post.getCategory();

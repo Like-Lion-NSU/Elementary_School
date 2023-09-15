@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="Feat : 채팅 기본 구현">
+    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="Error : 채팅 세션 연결 중 채팅방 생성 오류">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/socket/config/WebSocketConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694443099363</updated>
       <workItem from="1694443101670" duration="5997000" />
-      <workItem from="1694528184305" duration="12820000" />
+      <workItem from="1694528184305" duration="17945000" />
     </task>
     <task id="LOCAL-00001" summary="Feat : 채팅 기본 구현">
       <created>1694449118075</created>
@@ -89,14 +88,33 @@
       <option name="project" value="LOCAL" />
       <updated>1694449118076</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Error : 채팅 세션 연결 중 채팅방 생성 오류">
+      <created>1694541482551</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694541482551</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feat : 채팅 기본 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : 채팅 기본 구현" />
+    <MESSAGE value="Error : 채팅 세션 연결 중 채팅방 생성 오류" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error : 채팅 세션 연결 중 채팅방 생성 오류" />
   </component>
 </project>
