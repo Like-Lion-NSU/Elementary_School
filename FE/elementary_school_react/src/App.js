@@ -33,7 +33,7 @@ import PostPage from "./postpage/postPage";
 import PostLike from "./postpage/postLike";
 import Kioskproblem from "./kiosk/kioskproblem";
 import ErrorPage from "./error/404";
-import Chatpage from "./chat/chat";
+import Chatpage from "./chat/stomp";
 
 function App() {
   return (
