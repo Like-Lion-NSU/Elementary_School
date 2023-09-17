@@ -55,13 +55,13 @@ const PostPage = () => {
     return <div>게시물을 불러오는 중 오류가 발생했습니다.</div>;
   }
 
-  const { title, memberId, content, likeCount, viewCount, comments, photos } =
+  const { title, email, content, likeCount, viewCount, comments, photos } =
     selectedPost;
   return (
     <div>
       <Sidebar />
       <div className="post-container">
-        <PostHeader title={title} authorEmail={memberId} />
+        <PostHeader title={title} authorEmail={email} />
         <PostMain
           postId={postId}
           category={category}

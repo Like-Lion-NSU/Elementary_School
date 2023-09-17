@@ -1,5 +1,5 @@
-import React from 'react';
-import '../css/post.css';
+import React from "react";
+import "../css/post.css";
 
 const PostHeader = ({ title, authorEmail }) => {
   return (
