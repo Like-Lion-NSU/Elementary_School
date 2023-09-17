@@ -26,7 +26,6 @@ const PostPage = () => {
         }).then((response) => {
           checkedLike = response.data.data.postLiked;
           console.log(response.data.data);
-          console.log(response.data.data.photos);
           setSelectedPost(response.data.data);
         });
       } catch (error) {
@@ -55,13 +54,25 @@ const PostPage = () => {
     return <div>게시물을 불러오는 중 오류가 발생했습니다.</div>;
   }
 
-  const { title, email, content, likeCount, viewCount, comments, photos } =
-    selectedPost;
+  const {
+    title,
+    email,
+    currentEmail,
+    content,
+    likeCount,
+    viewCount,
+    comments,
+    photos,
+  } = selectedPost;
   return (
     <div>
       <Sidebar />
       <div className="post-container">
-        <PostHeader title={title} authorEmail={email} />
+        <PostHeader
+          title={title}
+          authorEmail={email}
+          currentEmail={currentEmail}
+        />
         <PostMain
           postId={postId}
           category={category}
