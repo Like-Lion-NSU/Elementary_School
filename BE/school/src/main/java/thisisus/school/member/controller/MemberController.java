@@ -2,6 +2,7 @@ package thisisus.school.member.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,11 +29,11 @@ public class MemberController {
         return "/index";
     }*/
 @GetMapping("/home")
-public String main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+public ResponseEntity<String> main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
     if (customUserDetails != null) {
-        return "http://115.85.183.239/home";
+        return ResponseEntity.ok("인가된 사용자");
     } else {
-        return "http://115.85.183.239/";
+        return ResponseEntity.badRequest().body("해당 유저가 없습니다.");
     }
 }
     @GetMapping("/me")

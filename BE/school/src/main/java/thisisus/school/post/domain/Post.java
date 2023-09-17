@@ -78,6 +78,7 @@ public class Post extends BaseEntity {
 
 
     public void delete(){
+        this.getMember().setId(null);
         this.setDeleted(true);
     }
 

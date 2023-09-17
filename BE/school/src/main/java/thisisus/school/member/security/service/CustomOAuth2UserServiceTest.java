@@ -71,6 +71,7 @@ public class CustomOAuth2UserServiceTest extends DefaultOAuth2UserService {
 
         return memberRepository.save(member);
     }
+
     private Member createUser(OAuth2UserInfo userInfo, AuthProvider authProvider) {
         Member member = Member.builder()
                 .name(userInfo.getName())
