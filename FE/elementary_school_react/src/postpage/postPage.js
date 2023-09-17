@@ -24,7 +24,7 @@ const PostPage = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }).then((response) => {
-          checkedLike = response.data.data.postLiked.delete;
+          checkedLike = response.data.data.postLiked;
           console.log(response.data.data);
           console.log(response.data.data.photos);
           setSelectedPost(response.data.data);
@@ -69,7 +69,7 @@ const PostPage = () => {
           content={content}
           likes={likeCount}
           views={viewCount}
-          imageUrl={photos[0].photoUrl}
+          imageUrl={photos[0]}
         />
         {category === "소통해요" || category === "질문해요" ? (
           <PostLike
