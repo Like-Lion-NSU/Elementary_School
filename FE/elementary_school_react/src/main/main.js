@@ -38,8 +38,13 @@ const Main = () => {
                 },
               })
               .then((result) => {
-                if (result === "403") {
-                  window.location.href = "/v1/403";
+                console.log("날라오는 데이터", result.data);
+                console.log("날아오는 상태", result.status);
+
+                if (result.status === 200) {
+                  setUserInfo(result.data);
+                } else {
+                  window.location.href = "/";
                 }
               });
 
