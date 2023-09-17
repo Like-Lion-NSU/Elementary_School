@@ -20,13 +20,15 @@ function BoardTable({ res }) {
             {res &&
               res.map((response, index) => (
                 <tr key={response.id}>
-                  <Link to={`/post/${response.category}/${response.postId}`}>
-                    <td>{index + 1}</td>
-                    <td>{response.title}</td>
-                    <td>{response.email}</td>
-                    <td>{response.updateAt}</td>
-                    <td>{response.viewCount}</td>
-                  </Link>
+                  <td>
+                    <Link to={`/post/${response.category}/${response.postId}`}>
+                      {index + 1}{" "}
+                    </Link>
+                  </td>
+                  <td>{response.title}</td>
+                  <td>{response.email}</td>
+                  <td>{response.updateAt}</td>
+                  <td>{response.viewCount}</td>
                 </tr>
               ))}
           </tbody>

@@ -9,13 +9,23 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
   const [chatMessages, setChatMessages] = useState([]);
   const [stompClient, setStompClient] = useState(null); // WebSocket 클라이언트 객체를 업데이트하거나 초기화
 
-  useEffect(async () => {
-    // const response = await axios({
-    //   method: "POST",
-    //   url: "/api/v1/chat",
-    //   data: {},
-    // });
-
+  useEffect(() => {
+    async function getInfo() {
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl
+        .replace("http://115.85.183.239/chat/", "")
+        .split("/");
+      console.log(currentUrl);
+      const response = await axios({
+        method: "POST",
+        url: "/v1/chat",
+        data: {
+          current: currentUrl[0],
+          post: currentUrl[1],
+        },
+      });
+    }
+    getInfo();
     // WebSocket 연결을 설정합니다.
     const socket = new WebSocket("ws://localhost:8081/ws-stomp"); // WebSocket 주소로 수정해야 합니다.
 
