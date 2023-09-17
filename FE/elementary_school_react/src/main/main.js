@@ -31,22 +31,17 @@ const Main = () => {
           try {
             const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
-            const refreshResponse = await axios
-              .post("/v1/auth/refresh", null, {
-                headers: {
-                  Authorization: `Bearer ${refreshToken}`,
-                },
-              })
-              .then((result) => {
-                console.log("날라오는 데이터", result.data);
-                console.log("날아오는 상태", result.status);
+            const refreshResponse = await axios.post("/v1/auth/refresh", null, {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            });
+            console.log("날라오는 데이터", refreshResponse.data);
+            console.log("날아오는 상태", refreshResponse.status);
 
-                if (result.status === 200) {
-                  setUserInfo(result.data);
-                } else {
-                  window.location.href = "/";
-                }
-              });
+            if (refreshResponse.status !== 200) {
+              window.location.href = "/";
+            }
 
             const newAccessToken = refreshResponse.data;
             const refreshedResponse = await axios.get("/v1/home", {
