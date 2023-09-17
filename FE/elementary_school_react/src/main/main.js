@@ -18,6 +18,8 @@ const Main = () => {
             Accept: "application/json", // JSON 응답을 요청한다고 설정
           },
         });
+        console.log("날라오는 데이터", response.data);
+        console.log("날아오는 상태", response.status);
 
         if (response.status === 200) {
           setUserInfo(response.data);
