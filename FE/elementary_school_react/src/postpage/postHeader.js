@@ -8,7 +8,7 @@ const PostHeader = ({ title, authorEmail, currentEmail }) => {
       <h2>{title}</h2>
       <p>{authorEmail}</p>
       {authorEmail !== currentEmail && (
-        <Link to={`/chat/${authorEmail}`}>
+        <Link to={`/chat/${currentEmail}/${authorEmail}`}>
           <button>채팅</button>
         </Link>
       )}

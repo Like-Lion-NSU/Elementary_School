@@ -11,6 +11,9 @@ const Main = () => {
       try {
         const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
         console.log("accessToken:", accessToken); // 추가된 부분
+        if (accessToken == undefined || accessToken == null) {
+          window.location.href = "/";
+        }
 
         const response = await axios.get("/v1/home", {
           headers: {
