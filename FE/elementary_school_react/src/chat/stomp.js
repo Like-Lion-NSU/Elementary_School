@@ -13,10 +13,6 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
     // const response = await axios({
     //   method: "POST",
     //   url: "/api/v1/chat",
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`,
-    //     Accept: "application/json", // JSON 응답을 요청한다고 설정
-    //   },
     //   data: {},
     // });
 

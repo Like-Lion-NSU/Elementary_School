@@ -58,6 +58,8 @@ const PostPage = () => {
     title,
     email,
     currentEmail,
+    currentMemberId,
+    postMemberId,
     content,
     likeCount,
     viewCount,
@@ -72,6 +74,8 @@ const PostPage = () => {
           title={title}
           authorEmail={email}
           currentEmail={currentEmail}
+          currentMemberId={currentMemberId}
+          postMemberId={postMemberId}
         />
         <PostMain
           postId={postId}
