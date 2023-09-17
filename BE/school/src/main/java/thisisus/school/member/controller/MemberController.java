@@ -2,6 +2,7 @@ package thisisus.school.member.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -28,14 +29,17 @@ public class MemberController {
     public String index() {
         return "/index";
     }*/
-@GetMapping("/home")
-public ResponseEntity<String> main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-    if (customUserDetails != null) {
-        return ResponseEntity.ok("인가된 사용자");
-    } else {
-        return ResponseEntity.badRequest().body("해당 유저가 없습니다.");
+
+    @GetMapping("/home")
+    public ResponseEntity<String> main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (customUserDetails != null) {
+            return ResponseEntity.ok("인가된 사용자");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
     }
-}
+
+
     @GetMapping("/me")
     @PreAuthorize("hasRole('STUDENT')")
     public Member getCurrentUser(@AuthenticationPrincipal CustomUserDetails user) {

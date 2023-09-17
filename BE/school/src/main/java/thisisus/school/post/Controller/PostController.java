@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.common.DefaultResponseDto;
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 import thisisus.school.post.domain.Post;
@@ -36,6 +38,7 @@ import java.util.stream.Collectors;
 public class PostController {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final PostLikeRepository postLikeRepository;
     private final PostService postService;
@@ -161,11 +164,11 @@ public class PostController {
     })
     @GetMapping("/post/{category}/{postId}")
     public ResponseEntity<DefaultResponseDto> findOnePost(@AuthenticationPrincipal CustomUserDetails customUserDetails, @PathVariable("postId") Long postId){
-
+        Member currentMember = memberRepository.getByEmail(customUserDetails.getEmail());
         Post post = postService.findOnePost(postId);
         /*PostDefaultResponseDto response = new PostDefaultResponseDto(post);*/
         PostLiked isLiked = postService.isLikedPost(customUserDetails, post);
-        PostDefaultResponseDto response = new PostDefaultResponseDto(post,isLiked);
+        PostDefaultResponseDto response = new PostDefaultResponseDto(post,isLiked, currentMember);
         return ResponseEntity.status(200)
                 .body(DefaultResponseDto.builder()
                         .responseCode("POST_FOUND")
