@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="Error : 채팅 세션 연결 중 채팅방 생성 오류">
+    <list default="true" id="8aecd05a-4dc6-4eb1-a245-b604611c4d24" name="변경" comment="Fix : response 작성자 memberId 리턴">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/member/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BE/school/src/main/java/thisisus/school/post/service/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,24 +42,24 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "c7770a749f8f36bcb71cf045b805f616",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;c7770a749f8f36bcb71cf045b805f616&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SchoolApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="school.main" />
@@ -80,6 +79,10 @@
       <updated>1694443099363</updated>
       <workItem from="1694443101670" duration="5997000" />
       <workItem from="1694528184305" duration="17945000" />
+      <workItem from="1694760869347" duration="225000" />
+      <workItem from="1694931164369" duration="2293000" />
+      <workItem from="1694935304210" duration="3824000" />
+      <workItem from="1695046824859" duration="1025000" />
     </task>
     <task id="LOCAL-00001" summary="Feat : 채팅 기본 구현">
       <created>1694449118075</created>
@@ -95,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694541482551</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fix : response 작성자 memberId 리턴">
+      <created>1694761069627</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694761069627</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +125,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feat : 채팅 기본 구현" />
     <MESSAGE value="Error : 채팅 세션 연결 중 채팅방 생성 오류" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error : 채팅 세션 연결 중 채팅방 생성 오류" />
+    <MESSAGE value="Fix : response 작성자 memberId 리턴" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix : response 작성자 memberId 리턴" />
   </component>
 </project>

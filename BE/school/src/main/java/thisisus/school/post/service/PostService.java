@@ -136,7 +136,7 @@ public class PostService {
     public Post updatePost(Long postId, PostRequestDto postRequestDto) throws Exception{
         try {
             Post post = postRepository.findById(postId).get();
-            if(postRequestDto.getFiles().size()!=0) {
+            if(postRequestDto.getFiles()!=null) {
                 savePhoto(post, postRequestDto.getFiles());
             }
             post.updatePost(postRequestDto);
