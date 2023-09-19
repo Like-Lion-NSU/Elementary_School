@@ -34,7 +34,7 @@ public class ChatController {
         template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
-    @MessageMapping("/chatroom/{id}") // 실제론 메세지 매핑으로 pub/chatroom/{id} 임
+    @MessageMapping("/chat/{id}") // 실제론 메세지 매핑으로 pub/chatroom/{id} 임
     public void sendMessage(@DestinationVariable("id") Long id, ChatMessageRequestDto chatDTO) {
         log.info("chat {} send by {} to room number{}", chatDTO.getMessage(), chatDTO.getSenderId());
 //        chatService.saveMessage(chatDTO);
