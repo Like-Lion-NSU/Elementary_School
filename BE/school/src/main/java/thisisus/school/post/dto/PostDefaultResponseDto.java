@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import thisisus.school.member.domain.Member;
 import thisisus.school.post.domain.*;
 
 import java.time.LocalDateTime;
@@ -24,14 +25,17 @@ public class PostDefaultResponseDto {
     private String content;
     private PostCategory category;
     private String email;
+    private String currentMemberEmail;
     private LocalDateTime updateAt;
     private int viewCount;
     private int likeCount;
+    private Long postMemberId;
+    private Long currentMemberId;
     private List<PostPhoto> photos = new ArrayList<>();
     private List<CommentDefaultResponseDto> comments = new ArrayList<>();
     private LikedDefaultResponseDto postLiked;
 
-    public PostDefaultResponseDto(Post post, PostLiked liked){
+    public PostDefaultResponseDto(Post post, PostLiked liked, Member currentMember){
         this.postId=post.getId();
         this.title=post.getTitle();
         this.content=post.getContent();
@@ -40,6 +44,9 @@ public class PostDefaultResponseDto {
         this.updateAt=post.getUpdateAt();
         this.viewCount=post.getViewCount();
         this.likeCount=post.getLikeCount();
+        this.postMemberId=post.getMember().getId();
+        this.currentMemberEmail =currentMember.getEmail();
+        this.currentMemberId=currentMember.getId();
         if(liked!=null) {
           postLiked = new LikedDefaultResponseDto(liked);
         }

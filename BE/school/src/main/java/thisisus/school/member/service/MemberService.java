@@ -6,12 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.dto.MemberInfoDto;
 import thisisus.school.member.etc.MemberNotFoundException;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.post.domain.Post;
 
+import java.util.List;
 
 
 @Service
@@ -88,11 +91,16 @@ public class MemberService {
     }
 
 
+    @Transactional
     public ResponseEntity<String> deleteMember(CustomUserDetails customUserDetails) {
         try {
-            Member deleteMember = findMember(customUserDetails);
-            memberRepository.deleteById(deleteMember.getId());
-
+            Member member = findMember(customUserDetails);
+//            List<Post> posts = member.getPosts();
+//            for(Post post : posts){
+//                post.delete();
+//            }
+//            memberRepository.delete(member);
+            member.delete();
             return ResponseEntity.status(HttpStatus.OK).body("Member deleted successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting member");
