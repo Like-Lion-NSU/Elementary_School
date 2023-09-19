@@ -11,6 +11,7 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
 
   useEffect(() => {
     async function getInfo() {
+      const accessToken = getCookieValue("accessToken");
       let currentUrl = window.location.href;
       currentUrl = currentUrl
         .replace("http://115.85.183.239/chat/", "")
@@ -23,7 +24,19 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
           current: currentUrl[0],
           post: currentUrl[1],
         },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
+    }
+    function getCookieValue(cookieName) {
+      const cookies = document.cookie.split(";");
+      for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split("=");
+        if (name === cookieName) {
+          return value;
+        }
+      }
     }
     getInfo();
     // WebSocket 연결을 설정합니다.
