@@ -6,68 +6,76 @@ import axios from "axios";
 
 const Main = () => {
   const [userInfo, setUserInfo] = useState(null);
-  // useEffect(() => {
-  //   const tokenMain = async () => {
-  //     try {
-  //       const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
-  //       console.log("accessToken:", accessToken); // 추가된 부분
+  useEffect(() => {
+    const tokenMain = async () => {
+      try {
+        const accessToken = getCookieValue("accessToken"); // 예시 함수로 쿠키 값 추출
+        console.log("accessToken:", accessToken); // 추가된 부분
+        if (accessToken == undefined || accessToken == null) {
+          window.location.href = "/";
+        }
 
-  //       const response = await axios.get("/v1/home", {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           Accept: "application/json", // JSON 응답을 요청한다고 설정
-  //         },
-  //       });
+        const response = await axios.get("/v1/home", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            Accept: "application/json", // JSON 응답을 요청한다고 설정
+          },
+        });
+        console.log("날라오는 데이터", response.data);
+        console.log("날아오는 상태", response.status);
 
-  //       setUserInfo(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 401) {
-  //         try {
-  //           const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
+        if (response.status === 200) {
+          setUserInfo(response.data);
+        } else {
+          window.location.href = "/";
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          try {
+            const refreshToken = getCookieValue("refreshToken"); // 예시 함수로 쿠키 값 추출
 
-  //           const refreshResponse = await axios
-  //             .post("/v1/auth/refresh", null, {
-  //               headers: {
-  //                 Authorization: `Bearer ${refreshToken}`,
-  //               },
-  //             })
-  //             .then((result) => {
-  //               if (result === "403") {
-  //                 window.location.href = "/v1/403";
-  //               }
-  //             });
+            const refreshResponse = await axios.post("/v1/auth/refresh", null, {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            });
+            console.log("날라오는 데이터", refreshResponse.data);
+            console.log("날아오는 상태", refreshResponse.status);
 
-  //           const newAccessToken = refreshResponse.data;
-  //           // 새로운 AccessToken을 사용하여 다시 마이페이지 정보 요청 등을 수행
-  //           const refreshedResponse = await axios.get("/v1/home", {
-  //             headers: {
-  //               Authorization: `Bearer ${newAccessToken}`,
-  //             },
-  //           });
+            if (refreshResponse.status !== 200) {
+              window.location.href = "/";
+            }
 
-  //           setUserInfo(refreshedResponse.data);
-  //         } catch (refreshError) {
-  //           // RefreshToken으로 새로운 AccessToken 발급 실패
-  //           // 로그아웃 처리 등을 수행
-  //         }
-  //       }
-  //       // Handle other errors
-  //     }
-  //   };
+            const newAccessToken = refreshResponse.data;
+            const refreshedResponse = await axios.get("/v1/home", {
+              headers: {
+                Authorization: `Bearer ${newAccessToken}`,
+              },
+            });
 
-  //   tokenMain();
-  // }, []);
+            setUserInfo(refreshedResponse.data);
+          } catch (refreshError) {
+            // RefreshToken으로 새로운 AccessToken 발급 실패
+            // 로그아웃 처리 등을 수행
+          }
+        }
+        // Handle other errors
+      }
+    };
 
-  // // 쿠키 값 추출 함수 예시
-  // function getCookieValue(cookieName) {
-  //   const cookies = document.cookie.split(";");
-  //   for (const cookie of cookies) {
-  //     const [name, value] = cookie.trim().split("=");
-  //     if (name === cookieName) {
-  //       return value;
-  //     }
-  //   }
-  // }
+    tokenMain();
+  }, []);
+
+  // 쿠키 값 추출 함수 예시
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
+      }
+    }
+  }
   return (
     <div className="main-page" id="mainE-container">
       <div>

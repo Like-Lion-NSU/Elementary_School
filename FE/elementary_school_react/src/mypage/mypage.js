@@ -101,9 +101,9 @@ function MyJMypage() {
   return (
     <div>
       <div className="myJCenter">
+        <Sidebar />
         {userInfo && (
           <div className="myJContainer">
-            <Sidebar />
             <div className="myJRole">
               {userInfo.role === "TEACHER" ? "선생님" : "학생"}
             </div>

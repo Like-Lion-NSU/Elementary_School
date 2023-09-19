@@ -22,7 +22,7 @@ function BoardTable({ res }) {
                 <tr key={response.id}>
                   <td>
                     <Link to={`/post/${response.category}/${response.postId}`}>
-                      {index + 1}
+                      {index + 1}{" "}
                     </Link>
                   </td>
                   <td>{response.title}</td>

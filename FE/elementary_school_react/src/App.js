@@ -33,6 +33,7 @@ import PostPage from "./postpage/postPage";
 import PostLike from "./postpage/postLike";
 import Kioskproblem from "./kiosk/kioskproblem";
 import ErrorPage from "./error/404";
+import Chatpage from "./chat/stomp";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
           <Route path="/elementary404" element={<ErrorPage />} />
+          <Route path="/chat/:me/:you" element={<Chatpage />} />
         </Routes>
       </div>
       <Footer />
