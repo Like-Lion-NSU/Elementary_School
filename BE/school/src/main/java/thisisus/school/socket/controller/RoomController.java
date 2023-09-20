@@ -2,10 +2,7 @@ package thisisus.school.socket.controller;
 
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import thisisus.school.member.security.service.CustomUserDetails;
-import thisisus.school.socket.dto.RoomNameRequestDto;
 import thisisus.school.socket.model.ChatRoom;
 import thisisus.school.socket.service.ChatService;
 
@@ -19,11 +16,9 @@ public class RoomController {
 
     private final ChatService chatService;
 
-    @PostMapping("/{postMemberId}/{currentMemberId}")
-    public ChatRoom createRoom(@PathVariable("postMemberId") Long postMemberId,
-                               @PathVariable("currentMemberId") Long currentMemberId,
-                               @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        return chatService.createChatRoom(postMemberId, currentMemberId, customUserDetails);
+    @PostMapping("/{postMemberId}")
+    public ChatRoom createRoom(@PathVariable("postMemberId") Long postMemberId) {
+        return chatService.createChatRoom(postMemberId);
     }
 
 

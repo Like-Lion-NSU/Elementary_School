@@ -6,9 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.socket.dto.ChatMessageRequestDto;
 import thisisus.school.socket.model.ChatMessage;
+import thisisus.school.socket.model.MessageType;
 import thisisus.school.socket.service.ChatService;
 
 @RestController
@@ -17,24 +22,26 @@ import thisisus.school.socket.service.ChatService;
 @Slf4j
 //@RequestMapping("/api/v1/chat")
 public class ChatController {
+    private final MemberRepository memberRepository;
+    private final ChatService chatService;
     //"/pub/chat/enter"
 
     private final SimpMessagingTemplate template;
-    private final ChatService chatService;
-    @MessageMapping(value = "/api/chat/enter")
-    public String enter(ChatMessageRequestDto message){
-        message.setMessage(message.getSenderId() + "님이 채팅방에 참여하였습니다.");
-        template.convertAndSend("/sub/chat/enter/" + message.getChatRoomId(), message);
-        log.info("");
-        return "hello," + message.getSenderId();
+
+    @MessageMapping(value = "/api/chat/onMessage")
+    public void onMessage(ChatMessageRequestDto message){
+        template.convertAndSend("/sub/chat/message/" + message.getRoomId(), message);
     }
 
-    @MessageMapping(value = "/chat/message")
-    public void message(ChatMessage message){
-        template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+    @MessageMapping("/api/chat/message")
+    public void message(ChatMessageRequestDto message,
+                        @AuthenticationPrincipal CustomUserDetails customUserDetails){
+
+        chatService.sendMessage(message, customUserDetails);
     }
 
-    @MessageMapping("/chat/{id}") // 실제론 메세지 매핑으로 pub/chatroom/{id} 임
+
+/*    @MessageMapping("/chat/{id}") // 실제론 메세지 매핑으로 pub/chatroom/{id} 임
     public void sendMessage(@DestinationVariable("id") Long id, ChatMessageRequestDto chatDTO) {
         log.info("chat {} send by {} to room number{}", chatDTO.getMessage(), chatDTO.getSenderId());
 //        chatService.saveMessage(chatDTO);
@@ -42,5 +49,5 @@ public class ChatController {
         template.convertAndSend("/sub/chatroom/" + chatDTO.getChatRoomId(), chatDTO);
         chatService.saveMessage(chatDTO.getSenderId(),chatDTO.getMessage(),chatDTO.getChatRoomId());
         log.info("Message [{}] send by member: {} to chatting room: {}",chatDTO.getMessage(), chatDTO.getSenderId(), chatDTO.getChatRoomId());
-    }
+    }*/
 }

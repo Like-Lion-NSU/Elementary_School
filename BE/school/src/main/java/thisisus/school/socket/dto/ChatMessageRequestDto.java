@@ -11,10 +11,6 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessageRequestDto {
-
-//    private String name;
-    private MessageType messageType;
-    private Long chatRoomId;
-    private Long senderId;
+    private String roomId;
     private String message;
 }

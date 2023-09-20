@@ -11,9 +11,11 @@ import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
+import thisisus.school.socket.dto.ChatMessageRequestDto;
 import thisisus.school.socket.model.ChatMessage;
 import thisisus.school.socket.model.ChatRoom;
 import thisisus.school.socket.repository.ChatRepository;
+import thisisus.school.socket.repository.RoomRepository;
 
 import java.io.IOException;
 import java.util.*;
@@ -26,6 +28,7 @@ public class ChatService {
     private final ObjectMapper objectMapper;
     private Map<String, ChatRoom> chatRooms = new LinkedHashMap<>();
     private final ChatRepository chatRepository;
+    private final RoomRepository roomRepository;
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
@@ -38,13 +41,9 @@ public class ChatService {
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createChatRoom(Long postMemberId, Long currentMemberId, CustomUserDetails customUserDetails){
+    public ChatRoom createChatRoom(Long postMemberId){
 
         String randomId = UUID.randomUUID().toString();
-        Member currentMember = memberService.findMember(customUserDetails);
-        if(currentMemberId!=currentMember.getId()){
-            throw new RuntimeException("현재 로그인한 유저와 정보가 맞지 않습니다.");
-        }
 
         Member otherMember = memberRepository.findById(postMemberId).get();
 
@@ -52,23 +51,28 @@ public class ChatService {
                 .roomId(randomId)
                 .name(otherMember.getName())
                 .build();
-        chatRooms.put(randomId, chatRoom);
+        roomRepository.save(chatRoom);
         return chatRoom;
     }
 
-    public <T> void sendMessage(WebSocketSession session, T message) {
-        try{
-            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
+    public void sendMessage(ChatMessageRequestDto message, CustomUserDetails customUserDetails) {
+            Member member = memberService.findMember(customUserDetails);
+            ChatRoom chatRoom = roomRepository.findByRoomId(message.getRoomId());
+            ChatMessage chatMessage = ChatMessage.builder()
+                    .chatRoom(chatRoom)
+                    .senderId(member.getId())
+                    .message(message.getMessage())
+                    .build();
+            chatRepository.save(chatMessage);
+
+
     }
 
-    public ChatMessage saveMessage(Long sender, String message, Long chatroom) {
+/*    public ChatMessage saveMessage(Long sender, String message, Long chatroom) {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setSenderId(sender);
         chatMessage.setMessage(message);
         chatMessage.setRoomId(chatroom);
         return chatRepository.save(chatMessage);
-    }
+    }*/
 }

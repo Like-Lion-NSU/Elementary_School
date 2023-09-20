@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-
       <module fileurl="file://$PROJECT_DIR$/.idea/BE.iml" filepath="$PROJECT_DIR$/.idea/BE.iml" />
-
-
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/school.iml" filepath="$PROJECT_DIR$/.idea/modules/school.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/school.main.iml" filepath="$PROJECT_DIR$/.idea/modules/school.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/school.test.iml" filepath="$PROJECT_DIR$/.idea/modules/school.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/thisIsUs.school.main.iml" filepath="$PROJECT_DIR$/.idea/modules/thisIsUs.school.main.iml" />
     </modules>
   </component>
 </project>
