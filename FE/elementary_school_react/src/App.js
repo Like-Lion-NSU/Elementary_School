@@ -71,7 +71,7 @@ function App() {
           <Route path="/postLike" element={<PostLike />} />
           <Route path="/kioskproblem" element={<Kioskproblem />} />
           <Route path="/elementary404" element={<ErrorPage />} />
-          <Route path="/chat/:me/:you" element={<Chatpage />} />
+          <Route path="/chat/:roomId" element={<Chatpage />} />
         </Routes>
       </div>
       <Footer />

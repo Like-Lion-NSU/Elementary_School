@@ -10,44 +10,35 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
   const [stompClient, setStompClient] = useState(null); // WebSocket 클라이언트 객체를 업데이트하거나 초기화
 
   useEffect(() => {
-    async function getInfo() {
-      const accessToken = getCookieValue("accessToken");
-      let currentUrl = window.location.href;
-      currentUrl = currentUrl
-        .replace("http://115.85.183.239/chat/", "")
-        .split("/");
-      console.log(currentUrl);
-      const response = await axios({
-        method: "POST",
-        url: "/v1/chat",
-        data: {
-          current: currentUrl[0],
-          post: currentUrl[1],
-        },
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-    }
-    function getCookieValue(cookieName) {
-      const cookies = document.cookie.split(";");
-      for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split("=");
-        if (name === cookieName) {
-          return value;
-        }
-      }
-    }
-    getInfo();
+    // async function getInfo() {
+    //   const accessToken = getCookieValue("accessToken");
+    //   const response = await axios({
+    //     method: "Get",
+    //     url: `/v1/chat`,
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   });
+    // }
+    // function getCookieValue(cookieName) {
+    //   const cookies = document.cookie.split(";");
+    //   for (const cookie of cookies) {
+    //     const [name, value] = cookie.trim().split("=");
+    //     if (name === cookieName) {
+    //       return value;
+    //     }
+    //   }
+    // }
+    // getInfo();
     // WebSocket 연결을 설정합니다.
-    const socket = new WebSocket("ws://localhost:8081/ws-stomp"); // WebSocket 주소로 수정해야 합니다.
+    const socket = new WebSocket("ws://115.85.183.239:8081/ws-stomp"); // WebSocket 주소로 수정해야 합니다.
 
     const client = Stomp.over(socket);
     client.connect(
       {},
       () => {
         // 연결이 성공하면 구독합니다.
-        client.subscribe(`/sub/chat/enter/1`, (message) => {
+        client.subscribe(`/sub/api/chat/message`, (message) => {
           onMessageReceived(message.body);
         });
         setStompClient(client);
@@ -69,6 +60,7 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
   const onMessageReceived = (messageBody) => {
     // 메시지를 받았을 때 처리합니다.
     setChatMessages([...chatMessages, JSON.parse(messageBody)]);
+    console.log("받은 메시지", setChatMessages);
   };
 
   const handleInputChange = (event) => {
@@ -83,7 +75,11 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
         content: message,
         timestamp: new Date().toLocaleTimeString(),
       };
-      stompClient.send(`/pub/api/chat/enter`, {}, JSON.stringify(messageData));
+      stompClient.send(
+        `/pub/api/chat/message`,
+        {},
+        JSON.stringify(messageData)
+      );
       setMessage("");
     }
   };
