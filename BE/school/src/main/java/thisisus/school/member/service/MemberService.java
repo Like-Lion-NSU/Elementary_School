@@ -25,7 +25,7 @@ public class MemberService {
     private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
     public Member findMember(CustomUserDetails customUserDetails) {
-        Member findMember = memberRepository.findByEmail(customUserDetails.getEmail()).get();
+        Member findMember = memberRepository.findByEmail(customUserDetails.getEmail()).orElse(null);
         return findMember;
     }
 

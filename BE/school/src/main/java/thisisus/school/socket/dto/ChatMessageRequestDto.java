@@ -4,6 +4,7 @@ import lombok.*;
 import thisisus.school.socket.model.MessageType;
 
 import javax.persistence.Entity;
+import java.sql.Date;
 
 @Builder
 @Getter
@@ -11,6 +12,8 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessageRequestDto {
+    private String sender;
+    private String content;
     private String roomId;
-    private String message;
+    private Date timeStamp;
 }

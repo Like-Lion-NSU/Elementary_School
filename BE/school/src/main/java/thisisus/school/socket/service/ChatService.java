@@ -55,17 +55,20 @@ public class ChatService {
         return chatRoom;
     }
 
-    public void sendMessage(ChatMessageRequestDto message, CustomUserDetails customUserDetails) {
+    public String sendMessage(ChatMessageRequestDto message, CustomUserDetails customUserDetails) {
+        log.info("message : {}", message);
             Member member = memberService.findMember(customUserDetails);
+            log.info("customUserDetails 정보 : {}", customUserDetails.getEmail());
             ChatRoom chatRoom = roomRepository.findByRoomId(message.getRoomId());
+
             ChatMessage chatMessage = ChatMessage.builder()
                     .chatRoom(chatRoom)
                     .senderId(member.getId())
-                    .message(message.getMessage())
+                    .message(message.getContent())
                     .build();
             chatRepository.save(chatMessage);
 
-
+            return message.getContent();
     }
 
 /*    public ChatMessage saveMessage(Long sender, String message, Long chatroom) {

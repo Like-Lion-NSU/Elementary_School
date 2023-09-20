@@ -28,16 +28,16 @@ public class ChatController {
 
     private final SimpMessagingTemplate template;
 
-    @MessageMapping(value = "/api/chat/onMessage")
-    public void onMessage(ChatMessageRequestDto message){
-        template.convertAndSend("/sub/chat/message/" + message.getRoomId(), message);
+    @MessageMapping("/api/chat/onMessage")
+    public void onMessage(@RequestBody ChatMessageRequestDto message){
+        template.convertAndSend("/sub/api/chat/message/" + message.getRoomId() +  message);
     }
 
     @MessageMapping("/api/chat/message")
-    public void message(ChatMessageRequestDto message,
+    public String message(@RequestBody ChatMessageRequestDto message,
                         @AuthenticationPrincipal CustomUserDetails customUserDetails){
 
-        chatService.sendMessage(message, customUserDetails);
+        return chatService.sendMessage(message, customUserDetails);
     }
 
 
