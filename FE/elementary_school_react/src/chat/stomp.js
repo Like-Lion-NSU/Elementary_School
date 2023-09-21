@@ -2,35 +2,17 @@ import React, { useState, useEffect } from "react";
 import Stomp from "stompjs";
 import "../css/chat.css";
 import Sidebar from "../sidebar/sidebar.js";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-const ChatComponent = ({ currentEmail, authorEmail }) => {
+const ChatComponent = () => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [stompClient, setStompClient] = useState(null); // WebSocket 클라이언트 객체를 업데이트하거나 초기화
+  const location = useLocation();
+  const currentEmail = location.state.email;
+  const room = location.state.room;
 
   useEffect(() => {
-    // async function getInfo() {
-    //   const accessToken = getCookieValue("accessToken");
-    //   const response = await axios({
-    //     method: "Get",
-    //     url: `/v1/chat`,
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`,
-    //     },
-    //   });
-    // }
-    // function getCookieValue(cookieName) {
-    //   const cookies = document.cookie.split(";");
-    //   for (const cookie of cookies) {
-    //     const [name, value] = cookie.trim().split("=");
-    //     if (name === cookieName) {
-    //       return value;
-    //     }
-    //   }
-    // }
-    // getInfo();
-    // WebSocket 연결을 설정합니다.
     const socket = new WebSocket("ws://115.85.183.239:8081/ws-stomp"); // WebSocket 주소로 수정해야 합니다.
 
     const client = Stomp.over(socket);
@@ -38,7 +20,7 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
       {},
       () => {
         // 연결이 성공하면 구독합니다.
-        client.subscribe(`/sub/api/chat/message`, (message) => {
+        client.subscribe(`/sub/chat/message/${room}`, (message) => {
           onMessageReceived(message.body);
         });
         setStompClient(client);
@@ -55,12 +37,19 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
         stompClient.disconnect();
       }
     };
-  }, [authorEmail]);
+  }, []);
 
   const onMessageReceived = (messageBody) => {
     // 메시지를 받았을 때 처리합니다.
-    setChatMessages([...chatMessages, JSON.parse(messageBody)]);
-    console.log("받은 메시지", setChatMessages);
+    console.log("지금찍히고 있는건가?", JSON.parse(messageBody));
+    const messag = JSON.parse(messageBody);
+    console.log(chatMessages);
+    const data = {
+      content: messag.content,
+      sender: messag.sender,
+      timestamp: message.timestamp,
+    };
+    setChatMessages((prevChatMessages) => [...prevChatMessages, data]);
   };
 
   const handleInputChange = (event) => {
@@ -70,19 +59,38 @@ const ChatComponent = ({ currentEmail, authorEmail }) => {
   const sendMessage = () => {
     // 메시지를 서버로 보냅니다.
     if (stompClient && message) {
+      let url = window.location.href;
+      url = url.replace("http://115.85.183.239/chat/", "");
       const messageData = {
-        sender: currentEmail,
+        roomId: url,
+        Sender: currentEmail,
         content: message,
         timestamp: new Date().toLocaleTimeString(),
       };
+      const accessToken = getCookieValue("accessToken");
+      const headers = {
+        // 원하는 헤더를 추가합니다.
+        Authorization: `Bearer ${accessToken}`,
+      };
+
       stompClient.send(
-        `/pub/api/chat/message`,
+        `/pub/api/chat/message/${room}`,
         {},
         JSON.stringify(messageData)
       );
       setMessage("");
     }
   };
+
+  function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === cookieName) {
+        return value;
+      }
+    }
+  }
 
   const ClickEnter = (ev) => {
     if (ev.key === "Enter") {

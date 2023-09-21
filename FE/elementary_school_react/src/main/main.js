@@ -107,7 +107,7 @@ const Main = () => {
               <span role="img" aria-label="information">
                 🗞️
               </span>
-              <div className="mainE-role">정책정보</div>
+              <div className="mainE-role">채팅해요</div>
             </Link>
           </div>
         </div>

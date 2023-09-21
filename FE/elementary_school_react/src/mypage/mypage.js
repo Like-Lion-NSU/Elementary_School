@@ -100,8 +100,8 @@ function MyJMypage() {
 
   return (
     <div>
+      <Sidebar />
       <div className="myJCenter">
-        <Sidebar />
         {userInfo && (
           <div className="myJContainer">
             <div className="myJRole">
