@@ -1,15 +1,16 @@
 import React from "react";
 import "../css/post.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const PostHeader = ({
   title,
   authorEmail,
-  currentEmail,
-  currentMemberId,
+  currentMemberEmail,
   postMemberId,
 }) => {
+  const navigate = useNavigate();
+  const currentEmail = currentMemberEmail;
   const MakeRoom = async () => {
     const accessToken = getCookieValue("accessToken");
     try {
@@ -20,7 +21,10 @@ const PostHeader = ({
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      window.location.href = `/chat/${response.data.roomId}`;
+      console.log(currentEmail);
+      navigate(`/chat/${response.data.roomId}`, {
+        state: { email: currentEmail, room: response.data.roomId },
+      });
     } catch (error) {
       console.log("방만들다가 에러", error);
     }
@@ -38,7 +42,9 @@ const PostHeader = ({
     <div className="post-header">
       <h2>{title}</h2>
       <p>{authorEmail}</p>
-      {authorEmail !== currentEmail && <button onClick={MakeRoom}>채팅</button>}
+      {authorEmail !== currentMemberEmail && (
+        <button onClick={MakeRoom}>채팅</button>
+      )}
     </div>
   );
 };

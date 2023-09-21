@@ -57,8 +57,7 @@ const PostPage = () => {
   const {
     title,
     email,
-    currentEmail,
-    currentMemberId,
+    currentMemberEmail,
     postMemberId,
     content,
     likeCount,
@@ -66,6 +65,7 @@ const PostPage = () => {
     comments,
     photos,
   } = selectedPost;
+  console.log("이거 찍히는지 화긴", currentMemberEmail);
   return (
     <div>
       <Sidebar />
@@ -73,8 +73,7 @@ const PostPage = () => {
         <PostHeader
           title={title}
           authorEmail={email}
-          currentEmail={currentEmail}
-          currentMemberId={currentMemberId}
+          currentMemberEmail={currentMemberEmail}
           postMemberId={postMemberId}
         />
         <PostMain

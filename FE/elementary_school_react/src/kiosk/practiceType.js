@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../css/practiceType.css';
-import megacoffeeImage from './img/megacoffee.png';
-import korailImage from './img/korail.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../css/practiceType.css";
+import megacoffeeImage from "./img/megacoffee.png";
+import korailImage from "./img/korail.png";
 import Sidebar from "../sidebar/sidebar";
 
 const PracticeTypePage = () => {
@@ -13,11 +13,11 @@ const PracticeTypePage = () => {
       <div className="type-buttons">
         <Link to="/kiosk" className="typeE-button">
           <img src={megacoffeeImage} alt="Mega Coffee" />
-          <div className='typeE-type'>메가커피</div>
+          <div className="typeE-type">메가커피</div>
         </Link>
-        <Link to="#" className="typeE-button">
+        <Link to="/korail" className="typeE-button">
           <img src={korailImage} alt="Korail" />
-          <div className='typeE-type'>코레일</div>
+          <div className="typeE-type">코레일</div>
         </Link>
       </div>
     </div>
