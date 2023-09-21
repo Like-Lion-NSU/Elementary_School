@@ -6,6 +6,7 @@ import thisisus.school.member.security.util.AuthProvider;
 import thisisus.school.post.domain.Comment;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostLiked;
+import thisisus.school.socket.model.MemberChatRoom;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -46,6 +47,8 @@ public class Member extends BaseEntity{
     @OneToMany(mappedBy = "member")
     private List<PostLiked> likes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<MemberChatRoom> memberChatRooms = new ArrayList<>();
 
     public Member update(String name) {
         this.name = name;

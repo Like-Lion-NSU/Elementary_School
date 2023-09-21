@@ -1,10 +1,12 @@
 package thisisus.school.socket.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import thisisus.school.socket.dto.ChatMessageRequestDto;
 import thisisus.school.socket.model.ChatMessage;
 import thisisus.school.socket.model.MessageType;
 import thisisus.school.socket.service.ChatService;
+
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,11 +37,24 @@ public class ChatController {
         template.convertAndSend("/sub/chat/message/" + message.getRoomId(), message);
     }
 
-    @MessageMapping("/api/chat/message")
+    /*@MessageMapping("/api/chat/message")
     public void message(ChatMessageRequestDto message,
                         @AuthenticationPrincipal CustomUserDetails customUserDetails){
 
         chatService.sendMessage(message, customUserDetails);
+    }*/
+    @MessageMapping("/api/chat/message/{roomId}")
+    @SendTo("/sub/chat/message/{roomId}")
+    public ChatMessageRequestDto message(@RequestBody Map<String, String> memberInfo){
+        ChatMessageRequestDto chatMessageRequestDto = ChatMessageRequestDto.builder()
+                .roomId(memberInfo.get("roomId"))
+                .content(memberInfo.get("content"))
+                .timestamp(memberInfo.get("timestamp"))
+                .Sender(memberInfo.get("Sender"))
+                .build();
+        chatService.sendMessage(chatMessageRequestDto);
+//        template.convertAndSend("/sub/chat/message/" + chatMessageRequestDto.getRoomId(), chatMessageRequestDto);
+        return chatMessageRequestDto;
     }
 
 

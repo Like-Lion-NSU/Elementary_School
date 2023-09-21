@@ -12,5 +12,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class ChatMessageRequestDto {
     private String roomId;
-    private String message;
+    private String Sender;
+    private String content;
+    private String timestamp;
 }
