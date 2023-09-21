@@ -1,61 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../sidebar/sidebar";
 import BoardHeader from "./boardHeader";
-import BoardTable from "./boardTable";
+import BoardTableChat from "./boardTableChat";
 import axios from "axios";
 
-const posts = [
-  // 더미 데이터
-  {
-    id: 1,
-    title: "첫 번째 게시물",
-    author: "글쓴이1",
-    date: "2023-08-15",
-    views: 10,
-  },
-  {
-    id: 2,
-    title: "두 번째 게시물",
-    author: "글쓴이2",
-    date: "2023-08-16",
-    views: 20,
-  },
-  {
-    id: 3,
-    title: "세 번째 게시물",
-    author: "글쓴이3",
-    date: "2023-08-17",
-    views: 30,
-  },
-  {
-    id: 4,
-    title: "네 번째 게시물",
-    author: "글쓴이4",
-    date: "2023-08-18",
-    views: 40,
-  },
-  {
-    id: 5,
-    title: "다섯 번째 게시물",
-    author: "글쓴이5",
-    date: "2023-08-19",
-    views: 50,
-  },
-];
-
 function Policy() {
+  const [res, setResponse] = useState();
   useEffect(() => {
     const accessToken = getCookieValue("accessToken");
     async function chatlist() {
       try {
         const response = await axios({
           method: "GET",
-          url: "/v1/chat/room",
+          url: "/v1/chat/rooms",
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        console.log(response);
+        console.log(response.data);
+        setResponse(response.data);
       } catch (error) {
         console.log("채팅방목록 가져오다 에러", error);
       }
@@ -70,12 +33,12 @@ function Policy() {
         }
       }
     }
-  });
+  }, []);
   return (
     <div>
       <Sidebar />
-      <BoardHeader boardTitle="정책정보" />
-      <BoardTable boardTitle="정책정보" posts={posts} />
+      <BoardHeader boardTitle="채팅방목록" />
+      <BoardTableChat boardTitle="채팅방" res={res} />
     </div>
   );
 }
