@@ -93,18 +93,24 @@ public class ChatService {
     }
 
     /*public void sendMessage(ChatMessageRequestDto message, CustomUserDetails customUserDetails) {
+=======
+    public String sendMessage(ChatMessageRequestDto message, CustomUserDetails customUserDetails) {
+        log.info("message : {}", message);
+>>>>>>> 4878d235431250cff5b6bc129b101707a08d5097
             Member member = memberService.findMember(customUserDetails);
+            log.info("customUserDetails 정보 : {}", customUserDetails.getEmail());
             ChatRoom chatRoom = roomRepository.findByRoomId(message.getRoomId());
+
             ChatMessage chatMessage = ChatMessage.builder()
                     .chatRoom(chatRoom)
                     .senderId(member.getId())
-                    .message(message.getMessage())
+                    .message(message.getContent())
                     .build();
             chatRepository.save(chatMessage);
 
+<<<<<<< HEAD
 
     }*/
-
 
 /*    public void sendMessage(ChatMessageRequestDto message, Map<String, String> memberInfo) {
         log.info("memberInfo : {}", memberInfo);
@@ -124,28 +130,15 @@ public class ChatService {
     }*/
 
     public void sendMessage(ChatMessageRequestDto chatMessageRequestDto) {
-
-
         Member member = memberRepository.findByEmail(chatMessageRequestDto.getSender()).get();
-        log.info("member : {}", member.getEmail());
-        log.info("chatMessageRequestDto.getRoomId() : {}", chatMessageRequestDto.getRoomId());
         ChatRoom chatRoom = roomRepository.findByRoomId(chatMessageRequestDto.getRoomId());
-        log.info("message : {}", chatMessageRequestDto);
         ChatMessage chatMessage = ChatMessage.builder()
                 .chatRoom(chatRoom)
                 .senderId(member.getId())
                 .message(chatMessageRequestDto.getContent())
                 .build();
-        log.info("chatMessage : {}", chatMessage.getMessage());
         chatRepository.save(chatMessage);
-        log.info("저장 성공~");
 
     }
-/*    public ChatMessage saveMessage(Long sender, String message, Long chatroom) {
-        ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setSenderId(sender);
-        chatMessage.setMessage(message);
-        chatMessage.setRoomId(chatroom);
-        return chatRepository.save(chatMessage);
-    }*/
+
 }
