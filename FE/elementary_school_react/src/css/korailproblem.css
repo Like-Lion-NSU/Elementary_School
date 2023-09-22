@@ -1,0 +1,39 @@
+.korailProblem_img {
+  width: 12vw;
+  height: 12vw;
+}
+.korailPHeader {
+  background-color: #223e72;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 0.5vw;
+}
+.korailPHeader div {
+  width: 15vw;
+  font-size: 1.2vw;
+  padding: 0.1vw;
+}
+#korailQ {
+  padding: 0.5vw;
+  margin: 0;
+  font-size: 1.3vw;
+}
+#goExam {
+  background-color: #fff;
+  border-radius: 5vw;
+  width: 10vw;
+  padding: 0.3vw;
+  float: right;
+  cursor: pointer;
+}
+.korailQFlex {
+  display: flex;
+}
+.korailProblem_list ol li {
+  font-size: 1.3vw;
+  font-weight: bold;
+  padding: 0.1vw;
+}
