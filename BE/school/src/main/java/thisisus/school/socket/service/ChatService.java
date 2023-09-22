@@ -12,6 +12,7 @@ import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 import thisisus.school.socket.dto.ChatMessageRequestDto;
+import thisisus.school.socket.dto.RoomsInfoRequestDto;
 import thisisus.school.socket.model.ChatMessage;
 import thisisus.school.socket.model.ChatRoom;
 import thisisus.school.socket.model.MemberChatRoom;
@@ -35,12 +36,13 @@ public class ChatService {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
-    public Map<String, String[]> findAllRoom(CustomUserDetails customUserDetails) {
+    public List<RoomsInfoRequestDto> findAllRoom(CustomUserDetails customUserDetails) {
 
         //DTO 변경 예정
         Member member = memberService.findMember(customUserDetails);
         List<MemberChatRoom> memberChatRooms = memberChatRoomRepository.findByMember(member);
-        Map<String, String[]> chatRooms = new HashMap<>();
+        List<RoomsInfoRequestDto> roomsInfoRequestDtos = new ArrayList<>();
+/*        Map<String, String[]> chatRooms = new HashMap<>();
 
         for (MemberChatRoom memberChatRoom : memberChatRooms) {
             String[] chatRoomInfo = new String[2];
@@ -52,8 +54,26 @@ public class ChatService {
                 chatRoomInfo[0] = memberChatRoom.getChatRoom().getOtherMemberName();
                 chatRoomInfo[1] = member.getEmail();
                 chatRooms.put(memberChatRoom.getChatRoom().getRoomId(), chatRoomInfo);            }
+        }*/
+        for (MemberChatRoom memberChatRoom : memberChatRooms) {
+            RoomsInfoRequestDto roomsInfoRequestDto;
+            if(member.getName().equals(memberChatRoom.getChatRoom().getOtherMemberName())) {
+                roomsInfoRequestDto = RoomsInfoRequestDto.builder()
+                        .roomId(memberChatRoom.getChatRoom().getRoomId())
+                        .memberEmail(member.getEmail())
+                        .roomTitle(memberChatRoom.getChatRoom().getRegisterMember())
+                        .build();
+            }else {
+                roomsInfoRequestDto = RoomsInfoRequestDto.builder()
+                        .roomId(memberChatRoom.getChatRoom().getRoomId())
+                        .memberEmail(member.getEmail())
+                        .roomTitle(memberChatRoom.getChatRoom().getOtherMemberName())
+                        .build();
+            }
+            roomsInfoRequestDtos.add(roomsInfoRequestDto);
+
         }
-        return chatRooms;
+        return roomsInfoRequestDtos;
 //        return new ArrayList<>(chatRooms.values());
     }
 

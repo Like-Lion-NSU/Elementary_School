@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.socket.dto.RoomsInfoRequestDto;
 import thisisus.school.socket.model.ChatRoom;
 import thisisus.school.socket.service.ChatService;
 
@@ -27,7 +28,7 @@ public class RoomController {
 
 
     @GetMapping("/rooms")
-    public Map<String, String[]> findAllRoom(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public List<RoomsInfoRequestDto> findAllRoom(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return chatService.findAllRoom(customUserDetails);
     }
 }
