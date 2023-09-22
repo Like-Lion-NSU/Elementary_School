@@ -2,9 +2,7 @@ package thisisus.school.socket.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Builder
@@ -15,9 +13,14 @@ import javax.persistence.Id;
 public class ChatMessage {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "message_id")
+    private Long id;
     private Long senderId;
-    private Long receiverId;
-    private Long roomId;
+  /*  @Enumerated(EnumType.STRING)
+    private MessageType type;*/
+    @ManyToOne
+    @JoinColumn(name = "chatRoom_id")
+    private ChatRoom chatRoom;
     private String message;
 }
