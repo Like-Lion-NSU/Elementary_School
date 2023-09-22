@@ -1,45 +1,47 @@
-  .board-table-container {
-    margin: 0 auto;
-    width: 100vh;
-    margin-top: 3vh;
-  }
-  
-  .board-table-body {
-    border-top: 1px solid #ccc; 
-    border-bottom: 1px solid #ccc; 
-  }
-  
-  .board-table {
-    width: 100vh;
-    border-collapse: collapse;
-  }
-  
-  .board-table th, .board-table td {
-    padding: 2vh;
-    text-align: center;
-    background-color: transparent; /* 배경색 없애기 */
-  }
-  
-  .board-table th {
-    background-color: transparent; /* 배경색 없애기 */
-  }  
+.board-table-container {
+  margin: 0 auto;
+  width: 100vh;
+  margin-top: 3vh;
+}
 
-  .board-write-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #749BC2;
-    border-radius: 1vh; 
-    width: 10vh;
-    height: 5vh;
-    cursor: pointer;
-    font-size: 2vh; 
-    margin-left: 128vh;
-    margin-top: 2vh;
-    color: white;
-  }
+.board-table-body {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
 
-  .board-table tbody tr:hover { 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
-    transition: box-shadow 0.3s ease-in-out; 
-  }
+.board-table {
+  width: 100vh;
+  border-collapse: collapse;
+}
+
+.board-table th,
+.board-table td {
+  padding: 2vh;
+  text-align: center;
+  background-color: transparent; /* 배경색 없애기 */
+}
+
+.board-table th {
+  background-color: transparent; /* 배경색 없애기 */
+}
+
+.board-write-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #749bc2;
+  border-radius: 1vh;
+  width: 10vh;
+  height: 5vh;
+  cursor: pointer;
+  font-size: 2vh;
+  margin-left: 128vh;
+  margin-top: 2vh;
+  color: white;
+}
+
+.board-table tbody tr:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+}

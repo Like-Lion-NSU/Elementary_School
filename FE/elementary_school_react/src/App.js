@@ -80,7 +80,7 @@ function App() {
             <Route path="/boardHeader" element={<BoardHeader />} />
             <Route path="/boardTable" element={<BoardTable />} />
             <Route path="/소통해요/posts" element={<Community />} />
-            <Route path="/policy" element={<Policy />} />
+            <Route path="/chatlist" element={<Policy />} />
             <Route path="/질문해요/posts" element={<Question />} />
             <Route path="/postHeader" element={<PostHeader />} />
             <Route path="/postMain" element={<PostMain />} />
