@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 function BoardTableChat({ res }) {
   const navigate = useNavigate();
-  const moveChatroom = (key) => {
-    navigate(`/chat/${key}`, {
-      state: { email: res[key][1], room: key },
+  const moveChatroom = (ob) => {
+    navigate(`/chat/${ob.roomId}`, {
+      state: { email: ob.memberEmail, room: ob.roomId },
     });
   };
   return (
@@ -21,15 +21,15 @@ function BoardTableChat({ res }) {
           </thead>
           <tbody className="board-table-body">
             {res &&
-              Object.keys(res).map((key, index) => (
+              res.map((ob, index) => (
                 <tr
-                  key={key}
+                  key={ob.roomId}
                   onClick={() => {
-                    moveChatroom(key);
+                    moveChatroom(ob);
                   }}
                 >
                   <td>{index + 1} </td>
-                  <td>{res[key][0]}</td>
+                  <td>{ob.roomTitle}</td>
                 </tr>
               ))}
           </tbody>

@@ -39,6 +39,17 @@ const ChatComponent = () => {
     };
   }, []);
 
+  //채팅보낼때마다 스크롤 가장아래로
+  useEffect(() => {
+    function prepareScroll() {
+      window.setTimeout(() => {
+        let chatUI = document.querySelector("#talk");
+        chatUI.scrollTop = chatUI.scrollHeight;
+      }, 50);
+    }
+    prepareScroll();
+  }, [chatMessages]);
+
   const onMessageReceived = (messageBody) => {
     // 메시지를 받았을 때 처리합니다.
     console.log("지금찍히고 있는건가?", JSON.parse(messageBody));

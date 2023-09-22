@@ -103,7 +103,7 @@ const Main = () => {
               </span>
               <div className="mainE-role">연습하기</div>
             </Link>
-            <Link to="/policy" className="mainE-button">
+            <Link to="/chatlist" className="mainE-button">
               <span role="img" aria-label="information">
                 🗞️
               </span>

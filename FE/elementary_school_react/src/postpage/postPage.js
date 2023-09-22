@@ -84,6 +84,8 @@ const PostPage = () => {
           likes={likeCount}
           views={viewCount}
           imageUrl={photos[0]}
+          currentMemberEmail={currentMemberEmail}
+          email={email}
         />
         {category === "소통해요" || category === "질문해요" ? (
           <PostLike
