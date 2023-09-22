@@ -1,6 +1,5 @@
 package thisisus.school.socket.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +21,6 @@ public class ChatMessage {
     private MessageType type;*/
     @ManyToOne
     @JoinColumn(name = "chatRoom_id")
-    @JsonIgnore
     private ChatRoom chatRoom;
     private String message;
 }

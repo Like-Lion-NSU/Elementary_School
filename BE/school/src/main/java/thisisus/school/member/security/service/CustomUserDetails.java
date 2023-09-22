@@ -1,8 +1,6 @@
 package thisisus.school.member.security.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CustomUserDetails implements UserDetails, OAuth2User {
     private Long id;
     private String email;
