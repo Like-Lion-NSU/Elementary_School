@@ -11,6 +11,8 @@ const PostMain = ({
   likes,
   views,
   imageUrl,
+  email,
+  currentMemberEmail,
 }) => {
   const navigate = useNavigate();
   const postUpdate = () => {
@@ -32,7 +34,7 @@ const PostMain = ({
       url: `/v1/post/${category}/${postId}`,
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((result) => {
-      window.location.href = `/v1/${category}/posts`;
+      window.location.href = `/${category}/posts`;
     });
   };
   function getCookieValue(cookieName) {
@@ -54,8 +56,18 @@ const PostMain = ({
       <div className="post-meta">
         <p>추천수: {likes}</p>
         <p>조회수: {views}</p>
-        <p onClick={postUpdate}>수정</p>
-        <p onClick={postdelete}>삭제</p>
+        {currentMemberEmail == email ? (
+          <>
+            <p onClick={postUpdate} className="updatePost">
+              수정
+            </p>
+            <p onClick={postdelete} className="deletePost">
+              삭제
+            </p>
+          </>
+        ) : (
+          <p></p>
+        )}
       </div>
     </div>
   );
