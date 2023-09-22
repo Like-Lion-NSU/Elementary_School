@@ -1,0 +1,24 @@
+.korail-menu {
+  position: absolute;
+  top: 8.7vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100%);
+  background-color: #223e72;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.korail-menu-item {
+  font-size: 2vh;
+  padding: 2vh 4vh;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  flex-basis: 25%;
+  box-sizing: border-box;
+  background-color: #223e72;
+}

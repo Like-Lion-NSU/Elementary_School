@@ -1,0 +1,19 @@
+.korailFooter {
+  font-size: 1.5vw;
+  margin-top: 53.8vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100%);
+  background-color: #223e72;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+}
+
+.korailFooter a {
+  color: white;
+  text-decoration: none;
+}

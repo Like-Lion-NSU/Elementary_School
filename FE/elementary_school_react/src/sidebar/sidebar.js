@@ -22,7 +22,7 @@ const Sidebar = () => {
           <Link to="/practiceType">연습하기</Link>
         </li>
         <li>
-          <Link to="/policy">정책정보</Link>
+          <Link to="/policy">채팅해요</Link>
         </li>
         <li>
           <Link to="/mypage">나의정보</Link>
