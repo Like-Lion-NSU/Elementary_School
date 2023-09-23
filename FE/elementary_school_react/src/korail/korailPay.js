@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import KorailPayHeader from "../korail/korailPayHeader";
 import KorailPayMenu from "../korail/korailPayMenu";
 import KorailPayBody from "../korail/korailPayBody";
@@ -8,7 +8,7 @@ import Korailproblem from "../korail/korailproblem";
 import { ScoreProvider, useScore } from "../korail/context";
 
 const KorailPay = () => {
-  const [problemopen, setProblemopen] = useState(true);
+  const [problemopen, setProblemopen] = useState(false);
   const { lastScore, updateScore } = useScore();
   const [selectedCategory, setSelectedCategory] = useState("카드결제");
 

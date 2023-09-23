@@ -163,19 +163,9 @@
   margin-top: 5vw;
 }
 
-.payment-button p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2vw;
-  margin-top: 12vw;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100%);
+.payment-button button {
+  font-size: 1.5vw;
   background-color: #223e72;
-  display: flex;
-  justify-content: center;
   color: white;
   padding-top: 1vw;
   padding-bottom: 1vw;
@@ -183,19 +173,18 @@
   cursor: pointer;
 }
 
-.payment-button button {
+.payment-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-size: 1.5vw;
-  margin-top: 15.3vw;
+  bottom: 0;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100%);
   background-color: #223e72;
-  display: flex;
-  justify-content: center;
   color: white;
   padding-top: 1vw;
   padding-bottom: 1vw;
