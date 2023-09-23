@@ -17,16 +17,6 @@
   font-size: 1.5vw;
 }
 
-#talk {
-  width: 100%;
-  height: 400px;
-  overflow-y: auto;
-  border-radius: 18px;
-  position: relative;
-  flex-grow: 1; /* 채팅 내용 영역이 남은 공간을 모두 차지하도록 설정 */
-  overflow-y: auto; /* 채팅 내용이 넘치면 스크롤이 나타나도록 설정 */
-}
-
 .talk-shadow {
   position: absolute;
   top: 0;
@@ -36,21 +26,52 @@
 }
 
 #talk div {
-  width: 60%;
-  display: block;
-  padding: 10px;
+  padding: 0.2vw;
   border-radius: 10px;
   box-sizing: border-box;
 }
-
+#talk {
+  width: 100%;
+  padding: 1vw;
+  overflow-y: auto;
+  border-radius: 1vw;
+  position: relative;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.ChatSender {
+  font-weight: bold;
+  font-size: 1vw;
+}
+.message-content {
+  font-size: 1.2vw;
+}
+.message-timestamp {
+  font-size: 0.9vw;
+}
 #talk div.me {
   background-color: #4682a9;
-  margin: 0px 0px 20px 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 0.5vw;
+  max-width: 60%;
+  margin-left: auto;
+  color: white;
+  padding: 0.7vw;
 }
 
 #talk div.other {
   background-color: #749bc2;
-  margin: 20px 0px 2px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 5vw;
+  max-width: 60%;
+  margin-right: auto;
+  padding: 0.7vw;
 }
 
 #sendZone {

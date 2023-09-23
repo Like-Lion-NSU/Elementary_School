@@ -24,7 +24,7 @@ const PostPage = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }).then((response) => {
-          checkedLike = response.data.data.postLiked.delete;
+          checkedLike = response.data.data.postLiked;
           console.log(response.data.data);
           console.log(response.data.data.photos);
           setSelectedPost(response.data.data);
@@ -55,13 +55,13 @@ const PostPage = () => {
     return <div>게시물을 불러오는 중 오류가 발생했습니다.</div>;
   }
 
-  const { title, memberId, content, likeCount, viewCount, comments, photos } =
+  const { title, email, content, likeCount, viewCount, comments, photos } =
     selectedPost;
   return (
     <div>
       <Sidebar />
       <div className="post-container">
-        <PostHeader title={title} authorEmail={memberId} />
+        <PostHeader title={title} authorEmail={email} />
         <PostMain
           postId={postId}
           category={category}
@@ -69,7 +69,7 @@ const PostPage = () => {
           content={content}
           likes={likeCount}
           views={viewCount}
-          imageUrl={photos[0].photoUrl}
+          imageUrl={photos[0]}
         />
         {category === "소통해요" || category === "질문해요" ? (
           <PostLike
