@@ -29,9 +29,6 @@ function BoardTableC({ res }) {
           </tbody>
         </table>
       </div>
-      <Link to="/writePost" className="board-write-button">
-        글쓰기
-      </Link>
     </div>
   );
 }

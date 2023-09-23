@@ -92,9 +92,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  bottom: 0;
   font-size: 1.5vw;
-  margin-top: 5.7vw;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

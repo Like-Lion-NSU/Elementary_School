@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 
-function KorailLastBody({ lastScore, setScore }) {
-  const [passengerCount, setPassengerCount] = useState({
-    adult: 1,
-    child: 0,
-    infant: 0,
-    senior: 0,
-    severeDisability: 0,
-    mildDisability: 0,
-  });
-
+function KorailLastBody({
+  lastScore,
+  setScore,
+  passengerCount,
+  setPassengerCount,
+}) {
   const [isPassengerTabOpen, setIsPassengerTabOpen] = useState(false);
 
   const openPassengerTab = () => {
@@ -55,41 +51,41 @@ function KorailLastBody({ lastScore, setScore }) {
   };
 
   return (
-    <div className='korail-last-body'>
-      <div className='passenger-count-box' onClick={openPassengerTab}>
-        <div className='passenger-count-label'>승객 연령 및 좌석수</div>
-        <div className='passenger-count-select'>
+    <div className="korail-last-body">
+      <div className="passenger-count-box" onClick={openPassengerTab}>
+        <div className="passenger-count-label">승객 연령 및 좌석수</div>
+        <div className="passenger-count-select">
           어른 {passengerCount.adult}명
         </div>
       </div>
 
       {isPassengerTabOpen && (
-        <div className='passenger-tab'>
-          <div className='passenger-type'>
+        <div className="passenger-tab">
+          <div className="passenger-type">
             어른(만 13세 이상)
             <button onClick={() => handleDecrement("adult")}>−</button>
             {passengerCount.adult}
             <button onClick={() => handleIncrement("adult")}>+</button>
           </div>
-          <div className='passenger-type'>
+          <div className="passenger-type">
             어린이(만 6-12세)
             <button onClick={() => handleDecrement("child")}>−</button>
             {passengerCount.child}
             <button onClick={() => handleIncrement("child")}>+</button>
           </div>
-          <div className='passenger-type'>
+          <div className="passenger-type">
             유아(만 6세 미만)
             <button onClick={() => handleDecrement("infant")}>−</button>
             {passengerCount.infant}
             <button onClick={() => handleIncrement("infant")}>+</button>
           </div>
-          <div className='passenger-type'>
+          <div className="passenger-type">
             경로(만 65세 이상)
             <button onClick={() => handleDecrement("senior")}>−</button>
             {passengerCount.senior}
             <button onClick={() => handleIncrement("senior")}>+</button>
           </div>
-          <div className='passenger-type'>
+          <div className="passenger-type">
             중증 장애인
             <button onClick={() => handleDecrement("severeDisability")}>
               −
@@ -99,14 +95,14 @@ function KorailLastBody({ lastScore, setScore }) {
               +
             </button>
           </div>
-          <div className='passenger-type'>
+          <div className="passenger-type">
             경증 장애인
             <button onClick={() => handleDecrement("mildDisability")}>−</button>
             {passengerCount.mildDisability}
             <button onClick={() => handleIncrement("mildDisability")}>+</button>
           </div>
 
-          <button className='apply-button' onClick={applyPassengerSelection}>
+          <button className="apply-button" onClick={applyPassengerSelection}>
             적용
           </button>
         </div>

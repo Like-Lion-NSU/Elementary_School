@@ -7,7 +7,7 @@ import KorailHeader from "../korail/korailHeader";
 import { ScoreProvider, useScore } from "../korail/context";
 
 const KorailSeat = () => {
-  const [problemopen, setProblemopen] = useState(true);
+  const [problemopen, setProblemopen] = useState(false);
   const { lastScore, updateScore } = useScore();
   const [isProblemVisible, setIsProblemVisible] = useState(false);
 

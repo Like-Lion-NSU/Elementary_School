@@ -110,7 +110,7 @@ const Write = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="">카테고리를 입력해주세요</option>
+            <option value="">카테고리를 선택해주세요</option>
             <option value="소통해요">소통해요</option>
             <option value="질문해요">질문해요</option>
           </select>

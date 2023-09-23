@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../sidebar/sidebar";
 import BoardHeader from "./boardHeader";
-import BoardTable from "./boardTable";
+import BoardTableC from "./boardTableC";
 import axios from "axios";
 
 function Userpost() {
@@ -47,7 +47,7 @@ function Userpost() {
     <div>
       <Sidebar />
       <BoardHeader boardTitle={category} />
-      <BoardTable res={res} />
+      <BoardTableC res={res} />
     </div>
   );
 }
