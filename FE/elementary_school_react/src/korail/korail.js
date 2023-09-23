@@ -14,7 +14,18 @@ const Korail = () => {
   const [problemopen, setProblemopen] = useState(true);
   const { lastScore, updateScore } = useScore();
   const [selectedCategory, setSelectedCategory] = useState("편도");
-
+  const [departure, setDeparture] = useState("영등포");
+  const [arrival, setArrival] = useState("영등포");
+  const [selectedDate, setSelectedDate] = useState("23일(토)");
+  const [selectedTime, setSelectedTime] = useState("00시");
+  const [passengerCount, setPassengerCount] = useState({
+    adult: 1,
+    child: 0,
+    infant: 0,
+    senior: 0,
+    severeDisability: 0,
+    mildDisability: 0,
+  });
   // useEffect(() => {
   //   const fetchMyPage = async () => {
   //     try {
@@ -82,8 +93,8 @@ const Korail = () => {
           setProblemopen={setProblemopen}
         />
         <Sidebar />
-        <div className='left-panel'></div>
-        <div className='center-panel'>
+        <div className="left-panel"></div>
+        <div className="center-panel">
           <KorailHeader lastScore={lastScore} setProblemopen={setProblemopen} />
           <KorailMenu
             selectedCategory={selectedCategory}
@@ -91,14 +102,39 @@ const Korail = () => {
             setScore={updateScore}
             lastScore={lastScore}
           />
-          <div className='korail-body'>
-            <KorailFirstBody setScore={updateScore} lastScore={lastScore} />
-            <KorailSecondBody setScore={updateScore} lastScore={lastScore} />
-            <KorailLastBody setScore={updateScore} lastScore={lastScore} />
-            <KorailFooter />
+          <div className="korail-body">
+            <KorailFirstBody
+              setScore={updateScore}
+              lastScore={lastScore}
+              departure={departure}
+              setDeparture={setDeparture}
+              arrival={arrival}
+              setArrival={setArrival}
+            />
+            <KorailSecondBody
+              setScore={updateScore}
+              lastScore={lastScore}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              selectedTime={selectedTime}
+              setSelectedTime={setSelectedTime}
+            />
+            <KorailLastBody
+              setScore={updateScore}
+              lastScore={lastScore}
+              passengerCount={passengerCount}
+              setPassengerCount={setPassengerCount}
+            />
+            <KorailFooter
+              departure={departure}
+              arrival={arrival}
+              selectedDate={selectedDate}
+              selectedTime={selectedTime}
+              passengerCount={passengerCount}
+            />
           </div>
         </div>
-        <div className='right-panel'></div>
+        <div className="right-panel"></div>
       </KorailLayout>
     </ScoreProvider>
   );

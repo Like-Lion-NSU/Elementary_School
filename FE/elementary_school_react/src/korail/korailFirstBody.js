@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "../css/korailBody.css";
 
-function KorailFirstBody({ setScore, lastScore }) {
-  const [departure, setDeparture] = useState("영등포");
-  const [arrival, setArrival] = useState("영등포");
-
+function KorailFirstBody({
+  setScore,
+  lastScore,
+  departure,
+  setDeparture,
+  arrival,
+  setArrival,
+}) {
   const [selectingDeparture, setSelectingDeparture] = useState(false);
   const [selectingArrival, setSelectingArrival] = useState(false);
 
@@ -64,29 +68,29 @@ function KorailFirstBody({ setScore, lastScore }) {
   };
 
   return (
-    <div className='korail-body-station'>
-      <div className='stations'>
-        <div className='station'>
-          <div className='station-label'>출발</div>
-          <div className='station-select-box' onClick={handleDepartureClick}>
-            <div className='station-select'>{departure}</div>
+    <div className="korail-body-station">
+      <div className="stations">
+        <div className="station">
+          <div className="station-label">출발</div>
+          <div className="station-select-box" onClick={handleDepartureClick}>
+            <div className="station-select">{departure}</div>
           </div>
         </div>
-        <div className='exchange-icon'>→</div>
+        <div className="exchange-icon">→</div>
 
-        <div className='station'>
-          <div className='station-label'>도착</div>
-          <div className='station-select-box' onClick={handleArrivalClick}>
-            <div className='station-select'>{arrival}</div>
+        <div className="station">
+          <div className="station-label">도착</div>
+          <div className="station-select-box" onClick={handleArrivalClick}>
+            <div className="station-select">{arrival}</div>
           </div>
         </div>
       </div>
       {(selectingDeparture || selectingArrival) && (
-        <div className='region-buttons'>
+        <div className="region-buttons">
           {regions.map((region) => (
             <button
               key={region}
-              className='region-button'
+              className="region-button"
               onClick={() => handleRegionClick(region)}
             >
               {region}

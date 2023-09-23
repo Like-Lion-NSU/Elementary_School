@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import "../css/korailBody.css";
 
-function KorailSecondBody({ setScore, lastScore }) {
+function KorailSecondBody({
+  setScore,
+  lastScore,
+  selectedDate,
+  setSelectedDate,
+  selectedTime,
+  setSelectedTime,
+}) {
   const [currentDate, setCurrentDate] = useState(
     new Date("2023-09-23T00:00:00")
   );
   const [dateTabOpen, setDateTabOpen] = useState(false);
   const [timeTabOpen, setTimeTabOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("23일(토)");
-  const [selectedTime, setSelectedTime] = useState("00시");
-
   const toggleDateTimeTabs = () => {
     setDateTabOpen(!dateTabOpen);
     setTimeTabOpen(!timeTabOpen);
@@ -49,7 +53,7 @@ function KorailSecondBody({ setScore, lastScore }) {
       "30일(토)",
     ];
     return (
-      <div className='date-tabs'>
+      <div className="date-tabs">
         {importantDates.map((date) => (
           <div
             key={date}
@@ -68,7 +72,7 @@ function KorailSecondBody({ setScore, lastScore }) {
       i < 10 ? `0${i}시` : `${i}시`
     );
     return (
-      <div className='time-tabs'>
+      <div className="time-tabs">
         {hours.map((hour) => (
           <div
             key={hour}
@@ -83,10 +87,10 @@ function KorailSecondBody({ setScore, lastScore }) {
   };
 
   return (
-    <div className='korail-body-date-time'>
-      <div className='date-box' onClick={toggleDateTimeTabs}>
-        <div className='date-label'>출발일</div>
-        <div className='date-select'>
+    <div className="korail-body-date-time">
+      <div className="date-box" onClick={toggleDateTimeTabs}>
+        <div className="date-label">출발일</div>
+        <div className="date-select">
           {currentDate.toLocaleDateString()}{" "}
           {currentDate.toLocaleTimeString([], {
             hour: "2-digit",
@@ -98,7 +102,7 @@ function KorailSecondBody({ setScore, lastScore }) {
         <>
           {generateDateTabs()}
           {generateTimeTabs()}
-          <button className='apply-button' onClick={applySelection}>
+          <button className="apply-button" onClick={applySelection}>
             적용
           </button>
         </>
