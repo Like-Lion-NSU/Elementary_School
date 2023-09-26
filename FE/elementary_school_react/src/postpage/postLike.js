@@ -22,7 +22,7 @@ const PostLike = ({ category, postId, checkedLike }) => {
     const accessToken = getCookieValue("accessToken");
     if (!liked) {
       await axios({
-        method: "POST",
+        method: "PUT",
         url: `/v1/post/${category}/${postId}/like`,
         headers: {
           Authorization: `Bearer ${accessToken}`,

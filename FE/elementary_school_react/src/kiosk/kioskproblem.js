@@ -56,7 +56,7 @@ const Kioskproblem = ({ problemopen, setProblemopen }) => {
         <img src={img1} className="kioskProblem_img"></img>
         <div className="kioskProblem_list">
           <ol>
-            <li>1번 문제 ) 아메리카노 연하게 1잔</li>
+            <li>1번 문제 ) 아이스아메리카노 연하게 1잔</li>
             <li>2번 문제 ) 아이스티 1샷추가 1잔</li>
             <li>3번 문제 ) 리얼초코프라페 휘핑O 1잔</li>
             <li>4번 문제 ) 포장</li>

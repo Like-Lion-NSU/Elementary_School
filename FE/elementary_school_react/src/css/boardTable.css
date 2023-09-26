@@ -45,3 +45,19 @@
   cursor: pointer;
   transition: box-shadow 0.3s ease-in-out;
 }
+@media (max-width: 450px) {
+  .board-table {
+    width: 100vw;
+  }
+  .board-write-button {
+    margin-left: auto;
+    width: 8vh;
+    height: 4vh;
+    font-size: 1.7vh;
+    font-weight: bold;
+    margin-right: 1vh;
+  }
+  .board-table-container {
+    width: 100vw;
+  }
+}

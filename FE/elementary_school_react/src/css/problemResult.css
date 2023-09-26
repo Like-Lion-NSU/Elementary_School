@@ -1,4 +1,4 @@
-.ResultHeader {
+.kioskResultHeader {
   background-color: #ffc519;
   text-align: center;
   display: flex;
@@ -7,7 +7,7 @@
   font-weight: bold;
   padding: 0.5vw;
 }
-.ResultHeader div {
+.kioskResultHeader div {
   width: 14vw;
   font-size: 1.2vw;
   padding: 0.1vw;

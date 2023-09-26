@@ -88,7 +88,7 @@ const Write = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       }).then((result) => {
         console.log(result);
-        window.location.href = "/home";
+        window.location.href = `/${category}/posts`;
       });
     } catch (error) {
       console.error("글 수정 중 에러가 발생했습니다.", error);
@@ -138,19 +138,9 @@ const Write = () => {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <div>
-          <input
-            type="file"
-            id="attachments"
-            name="attachments"
-            className="write-input"
-            accept="image/*,video/*"
-            onChange={handleFileChange}
-          />
-        </div>
         <div>{error && <div className="error-message">{error}</div>}</div>
         <button type="submit" className="write-button">
-          글쓰기 완료
+          글쓰기
         </button>
         <button
           type="button"

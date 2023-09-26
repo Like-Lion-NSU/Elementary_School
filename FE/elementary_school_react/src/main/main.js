@@ -101,7 +101,7 @@ const Main = () => {
               <span role="img" aria-label="practice">
                 📱
               </span>
-              <div className="mainE-role">연습하기</div>
+              <div className="mainE-role">연습해요</div>
             </Link>
             <Link to="/chatlist" className="mainE-button">
               <span role="img" aria-label="information">

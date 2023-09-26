@@ -3,8 +3,12 @@ import Stomp from "stompjs";
 import "../css/chat.css";
 import Sidebar from "../sidebar/sidebar.js";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const ChatComponent = () => {
+  const [premessage, setPremessage] = useState([]);
+  const [otheremail, setOtheremail] = useState("");
+  const [nowuserId, setNowuserId] = useState("");
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [stompClient, setStompClient] = useState(null); // WebSocket 클라이언트 객체를 업데이트하거나 초기화
@@ -13,6 +17,34 @@ const ChatComponent = () => {
   const room = location.state.room;
 
   useEffect(() => {
+    function getCookieValue(cookieName) {
+      const cookies = document.cookie.split(";");
+      for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split("=");
+        if (name === cookieName) {
+          return value;
+        }
+      }
+    }
+
+    async function getMessage() {
+      const accessToken = getCookieValue("accessToken");
+      try {
+        const response = await axios({
+          method: "GET",
+          url: `/v1/premessage/${room}`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setNowuserId(response.data.clientId);
+        setOtheremail(response.data.otherMemberEmail);
+        setPremessage(response.data.chatMessages);
+      } catch (error) {
+        console.log("이전 채팅불러오다가 에러", error);
+      }
+    }
+    getMessage();
     const socket = new WebSocket("ws://115.85.183.239:8081/ws-stomp"); // WebSocket 주소로 수정해야 합니다.
 
     const client = Stomp.over(socket);
@@ -58,7 +90,7 @@ const ChatComponent = () => {
     const data = {
       content: messag.content,
       sender: messag.sender,
-      timestamp: message.timestamp,
+      timestamp: messag.timestamp,
     };
     setChatMessages((prevChatMessages) => [...prevChatMessages, data]);
   };
@@ -110,6 +142,9 @@ const ChatComponent = () => {
     }
   };
 
+  // console.log(otherEmail);
+  // console.log(nowuserId);
+
   return (
     <div>
       <Sidebar />
@@ -118,6 +153,20 @@ const ChatComponent = () => {
         <div className="chatContainer">
           <div id="talk">
             <div className="talk-shadow"></div>
+            {premessage.map((msg, index) => (
+              <div
+                key={index}
+                className={msg.senderId === nowuserId ? "me" : "other"}
+              >
+                {msg.senderId !== nowuserId && (
+                  <span>
+                    <b>{otheremail}</b>
+                  </span>
+                )}
+                <div className="message-content">{msg.message}</div>
+                <div className="message-timestamp">{msg.timestamp}</div>
+              </div>
+            ))}
             {chatMessages.map((msg, index) => (
               <div
                 key={index}
