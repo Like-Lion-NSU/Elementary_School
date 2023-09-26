@@ -71,12 +71,13 @@ public class CustomOAuth2UserServiceTest extends DefaultOAuth2UserService {
 
         return memberRepository.save(member);
     }
+
     private Member createUser(OAuth2UserInfo userInfo, AuthProvider authProvider) {
         Member member = Member.builder()
                 .name(userInfo.getName())
                 .email(userInfo.getEmail())
-                .role("STUDENT")
                 .point(100L)
+                .role("NOT_ROLE")
                 .provider(authProvider)
                 .lastLogin(LocalDateTime.now())
                 .build();

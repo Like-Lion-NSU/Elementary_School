@@ -3,14 +3,19 @@ package thisisus.school.member.service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.dto.MemberInfoDto;
 import thisisus.school.member.etc.MemberNotFoundException;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
+import thisisus.school.post.domain.Post;
 
-import java.util.Optional;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
-    private Member findMember(CustomUserDetails customUserDetails) {
+    public Member findMember(CustomUserDetails customUserDetails) {
         Member findMember = memberRepository.findByEmail(customUserDetails.getEmail()).get();
         return findMember;
     }
@@ -30,7 +35,7 @@ public class MemberService {
 
 //        Optional<Member> findMember = memberRepository.findByEmail(customUserDetails.getEmail());
 
-        if (member != null) {
+        if (member == null) {
             LOGGER.info("[오류] 해당 {}가 존재하지 않습니다.", customUserDetails.getName());
             LOGGER.info("[오류] {} 역할 수정 실패", customUserDetails.getName());
             return ;
@@ -39,7 +44,7 @@ public class MemberService {
 //        Member member = findMember
 //                .map(entity -> entity.setRole("TEACHER"))
 //                .get();
-        member.setRole("TEACHER");
+        member.setRole(value);
         memberRepository.save(member);
         return ;
     }
@@ -86,8 +91,19 @@ public class MemberService {
     }
 
 
-    public void deleteMember(CustomUserDetails customUserDetails) {
-        Member deleteMember = findMember(customUserDetails);
-        memberRepository.deleteById(deleteMember.getId());
+    @Transactional
+    public ResponseEntity<String> deleteMember(CustomUserDetails customUserDetails) {
+        try {
+            Member member = findMember(customUserDetails);
+//            List<Post> posts = member.getPosts();
+//            for(Post post : posts){
+//                post.delete();
+//            }
+//            memberRepository.delete(member);
+            member.delete();
+            return ResponseEntity.status(HttpStatus.OK).body("Member deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting member");
+        }
     }
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/home")
+@RequestMapping("/v1")
 public class AuthController {
 
     private final AuthService authService;
@@ -21,7 +21,7 @@ public class AuthController {
         return ResponseEntity.ok().body(authService.refreshToken(request, response, accessToken));
     }
 
-    @GetMapping(value = "token")
+    @GetMapping(value = "/token")
     public String token(@RequestParam String token, @RequestParam String error) {
         if (StringUtils.isNotBlank(error)) {
             return error;

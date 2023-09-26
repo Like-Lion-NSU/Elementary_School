@@ -1,0 +1,193 @@
+.selected {
+  background-color: transparent;
+  color: #223e72;
+  font-weight: bold;
+}
+
+.korail-body-station {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.stations {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  height: 10vw;
+}
+
+.exchange-icon {
+  margin: 5vw 10vw;
+  font-size: 4vh;
+}
+
+.station {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.station-label {
+  margin-bottom: 1vw;
+}
+
+.station-select-box {
+  color: #223e72;
+  font-size: 4vh;
+}
+
+.korail-menu-item {
+  border: none;
+}
+
+.region-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.region-buttons {
+  display: flex;
+  margin-bottom: 1vw;
+}
+
+.date-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+  cursor: pointer;
+}
+
+.time-tabs {
+  padding: 1vw 0vw;
+  display: flex;
+  flex-wrap: wrap;
+  width: 65vh;
+  gap: 1vw;
+  cursor: pointer;
+}
+
+.date-label {
+  font-size: 1vw;
+  margin-bottom: 1vw;
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vw;
+  font-size: 1.5vw;
+  margin-top: 1.5vw;
+}
+
+.date-select {
+  color: #223e72;
+}
+
+.korail-body-date-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apply-button {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 2vw;
+  font-size: 1vw;
+  border: 0.1vw solid #d2d2d2;
+  border-radius: 100vw;
+  padding: 0.2vw 0.5vw;
+  cursor: pointer;
+}
+
+.passenger-count-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0vw;
+}
+
+.passenger-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.passenger-tab button {
+  border: 0.1vw solid #d2d2d2;
+  background-color: transparent;
+  border-radius: 100vw;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  margin-bottom: 0.3vw;
+}
+
+.passenger-type {
+  display: flex;
+  align-items: center;
+}
+
+.passenger-count-label {
+  margin-bottom: 1vw;
+}
+
+.passenger-count-select {
+  margin-bottom: 2vw;
+  font-size: 1.5vw;
+  color: #223e72;
+}
+
+.ticket-price div {
+  display: flex;
+  justify-content: space-between;
+  width: 30vw;
+  font-size: 1.5vw;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vw;
+  color: #223e72;
+  margin-top: 5vw;
+}
+
+.payment-button button {
+  font-size: 1.5vw;
+  background-color: #223e72;
+  color: white;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  border: none;
+  cursor: pointer;
+}
+
+.payment-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.5vw;
+  bottom: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100%);
+  background-color: #223e72;
+  color: white;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  border: none;
+  cursor: pointer;
+}

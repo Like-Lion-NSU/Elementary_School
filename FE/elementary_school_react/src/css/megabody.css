@@ -1,0 +1,42 @@
+.C-bodySection {
+  position: relative;
+  bottom: 3.1vh;
+  overflow-x: none;
+  overflow-y: scroll;
+  height: 51vh;
+}
+.mega-C-table {
+  display: flex;
+  justify-content: center;
+}
+.mega-C-info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+}
+.mega-C-td {
+  border: 1.5px solid #ffc519;
+  background-color: white;
+  cursor: pointer;
+}
+.mega-C-td:hover {
+  border: 1.5px solid red;
+}
+.C-bev_name {
+  margin: 0;
+  font-size: 1vw;
+  font-weight: bolder;
+}
+.mega-C-price {
+  margin: 0;
+  color: red;
+  font-size: 0.9vw;
+}
+.mega-C-img {
+  width: 13vw;
+  height: 25vh;
+}
+.mega-C-tbody {
+  background-color: #ffc519;
+}

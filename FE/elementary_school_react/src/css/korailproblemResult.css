@@ -1,0 +1,45 @@
+.ResultHeader {
+  background-color: #223e72;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 0.5vw;
+}
+.ResultHeader div {
+  width: 14vw;
+  font-size: 1.2vw;
+  padding: 0.1vw;
+}
+#ResultQ {
+  padding: 0.5vw;
+  margin: 0;
+  font-size: 1.3vw;
+}
+#goHome {
+  width: 7vw;
+  padding: 0.3vw;
+  float: right;
+  cursor: pointer;
+}
+.resultCenter {
+  text-align: center;
+  font-size: 1.2vw;
+  margin: 1vw;
+}
+.resultFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resultFlex div {
+  margin: 0.3vw;
+}
+.resultLeft {
+  font-size: 1.5vw;
+}
+.resultRight {
+  font-size: 1.7vw;
+  font-weight: bold;
+}

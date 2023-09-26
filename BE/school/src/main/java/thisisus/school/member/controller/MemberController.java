@@ -1,26 +1,25 @@
 package thisisus.school.member.controller;
 
+
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.jwt.JwtTokenProvider;
 import thisisus.school.member.security.service.CustomUserDetails;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/v1")
 public class MemberController {
 
     private final MemberRepository memberRepository;
@@ -30,6 +29,16 @@ public class MemberController {
     public String index() {
         return "/index";
     }*/
+
+    @GetMapping("/home")
+    public ResponseEntity<String> main(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (customUserDetails != null) {
+            return ResponseEntity.ok("인가된 사용자");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
+
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('STUDENT')")

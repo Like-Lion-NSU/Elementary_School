@@ -1,12 +1,16 @@
 package thisisus.school.member.security.config;
 
 
+
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.security.jwt.JwtTokenProvider;
+import thisisus.school.member.security.service.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import thisisus.school.member.security.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -37,6 +41,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private final JwtTokenProvider jwtTokenProvider;
     private final CookieAuthorizationRequestRepository cookieAuthorizationRequestRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(OAuth2AuthenticationSuccessHandler.class);
+    private final MemberRepository memberRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -84,11 +89,18 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             throw new RuntimeException(e);
         }
 
+        CustomUserDetails member = (CustomUserDetails) authentication.getPrincipal();
+        Member findMember = memberRepository.getByEmail(member.getEmail());
+
+        if (findMember.getRole().equals("NOT_ROLE")) {
+            return UriComponentsBuilder.fromUriString("http://115.85.183.239/role")
+                    .build().toString();
+        }
 
 //         본 코드
 //        MemberResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication, response);
         LOGGER.info("[JWT 생성 완료]");
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/main")
+        return UriComponentsBuilder.fromUriString("http://115.85.183.239/home")
 //                .queryParam("TOKEN", tokenInfo.getAccessToken())
 //                .queryParam("REFRESH_TOKEN", tokenInfo.getRefreshToken())
                 .build().toString();
@@ -121,4 +133,3 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         return false;
     }
 }
-

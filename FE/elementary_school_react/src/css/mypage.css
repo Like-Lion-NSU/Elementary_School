@@ -1,0 +1,92 @@
+a{
+    text-decoration: none;
+}
+.myJCenter{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    height: 90vh; 
+    text-align: center;
+}
+.myJContainer{
+    background-color: #F6F4EB;
+    padding: 2vw;
+    border-radius: 3vw;
+}
+.myJContainer div{
+    margin: 0.5vw 0;
+}
+.myJRole{
+    font-size: 2vw;
+}
+.myJCenter img{
+    width: 7vw;
+}
+.myJMail{
+    font-size: 1.5vw;
+}
+.myJPoint{
+    font-size: 1.2vw;
+    border-radius: 2vw;
+    padding: 0.5vw 1vw;
+    margin: 0.5vw 0;
+    display: inline-block;
+}
+.myJCommu div{
+    padding: 1vw;
+    margin:0.1vw;
+    width:20vw;
+    background-color: #fff;
+    font-size: 1.2vw;
+    border: 1px solid #749BC2;
+    border-radius: 1vh;
+    margin-bottom: 0.7vh;
+}
+.myJCommu div a{
+    color:#749BC2;
+}
+
+.myJDrop{
+    color:gray;
+    padding:1vw;
+    padding-bottom: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+.myJdropUser{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(70, 130, 169, 0.8); /* 배경 어둡게 처리 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myJuserDropContent{
+    background-color: #F6F4EB;
+    padding:1vw;
+    border-radius: 30px;
+    box-shadow: 10px 10px 0 rgb(53, 103, 136, 0.8);
+}
+.myJdropFlex{
+    display: flex;
+    justify-content: space-between;
+}
+.myJdropButton{
+    font-size:2vw;
+    width:15vw;
+    border-radius: 10px;
+    padding:0.4vw;
+    text-align: center;
+    margin:0.5vw;
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+    font-weight: bold;
+}
+h1{
+    font-size: 2vw;
+}

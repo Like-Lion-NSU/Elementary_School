@@ -1,0 +1,71 @@
+.shJproductWrapper {
+  width: 70vw;
+  margin: 1vw auto;
+}
+
+.shJcolumns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0px;
+  justify-content: center;
+}
+
+.shJcard {
+  display: inline-block;
+  box-shadow: 0px 1px 3px #91c8e4;
+  width: 16vw;
+  text-align: center;
+  margin: 1vw auto;
+  padding: 0.5vw;
+}
+
+.shJcard img {
+  width: 14vw;
+  height: 14vw;
+  border-bottom: 1.5px solid #91c8e4;
+  margin: 0.5vw;
+}
+
+.shJname {
+  text-align: center;
+}
+.shJname div {
+  margin-bottom: 0.5vw;
+}
+.shJtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw;
+}
+.shJpoint {
+  font-size: 1vw;
+}
+#shJproductFoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shJbox {
+  cursor: pointer;
+  width: 1vw;
+  height: 1vw;
+  padding: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5vw;
+  border: 1px solid #4682a9;
+}
+
+.shJbox.shJactive {
+  background-color: #4682a9;
+  color: #fff;
+}
+.shJicon {
+  cursor: pointer;
+  margin: 0.5vw;
+}
+.shJTitle {
+  font-size: 2vw;
+}

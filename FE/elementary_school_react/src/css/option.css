@@ -1,0 +1,134 @@
+.opJOption{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 51.5vw;
+    height: 95vh; 
+}
+.opJHead{
+    font-weight: bold;
+    font-size:1.5vw;
+    background-color: #FDD000;
+    padding:0.5vw 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.opJImgFlex{
+    display: flex;
+    align-items: center;
+    margin:0 2vw;
+    font-weight: bold;
+}
+.opJCoffeeImg{
+    width:10vw;
+}
+.opJTPE{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+.opJTPE div{
+    margin: 0.5vw 0;
+}
+.opJTitlePrice{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.opJTitle{
+    font-size: 1.5vw;
+}
+.opJPrice{
+    color:red;
+    font-size: 2vw;
+}
+.opJExpain{
+    font-size: 1vw;
+}
+.opJSelectOption{
+    display: flex;
+    justify-content: space-between;
+    background-color: #e3e3e3;
+    padding:1vw;
+    font-size: 1vw;
+    font-weight: bold;
+}
+.opJSelectOption div{
+    border-radius: 50px;
+    padding:0.5vw;
+}
+.opJInnerSelect{
+    background-color: #fff;
+    width: 50vw;
+}
+.opJReset{
+    background-color: red;
+    color: #fff;
+    width: 5vw;
+    text-align: center;
+    cursor: pointer;
+}
+.opJShotSelect{
+    margin:1.5vw;
+    font-weight: bold;
+}
+.opJSelects{
+    display: flex;
+    background-color: rgb(233, 231, 231);
+    padding: 1vw;
+}
+.opJSelectTitle{
+    background-color: rgb(233, 231, 231);
+    padding: 0.5vw;
+    border-radius: 10px 10px 0 0;
+    font-size: 1vw;
+}
+.opJSelectsProduct{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    width: 9vw;
+    margin: 0 0.5vw;
+    padding: 0.3vw 0.1vw;
+    border-radius: 10px;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border: 2px solid rgb(233, 231, 231);
+}
+.opJSelectsProduct.selected {
+    border: 2px solid red;
+  }
+.opJSelectImg{
+    width:7vw;
+    margin: 0.3vw;
+}
+.opJSelectPrice{
+    color:red;
+}
+.opJButton{
+    display: flex;
+    justify-content: center;
+}
+.opJBtnStyle{
+    width: 10vw;
+    color:white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5vw;
+    padding: 0.5vw 1.5vw;
+    cursor: pointer;
+    margin: 0 0.5vw;
+    border-radius: 10px;
+    margin-bottom: 2vw;
+}
+.opJCancel{
+    background-color: black;
+    
+}
+.opJPut{
+    background-color: red;
+}

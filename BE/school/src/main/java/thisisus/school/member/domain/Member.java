@@ -1,27 +1,23 @@
 package thisisus.school.member.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import thisisus.school.common.BaseEntity;
 import thisisus.school.member.security.util.AuthProvider;
+import thisisus.school.post.domain.Comment;
+import thisisus.school.post.domain.Post;
+import thisisus.school.post.domain.PostLiked;
+import thisisus.school.socket.model.MemberChatRoom;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Data
 @ToString
 @NoArgsConstructor
-public class Member{
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +38,17 @@ public class Member{
 
     private String refreshToken;
 
+    @OneToMany(mappedBy = "member")
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<PostLiked> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberChatRoom> memberChatRooms = new ArrayList<>();
 
     public Member update(String name) {
         this.name = name;
@@ -62,8 +69,20 @@ public class Member{
         this.point = point;
         this.lastLogin = lastLogin;
         this.provider = provider;
+        this.setDeleted(false);
     }
 
+    public void delete(){
+        this.name=null;
+        this.email=null;
+        this.role=null;
+        this.point=null;
+        this.lastLogin=null;
+        this.provider=null;
+        this.refreshToken=null;
+        this.setUpdateAt(null);
+        this.setDeleted(true);
+    }
 
 //    @JsonIgnore     // 양뱡향 관계에서는 한쪽에 JsonIgnor를 하지 않으면 무한루프에 걸림!
 //    @OneToMany(mappedBy = "member")

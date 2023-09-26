@@ -1,46 +1,32 @@
-package com.example.thisisustest.member.controller;
+package thisisus.school.member.controller;
+
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/social")
 public class SocialLoginController {
 
     private final MemberService memberService;
+    private final Logger LOGGER = LoggerFactory.getLogger(SocialLoginController.class);
 
-    @GetMapping("/social")
-    public String social() {
-        return "social";
+    @PostMapping("/v1/role/decide")
+    public ResponseEntity<String> setRole(@RequestParam String role, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        LOGGER.info("[value] value : {}", role);
+        LOGGER.info("[customUserDetails] customUserDetails : {}", customUserDetails);
+
+        memberService.SetRole(role, customUserDetails);
+
+
+        return ResponseEntity.status(HttpStatus.OK).body("Role set successfully");
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/social/google")
-    public String redirectGoogle() {
-        return "redirect:/oauth2/authorization/google";
-    }
-
-    @GetMapping("/social/kakao")
-    public String redirectKakao() {
-        return "redirect:/oauth2/authorization/kakao";
-    }
-
-    @PostMapping("role/decide")
-    public String setRole(@RequestParam String value, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
-        if (value.equals("TEACHER")) {
-            memberService.SetRole(value, customUserDetails);
-        }
-
-        return "redirect:/http://localhost:8081/mypage";
-    }
 }

@@ -5,24 +5,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import thisisus.school.member.dto.MemberInfoDto;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1")
 public class MypageController {
 
     private final MemberService memberService;
 
 
     @GetMapping(value = "/mypage")
-    public ResponseEntity<MemberInfoDto> getMyPage( @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public ResponseEntity<MemberInfoDto> getMyPage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         try {
             MemberInfoDto memberInfo = memberService.getMemberInfo(customUserDetails);
             return ResponseEntity.ok(memberInfo);       // Json 형태로 전달됨
@@ -34,11 +31,10 @@ public class MypageController {
         }
     }
 
-    @GetMapping("/drop")
-    public String deleteMember(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    @DeleteMapping("/drop")
+    public ResponseEntity<String> deleteMember(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        memberService.deleteMember(customUserDetails);
+        return memberService.deleteMember(customUserDetails);
 
-        return "redirect:/http://localhost:8081/login";
     }
 }
