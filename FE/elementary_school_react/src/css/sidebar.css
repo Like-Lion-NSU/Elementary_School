@@ -1,38 +1,86 @@
 .sidebar {
+  background-color: #f6f4eb;
+  padding: 1vh;
+  border-radius: 3vh;
+  width: 16vh;
+  position: fixed;
+  top: 50vh;
+  right: 10vh;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.sidebarE-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarE-list li {
+  margin-bottom: 3vh;
+  margin-top: 2.5vh;
+}
+
+.sidebarE-list li a {
+  text-decoration: none;
+  color: black;
+  font-size: 2.5vh;
+}
+
+.sidebarE-list li a:hover {
+  color: #4682a9;
+}
+
+.logologo-E {
+  width: 6vh;
+  height: 6vh;
+  margin-top: 1vh;
+}
+
+@media (max-width: 450px) {
+  .sidebar {
     background-color: #f6f4eb;
     padding: 1vh;
-    border-radius: 3vh;
-    width: 16vh;
+    border-radius: 0;
+    width: 100%;
     position: fixed;
-    top: 50vh;
-    right: 10vh;
+    top: 6vw;
+    right: 0vw;
     transform: translateY(-50%);
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0;
   }
-  
+
   .sidebarE-list {
+    width: 95vw;
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  
+
   .sidebarE-list li {
-    margin-bottom: 3vh;
-    margin-top: 2.5vh;
+    margin-bottom: 0;
+    margin-top: 0;
   }
-  
+
   .sidebarE-list li a {
     text-decoration: none;
     color: black;
-    font-size: 2.5vh;
+    font-size: 1vh;
   }
-  
+
   .sidebarE-list li a:hover {
-    color: #4682A9;
-  }  
+    color: #4682a9;
+  }
 
   .logologo-E {
-    width: 6vh;
-    height: 6vh;
+    width: 4vh;
+    height: 4vh;
     margin-top: 1vh;
   }
+}

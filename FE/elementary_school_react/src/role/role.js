@@ -72,11 +72,11 @@ const RolePage = () => {
       <h1 id="roleE-title">역할을 선택해주세요.</h1>
       <div className="role-buttons">
         <button className="roleE-button" onClick={() => roleselect("TEACHER")}>
-          <span role="img">👩‍🏫</span>
+          <span className="roleIcon">👩‍🏫</span>
           <div className="roleE-role">선생님</div>
         </button>
         <button className="roleE-button" onClick={() => roleselect("STUDENT")}>
-          <span role="img">👩‍🎓</span>
+          <span className="roleIcon">👩‍🎓</span>
           <div className="roleE-role">학생</div>
         </button>
       </div>

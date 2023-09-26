@@ -22,7 +22,7 @@
   width: 30vh;
   height: 30vh;
   border-radius: 5vh;
-  background-color: #F6F4EB;
+  background-color: #f6f4eb;
   border: none;
   cursor: pointer;
   display: flex;
@@ -40,4 +40,23 @@
 .roleE-role {
   font-size: 3.5vh;
   margin-top: 1vh;
+}
+@media (max-width: 450px) {
+  .roleE-button {
+    font-size: 10vh;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 5vw;
+  }
+  #roleE-title {
+    font-size: 2vh;
+    margin-bottom: 3vh;
+  }
+  .roleE-role {
+    font-size: 3.5vw;
+    margin-top: 1vh;
+  }
+  .roleIcon {
+    font-size: 3.5vh;
+  }
 }

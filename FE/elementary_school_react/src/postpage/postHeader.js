@@ -5,11 +5,14 @@ import axios from "axios";
 
 const PostHeader = ({
   title,
-  authorEmail,
+  email,
   currentMemberEmail,
   postMemberId,
+  currentMemberId,
 }) => {
   const navigate = useNavigate();
+  const author = email;
+  const currentId = currentMemberId;
   const currentEmail = currentMemberEmail;
   const MakeRoom = async () => {
     const accessToken = getCookieValue("accessToken");
@@ -21,9 +24,13 @@ const PostHeader = ({
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log("내아이디", currentId);
       console.log(currentEmail);
       navigate(`/chat/${response.data.roomId}`, {
-        state: { email: currentEmail, room: response.data.roomId },
+        state: {
+          email: currentEmail,
+          room: response.data.roomId,
+        },
       });
     } catch (error) {
       console.log("방만들다가 에러", error);
@@ -41,10 +48,8 @@ const PostHeader = ({
   return (
     <div className="post-header">
       <h2>{title}</h2>
-      <p>{authorEmail}</p>
-      {authorEmail !== currentMemberEmail && (
-        <button onClick={MakeRoom}>채팅</button>
-      )}
+      <p>{email}</p>
+      {email !== currentMemberEmail && <button onClick={MakeRoom}>채팅</button>}
     </div>
   );
 };

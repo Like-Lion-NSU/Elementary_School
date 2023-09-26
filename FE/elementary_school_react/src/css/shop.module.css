@@ -69,3 +69,41 @@
 .shJTitle {
   font-size: 2vw;
 }
+@media (max-width: 450px) {
+  .shJproductWrapper {
+    margin-top: 10vh;
+  }
+  .shJcolumns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .shJcard img {
+    width: 14vh;
+    height: 14vh;
+    border-bottom: 1.5px solid #91c8e4;
+    margin: 0.5vh;
+  }
+  .shJTitle {
+    font-size: 2vh;
+  }
+  .shJcard {
+    box-shadow: 0px 1px 3px #91c8e4;
+    width: 16vh;
+    margin: 1vh;
+    padding: 0.5vw;
+  }
+  .shJtitle {
+    font-size: 1vh;
+  }
+  .shJpoint {
+    font-size: 1vh;
+  }
+  .shJbox {
+    padding: 1.5vh;
+    margin: 0.5vh;
+    border: 1px solid #4682a9;
+  }
+  #shJproductFoot {
+    margin-bottom: 1vh;
+  }
+}

@@ -64,6 +64,7 @@ const PostPage = () => {
     viewCount,
     comments,
     photos,
+    currentMemberId,
   } = selectedPost;
   console.log("이거 찍히는지 화긴", currentMemberEmail);
   return (
@@ -72,9 +73,10 @@ const PostPage = () => {
       <div className="post-container">
         <PostHeader
           title={title}
-          authorEmail={email}
+          email={email}
           currentMemberEmail={currentMemberEmail}
           postMemberId={postMemberId}
+          currentMemberId={currentMemberId}
         />
         <PostMain
           postId={postId}

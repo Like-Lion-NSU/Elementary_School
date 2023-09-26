@@ -126,6 +126,8 @@ const Korail = () => {
               setPassengerCount={setPassengerCount}
             />
             <KorailFooter
+              setScore={updateScore}
+              lastScore={lastScore}
               departure={departure}
               arrival={arrival}
               selectedDate={selectedDate}

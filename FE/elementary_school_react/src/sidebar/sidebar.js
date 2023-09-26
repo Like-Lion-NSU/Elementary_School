@@ -19,7 +19,7 @@ const Sidebar = () => {
           <Link to="/질문해요/posts">질문해요</Link>
         </li>
         <li>
-          <Link to="/practiceType">연습하기</Link>
+          <Link to="/practiceType">연습해요</Link>
         </li>
         <li>
           <Link to="/chatlist">채팅해요</Link>

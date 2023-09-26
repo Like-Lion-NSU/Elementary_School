@@ -9,6 +9,8 @@ function KorailFooter({
   selectedDate,
   selectedTime,
   passengerCount,
+  setScore,
+  lastScore,
 }) {
   const movetokorailSeat = () => {
     console.log("출발", departure);
@@ -32,6 +34,9 @@ function KorailFooter({
     ) {
       window.location.href = "/korailSeat";
     } else {
+      if (lastScore > 0) {
+        setScore(lastScore - 10);
+      }
       alert("문제를 다시한번 확인해주세요!");
     }
   };

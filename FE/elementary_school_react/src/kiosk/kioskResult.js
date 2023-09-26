@@ -96,7 +96,7 @@ const KioskResult = ({ resultopen, setResultopen, lastScore, setScore }) => {
       shouldCloseOnOverlayClick={false}
       style={customModalStyles}
     >
-      <div className="ResultHeader">
+      <div className="kioskResultHeader">
         <div className="resultFont">국민학교 제1회 학력고사</div>
         <div className="resultFont" id="ResultQ">
           시험 결과 공지

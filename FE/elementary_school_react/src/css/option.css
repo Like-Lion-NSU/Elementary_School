@@ -1,134 +1,132 @@
-.opJOption{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    width: 51.5vw;
-    height: 95vh; 
+.opJOption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 51.5vw;
+  height: 95vh;
 }
-.opJHead{
-    font-weight: bold;
-    font-size:1.5vw;
-    background-color: #FDD000;
-    padding:0.5vw 1vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.opJHead {
+  font-weight: bold;
+  font-size: 1.5vw;
+  background-color: #fdd000;
+  padding: 0.5vw 1vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.opJImgFlex{
-    display: flex;
-    align-items: center;
-    margin:0 2vw;
-    font-weight: bold;
+.opJImgFlex {
+  display: flex;
+  align-items: center;
+  margin: 0 2vw;
+  font-weight: bold;
 }
-.opJCoffeeImg{
-    width:10vw;
+.opJCoffeeImg {
+  width: 10vw;
 }
-.opJTPE{
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
+.opJTPE {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
 }
-.opJTPE div{
-    margin: 0.5vw 0;
+.opJTPE div {
+  margin: 0.5vw 0;
 }
-.opJTitlePrice{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.opJTitlePrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.opJTitle{
-    font-size: 1.5vw;
+.opJTitle {
+  font-size: 1.5vw;
 }
-.opJPrice{
-    color:red;
-    font-size: 2vw;
+.opJPrice {
+  color: red;
+  font-size: 2vw;
 }
-.opJExpain{
-    font-size: 1vw;
+.opJExpain {
+  font-size: 1vw;
 }
-.opJSelectOption{
-    display: flex;
-    justify-content: space-between;
-    background-color: #e3e3e3;
-    padding:1vw;
-    font-size: 1vw;
-    font-weight: bold;
+.opJSelectOption {
+  background-color: #e3e3e3;
+  padding: 1vw;
+  font-size: 1vw;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+  grid-gap: 0px;
 }
-.opJSelectOption div{
-    border-radius: 50px;
-    padding:0.5vw;
+.opJSelectOption div {
+  border-radius: 50px;
+  padding: 0.5vw;
 }
-.opJInnerSelect{
-    background-color: #fff;
-    width: 50vw;
+.opJInnerSelect {
+  background-color: #fff;
 }
-.opJReset{
-    background-color: red;
-    color: #fff;
-    width: 5vw;
-    text-align: center;
-    cursor: pointer;
+.opJReset {
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
 }
-.opJShotSelect{
-    margin:1.5vw;
-    font-weight: bold;
+.opJShotSelect {
+  margin: 1.5vw;
+  font-weight: bold;
 }
-.opJSelects{
-    display: flex;
-    background-color: rgb(233, 231, 231);
-    padding: 1vw;
+.opJSelects {
+  display: flex;
+  background-color: rgb(233, 231, 231);
+  padding: 1vw;
 }
-.opJSelectTitle{
-    background-color: rgb(233, 231, 231);
-    padding: 0.5vw;
-    border-radius: 10px 10px 0 0;
-    font-size: 1vw;
+.opJSelectTitle {
+  background-color: rgb(233, 231, 231);
+  padding: 0.5vw;
+  border-radius: 10px 10px 0 0;
+  font-size: 1vw;
 }
-.opJSelectsProduct{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    width: 9vw;
-    margin: 0 0.5vw;
-    padding: 0.3vw 0.1vw;
-    border-radius: 10px;
-    font-size: 1.2vw;
-    cursor: pointer;
-    border: 2px solid rgb(233, 231, 231);
+.opJSelectsProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 9vw;
+  margin: 0 0.5vw;
+  padding: 0.3vw 0.1vw;
+  border-radius: 10px;
+  font-size: 1.2vw;
+  cursor: pointer;
+  border: 2px solid rgb(233, 231, 231);
 }
 .opJSelectsProduct.selected {
-    border: 2px solid red;
-  }
-.opJSelectImg{
-    width:7vw;
-    margin: 0.3vw;
+  border: 2px solid red;
 }
-.opJSelectPrice{
-    color:red;
+.opJSelectImg {
+  width: 7vw;
+  margin: 0.3vw;
 }
-.opJButton{
-    display: flex;
-    justify-content: center;
+.opJSelectPrice {
+  color: red;
 }
-.opJBtnStyle{
-    width: 10vw;
-    color:white;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5vw;
-    padding: 0.5vw 1.5vw;
-    cursor: pointer;
-    margin: 0 0.5vw;
-    border-radius: 10px;
-    margin-bottom: 2vw;
+.opJButton {
+  display: flex;
+  justify-content: center;
 }
-.opJCancel{
-    background-color: black;
-    
+.opJBtnStyle {
+  width: 10vw;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding: 0.5vw 1.5vw;
+  cursor: pointer;
+  margin: 0 0.5vw;
+  border-radius: 10px;
+  margin-bottom: 2vw;
 }
-.opJPut{
-    background-color: red;
+.opJCancel {
+  background-color: black;
+}
+.opJPut {
+  background-color: red;
 }

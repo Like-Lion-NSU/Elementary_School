@@ -59,7 +59,7 @@ function PostFooter({ comments, userIsAuthor }) {
       }).then((response) => {
         console.log("댓글 삭제 결과:", response);
         console.log("comments", comments);
-        window.location.href = "/home";
+        window.location.href = `/post/${category}/${postId}`;
       });
     } catch (error) {
       console.error("댓글 삭제 오류:", error);
