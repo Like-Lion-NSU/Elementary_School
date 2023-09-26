@@ -12,6 +12,8 @@ import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.member.service.MemberService;
 import thisisus.school.socket.dto.ChatMessageRequestDto;
+import thisisus.school.socket.dto.PreMessageRequestDto;
+import thisisus.school.socket.dto.RoomsInfoRequestDto;
 import thisisus.school.socket.model.ChatMessage;
 import thisisus.school.socket.model.ChatRoom;
 import thisisus.school.socket.model.MemberChatRoom;
@@ -35,12 +37,13 @@ public class ChatService {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
-    public Map<String, String[]> findAllRoom(CustomUserDetails customUserDetails) {
+    public List<RoomsInfoRequestDto> findAllRoom(CustomUserDetails customUserDetails) {
 
         //DTO 변경 예정
         Member member = memberService.findMember(customUserDetails);
         List<MemberChatRoom> memberChatRooms = memberChatRoomRepository.findByMember(member);
-        Map<String, String[]> chatRooms = new HashMap<>();
+        List<RoomsInfoRequestDto> roomsInfoRequestDtos = new ArrayList<>();
+/*        Map<String, String[]> chatRooms = new HashMap<>();
 
         for (MemberChatRoom memberChatRoom : memberChatRooms) {
             String[] chatRoomInfo = new String[2];
@@ -52,8 +55,26 @@ public class ChatService {
                 chatRoomInfo[0] = memberChatRoom.getChatRoom().getOtherMemberName();
                 chatRoomInfo[1] = member.getEmail();
                 chatRooms.put(memberChatRoom.getChatRoom().getRoomId(), chatRoomInfo);            }
+        }*/
+        for (MemberChatRoom memberChatRoom : memberChatRooms) {
+            RoomsInfoRequestDto roomsInfoRequestDto;
+            if(member.getName().equals(memberChatRoom.getChatRoom().getOtherMemberName())) {
+                roomsInfoRequestDto = RoomsInfoRequestDto.builder()
+                        .roomId(memberChatRoom.getChatRoom().getRoomId())
+                        .memberEmail(member.getEmail())
+                        .roomTitle(memberChatRoom.getChatRoom().getRegisterMember())
+                        .build();
+            }else {
+                roomsInfoRequestDto = RoomsInfoRequestDto.builder()
+                        .roomId(memberChatRoom.getChatRoom().getRoomId())
+                        .memberEmail(member.getEmail())
+                        .roomTitle(memberChatRoom.getChatRoom().getOtherMemberName())
+                        .build();
+            }
+            roomsInfoRequestDtos.add(roomsInfoRequestDto);
+
         }
-        return chatRooms;
+        return roomsInfoRequestDtos;
 //        return new ArrayList<>(chatRooms.values());
     }
 
@@ -134,11 +155,55 @@ public class ChatService {
         ChatMessage chatMessage = ChatMessage.builder()
                 .chatRoom(chatRoom)
                 .senderId(member.getId())
+                .timestamp(chatMessageRequestDto.getTimestamp())
                 .message(chatMessageRequestDto.getContent())
                 .build();
         log.info("chatMessage : {}", chatMessage.getMessage());
         chatRepository.save(chatMessage);
         log.info("저장 성공~");
+
+    }
+
+    public PreMessageRequestDto getMessageInfo(String roomId, CustomUserDetails customUserDetails) {
+//        log.info("message 확인 : {}", chatRepository.findByChatRoomRoomIdOrderByTimestampDesc(roomId));
+//        return chatRepository.findByChatRoomRoomIdOrderByTimestampDesc(roomId);
+        ChatRoom chatRoom = roomRepository.findByRoomId(roomId);
+        Member client = memberService.findMember(customUserDetails);
+        String clientEmail = client.getEmail();
+        String otherMemberEmail ="";
+        List<ChatMessage> chatMessagesList = chatRepository.findByChatRoom(chatRoom);
+
+        for (ChatMessage chatMessage : chatMessagesList) {
+            Long sender = chatMessage.getSenderId();
+            Member findMember = memberRepository.findById(sender).get();
+
+            if (!findMember.getEmail().equals(clientEmail)) {
+                otherMemberEmail = findMember.getEmail();
+                break;
+            }
+        }
+        log.info("otherMemberEmail : {}", otherMemberEmail);
+
+        Long otherMemberId = null;
+
+        Optional<Member> otherMemberOptional = memberRepository.findByEmail(otherMemberEmail);
+        log.info("otherMemberOptional : {}", otherMemberOptional);
+
+        if (otherMemberOptional.isPresent()) {
+            otherMemberId = otherMemberOptional.get().getId();
+        }
+        log.info("otherMemberId : {}", otherMemberId);
+
+        PreMessageRequestDto preMessageRequestDto = PreMessageRequestDto.builder()
+                .chatMessages(chatMessagesList)
+                .clientId(client.getId())
+                .clientEmail(clientEmail)
+                .otherMemberId(otherMemberId)
+                .otherMemberEmail(otherMemberEmail)
+                .build();
+
+        log.info("message 확인 : {}", chatRepository.findByChatRoom(chatRoom));
+        return preMessageRequestDto;
 
     }
 /*    public ChatMessage saveMessage(Long sender, String message, Long chatroom) {

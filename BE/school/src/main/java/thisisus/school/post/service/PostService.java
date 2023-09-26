@@ -65,7 +65,7 @@ public class PostService {
 
     public List<Post> findAllPostsByCategory(String category){
         try{
-            List<Post> posts = postRepository.findByCategory(PostCategory.valueOf(category));
+            List<Post> posts = postRepository.findByCategoryAndIsDeletedIsFalse(PostCategory.valueOf(category));
 
             return posts;
         }catch (RuntimeException e) {

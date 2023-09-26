@@ -1,5 +1,6 @@
 package thisisus.school.socket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class ChatRoom {
 
     private String registerMember;
 
-    @OneToMany(mappedBy = "chatRoom")
+    @OneToMany(mappedBy = "chatRoom", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<ChatMessage> chatMessage = new ArrayList<>();
 
     @OneToMany(mappedBy = "chatRoom")

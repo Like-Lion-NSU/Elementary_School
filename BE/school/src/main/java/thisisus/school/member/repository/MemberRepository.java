@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import thisisus.school.member.domain.Member;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -25,4 +26,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Modifying
     @Query("UPDATE Member m SET m.refreshToken=:token WHERE m.id=:id")
     void updateRefreshToken(@Param("id") Long id, @Param("token") String token);
+
 }
+

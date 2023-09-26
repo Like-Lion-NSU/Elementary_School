@@ -5,6 +5,7 @@ import lombok.*;
 import thisisus.school.common.BaseEntity;
 import thisisus.school.member.domain.Member;
 import thisisus.school.post.dto.PostRequestDto;
+import thisisus.school.socket.model.MemberChatRoom;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Post extends BaseEntity {
     private List<Comment> comments = new ArrayList<>();
     @OneToMany(mappedBy = "post")
     private List<PostPhoto> postPhotos = new ArrayList<>();
+
 
     public List<Comment> getComments(){
         int size = this.comments.size();
