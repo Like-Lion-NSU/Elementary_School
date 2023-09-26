@@ -14,10 +14,12 @@ import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.member.security.service.CustomUserDetails;
 import thisisus.school.socket.dto.ChatMessageRequestDto;
+import thisisus.school.socket.dto.PreMessageRequestDto;
 import thisisus.school.socket.model.ChatMessage;
 import thisisus.school.socket.model.MessageType;
 import thisisus.school.socket.service.ChatService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -55,6 +57,13 @@ public class ChatController {
         chatService.sendMessage(chatMessageRequestDto);
 //        template.convertAndSend("/sub/chat/message/" + chatMessageRequestDto.getRoomId(), chatMessageRequestDto);
         return chatMessageRequestDto;
+    }
+
+    @GetMapping("/v1/premessage/{roomId}")
+    public PreMessageRequestDto callMessage(@PathVariable("roomId") String roomId,
+                                         @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        log.info("roomId : {}", roomId);
+        return chatService.getMessageInfo(roomId, customUserDetails);
     }
 
 

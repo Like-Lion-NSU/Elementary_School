@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByMemberIdAndIsDeletedIsFalse(Long id);
-    List<Post> findByCategory(PostCategory category);
+    List<Post> findByCategoryAndIsDeletedIsFalse(PostCategory category);
 }

@@ -23,4 +23,5 @@ public class ChatMessage {
     @JoinColumn(name = "chatRoom_id")
     private ChatRoom chatRoom;
     private String message;
+    private String timestamp;
 }

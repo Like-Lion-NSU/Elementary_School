@@ -1,6 +1,5 @@
 package thisisus.school.socket.dto;
 
-
 import lombok.*;
 
 @Builder
@@ -8,10 +7,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomsInfoRequestDto {
-
+public class RoomIdRequestDto {
     private String roomId;
-    private String roomTitle;
-    private String memberEmail;
-    private String timestamp;
 }
