@@ -3,6 +3,7 @@
 
 ## 서비스 UI
 |![image](https://github.com/Like-Lion-NSU/Elementary_School/assets/62410059/86a1afaf-847b-4a3d-bcb3-e190485a3616)|![image](https://github.com/Like-Lion-NSU/Elementary_School/assets/62410059/05262255-8516-4b62-a408-b8eb71a27ec4)|
+|:--:|:--:|
 
 ---
 
