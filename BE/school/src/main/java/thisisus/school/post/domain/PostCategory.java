@@ -6,8 +6,4 @@ import lombok.Getter;
 public enum PostCategory {
     질문해요,
     소통해요;
-
-
-
-
 }
