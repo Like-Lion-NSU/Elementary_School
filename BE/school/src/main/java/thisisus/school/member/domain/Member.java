@@ -1,21 +1,27 @@
 package thisisus.school.member.domain;
 
-import lombok.*;
-import thisisus.school.common.BaseTimeEntity;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BaseTimeEntity {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long kakaoId;
     private String name;
     private String email;
     private String nickname;
@@ -26,8 +32,7 @@ public class Member extends BaseTimeEntity {
     private String refreshToken;
 
     @Builder
-    public Member(Long kakaoId, String name, String email, String nickname, Role role){
-        this.kakaoId = kakaoId;
+    public Member(String name, String email, String nickname, Role role) {
         this.name = name;
         this.email = email;
         this.nickname = nickname;
@@ -35,10 +40,17 @@ public class Member extends BaseTimeEntity {
         this.memberStatus = MemberStatus.ACTIVE;
     }
 
-    public void delete(){
+    public void delete() {
         this.memberStatus = MemberStatus.DELETED;
+        this.email = null;
     }
-    public void setRefreshToken(String refreshToken){
+
+    public void update(String nickname, Role role) {
+        this.nickname = nickname;
+        this.role = role;
+    }
+
+    public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 }

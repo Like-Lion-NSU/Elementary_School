@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class KakaoErrorResponse {
-  private String error;
-  private String errorDescription;
+
+    private String error;
+    private String errorDescription;
 }
