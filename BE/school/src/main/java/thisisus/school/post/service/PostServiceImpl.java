@@ -16,12 +16,6 @@ import thisisus.school.post.repository.PostRepository;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
-    /**
-     * 게시물 등록
-     *
-     * @param postRequest
-     * @return
-     */
     @Override
     public PostResponse savePost(PostRequest postRequest) {
         Post post = postRequest.toEntity();
@@ -31,12 +25,6 @@ public class PostServiceImpl implements PostService {
         return response;
     }
 
-    /**
-     * 게시물 한개 등록
-     *
-     * @param postId
-     * @return
-     */
     @Override
     public PostResponse findPost(long postId) {
         Post post = postRepository.findById(postId)
@@ -51,32 +39,21 @@ public class PostServiceImpl implements PostService {
 
     }
 
-    /**
-     * 게시물 수정
-     *
-     * @param postRequest
-     * @return
-     */
+
     @Override
     public PostResponse update(PostUpdateRequest postRequest) {
         Post post = postRepository.findById(postRequest.getId())
                 .orElseThrow(() -> new CustomException(ExceptionCode.NOT_FOUND_POST));
-        post.update(postRequest);
-        postRepository.save(post);
+        post.update(postRequest.getTitle(), post.getContent(), postRequest.getCategory());
+
         PostResponse response = new PostResponse(post);
         return response;
     }
 
-    /**
-     * 게시물 삭제
-     *
-     * @param postId
-     */
     @Override
     public void delete(long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ExceptionCode.NOT_FOUND_POST));
         post.delete();
-        postRepository.save(post);
     }
 }
