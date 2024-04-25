@@ -1,6 +1,7 @@
 package thisisus.school.post.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import thisisus.school.common.response.SuccessResonse;
 import thisisus.school.post.dto.PostRequest;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping("/api/v1/post")
 public class PostController {
     private final PostServiceImpl postService;
 
@@ -24,31 +25,19 @@ public class PostController {
      * @return
      */
     @PostMapping
-    public SuccessResonse<PostResponse> savePost(@Valid PostRequest postRequest) {
+    public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest) {
         PostResponse response = postService.savePost(postRequest);
         return SuccessResonse.of(response);
     }
 
-    /**
-     * 게시물 상세 조회
-     *
-     * @param postId
-     * @return
-     */
     @GetMapping("/{postId}")
     public SuccessResonse<PostResponse> findPost(@PathVariable("postId") long postId) {
         PostResponse response = postService.findPost(postId);
         return SuccessResonse.of(response);
     }
 
-    /**
-     * 게시글 수정
-     *
-     * @param postRequest
-     * @return
-     */
     @PatchMapping
-    public SuccessResonse<PostResponse> updatePost(@Valid PostUpdateRequest postRequest) {
+    public SuccessResonse<PostResponse> updatePost(@Valid @RequestBody PostUpdateRequest postRequest) {
         PostResponse response = postService.update(postRequest);
         return SuccessResonse.of(response);
     }
