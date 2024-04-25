@@ -7,11 +7,13 @@ import thisisus.school.post.dto.PostUpdateRequest;
 
 public interface PostService {
     PostResponse savePost(PostRequest postRequest);
-    PostResponse findPost(long postId);
-
-    void findPosts(PostCategory postCategory);
 
     PostResponse update(PostUpdateRequest postRequest);
 
     void delete(long postId);
+
+    PostResponse findPost(long postId);
+
+    void findPosts(PostCategory postCategory);
+
 }
