@@ -37,14 +37,13 @@ public class Post extends BaseTimeEntity {
     @Column
     private boolean isDelete;
 
-    //삭제 수행 메소드
     public void delete() {
         this.isDelete = true;
     }
 
-    public void update(PostUpdateRequest postRequest) {
-        this.title = postRequest.getTitle();
-        this.content = postRequest.getContent();
-        this.category = postRequest.getCategory();
+    public void update(String title, String content, PostCategory category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
     }
 }
