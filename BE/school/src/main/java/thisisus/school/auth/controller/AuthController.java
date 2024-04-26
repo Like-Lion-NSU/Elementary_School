@@ -9,38 +9,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import thisisus.school.auth.dto.request.SignUpRequest;
 import thisisus.school.auth.dto.response.AuthResponse;
-import thisisus.school.auth.dto.response.KakaoIdResponse;
-import thisisus.school.auth.dto.response.KakaoTokenResponse;
+import thisisus.school.auth.dto.response.IdTokenResponse;
 import thisisus.school.auth.service.AuthService;
 import thisisus.school.common.response.SuccessResonse;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-  private final AuthService authService;
+    private final AuthService authService;
 
-  @GetMapping("/oauth/authorize")
-  public SuccessResonse getKakaoAccessToken(@RequestParam("code") String code) {
-    KakaoTokenResponse kakaoTokenResponse = authService.getAccessTokenFromKakao(code);
-    return SuccessResonse.of(kakaoTokenResponse);
-  }
+    @GetMapping("/idToken")
+    public SuccessResonse getIdToken(
+        @RequestParam("code") String code
+    ) {
+        IdTokenResponse idTokenResponse = authService.getIdToken(code);
+        return SuccessResonse.of(idTokenResponse);
+    }
 
-  @PostMapping("/login")
-  public SuccessResonse login(@RequestParam("kakaoAccessToken") String kakaoAccessToken) {
-    AuthResponse authResponse = authService.login(kakaoAccessToken);
-    return SuccessResonse.of(authResponse);
-  }
+    @PostMapping("/login")
+    public SuccessResonse login(
+        @RequestParam("idToken") String idToken
+    ) {
+        AuthResponse authResponse = authService.login(idToken);
+        return SuccessResonse.of(authResponse);
+    }
 
-  @PostMapping("/sign-up")
-  public SuccessResonse signUp(@RequestParam("kakaoAccessToken") String kakaoAccessToken, @RequestBody SignUpRequest signUpRequest) {
-    AuthResponse authResponse = authService.signUp(kakaoAccessToken, signUpRequest);
-    return SuccessResonse.of(authResponse);
-  }
+    @PostMapping("/sign-up")
+    public SuccessResonse signUp(
+        @RequestParam("idToken") String idToken,
+        @RequestBody SignUpRequest signUpRequest
+    ) {
+        AuthResponse authResponse = authService.signUp(idToken, signUpRequest);
+        return SuccessResonse.of(authResponse);
+    }
 
-  @PostMapping("/refresh")
-  public SuccessResonse refreshToken() {
-    return SuccessResonse.of();
-  }
+    @PostMapping("/refresh")
+    public SuccessResonse refreshToken() {
+        return SuccessResonse.of();
+    }
 }

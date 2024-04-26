@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Role {
-  STUDENT, TEACHER
+    STUDENT, TEACHER
 }
