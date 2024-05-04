@@ -9,6 +9,7 @@ import thisisus.school.post.domain.PostCategory;
 import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
 import thisisus.school.post.dto.PostUpdateRequest;
+import thisisus.school.post.exception.NotFoundPost;
 import thisisus.school.post.repository.PostRepository;
 
 @Service
@@ -28,7 +29,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse findPost(long postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new CustomException(ExceptionCode.NOT_FOUND_POST));
+                .orElseThrow(NotFoundPost::new);
 
         PostResponse response = new PostResponse(post);
         return response;
@@ -43,7 +44,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse update(PostUpdateRequest postRequest) {
         Post post = postRepository.findById(postRequest.getId())
-                .orElseThrow(() -> new CustomException(ExceptionCode.NOT_FOUND_POST));
+                .orElseThrow(NotFoundPost::new);
         post.update(postRequest.getTitle(), post.getContent(), postRequest.getCategory());
 
         PostResponse response = new PostResponse(post);
@@ -53,7 +54,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(long postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new CustomException(ExceptionCode.NOT_FOUND_POST));
+                .orElseThrow(NotFoundPost::new);
         post.delete();
     }
 }
