@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @ConfigurationPropertiesScan(basePackages = "thisisus.school")
 public class SchoolApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SchoolApplication.class, args);
-    }
-
-
+	public static void main(String[] args) {
+		SpringApplication.run(SchoolApplication.class, args);
+	}
 }
