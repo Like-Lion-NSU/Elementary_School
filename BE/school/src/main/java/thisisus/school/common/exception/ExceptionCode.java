@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ExceptionCode {
+
   BAD_REQUEST_ERROR(BAD_REQUEST, "잘못된 요청입니다."),
   INVALID_HTTP_MESSAGE_BODY(BAD_REQUEST, "잘못된 HTTP 요청입니다."),
   INVALID_JWT_CHARACTER(BAD_REQUEST, "JWT 형식이 유효하지 않습니다."),
