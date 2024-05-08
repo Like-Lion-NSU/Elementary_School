@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class KakaoTokenResponse {
-  private String accessToken;
+public class IdTokenResponse {
+
+    private String idToken;
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "memberForKakao", url = "https://kapi.kakao.com")
 public interface RequestKakaoMemberInfoClient {
 
-  @PostMapping("/v2/user/me")
-  KakaoMemberInfoResponse getId(
-      @RequestHeader("Authorization") String authorization);
+    @PostMapping("/v2/user/me")
+    KakaoMemberInfoResponse getId(
+        @RequestHeader("Authorization") String authorization);
 }
