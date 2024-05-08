@@ -14,23 +14,24 @@ import thisisus.school.auth.infrastructure.JwtTokenProvider;
 @AllArgsConstructor
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
-  private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-  @Override
-  public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler){
-    if (!(handler instanceof HandlerMethod)) {
-      return true;
+    @Override
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
+        final Object handler) {
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        AuthenticatedMemberId AuthenticatedMemberId = handlerMethod.getMethodAnnotation(AuthenticatedMemberId.class);
+        if (AuthenticatedMemberId == null) {
+            return true;
+        }
+
+        final String token = AuthenticationExtractor.extractAccessToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        return true;
     }
-    HandlerMethod handlerMethod = (HandlerMethod)handler;
-    AuthenticatedMemberId AuthenticatedMemberId = handlerMethod.getMethodAnnotation(AuthenticatedMemberId.class);
-    if (AuthenticatedMemberId == null) {
-      return true;
-    }
-
-    final String token = AuthenticationExtractor.extractAccessToken(request);
-    jwtTokenProvider.validateToken(token);
-
-    return true;
-  }
 
 }

@@ -1,20 +1,13 @@
 package thisisus.school.member.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import thisisus.school.member.domain.Member;
 import thisisus.school.member.dto.MemberInfoResponse;
-import thisisus.school.member.exception.NotFoundMember;
-import thisisus.school.member.repository.MemberRepository;
+import thisisus.school.member.dto.UpdateMemberRequest;
 
-@Service
-@RequiredArgsConstructor
-public class MemberService {
+public interface MemberService {
 
-    private final MemberRepository memberRepository;
+    void update(Long memberId, UpdateMemberRequest updateMemberRequest);
 
-    public MemberInfoResponse findMember(Long memberId){
-      Member member = memberRepository.findById(memberId).orElseThrow(NotFoundMember::new);
-      return new MemberInfoResponse(member.getEmail(), member.getRole());
-    }
+    void delete(Long memberId);
+
+    MemberInfoResponse findMember(Long memberId);
 }

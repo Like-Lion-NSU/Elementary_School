@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class KakaoIdResponse {
-  private Long kakaoMemberId;
+
+    private Long kakaoMemberId;
 }
