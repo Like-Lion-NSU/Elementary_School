@@ -2,9 +2,11 @@ package thisisus.school.post.domain;
 
 import lombok.*;
 import thisisus.school.common.BaseTimeEntity;
+import thisisus.school.member.domain.Member;
 import thisisus.school.post.dto.PostUpdateRequest;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -36,6 +38,10 @@ public class Post extends BaseTimeEntity {
 
     @Column
     private boolean isDelete;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     public void delete() {
         this.isDelete = true;
