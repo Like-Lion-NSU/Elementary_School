@@ -12,6 +12,9 @@ import thisisus.school.post.dto.PostUpdateRequest;
 import thisisus.school.post.exception.NotFoundPost;
 import thisisus.school.post.repository.PostRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
@@ -33,6 +36,15 @@ public class PostServiceImpl implements PostService {
 
         PostResponse response = new PostResponse(post);
         return response;
+    }
+
+    @Override
+    public List<PostResponse> findPostByMemberId(long memberId) {
+        List<Post> posts = postRepository.findByMemberId(memberId);
+        List<PostResponse> result = posts.stream()
+                .map(post -> new PostResponse(post))
+                .collect(Collectors.toList());
+        return result;
     }
 
     @Override

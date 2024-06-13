@@ -1,8 +1,8 @@
 package thisisus.school.post.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import thisisus.school.auth.config.AuthenticatedMemberId;
 import thisisus.school.common.response.SuccessResonse;
 import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
@@ -10,6 +10,7 @@ import thisisus.school.post.dto.PostUpdateRequest;
 import thisisus.school.post.service.PostServiceImpl;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,9 +44,15 @@ public class PostController {
     }
 
 
-    @DeleteMapping("{postId}")
+    @DeleteMapping("/{postId}")
     public SuccessResonse deletePost(@PathVariable("postId") long postId) {
         postService.delete(postId);
         return SuccessResonse.of();
+    }
+
+    @GetMapping("/myPost")
+    public SuccessResonse<List<PostResponse>> findUserPost(@AuthenticatedMemberId final Long memberId) {
+        List<PostResponse> response = postService.findPostByMemberId(memberId);
+        return SuccessResonse.of(response);
     }
 }
