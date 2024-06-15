@@ -8,7 +8,7 @@ import thisisus.school.post.dto.PostUpdateRequest;
 import java.util.List;
 
 public interface PostService {
-    PostResponse savePost(PostRequest postRequest);
+    PostResponse savePost(PostRequest postRequest, Long memberId);
 
     PostResponse update(PostUpdateRequest postRequest);
 

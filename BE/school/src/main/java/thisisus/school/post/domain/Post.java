@@ -10,8 +10,8 @@ import java.util.List;
 
 
 @Entity
-@Getter
 @Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Post extends BaseTimeEntity {

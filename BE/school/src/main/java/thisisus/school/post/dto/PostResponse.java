@@ -17,6 +17,7 @@ public class PostResponse {
     private PostCategory category;
     private int viewCount;
     private int likeCount;
+    private String writer;
 
     public PostResponse(Post post) {
         this.postId = post.getId();
@@ -25,5 +26,6 @@ public class PostResponse {
         this.category = post.getCategory();
         this.viewCount = post.getViewCount();
         this.likeCount = post.getLikeCount();
+        this.writer = post.getMember().getNickname();
     }
 }

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import thisisus.school.common.exception.CustomException;
 import thisisus.school.common.exception.ExceptionCode;
+import thisisus.school.member.domain.Member;
+import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
 import thisisus.school.post.dto.PostRequest;
@@ -18,15 +20,28 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
+    private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
     @Override
-    public PostResponse savePost(PostRequest postRequest) {
-        Post post = postRequest.toEntity();
+    public PostResponse savePost(PostRequest postRequest, Long memberId) {
+        Member member = memberRepository.findByMemberId(memberId);
+        Post post = createPost(postRequest,member);
         postRepository.save(post);
 
         PostResponse response = new PostResponse(post);
         return response;
+    }
+
+    private Post createPost(PostRequest postRequest, Member member) {
+        return Post.builder().
+                title(postRequest.getTitle())
+                .content(postRequest.getContent())
+                .category(postRequest.getCategory())
+                .likeCount(0)
+                .viewCount(0)
+                .member(member)
+                .build();
     }
 
     @Override

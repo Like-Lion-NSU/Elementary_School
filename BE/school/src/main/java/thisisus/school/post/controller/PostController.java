@@ -26,8 +26,9 @@ public class PostController {
      * @return
      */
     @PostMapping
-    public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest) {
-        PostResponse response = postService.savePost(postRequest);
+    public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest,
+                                                 @AuthenticatedMemberId Long memberId) {
+        PostResponse response = postService.savePost(postRequest, memberId);
         return SuccessResonse.of(response);
     }
 
