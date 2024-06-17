@@ -6,15 +6,18 @@
 ## 프로젝트 기간 / 인원
 2023.07 ~ 2023.09
 
+## 리팩토링 기간
+2024.05 ~ ing
+
 백엔드 3명, 프론트 3명
 
 ## 개발 환경
 - **Backend** : SpringBoot Framework, JPA, MySQL, JAVA
 - **Frontend** : HTML, CSS, JS, REACT
 
-## 핵심 기능
-- 실시간 채팅
-- 카카오를 이용한 소셜 로그인
+## 개발 과정
+[송현 : Open Feign을 이용한 카카오 OpenID Connect 구현하기]([https://nahyeon99.tistory.com/55](https://velog.io/@shyeon4643/Open-Feign%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-OpenID-Connect-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0))
+
 
 ## 서비스 UI
 
