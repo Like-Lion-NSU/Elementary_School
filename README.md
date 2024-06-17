@@ -16,7 +16,7 @@
 - **Frontend** : HTML, CSS, JS, REACT
 
 ## 개발 과정
-[송현 : Open Feign을 이용한 카카오 OpenID Connect 구현하기]([https://nahyeon99.tistory.com/55](https://velog.io/@shyeon4643/Open-Feign%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-OpenID-Connect-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+[송현 : Open Feign을 이용한 카카오 OpenID Connect 구현하기]([https://nahyeon99.tistory.com/55](https://velog.io/@shyeon4643/Open-Feign%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-OpenID-Connect-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)  
 [송현 : 인터셉터를 이용한 인증•인가 처리하기](https://velog.io/@shyeon4643/%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9D%B8%EC%A6%9D%EC%9D%B8%EA%B0%80-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0feat.-Filter%EC%99%80-AOP-%EB%B9%84%EA%B5%90)
 
 
