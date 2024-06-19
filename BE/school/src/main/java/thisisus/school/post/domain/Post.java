@@ -1,5 +1,6 @@
 package thisisus.school.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import thisisus.school.common.BaseTimeEntity;
 import thisisus.school.member.domain.Member;

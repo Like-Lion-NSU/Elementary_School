@@ -2,8 +2,6 @@ package thisisus.school.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import thisisus.school.common.exception.CustomException;
-import thisisus.school.common.exception.ExceptionCode;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.post.domain.Post;
@@ -11,6 +9,7 @@ import thisisus.school.post.domain.PostCategory;
 import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
 import thisisus.school.post.dto.PostUpdateRequest;
+import thisisus.school.post.exception.NotCorrectUser;
 import thisisus.school.post.exception.NotFoundPost;
 import thisisus.school.post.repository.PostRepository;
 
@@ -26,7 +25,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse savePost(PostRequest postRequest, Long memberId) {
         Member member = memberRepository.findByMemberId(memberId);
-        Post post = createPost(postRequest,member);
+        Post post = createPost(postRequest, member);
         postRepository.save(post);
 
         PostResponse response = new PostResponse(post);
@@ -55,7 +54,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostResponse> findPostByMemberId(long memberId) {
-        List<Post> posts = postRepository.findByMemberId(memberId);
+        List<Post> posts = postRepository.findAllByMemberId(memberId);
         List<PostResponse> result = posts.stream()
                 .map(post -> new PostResponse(post))
                 .collect(Collectors.toList());
@@ -69,9 +68,12 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public PostResponse update(PostUpdateRequest postRequest) {
-        Post post = postRepository.findById(postRequest.getId())
+    public PostResponse update(long postId, PostUpdateRequest postRequest, Long memberId) {
+        Post post = postRepository.findById(postId)
                 .orElseThrow(NotFoundPost::new);
+        if (post.getMember().getId() != memberId) {
+            throw new NotCorrectUser();
+        }
         post.update(postRequest.getTitle(), post.getContent(), postRequest.getCategory());
 
         PostResponse response = new PostResponse(post);

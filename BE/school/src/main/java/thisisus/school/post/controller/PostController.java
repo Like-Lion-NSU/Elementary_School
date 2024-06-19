@@ -38,9 +38,11 @@ public class PostController {
         return SuccessResonse.of(response);
     }
 
-    @PatchMapping
-    public SuccessResonse<PostResponse> updatePost(@Valid @RequestBody PostUpdateRequest postRequest) {
-        PostResponse response = postService.update(postRequest);
+    @PatchMapping("/{postId}")
+    public SuccessResonse<PostResponse> updatePost(@PathVariable("postId") long postId,
+                                                   @Valid @RequestBody PostUpdateRequest postRequest,
+                                                   @AuthenticatedMemberId Long memberId) {
+        PostResponse response = postService.update(postId, postRequest, memberId);
         return SuccessResonse.of(response);
     }
 

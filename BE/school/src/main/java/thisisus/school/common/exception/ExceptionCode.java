@@ -22,6 +22,7 @@ public enum ExceptionCode {
   INCORRECT_TOKEN(UNAUTHORIZED, "올바르지 않는 토큰입니다."),
   ALREADY_REGISTERED_EMAIL(CONFLICT, "이미 등록된 이메일입니다."),
   NOT_FOUND_POST(NOT_FOUND, "게시물을 찾을 수 없습니다."),
+  NOT_CORRECT_USER(UNAUTHORIZED, "작성자가 일치하지 않습니다."),
   PUBLIC_KEY_GENERATION_FAILED(INTERNAL_SERVER_ERROR ,"공개 키 생성에 실패했습니다.");
   ;
 
