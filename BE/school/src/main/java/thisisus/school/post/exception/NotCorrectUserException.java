@@ -3,8 +3,8 @@ package thisisus.school.post.exception;
 import thisisus.school.common.exception.CustomException;
 import thisisus.school.common.exception.ExceptionCode;
 
-public class NotFoundPost extends CustomException {
-    public NotFoundPost() {
+public class NotCorrectUserException extends CustomException {
+    public NotCorrectUserException() {
         super(ExceptionCode.NOT_FOUND_POST);
     }
 }
