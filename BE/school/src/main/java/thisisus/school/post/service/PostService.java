@@ -8,16 +8,16 @@ import thisisus.school.post.dto.PostUpdateRequest;
 import java.util.List;
 
 public interface PostService {
-    PostResponse savePost(PostRequest postRequest, Long memberId);
+	PostResponse savePost(PostRequest postRequest, Long memberId);
 
-    PostResponse update(long postId, PostUpdateRequest postRequest, Long memberId);
+	PostResponse update(Long postId, PostUpdateRequest postRequest, Long memberId);
 
-    void delete(long postId);
+	void delete(Long postId);
 
-    PostResponse findPost(long postId);
+	PostResponse findPost(Long postId);
 
-    List<PostResponse> findPostByMemberId(long memberId);
+	List<PostResponse> findPostByMemberId(Long memberId);
 
-    void findPosts(PostCategory postCategory);
+	void findPosts(PostCategory postCategory);
 
 }

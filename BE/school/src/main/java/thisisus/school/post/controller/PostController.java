@@ -1,61 +1,69 @@
 package thisisus.school.post.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 import thisisus.school.auth.config.AuthenticatedMemberId;
 import thisisus.school.common.response.SuccessResonse;
 import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
 import thisisus.school.post.dto.PostUpdateRequest;
-import thisisus.school.post.service.PostServiceImpl;
-
-import javax.validation.Valid;
-import java.util.List;
+import thisisus.school.post.service.PostService;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/post")
 public class PostController {
-    private final PostServiceImpl postService;
+	private final PostService postService;
 
-    /**
-     * 게시글 등록
-     * TODO - memeber관련 작업
-     *
-     * @param postRequest
-     * @return
-     */
-    @PostMapping
-    public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest,
-                                                 @AuthenticatedMemberId Long memberId) {
-        PostResponse response = postService.savePost(postRequest, memberId);
-        return SuccessResonse.of(response);
-    }
+	/**
+	 * 게시글 등록
+	 * TODO - memeber관련 작업
+	 *
+	 * @param postRequest
+	 * @return
+	 */
+	@PostMapping
+	public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest,
+		@AuthenticatedMemberId Long memberId) {
+		PostResponse response = postService.savePost(postRequest, memberId);
+		return SuccessResonse.of(response);
+	}
 
-    @GetMapping("/{postId}")
-    public SuccessResonse<PostResponse> findPost(@PathVariable("postId") long postId) {
-        PostResponse response = postService.findPost(postId);
-        return SuccessResonse.of(response);
-    }
+	@GetMapping("/{postId}")
+	public SuccessResonse<PostResponse> findPost(@PathVariable("postId") final Long postId) {
+		PostResponse response = postService.findPost(postId);
+		return SuccessResonse.of(response);
+	}
 
-    @PatchMapping("/{postId}")
-    public SuccessResonse<PostResponse> updatePost(@PathVariable("postId") long postId,
-                                                   @Valid @RequestBody PostUpdateRequest postRequest,
-                                                   @AuthenticatedMemberId Long memberId) {
-        PostResponse response = postService.update(postId, postRequest, memberId);
-        return SuccessResonse.of(response);
-    }
+	@PatchMapping("/{postId}")
+	public SuccessResonse<PostResponse> updatePost(@PathVariable("postId") final Long postId,
+		@Valid @RequestBody PostUpdateRequest postRequest,
+		@AuthenticatedMemberId Long memberId) {
+		PostResponse response = postService.update(postId, postRequest, memberId);
+		return SuccessResonse.of(response);
+	}
 
+	@DeleteMapping("/{postId}")
+	public SuccessResonse deletePost(@PathVariable("postId") final Long postId) {
+		postService.delete(postId);
+		return SuccessResonse.of();
+	}
 
-    @DeleteMapping("/{postId}")
-    public SuccessResonse deletePost(@PathVariable("postId") long postId) {
-        postService.delete(postId);
-        return SuccessResonse.of();
-    }
-
-    @GetMapping("/myPost")
-    public SuccessResonse<List<PostResponse>> findUserPost(@AuthenticatedMemberId final Long memberId) {
-        List<PostResponse> response = postService.findPostByMemberId(memberId);
-        return SuccessResonse.of(response);
-    }
+	@GetMapping("/myPost")
+	public SuccessResonse<List<PostResponse>> findUserPost(@AuthenticatedMemberId final Long memberId) {
+		List<PostResponse> response = postService.findPostByMemberId(memberId);
+		return SuccessResonse.of(response);
+	}
 }
