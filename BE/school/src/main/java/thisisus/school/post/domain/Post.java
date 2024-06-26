@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import thisisus.school.common.BaseTimeEntity;
 import thisisus.school.member.domain.Member;
+import thisisus.school.post.exception.NotCorrectUserException;
 
 @Entity
 @Builder
@@ -61,5 +62,11 @@ public class Post extends BaseTimeEntity {
 		this.title = title;
 		this.content = content;
 		this.category = category;
+	}
+
+	public void checkWriter(Post post, Long memberId) {
+		if (post.getMember().getId() != memberId) {
+			throw new NotCorrectUserException();
+		}
 	}
 }

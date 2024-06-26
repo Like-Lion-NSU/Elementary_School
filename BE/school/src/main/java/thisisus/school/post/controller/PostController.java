@@ -27,13 +27,6 @@ import thisisus.school.post.service.PostService;
 public class PostController {
 	private final PostService postService;
 
-	/**
-	 * 게시글 등록
-	 * TODO - memeber관련 작업
-	 *
-	 * @param postRequest
-	 * @return
-	 */
 	@PostMapping
 	public SuccessResonse<PostResponse> savePost(@Valid @RequestBody PostRequest postRequest,
 		@AuthenticatedMemberId Long memberId) {
@@ -56,8 +49,9 @@ public class PostController {
 	}
 
 	@DeleteMapping("/{postId}")
-	public SuccessResonse deletePost(@PathVariable("postId") final Long postId) {
-		postService.delete(postId);
+	public SuccessResonse deletePost(@PathVariable("postId") final Long postId,
+		@AuthenticatedMemberId Long memberId) {
+		postService.delete(postId, memberId);
 		return SuccessResonse.of();
 	}
 

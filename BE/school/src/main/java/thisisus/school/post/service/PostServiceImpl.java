@@ -1,9 +1,7 @@
 package thisisus.school.post.service;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.post.domain.Post;
@@ -11,7 +9,6 @@ import thisisus.school.post.domain.PostCategory;
 import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
 import thisisus.school.post.dto.PostUpdateRequest;
-import thisisus.school.post.exception.NotCorrectUserException;
 import thisisus.school.post.exception.NotFoundPostException;
 import thisisus.school.post.repository.PostRepository;
 
@@ -27,22 +24,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostResponse savePost(final PostRequest postRequest, final Long memberId) {
 		Member member = memberRepository.findByMemberId(memberId);
-		Post post = createPost(postRequest, member);
+		Post post = postRequest.toEntity(member);
 		postRepository.save(post);
 
 		PostResponse response = new PostResponse(post);
 		return response;
-	}
-
-    private Post createPost(final PostRequest postRequest, final Member member) {
-		return Post.builder().
-			title(postRequest.getTitle())
-			.content(postRequest.getContent())
-			.category(postRequest.getCategory())
-			.likeCount(0)
-			.viewCount(0)
-			.member(member)
-			.build();
 	}
 
 	@Override
@@ -72,9 +58,7 @@ public class PostServiceImpl implements PostService {
 	public PostResponse update(final Long postId, final PostUpdateRequest postRequest, final Long memberId) {
 		Post post = postRepository.findById(postId)
 			.orElseThrow(NotFoundPostException::new);
-		if (post.getMember().getId() != memberId) {
-			throw new NotCorrectUserException();
-		}
+		post.checkWriter(post, memberId);
 		post.update(postRequest.getTitle(), post.getContent(), postRequest.getCategory());
 
 		PostResponse response = new PostResponse(post);
@@ -82,9 +66,10 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void delete(final Long postId) {
+	public void delete(final Long postId, final Long memberId) {
 		Post post = postRepository.findById(postId)
 			.orElseThrow(NotFoundPostException::new);
+		post.checkWriter(post, memberId);
 		post.delete();
 	}
 }

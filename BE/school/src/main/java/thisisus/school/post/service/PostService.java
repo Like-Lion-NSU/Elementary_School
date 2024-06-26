@@ -12,7 +12,7 @@ public interface PostService {
 
 	PostResponse update(Long postId, PostUpdateRequest postRequest, Long memberId);
 
-	void delete(Long postId);
+	void delete(Long postId, Long memberId);
 
 	PostResponse findPost(Long postId);
 
