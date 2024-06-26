@@ -5,6 +5,6 @@ import thisisus.school.common.exception.ExceptionCode;
 
 public class NotCorrectUserException extends CustomException {
     public NotCorrectUserException() {
-        super(ExceptionCode.NOT_FOUND_POST);
+        super(ExceptionCode.NOT_CORRECT_USER);
     }
 }
