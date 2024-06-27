@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class PostUpdateRequest {
-    private Long id;
     @NotBlank
     private String title;
     @NotBlank

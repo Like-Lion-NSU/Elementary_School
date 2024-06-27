@@ -5,15 +5,19 @@ import thisisus.school.post.dto.PostRequest;
 import thisisus.school.post.dto.PostResponse;
 import thisisus.school.post.dto.PostUpdateRequest;
 
+import java.util.List;
+
 public interface PostService {
-    PostResponse savePost(PostRequest postRequest);
+	PostResponse savePost(PostRequest postRequest, Long memberId);
 
-    PostResponse update(PostUpdateRequest postRequest);
+	PostResponse update(Long postId, PostUpdateRequest postRequest, Long memberId);
 
-    void delete(long postId);
+	void delete(Long postId, Long memberId);
 
-    PostResponse findPost(long postId);
+	PostResponse findPost(Long postId);
 
-    void findPosts(PostCategory postCategory);
+	List<PostResponse> findPostByMemberId(Long memberId);
+
+	void findPosts(PostCategory postCategory);
 
 }

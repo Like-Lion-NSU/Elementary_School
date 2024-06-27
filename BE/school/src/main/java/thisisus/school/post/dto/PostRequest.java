@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import thisisus.school.member.domain.Member;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
 
@@ -21,13 +22,15 @@ public class PostRequest {
     @NotNull
     private PostCategory category;
 
-    public Post toEntity() {
-        return Post.builder()
-                .title(this.title)
-                .content(this.content)
-                .category(this.category)
+    public Post toEntity(Member member){
+        return Post.builder().
+                title(title)
+                .content(content)
+                .category(category)
                 .likeCount(0)
                 .viewCount(0)
+                .member(member)
                 .build();
+
     }
 }
