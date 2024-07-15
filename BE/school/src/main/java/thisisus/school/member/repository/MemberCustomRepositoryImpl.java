@@ -1,5 +1,5 @@
 package thisisus.school.member.repository;
 
-public class MemberCustomRepositoryImpl {
+public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
 }

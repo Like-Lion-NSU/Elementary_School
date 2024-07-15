@@ -5,9 +5,9 @@ import thisisus.school.member.dto.UpdateMemberRequest;
 
 public interface MemberService {
 
-    void update(Long memberId, UpdateMemberRequest updateMemberRequest);
+	void update(Long memberId, UpdateMemberRequest updateMemberRequest);
 
-    void delete(Long memberId);
+	void delete(Long memberId);
 
-    MemberInfoResponse findMember(Long memberId);
+	MemberInfoResponse findMember(Long memberId);
 }
