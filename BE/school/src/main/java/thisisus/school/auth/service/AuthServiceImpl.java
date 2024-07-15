@@ -81,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	@Transactional
-	public AuthResponse reissueRefreshToken(final String refreshToken) {
+	public AuthResponse reissueToken(final String refreshToken) {
 		refreshTokenValidator.validateToken(refreshToken);
 		final Long memberId = Long.valueOf(jwtTokenProvider.getMemberId(refreshToken));
 		final Member member = memberRepository.findById(memberId)

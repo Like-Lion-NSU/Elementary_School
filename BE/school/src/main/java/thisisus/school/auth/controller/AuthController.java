@@ -63,19 +63,18 @@ public class AuthController {
 
 	@DeleteMapping("/logout")
 	public SuccessResonse logout(
-		@AuthenticatedMemberId Long memberId,
-		String refreshToken
+		@AuthenticatedMemberId Long memberId
 	) {
 		authService.logout(memberId);
 		return SuccessResonse.of();
 	}
 
-	@PostMapping("/refreshToken")
-	public SuccessResonse refreshToken(
+	@PostMapping("/token/reissue")
+	public SuccessResonse reissueToken(
 		@RequestHeader("refresh") String refreshToken,
 		HttpServletResponse response
 	) {
-		AuthResponse authResponse = authService.reissueRefreshToken(refreshToken);
+		AuthResponse authResponse = authService.reissueToken(refreshToken);
 		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
 		return SuccessResonse.of(authResponse);

@@ -14,5 +14,5 @@ public interface AuthService {
 
 	void logout(Long memberId);
 
-	AuthResponse reissueRefreshToken(String refreshToken);
+	AuthResponse reissueToken(String refreshToken);
 }
