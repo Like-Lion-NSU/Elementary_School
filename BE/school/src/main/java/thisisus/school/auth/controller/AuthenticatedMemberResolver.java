@@ -33,6 +33,7 @@ public class AuthenticatedMemberResolver implements HandlerMethodArgumentResolve
         if (token == null) {
             throw new InvalidTokenException();
         }
+        jwtTokenProvider.validateToken(token, "ACEESS_TOKEN");
         return Long.valueOf(jwtTokenProvider.getMemberId(token));
     }
 }

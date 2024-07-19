@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
 import thisisus.school.auth.exception.InvalidTokenException;
+import thisisus.school.auth.exception.TokenTypeMismatchException;
 import thisisus.school.common.exception.CustomException;
 
 @Component
@@ -117,9 +118,17 @@ public class JwtTokenProvider {
 		}
 	}
 
-	public boolean validateToken(String token) {
+	public boolean validateToken(String token, String type) {
 		try {
-			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+			Claims claims = Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+			String tokenType = claims.get("type", String.class);
+			if (!tokenType.equals(type)) {
+				throw new TokenTypeMismatchException();
+			}
 			return true;
 		} catch (SignatureException e) {
 			throw new CustomException(INVALID_JWT_CHARACTER);
