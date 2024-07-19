@@ -63,9 +63,9 @@ public class AuthController {
 
 	@DeleteMapping("/logout")
 	public SuccessResonse logout(
-		@AuthenticatedMemberId Long memberId
+		@RequestHeader("refresh") String refreshToken
 	) {
-		authService.logout(memberId);
+		authService.logout(refreshToken);
 		return SuccessResonse.of();
 	}
 

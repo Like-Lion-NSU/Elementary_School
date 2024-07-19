@@ -16,6 +16,8 @@ import thisisus.school.auth.infrastructure.kakao.KakaoProperties;
 import thisisus.school.auth.infrastructure.kakao.KakaoTokenInfoResponse;
 import thisisus.school.auth.infrastructure.kakao.RequestKakaoOauthClient;
 import thisisus.school.auth.processor.LoginByIdTokenProcessor;
+import thisisus.school.redis.Auth.domain.RefreshToken;
+import thisisus.school.redis.Auth.service.RefreshTokenRedisService;
 import thisisus.school.member.domain.Member;
 import thisisus.school.member.exception.NotFoundMemberException;
 import thisisus.school.member.repository.MemberRepository;
@@ -26,6 +28,7 @@ import thisisus.school.member.repository.MemberRepository;
 public class AuthServiceImpl implements AuthService {
 
 	private final MemberRepository memberRepository;
+	private final RefreshTokenRedisService refreshTokenRedisService;
 	private final RequestKakaoOauthClient requestKakaoOauthClient;
 	private final LoginByIdTokenProcessor loginByIdTokenProcessor;
 	private final KakaoProperties kakaoProperties;
@@ -50,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
 			Member member = signUpRequest.toEntity(memberInfoFromIdToken.getEmail());
 			memberRepository.save(member);
 			AuthResponse authResponse = authTokenGenerator.generate(member);
-			member.setRefreshToken(authResponse.getRefreshToken());
+			refreshTokenRedisService.save(authResponse.getRefreshToken(), member.getId());
 			return authResponse;
 		} else {
 			throw new AlreadyRegisteredEmailException();
@@ -64,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
 		if (validateEmail(memberInfoFromIdToken.getEmail())) {
 			Member member = memberRepository.findByEmail(memberInfoFromIdToken.getEmail());
 			AuthResponse authResponse = authTokenGenerator.generate(member);
-			member.setRefreshToken(authResponse.getRefreshToken());
+			refreshTokenRedisService.save(authResponse.getRefreshToken(), member.getId());
 			return authResponse;
 		} else {
 			throw new NotFoundEmailException();
@@ -73,10 +76,9 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	@Transactional
-	public void logout(final Long memberId) {
-		final Member member = memberRepository.findById(memberId).
-			orElseThrow(NotFoundMemberException::new);
-		member.setRefreshToken(null);
+	public void logout(final String token) {
+		refreshTokenValidator.validateLogoutToken(token);
+		refreshTokenRedisService.delete(token);
 	}
 
 	@Override
@@ -86,14 +88,15 @@ public class AuthServiceImpl implements AuthService {
 		final Long memberId = Long.valueOf(jwtTokenProvider.getMemberId(refreshToken));
 		final Member member = memberRepository.findById(memberId)
 			.orElseThrow(NotFoundMemberException::new);
-		refreshTokenValidator.validateLogoutToken(member);
-		refreshTokenValidator.validateTokenOwner(refreshToken, member);
+		refreshTokenValidator.validateLogoutToken(refreshToken);
+		refreshTokenValidator.validateTokenOwner(refreshToken, member.getId());
 		AuthResponse authResponse = authTokenGenerator.generate(member);
-		member.setRefreshToken(authResponse.getRefreshToken());
+		refreshTokenRedisService.save(authResponse.getRefreshToken(), member.getId());
 		return authResponse;
 	}
 
 	private Boolean validateEmail(final String email) {
 		return memberRepository.existsByEmail(email);
 	}
+
 }
