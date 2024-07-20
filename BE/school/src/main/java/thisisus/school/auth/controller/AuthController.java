@@ -4,6 +4,7 @@ import static org.springframework.boot.web.server.Cookie.SameSite.*;
 import static org.springframework.http.HttpHeaders.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +42,7 @@ public class AuthController {
 	@PostMapping("/sign-up")
 	public SuccessResonse signUp(
 		@RequestParam("idToken") String idToken,
-		@RequestBody SignUpRequest signUpRequest,
+		@RequestBody @Valid SignUpRequest signUpRequest,
 		HttpServletResponse response
 	) {
 		AuthResponse authResponse = authService.signUp(idToken, signUpRequest);
