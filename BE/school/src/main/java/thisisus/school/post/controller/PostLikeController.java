@@ -11,15 +11,15 @@ import thisisus.school.post.service.PostLikeService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/like")
+@RequestMapping("/api/post/like")
 public class PostLikeController {
 
     private final PostLikeService postLikeService;
 
     @PostMapping("/{postId}")
-    public SuccessResonse insertLike(@PathVariable("postId") final Long postId,
-                                     @AuthenticatedMemberId final Long memberId) {
-        postLikeService.insertLike(postId, memberId);
+    public SuccessResonse likePost(@PathVariable("postId") final Long postId,
+                                   @AuthenticatedMemberId final Long memberId) {
+        postLikeService.likePost(postId, memberId);
         return SuccessResonse.of();
     }
 }

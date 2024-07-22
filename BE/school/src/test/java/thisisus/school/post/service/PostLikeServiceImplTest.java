@@ -25,7 +25,6 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -70,7 +69,7 @@ class PostLikeServiceImplTest {
         when(postLikeRepository.save(any(PostLike.class))).thenReturn(postLike);
 
         //when
-        postLikeService.insertLike(1L, 1L);
+        postLikeService.likePost(1L, 1L);
 
         //then
         verify(memberRepository).findById(1L);
@@ -88,7 +87,7 @@ class PostLikeServiceImplTest {
         when(postRepository.findById(1L)).thenReturn(Optional.empty());
 
         // then
-        assertThrows(NotFoundPostException.class, () -> postLikeService.insertLike(1L, 1L));
+        assertThrows(NotFoundPostException.class, () -> postLikeService.likePost(1L, 1L));
     }
 
     @Test
@@ -98,7 +97,7 @@ class PostLikeServiceImplTest {
         when(memberRepository.findById(1L)).thenReturn(Optional.empty());
 
         // then
-        assertThrows(NotFoundMemberException.class, () -> postLikeService.insertLike(1L, 1L));
+        assertThrows(NotFoundMemberException.class, () -> postLikeService.likePost(1L, 1L));
     }
 
     @Test
@@ -110,7 +109,7 @@ class PostLikeServiceImplTest {
         when(postLikeRepository.existsByMemberAndPost(member, post)).thenReturn(true);
 
         // then
-        assertThrows(AlreadyExistPostLikeException.class, () -> postLikeService.insertLike(1L, 1L));
+        assertThrows(AlreadyExistPostLikeException.class, () -> postLikeService.likePost(1L, 1L));
     }
 
     // 차이가 나긴 하지만 메모리상에 위치하는 Mock객체를 이용해서 그런지 차이가 매우 극소량 났다.
@@ -131,7 +130,7 @@ class PostLikeServiceImplTest {
         for (int i = 0; i < numberOfThreads; i++) {
             executorService.submit(() -> {
                 try {
-                    postLikeService.insertLike(1L, 1L);
+                    postLikeService.likePost(1L, 1L);
                 } finally {
                     latch.countDown();
                 }

@@ -22,7 +22,7 @@ public class PostLikeServiceImpl implements PostLikeService {
 
     @Override
     @Transactional
-    public synchronized void insertLike(Long postId, Long memberId) {
+    public synchronized void likePost(Long postId, Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(NotFoundMemberException::new);
         Post post = postRepository.findWithLockById(postId)

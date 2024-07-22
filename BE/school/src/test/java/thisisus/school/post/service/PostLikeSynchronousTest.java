@@ -56,12 +56,12 @@ public class PostLikeSynchronousTest {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         CountDownLatch latch = new CountDownLatch(2);
         executorService.execute(() -> {
-            postLikeService.insertLike(1L, member.getId());
+            postLikeService.likePost(1L, member.getId());
             latch.countDown();
         });
 
         executorService.execute(() -> {
-            postLikeService.insertLike(1L, member2.getId());
+            postLikeService.likePost(1L, member2.getId());
             latch.countDown();
         });
         latch.await();
