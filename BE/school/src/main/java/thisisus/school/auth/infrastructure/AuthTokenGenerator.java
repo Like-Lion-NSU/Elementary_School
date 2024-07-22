@@ -19,10 +19,6 @@ public class AuthTokenGenerator {
 	}
 
 	public boolean isValidToken(String token) {
-		return jwtTokenProvider.validateToken(token);
-	}
-
-	public Long extractMemberId(String refreshToken) {
-		return Long.valueOf(jwtTokenProvider.getMemberId(refreshToken));
+		return jwtTokenProvider.validateToken(token, "REFRESH_TOKEN");
 	}
 }

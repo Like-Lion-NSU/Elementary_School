@@ -12,7 +12,7 @@ public interface AuthService {
 
 	AuthResponse login(String idToken);
 
-	void logout(Long memberId);
+	void logout(String refreshToken);
 
 	AuthResponse reissueToken(String refreshToken);
 }

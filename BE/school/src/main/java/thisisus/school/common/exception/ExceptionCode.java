@@ -25,6 +25,7 @@ public enum ExceptionCode {
 	NOT_FOUND_POST(NOT_FOUND, "게시물을 찾을 수 없습니다."),
 	NOT_CORRECT_USER(UNAUTHORIZED, "작성자가 일치하지 않습니다."),
 	PUBLIC_KEY_GENERATION_FAILED(INTERNAL_SERVER_ERROR, "공개 키 생성에 실패했습니다."),
+	TOKEN_TYPE_MISMATCH(FORBIDDEN, "토큰 타입이 잘못되었습니다."),
 	MEMBER_REFRESH_TOKEN_MISMATCH(FORBIDDEN, "로그인한 사용자의 RefreshToken이 아닙니다.");
 
 	private final HttpStatus httpStatus;

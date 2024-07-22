@@ -1,5 +1,7 @@
 package thisisus.school.member.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,7 +26,7 @@ public class MemberController {
 	@PatchMapping("/update")
 	public SuccessResonse updateMember(
 		@AuthenticatedMemberId final Long memberId,
-		@RequestBody UpdateMemberRequest updateMemberRequest
+		@RequestBody @Valid UpdateMemberRequest updateMemberRequest
 	) {
 		memberService.update(memberId, updateMemberRequest);
 		return SuccessResonse.of();

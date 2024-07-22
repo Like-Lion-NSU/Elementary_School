@@ -1,5 +1,6 @@
 package thisisus.school.auth.infrastructure.kakao;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ public interface RequestKakaoOauthClient {
       @RequestParam("code") String code
   );
 
+  @Cacheable(cacheNames = "KakaoOIDC", cacheManager = "oidcCacheManager")
   @GetMapping("/.well-known/jwks.json")
   PublicKeysDto getPublicKeys();
 }
