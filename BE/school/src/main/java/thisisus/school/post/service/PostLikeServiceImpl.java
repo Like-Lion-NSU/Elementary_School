@@ -9,6 +9,7 @@ import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostLike;
 import thisisus.school.post.exception.AlreadyExistPostLikeException;
+import thisisus.school.post.exception.NotExistPostLikeException;
 import thisisus.school.post.exception.NotFoundPostException;
 import thisisus.school.post.repository.PostLikeRepository;
 import thisisus.school.post.repository.PostRepository;
@@ -22,7 +23,7 @@ public class PostLikeServiceImpl implements PostLikeService {
 
     @Override
     @Transactional
-    public synchronized void likePost(Long postId, Long memberId) {
+    public void likePost(Long postId, Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(NotFoundMemberException::new);
         Post post = postRepository.findWithLockById(postId)
@@ -31,7 +32,6 @@ public class PostLikeServiceImpl implements PostLikeService {
             throw new AlreadyExistPostLikeException();
         }
         post.increaseLikeCount();
-        postRepository.save(post);
 
         PostLike postLike = PostLike.builder()
                 .post(post)
@@ -39,5 +39,21 @@ public class PostLikeServiceImpl implements PostLikeService {
                 .build();
 
         postLikeRepository.save(postLike);
+    }
+
+    @Override
+    @Transactional
+    public void disLikePost(Long postId, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(NotFoundMemberException::new);
+        Post post = postRepository.findWithLockById(postId)
+                .orElseThrow(NotFoundPostException::new);
+        if (!postLikeRepository.existsByMemberAndPost(member, post)) {
+            throw new NotExistPostLikeException();
+        }
+        post.decreaseLikeCount();
+
+        PostLike postLike = postLikeRepository.findByMemberAndPost(member, post);
+        postLikeRepository.delete(postLike);
     }
 }

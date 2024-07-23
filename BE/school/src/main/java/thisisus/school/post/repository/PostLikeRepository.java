@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     boolean existsByMemberAndPost(Member member, Post post);
+
+    PostLike findByMemberAndPost(Member member, Post post);
 }

@@ -17,16 +17,14 @@ import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
 import thisisus.school.post.domain.PostLike;
 import thisisus.school.post.exception.AlreadyExistPostLikeException;
+import thisisus.school.post.exception.NotExistPostLikeException;
 import thisisus.school.post.exception.NotFoundPostException;
 import thisisus.school.post.repository.PostLikeRepository;
 import thisisus.school.post.repository.PostRepository;
 
 import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -112,34 +110,58 @@ class PostLikeServiceImplTest {
         assertThrows(AlreadyExistPostLikeException.class, () -> postLikeService.likePost(1L, 1L));
     }
 
-    // 차이가 나긴 하지만 메모리상에 위치하는 Mock객체를 이용해서 그런지 차이가 매우 극소량 났다.
-    // 또한 실제 DB에 접근하여 물리적인 행위가 안나오니 크게 오차가 없는것 같다.
-    // 그래서 DB에 실제 접근하는 테스트코드를 작성하기로 했다.
     @Test
-    @DisplayName("좋아요 기능에 대한 동시성 테스트")
-    void synchronousTestAboutPostLike() throws InterruptedException {
-        int numberOfThreads = 1000;
-        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        CountDownLatch latch = new CountDownLatch(numberOfThreads);
-
+    @DisplayName("좋아요 delete - 성공")
+    void deletePostLike() {
+        //given
         when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
-        when(postRepository.findById(1L)).thenReturn(Optional.of(post));
+        when(postRepository.findWithLockById(1L)).thenReturn(Optional.of(post));
+        when(postLikeRepository.existsByMemberAndPost(member, post)).thenReturn(true);
+        when(postRepository.save(any(Post.class))).thenReturn(post);
+        when(postLikeRepository.findByMemberAndPost(member, post)).thenReturn(postLike);
+        doNothing().when(postLikeRepository).delete(any(PostLike.class));
+
+        //when
+        postLikeService.disLikePost(1L, 1L);
+
+        //then
+        verify(memberRepository).findById(1L);
+        verify(postRepository).findWithLockById(1L);
+        verify(postLikeRepository).existsByMemberAndPost(member, post);
+        verify(postRepository).save(any(Post.class));
+        verify(postLikeRepository).delete(any(PostLike.class));
+    }
+
+    @Test
+    @DisplayName("좋아요 delete - 잘못된 postId로 인한 실패")
+    void failedDeletePostLikeByWrongPostId() {
+        // given
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+
+        // when
+        assertThrows(NotFoundPostException.class, () -> postLikeService.disLikePost(1L, 1L));
+    }
+
+    @Test
+    @DisplayName("좋아요 delete - 잘못된 memberId로 인한 실패")
+    void failedDeletePostLikeByWrongMemberId() {
+        // given
+        when(memberRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // when
+        assertThrows(NotFoundMemberException.class, () -> postLikeService.disLikePost(1L, 1L));
+    }
+
+    @Test
+    @DisplayName("좋아요 delete - 좋아요를 누르지 않은 경우")
+    void failedDeletePostLikeByNotExistPostLike() {
+        // given
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(postRepository.findWithLockById(1L)).thenReturn(Optional.of(post));
         when(postLikeRepository.existsByMemberAndPost(member, post)).thenReturn(false);
-        when(postLikeRepository.save(any(PostLike.class))).thenReturn(postLike);
 
-        for (int i = 0; i < numberOfThreads; i++) {
-            executorService.submit(() -> {
-                try {
-                    postLikeService.likePost(1L, 1L);
-                } finally {
-                    latch.countDown();
-                }
-            });
-
-        }
-        latch.await();
-
-        assertEquals(numberOfThreads, post.getLikeCount());
+        // then
+        assertThrows(NotExistPostLikeException.class, () -> postLikeService.disLikePost(1L, 1L));
     }
 
 }
