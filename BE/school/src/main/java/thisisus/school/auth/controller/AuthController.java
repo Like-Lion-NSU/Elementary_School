@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import thisisus.school.auth.config.AuthenticatedMemberId;
 import thisisus.school.auth.dto.request.SignUpRequest;
 import thisisus.school.auth.dto.response.AuthResponse;
 import thisisus.school.auth.dto.response.IdTokenResponse;
 import thisisus.school.auth.service.AuthService;
-import thisisus.school.common.response.SuccessResonse;
+import thisisus.school.common.response.SuccessResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,15 +31,15 @@ public class AuthController {
 	private final AuthService authService;
 
 	@GetMapping("/idToken")
-	public SuccessResonse getIdToken(
+	public SuccessResponse getIdToken(
 		@RequestParam("code") String code
 	) {
 		IdTokenResponse idTokenResponse = authService.getIdToken(code);
-		return SuccessResonse.of(idTokenResponse);
+		return SuccessResponse.of(idTokenResponse);
 	}
 
 	@PostMapping("/sign-up")
-	public SuccessResonse signUp(
+	public SuccessResponse signUp(
 		@RequestParam("idToken") String idToken,
 		@RequestBody @Valid SignUpRequest signUpRequest,
 		HttpServletResponse response
@@ -48,37 +47,37 @@ public class AuthController {
 		AuthResponse authResponse = authService.signUp(idToken, signUpRequest);
 		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		return SuccessResponse.of(authResponse);
 	}
 
 	@PostMapping("/login")
-	public SuccessResonse login(
+	public SuccessResponse login(
 		@RequestParam("idToken") String idToken,
 		HttpServletResponse response
 	) {
 		AuthResponse authResponse = authService.login(idToken);
 		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		return SuccessResponse.of(authResponse);
 	}
 
 	@DeleteMapping("/logout")
-	public SuccessResonse logout(
+	public SuccessResponse logout(
 		@RequestHeader("refresh") String refreshToken
 	) {
 		authService.logout(refreshToken);
-		return SuccessResonse.of();
+		return SuccessResponse.of();
 	}
 
 	@PostMapping("/token/reissue")
-	public SuccessResonse reissueToken(
+	public SuccessResponse reissueToken(
 		@RequestHeader("refresh") String refreshToken,
 		HttpServletResponse response
 	) {
 		AuthResponse authResponse = authService.reissueToken(refreshToken);
 		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		return SuccessResponse.of(authResponse);
 	}
 
 	private ResponseCookie getCookie(

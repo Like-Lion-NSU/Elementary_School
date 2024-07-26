@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import thisisus.school.auth.config.AuthenticatedMemberId;
-import thisisus.school.common.response.SuccessResonse;
+import thisisus.school.common.response.SuccessResponse;
 import thisisus.school.member.dto.MemberInfoResponse;
 import thisisus.school.member.dto.UpdateMemberRequest;
 import thisisus.school.member.service.MemberService;
@@ -24,27 +24,27 @@ public class MemberController {
 	private final MemberService memberService;
 
 	@PatchMapping("/update")
-	public SuccessResonse updateMember(
+	public SuccessResponse updateMember(
 		@AuthenticatedMemberId final Long memberId,
 		@RequestBody @Valid UpdateMemberRequest updateMemberRequest
 	) {
 		memberService.update(memberId, updateMemberRequest);
-		return SuccessResonse.of();
+		return SuccessResponse.of();
 	}
 
 	@DeleteMapping("/delete")
-	public SuccessResonse deleteMember(
+	public SuccessResponse deleteMember(
 		@AuthenticatedMemberId final Long memberId
 	) {
 		memberService.delete(memberId);
-		return SuccessResonse.of();
+		return SuccessResponse.of();
 	}
 
 	@GetMapping("/me")
-	public SuccessResonse findMember(
+	public SuccessResponse findMember(
 		@AuthenticatedMemberId final Long memberId
 	) {
 		MemberInfoResponse memberInfoResponse = memberService.findMember(memberId);
-		return SuccessResonse.of(memberInfoResponse);
+		return SuccessResponse.of(memberInfoResponse);
 	}
 }
