@@ -17,11 +17,6 @@ public class AuthenticationExtractor {
     return extract(headers);
   }
 
-  public static String extractRefreshToken(HttpServletRequest request) {
-    Enumeration<String> headers = request.getHeaders("Refresh-Token");
-    return extract(headers);
-  }
-
   private static String extract(Enumeration<String> headers) {
     while (headers.hasMoreElements()) {
       String value = headers.nextElement();
@@ -37,5 +32,4 @@ public class AuthenticationExtractor {
     }
     return null;
   }
-
 }

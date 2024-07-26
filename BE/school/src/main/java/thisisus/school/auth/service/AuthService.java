@@ -6,10 +6,13 @@ import thisisus.school.auth.dto.response.IdTokenResponse;
 
 public interface AuthService {
 
-    IdTokenResponse getIdToken(String code);
+	IdTokenResponse getIdToken(String code);
 
-    AuthResponse login(String idToken);
+	AuthResponse signUp(String idToken, SignUpRequest signUpRequest);
 
-    AuthResponse signUp(String idToken, SignUpRequest signUpRequest);
+	AuthResponse login(String idToken);
 
+	void logout(String refreshToken);
+
+	AuthResponse reissueToken(String refreshToken);
 }

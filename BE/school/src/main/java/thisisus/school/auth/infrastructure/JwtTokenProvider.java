@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
 import thisisus.school.auth.exception.InvalidTokenException;
+import thisisus.school.auth.exception.TokenTypeMismatchException;
 import thisisus.school.common.exception.CustomException;
 
 @Component
@@ -36,7 +37,8 @@ public class JwtTokenProvider {
 
 	@Value("${secret}")
 	private String secretKey;
-	private Long time = 1209600000L;
+	private static long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;
+	private static long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;
 
 	private SecretKey key;
 
@@ -61,11 +63,11 @@ public class JwtTokenProvider {
 	}
 
 	public String createAccessToken(Long memberId, String role) {
-		return createToken(memberId, role, "ACEESS_TOKEN", time);
+		return createToken(memberId, role, "ACEESS_TOKEN", ACCESS_TOKEN_EXPIRE_TIME);
 	}
 
 	public String createRefreshToken(Long memberId, String role) {
-		return createToken(memberId, role, "REFRESH_TOKEN", time);
+		return createToken(memberId, role, "REFRESH_TOKEN", REFRESH_TOKEN_EXPIRE_TIME);
 	}
 
 	public String getMemberId(String token) {
@@ -116,9 +118,17 @@ public class JwtTokenProvider {
 		}
 	}
 
-	public boolean validateToken(String token) {
+	public boolean validateToken(String token, String type) {
 		try {
-			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+			Claims claims = Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+			String tokenType = claims.get("type", String.class);
+			if (!tokenType.equals(type)) {
+				throw new TokenTypeMismatchException();
+			}
 			return true;
 		} catch (SignatureException e) {
 			throw new CustomException(INVALID_JWT_CHARACTER);
