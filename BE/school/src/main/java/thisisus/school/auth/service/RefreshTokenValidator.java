@@ -17,21 +17,21 @@ public class RefreshTokenValidator {
 	private final AuthTokenGenerator authTokenGenerator;
 	private final RefreshTokenRedisService refreshTokenRedisService;
 
-	public void validateToken(final String refreshToken) {
+	protected void validateToken(final String refreshToken) {
 		refreshTokenRedisService.validateRefreshToken(refreshToken);
 		if (!authTokenGenerator.isValidToken(refreshToken)) {
 			throw new InvalidTokenException();
 		}
 	}
 
-	public void validateTokenOwner(final String refreshToken, final Long memberId) {
+	protected void validateTokenOwner(final String refreshToken, final Long memberId) {
 		RefreshToken token = refreshTokenRedisService.findByKey(refreshToken);
 		if (!token.getMemberId().equals(memberId)) {
 			throw new MemberRefreshTokenMismatchException();
 		}
 	}
 
-	public void validateLogoutToken(final String refreshToken) {
+	protected void validateLogoutToken(final String refreshToken) {
 		if (refreshTokenRedisService.findByKey(refreshToken).equals(null)) {
 			throw new AlreadyLoggedOutException();
 		}
