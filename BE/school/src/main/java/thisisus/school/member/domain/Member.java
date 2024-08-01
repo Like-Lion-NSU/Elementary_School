@@ -33,7 +33,7 @@ public class Member {
 	private Role role;
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
-	private LocalDate deletionGracePeriod;
+	private LocalDate deletedAt;
 
 	@Builder
 	public Member(String name, String email, String nickname, Role role) {
@@ -52,12 +52,12 @@ public class Member {
 	public void reRegistration() {
 		this.memberStatus = MemberStatus.ACTIVE;
 		this.role = Role.USER;
-		this.deletionGracePeriod = null;
+		this.deletedAt = null;
 	}
 
 	public void delete() {
 		this.memberStatus = MemberStatus.DELETED;
 		this.role = Role.GUEST;
-		this.deletionGracePeriod = LocalDate.now().plus(Period.ofMonths(3));
+		this.deletedAt = LocalDate.now().plus(Period.ofMonths(3));
 	}
 }
