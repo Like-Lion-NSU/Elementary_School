@@ -6,5 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Role {
-    STUDENT, TEACHER
+	GUEST, USER;
+
+	public static boolean isGuest(String role) {
+		return GUEST.equals(Role.valueOf(role));
+	}
 }

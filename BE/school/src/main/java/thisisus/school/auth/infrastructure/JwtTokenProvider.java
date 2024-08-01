@@ -25,8 +25,10 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import thisisus.school.auth.dto.response.AuthInfoResponse;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
 import thisisus.school.auth.exception.InvalidTokenException;
+import thisisus.school.auth.exception.TokenTypeMismatchException;
 import thisisus.school.common.exception.CustomException;
 
 @Component
@@ -62,7 +64,7 @@ public class JwtTokenProvider {
 	}
 
 	public String createAccessToken(Long memberId, String role) {
-		return createToken(memberId, role, "ACEESS_TOKEN", ACCESS_TOKEN_EXPIRE_TIME);
+		return createToken(memberId, role, "ACCESS_TOKEN", ACCESS_TOKEN_EXPIRE_TIME);
 	}
 
 	public String createRefreshToken(Long memberId, String role) {
@@ -117,9 +119,37 @@ public class JwtTokenProvider {
 		}
 	}
 
-	public boolean validateToken(String token) {
+	public AuthInfoResponse getAuthInfo(String token) {
 		try {
-			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+			Claims claims = Jwts.parser()
+				.setSigningKey(key)
+				.parseClaimsJws(token)
+				.getBody();
+			Long id = Long.valueOf(claims.getSubject());
+			String role = claims.get("role", String.class);
+			return new AuthInfoResponse(id, role);
+		} catch (SignatureException e) {
+			throw new CustomException(INVALID_JWT_CHARACTER);
+		} catch (ExpiredJwtException e) {
+			throw new CustomException(EXPIRED_TOKEN);
+		} catch (UnsupportedJwtException e) {
+			throw new CustomException(INVALID_TOKEN);
+		} catch (IllegalArgumentException e) {
+			throw new CustomException(INCORRECT_TOKEN);
+		}
+	}
+
+	public boolean validateToken(String token, String type) {
+		try {
+			Claims claims = Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+			String tokenType = claims.get("type", String.class);
+			if (!tokenType.equals(type)) {
+				throw new TokenTypeMismatchException();
+			}
 			return true;
 		} catch (SignatureException e) {
 			throw new CustomException(INVALID_JWT_CHARACTER);
