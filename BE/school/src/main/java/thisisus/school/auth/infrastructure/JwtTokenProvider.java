@@ -25,6 +25,7 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import thisisus.school.auth.dto.response.AuthInfoResponse;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
 import thisisus.school.auth.exception.InvalidTokenException;
 import thisisus.school.auth.exception.TokenTypeMismatchException;
@@ -63,7 +64,7 @@ public class JwtTokenProvider {
 	}
 
 	public String createAccessToken(Long memberId, String role) {
-		return createToken(memberId, role, "ACEESS_TOKEN", ACCESS_TOKEN_EXPIRE_TIME);
+		return createToken(memberId, role, "ACCESS_TOKEN", ACCESS_TOKEN_EXPIRE_TIME);
 	}
 
 	public String createRefreshToken(Long memberId, String role) {
@@ -107,6 +108,26 @@ public class JwtTokenProvider {
 			return MemberInfoFromIdToken.builder()
 				.email(claims.get("email", String.class))
 				.build();
+		} catch (SignatureException e) {
+			throw new CustomException(INVALID_JWT_CHARACTER);
+		} catch (ExpiredJwtException e) {
+			throw new CustomException(EXPIRED_TOKEN);
+		} catch (UnsupportedJwtException e) {
+			throw new CustomException(INVALID_TOKEN);
+		} catch (IllegalArgumentException e) {
+			throw new CustomException(INCORRECT_TOKEN);
+		}
+	}
+
+	public AuthInfoResponse getAuthInfo(String token) {
+		try {
+			Claims claims = Jwts.parser()
+				.setSigningKey(key)
+				.parseClaimsJws(token)
+				.getBody();
+			Long id = Long.valueOf(claims.getSubject());
+			String role = claims.get("role", String.class);
+			return new AuthInfoResponse(id, role);
 		} catch (SignatureException e) {
 			throw new CustomException(INVALID_JWT_CHARACTER);
 		} catch (ExpiredJwtException e) {

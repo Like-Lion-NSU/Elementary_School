@@ -1,5 +1,8 @@
 package thisisus.school.member.domain;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,6 +33,7 @@ public class Member {
 	private Role role;
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
+	private LocalDate deletedAt;
 
 	@Builder
 	public Member(String name, String email, String nickname, Role role) {
@@ -40,13 +44,20 @@ public class Member {
 		this.memberStatus = MemberStatus.ACTIVE;
 	}
 
-	public void delete() {
-		this.memberStatus = MemberStatus.DELETED;
-		this.email = null;
-	}
-
 	public void update(String nickname, Role role) {
 		this.nickname = nickname;
 		this.role = role;
+	}
+
+	public void reRegistration() {
+		this.memberStatus = MemberStatus.ACTIVE;
+		this.role = Role.STUDENT;
+		this.deletedAt = null;
+	}
+
+	public void delete() {
+		this.memberStatus = MemberStatus.DELETED;
+		this.role = Role.GUEST;
+		this.deletedAt = LocalDate.now().plus(Period.ofMonths(3));
 	}
 }

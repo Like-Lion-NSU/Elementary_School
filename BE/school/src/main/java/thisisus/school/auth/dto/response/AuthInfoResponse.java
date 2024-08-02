@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class KakaoIdResponse {
-
-    private Long kakaoMemberId;
+public class AuthInfoResponse {
+	Long memberId;
+	String role;
 }
