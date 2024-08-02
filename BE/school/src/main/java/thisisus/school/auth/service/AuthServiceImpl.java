@@ -100,5 +100,5 @@ public class AuthServiceImpl implements AuthService {
 	private Boolean validateEmail(final String email) {
 		return memberRepository.existsByEmail(email);
 	}
-
+  
 }
