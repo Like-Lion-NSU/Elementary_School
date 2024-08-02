@@ -11,5 +11,5 @@ import thisisus.school.member.domain.Role;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
 
-	Role role() default Role.USER;
+	Role role() default Role.STUDENT;
 }

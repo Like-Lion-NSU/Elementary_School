@@ -26,7 +26,7 @@ public enum ExceptionCode {
 	NOT_CORRECT_USER(UNAUTHORIZED, "작성자가 일치하지 않습니다."),
 	PUBLIC_KEY_GENERATION_FAILED(INTERNAL_SERVER_ERROR, "공개 키 생성에 실패했습니다."),
 	TOKEN_TYPE_MISMATCH(FORBIDDEN, "토큰 타입이 잘못되었습니다."),
-	ACCESS_DENIED_RESOURCE(FORBIDDEN, "손님 등급은 서비스에 접근할 수 없습니다."),
+	ACCESS_DENIED_RESOURCE(FORBIDDEN, "손님/학생 등급은 서비스에 접근할 수 없습니다."),
 	MEMBER_REFRESH_TOKEN_MISMATCH(FORBIDDEN, "로그인한 사용자의 RefreshToken이 아닙니다."),
   	ALREADY_EXIST_POSTLIKE(CONFLICT, "이미 좋아요를 누른 게시물입니다."),
   	NOT_EXIST_POSTLIKE(NOT_FOUND,"해당 게시물에 좋아요 기록이 없습니다.");

@@ -39,16 +39,26 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		jwtTokenProvider.validateToken(token, "ACCESS_TOKEN");
 
 		AuthInfoResponse authInfo = jwtTokenProvider.getAuthInfo(token);
-		if (isAccessOnlyUser(auth)) {
-			if (isGuest(authInfo.getRole())) {
+
+		if(isAccessTeacher(auth)){
+			if(isNotTeacher(authInfo.getRole())){
 				throw new AccessDeniedResourceException();
 			}
 		}
 
+		if (isAccessStudent(auth)) {
+			if (isGuest(authInfo.getRole())) {
+				throw new AccessDeniedResourceException();
+			}
+		}
 		return true;
 	}
 
-	private boolean isAccessOnlyUser(Auth auth) {
-		return auth.role().compareTo(Role.USER) == 0;
+	private boolean isAccessStudent(Auth auth) {
+		return auth.role().compareTo(STUDENT) == 0;
+	}
+
+	private boolean isAccessTeacher(Auth auth){
+		return auth.role().compareTo(TEACHER) == 0;
 	}
 }

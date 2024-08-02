@@ -51,7 +51,7 @@ public class Member {
 
 	public void reRegistration() {
 		this.memberStatus = MemberStatus.ACTIVE;
-		this.role = Role.USER;
+		this.role = Role.STUDENT;
 		this.deletedAt = null;
 	}
 
