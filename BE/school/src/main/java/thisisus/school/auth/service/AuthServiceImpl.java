@@ -8,7 +8,6 @@ import thisisus.school.auth.dto.request.SignUpRequest;
 import thisisus.school.auth.dto.response.AuthTokenResponse;
 import thisisus.school.auth.dto.response.IdTokenResponse;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
-import thisisus.school.auth.exception.AlreadyRegisteredEmailException;
 import thisisus.school.auth.exception.NotFoundEmailException;
 import thisisus.school.auth.infrastructure.AuthTokenGenerator;
 import thisisus.school.auth.infrastructure.JwtTokenProvider;
@@ -54,11 +53,7 @@ public class AuthServiceImpl implements AuthService {
 			memberRepository.save(member);
 		} else {
 			Member member = memberRepository.findByEmail(memberInfoFromIdToken.getEmail());
-			if (member.getMemberStatus().equals("DELETED")) {
-				member.reRegistration();
-			} else {
-				throw new AlreadyRegisteredEmailException();
-			}
+			member.reRegisterIfDeleted();
 		}
 	}
 
@@ -100,5 +95,4 @@ public class AuthServiceImpl implements AuthService {
 	private Boolean validateEmail(final String email) {
 		return memberRepository.existsByEmail(email);
 	}
-  
 }

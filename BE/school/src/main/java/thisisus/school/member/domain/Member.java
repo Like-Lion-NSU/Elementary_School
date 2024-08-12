@@ -1,5 +1,7 @@
 package thisisus.school.member.domain;
 
+import static thisisus.school.member.domain.MemberStatus.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -15,6 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import thisisus.school.auth.exception.AlreadyRegisteredEmailException;
 
 @Entity
 @Getter
@@ -49,15 +52,23 @@ public class Member {
 		this.role = role;
 	}
 
-	public void reRegistration() {
+	private void reRegistration() {
 		this.memberStatus = MemberStatus.ACTIVE;
 		this.role = Role.STUDENT;
 		this.deletedAt = null;
 	}
 
 	public void delete() {
-		this.memberStatus = MemberStatus.DELETED;
+		this.memberStatus = DELETED;
 		this.role = Role.GUEST;
 		this.deletedAt = LocalDate.now().plus(Period.ofMonths(3));
+	}
+
+	public void reRegisterIfDeleted(){
+		if (this.getMemberStatus().equals(DELETED)) {
+			this.reRegistration();
+		} else {
+			throw new AlreadyRegisteredEmailException();
+		}
 	}
 }
