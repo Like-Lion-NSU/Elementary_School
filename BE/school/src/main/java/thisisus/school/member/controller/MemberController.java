@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import thisisus.school.auth.config.Auth;
 import thisisus.school.auth.config.AuthenticatedMemberId;
 import thisisus.school.common.response.SuccessResponse;
 import thisisus.school.member.dto.MemberInfoResponse;
@@ -23,6 +24,7 @@ public class MemberController {
 
 	private final MemberService memberService;
 
+	@Auth
 	@PatchMapping("/update")
 	public SuccessResponse updateMember(
 		@AuthenticatedMemberId final Long memberId,
@@ -32,6 +34,7 @@ public class MemberController {
 		return SuccessResponse.of();
 	}
 
+	@Auth
 	@DeleteMapping("/delete")
 	public SuccessResponse deleteMember(
 		@AuthenticatedMemberId final Long memberId
@@ -40,6 +43,7 @@ public class MemberController {
 		return SuccessResponse.of();
 	}
 
+	@Auth
 	@GetMapping("/me")
 	public SuccessResponse findMember(
 		@AuthenticatedMemberId final Long memberId

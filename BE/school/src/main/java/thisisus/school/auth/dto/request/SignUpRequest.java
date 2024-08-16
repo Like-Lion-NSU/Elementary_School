@@ -13,7 +13,6 @@ public record SignUpRequest(
     @Size(min = 2, max = 10, message = "사용자 이름은 2 ~ 10 사이어야 합니다.")
     String name,
     @NotNull(message = "역할은 빈칸일 수가 없습니다.")
-    @NotBlank(message = "역할은 공백일 수가 없습니다.")
     Role role,
     @NotNull(message = "닉네임은 빈칸일 수가 없습니다.")
     @NotBlank(message = "닉네임은 공백일 수가 없습니다.")
@@ -21,7 +20,7 @@ public record SignUpRequest(
     String nickname
 ) {
 
-    public Member toEntity(String email) {
+    public Member toEntity(String email, String name, Role role, String nickname) {
         return Member.builder()
             .email(email)
             .name(name)

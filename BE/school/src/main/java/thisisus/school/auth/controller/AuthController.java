@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import thisisus.school.auth.dto.request.SignUpRequest;
-import thisisus.school.auth.dto.response.AuthResponse;
+import thisisus.school.auth.dto.response.AuthTokenResponse;
 import thisisus.school.auth.dto.response.IdTokenResponse;
 import thisisus.school.auth.service.AuthService;
 import thisisus.school.common.response.SuccessResponse;
@@ -41,13 +41,10 @@ public class AuthController {
 	@PostMapping("/sign-up")
 	public SuccessResponse signUp(
 		@RequestParam("idToken") String idToken,
-		@RequestBody @Valid SignUpRequest signUpRequest,
-		HttpServletResponse response
+		@RequestBody @Valid SignUpRequest signUpRequest
 	) {
-		AuthResponse authResponse = authService.signUp(idToken, signUpRequest);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
-		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResponse.of(authResponse);
+		authService.signUp(idToken, signUpRequest);
+		return SuccessResponse.of();
 	}
 
 	@PostMapping("/login")
@@ -55,10 +52,10 @@ public class AuthController {
 		@RequestParam("idToken") String idToken,
 		HttpServletResponse response
 	) {
-		AuthResponse authResponse = authService.login(idToken);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
+		AuthTokenResponse authTokenResponse = authService.login(idToken);
+		ResponseCookie cookie = getCookie(authTokenResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResponse.of(authResponse);
+		return SuccessResponse.of(authTokenResponse);
 	}
 
 	@DeleteMapping("/logout")
@@ -74,10 +71,10 @@ public class AuthController {
 		@RequestHeader("refresh") String refreshToken,
 		HttpServletResponse response
 	) {
-		AuthResponse authResponse = authService.reissueToken(refreshToken);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
+		AuthTokenResponse authTokenResponse = authService.reissueToken(refreshToken);
+		ResponseCookie cookie = getCookie(authTokenResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResponse.of(authResponse);
+		return SuccessResponse.of(authTokenResponse);
 	}
 
 	private ResponseCookie getCookie(
