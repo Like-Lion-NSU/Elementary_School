@@ -30,8 +30,8 @@ public enum ExceptionCode {
 	ACCESS_DENIED_RESOURCE(FORBIDDEN, "서비스에 접근할 수 없는 역할입니다."),
 	MEMBER_REFRESH_TOKEN_MISMATCH(FORBIDDEN, "로그인한 사용자의 RefreshToken이 아닙니다."),
 	CANNOT_REQUEST_CHAT_TO_STUDENT(FORBIDDEN, "학생에게는 채팅을 요청할 수 없습니다."),
-  	ALREADY_EXIST_POSTLIKE(CONFLICT, "이미 좋아요를 누른 게시물입니다."),
-  	NOT_EXIST_POSTLIKE(NOT_FOUND,"해당 게시물에 좋아요 기록이 없습니다.");
+  ALREADY_EXIST_POSTLIKE(CONFLICT, "이미 좋아요를 누른 게시물입니다."),
+  NOT_EXIST_POSTLIKE(NOT_FOUND,"해당 게시물에 좋아요 기록이 없습니다.");
 
 	private final HttpStatus httpStatus;
 	private final String message;

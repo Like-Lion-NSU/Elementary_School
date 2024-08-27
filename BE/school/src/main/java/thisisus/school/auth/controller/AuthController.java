@@ -4,6 +4,7 @@ import static org.springframework.boot.web.server.Cookie.SameSite.*;
 import static org.springframework.http.HttpHeaders.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import thisisus.school.auth.config.AuthenticatedMemberId;
 import thisisus.school.auth.dto.request.SignUpRequest;
-import thisisus.school.auth.dto.response.AuthResponse;
+import thisisus.school.auth.dto.response.AuthTokenResponse;
 import thisisus.school.auth.dto.response.IdTokenResponse;
 import thisisus.school.auth.service.AuthService;
-import thisisus.school.common.response.SuccessResonse;
+import thisisus.school.common.response.SuccessResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,53 +31,50 @@ public class AuthController {
 	private final AuthService authService;
 
 	@GetMapping("/idToken")
-	public SuccessResonse getIdToken(
+	public SuccessResponse getIdToken(
 		@RequestParam("code") String code
 	) {
 		IdTokenResponse idTokenResponse = authService.getIdToken(code);
-		return SuccessResonse.of(idTokenResponse);
+		return SuccessResponse.of(idTokenResponse);
 	}
 
 	@PostMapping("/sign-up")
-	public SuccessResonse signUp(
+	public SuccessResponse signUp(
 		@RequestParam("idToken") String idToken,
-		@RequestBody SignUpRequest signUpRequest,
-		HttpServletResponse response
+		@RequestBody @Valid SignUpRequest signUpRequest
 	) {
-		AuthResponse authResponse = authService.signUp(idToken, signUpRequest);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
-		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		authService.signUp(idToken, signUpRequest);
+		return SuccessResponse.of();
 	}
 
 	@PostMapping("/login")
-	public SuccessResonse login(
+	public SuccessResponse login(
 		@RequestParam("idToken") String idToken,
 		HttpServletResponse response
 	) {
-		AuthResponse authResponse = authService.login(idToken);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
+		AuthTokenResponse authTokenResponse = authService.login(idToken);
+		ResponseCookie cookie = getCookie(authTokenResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		return SuccessResponse.of(authTokenResponse);
 	}
 
 	@DeleteMapping("/logout")
-	public SuccessResonse logout(
-		@AuthenticatedMemberId Long memberId
+	public SuccessResponse logout(
+		@RequestHeader("refresh") String refreshToken
 	) {
-		authService.logout(memberId);
-		return SuccessResonse.of();
+		authService.logout(refreshToken);
+		return SuccessResponse.of();
 	}
 
 	@PostMapping("/token/reissue")
-	public SuccessResonse reissueToken(
+	public SuccessResponse reissueToken(
 		@RequestHeader("refresh") String refreshToken,
 		HttpServletResponse response
 	) {
-		AuthResponse authResponse = authService.reissueToken(refreshToken);
-		ResponseCookie cookie = getCookie(authResponse.getRefreshToken());
+		AuthTokenResponse authTokenResponse = authService.reissueToken(refreshToken);
+		ResponseCookie cookie = getCookie(authTokenResponse.getRefreshToken());
 		response.addHeader(SET_COOKIE, cookie.toString());
-		return SuccessResonse.of(authResponse);
+		return SuccessResponse.of(authTokenResponse);
 	}
 
 	private ResponseCookie getCookie(
