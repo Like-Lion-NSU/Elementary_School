@@ -1,6 +1,7 @@
 package thisisus.school.member.domain;
 
 import static thisisus.school.member.domain.MemberStatus.*;
+import static thisisus.school.member.domain.Role.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import thisisus.school.auth.exception.AlreadyRegisteredEmailException;
+import thisisus.school.chatting.exception.CannotRequestChatToStudentException;
 
 @Entity
 @Getter
@@ -69,6 +71,12 @@ public class Member {
 			this.reRegistration();
 		} else {
 			throw new AlreadyRegisteredEmailException();
+		}
+	}
+
+	public void validateTeacherRole(){
+		if(!this.role.equals(TEACHER)){
+			throw new CannotRequestChatToStudentException();
 		}
 	}
 }
