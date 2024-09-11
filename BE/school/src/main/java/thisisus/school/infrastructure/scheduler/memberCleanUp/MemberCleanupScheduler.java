@@ -1,4 +1,4 @@
-package thisisus.school.scheduler.memberCleanUp;
+package thisisus.school.infrastructure.scheduler.memberCleanUp;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

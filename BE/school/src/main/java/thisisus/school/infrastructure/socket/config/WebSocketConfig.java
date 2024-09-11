@@ -1,4 +1,4 @@
-package thisisus.school.socket.config;
+package thisisus.school.infrastructure.socket.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
