@@ -3,6 +3,7 @@ package thisisus.school.post.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import thisisus.school.member.domain.Member;
+import thisisus.school.member.exception.NotFoundMemberException;
 import thisisus.school.member.repository.MemberRepository;
 import thisisus.school.post.domain.Post;
 import thisisus.school.post.domain.PostCategory;
@@ -23,7 +24,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostResponse savePost(final PostRequest postRequest, final Long memberId) {
-		Member member = memberRepository.findByMemberId(memberId);
+		Member member = memberRepository.findById(memberId)
+			.orElseThrow(NotFoundMemberException::new);
 		Post post = postRequest.toEntity(member);
 		postRepository.save(post);
 
