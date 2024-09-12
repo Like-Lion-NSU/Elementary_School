@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.RequiredArgsConstructor;
-import thisisus.school.member.domain.Member;
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,12 +21,13 @@ public class ReaderConfig {
 	private final int chunkSize = 1000;
 
 	@Bean(DELETION_READER)
-	public QuerydslZeroPagingItemReader<Member> deleteMemberReader() {
+	public QuerydslZeroPagingItemReader<Long> deleteMemberReader() {
 		return new QuerydslZeroPagingItemReader<>(
 			entityManagerFactory,
 			chunkSize,
 			queryFactory -> queryFactory
-				.selectFrom(member)
+				.select(member.id)
+				.from(member)
 				.where(member.deletedAt.eq(LocalDate.now())));
 	}
 }

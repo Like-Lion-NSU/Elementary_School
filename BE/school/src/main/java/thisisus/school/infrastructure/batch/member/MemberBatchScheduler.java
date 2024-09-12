@@ -18,7 +18,7 @@ public class MemberBatchScheduler {
 	private final JobLauncher jobLauncher;
 	private final Job deleteMemberJob;
 
-	@Scheduled(cron = "0 12 2 * * *", zone = "Asia/Seoul")
+	@Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
 	public void deleteExpiredMembers() throws Exception {
 		log.info("스케줄러 시작");
 		JobParameters jobParameters = new JobParametersBuilder()

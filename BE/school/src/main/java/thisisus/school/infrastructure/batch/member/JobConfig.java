@@ -34,11 +34,11 @@ public class JobConfig {
 
 	@Bean(DELETION_STEP)
 	public Step deleteStep(
-		@Qualifier(DELETION_READER) QuerydslZeroPagingItemReader<Member> deleteMemberReader,
-		@Qualifier(DELETION_WRITER) ItemWriter<Member> deleteMemberWriter
+		@Qualifier(DELETION_READER) QuerydslZeroPagingItemReader<Long> deleteMemberReader,
+		@Qualifier(DELETION_WRITER) ItemWriter<Long> deleteMemberWriter
 	) {
 		return stepBuilderFactory.get("deleteMemberStep")
-			.<Member, Member>chunk(1000)
+			.<Long, Long>chunk(1000)
 			.reader(deleteMemberReader)
 			.writer(deleteMemberWriter)
 			.build();
