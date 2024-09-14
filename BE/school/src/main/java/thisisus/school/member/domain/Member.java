@@ -5,13 +5,17 @@ import static thisisus.school.member.domain.Role.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +23,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import thisisus.school.auth.exception.AlreadyRegisteredEmailException;
+import thisisus.school.chatting.domain.ChatRequest;
 import thisisus.school.chatting.exception.CannotRequestChatToStudentException;
+import thisisus.school.post.domain.Post;
 
 @Entity
 @Getter
@@ -38,6 +44,12 @@ public class Member {
 	private Role role;
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
+	@OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<Post> posts = new ArrayList<>();
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ChatRequest> teacher = new ArrayList<>();
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ChatRequest> student = new ArrayList<>();
 	private LocalDate deletedAt;
 
 	@Builder
@@ -66,7 +78,7 @@ public class Member {
 		this.deletedAt = LocalDate.now().plus(Period.ofMonths(3));
 	}
 
-	public void reRegisterIfDeleted(){
+	public void reRegisterIfDeleted() {
 		if (this.getMemberStatus().equals(DELETED)) {
 			this.reRegistration();
 		} else {
@@ -74,8 +86,8 @@ public class Member {
 		}
 	}
 
-	public void validateTeacherRole(){
-		if(!this.role.equals(TEACHER)){
+	public void validateTeacherRole() {
+		if (!this.role.equals(TEACHER)) {
 			throw new CannotRequestChatToStudentException();
 		}
 	}
