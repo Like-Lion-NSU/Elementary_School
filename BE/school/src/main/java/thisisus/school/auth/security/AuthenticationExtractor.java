@@ -1,4 +1,4 @@
-package thisisus.school.auth.config;
+package thisisus.school.auth.security;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 

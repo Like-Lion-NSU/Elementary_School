@@ -1,4 +1,4 @@
-package thisisus.school.auth.infrastructure;
+package thisisus.school.auth.security;
 
 import static thisisus.school.common.exception.ExceptionCode.*;
 
@@ -38,7 +38,7 @@ public class JwtTokenProvider {
 
 	@Value("${secret}")
 	private String secretKey;
-	private static long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;
+	private static long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 3;
 	private static long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;
 
 	private SecretKey key;

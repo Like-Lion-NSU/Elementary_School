@@ -1,4 +1,4 @@
-package thisisus.school.auth.infrastructure;
+package thisisus.school.auth.security;
 
 import org.springframework.stereotype.Component;
 
