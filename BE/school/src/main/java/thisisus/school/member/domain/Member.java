@@ -25,6 +25,7 @@ import lombok.ToString;
 import thisisus.school.auth.exception.AlreadyRegisteredEmailException;
 import thisisus.school.chatting.domain.ChatRequest;
 import thisisus.school.chatting.exception.CannotRequestChatToStudentException;
+import thisisus.school.comment.domain.Comment;
 import thisisus.school.post.domain.Post;
 
 @Entity
@@ -46,6 +47,8 @@ public class Member {
 	private MemberStatus memberStatus;
 	@OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Post> posts = new ArrayList<>();
+	@OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
 	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ChatRequest> teacher = new ArrayList<>();
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
