@@ -2,7 +2,7 @@ package thisisus.school.member.repository;
 
 import static thisisus.school.member.domain.QMember.*;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -16,10 +16,10 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 	private final EntityManager entityManager;
 
 	@Override
-	public long deleteByDeletedAt() {
+	public long deleteByIdIn(List<Long> ids) {
 		long count = queryFactory
 			.delete(member)
-			.where(member.deletedAt.eq(LocalDate.now()))
+			.where(member.id.in(ids))
 			.execute();
 
 		entityManager.clear();
