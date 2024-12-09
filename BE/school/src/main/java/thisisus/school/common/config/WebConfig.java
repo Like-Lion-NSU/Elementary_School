@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import lombok.RequiredArgsConstructor;
 import thisisus.school.auth.controller.AuthenticatedMemberResolver;
 import thisisus.school.auth.controller.interceptor.AuthenticationInterceptor;
-import thisisus.school.auth.infrastructure.JwtTokenProvider;
+import thisisus.school.auth.security.JwtTokenProvider;
 
 @Configuration
 @RequiredArgsConstructor

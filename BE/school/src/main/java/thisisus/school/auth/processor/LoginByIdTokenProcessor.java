@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import thisisus.school.auth.dto.response.MemberInfoFromIdToken;
 import thisisus.school.auth.exception.InvalidTokenException;
-import thisisus.school.auth.infrastructure.JwtTokenProvider;
 import thisisus.school.auth.infrastructure.kakao.KakaoProperties;
 import thisisus.school.auth.infrastructure.oidc.PublicKeyDto;
 import thisisus.school.auth.infrastructure.oidc.PublicKeysDto;
+import thisisus.school.auth.security.JwtTokenProvider;
 
 @Component
 @RequiredArgsConstructor

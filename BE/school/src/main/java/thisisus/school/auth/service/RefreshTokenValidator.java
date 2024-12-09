@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import thisisus.school.auth.exception.AlreadyLoggedOutException;
 import thisisus.school.auth.exception.InvalidTokenException;
 import thisisus.school.auth.exception.MemberRefreshTokenMismatchException;
-import thisisus.school.auth.infrastructure.AuthTokenGenerator;
+import thisisus.school.auth.security.AuthTokenGenerator;
 import thisisus.school.redis.Auth.domain.RefreshToken;
 import thisisus.school.redis.Auth.service.RefreshTokenRedisService;
 

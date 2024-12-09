@@ -11,11 +11,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import lombok.AllArgsConstructor;
 import thisisus.school.auth.config.Auth;
-import thisisus.school.auth.config.AuthenticationExtractor;
 import thisisus.school.auth.dto.response.AuthInfoResponse;
 import thisisus.school.auth.exception.AccessDeniedResourceException;
-import thisisus.school.auth.infrastructure.JwtTokenProvider;
-import thisisus.school.member.domain.Role;
+import thisisus.school.auth.security.AuthenticationExtractor;
+import thisisus.school.auth.security.JwtTokenProvider;
 
 @Component
 @AllArgsConstructor

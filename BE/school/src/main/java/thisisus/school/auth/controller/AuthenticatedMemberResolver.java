@@ -13,9 +13,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import lombok.RequiredArgsConstructor;
 import thisisus.school.auth.config.AuthenticatedMemberId;
-import thisisus.school.auth.config.AuthenticationExtractor;
 import thisisus.school.auth.exception.InvalidTokenException;
-import thisisus.school.auth.infrastructure.JwtTokenProvider;
+import thisisus.school.auth.security.AuthenticationExtractor;
+import thisisus.school.auth.security.JwtTokenProvider;
 
 @Component
 @RequiredArgsConstructor

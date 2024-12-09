@@ -19,6 +19,7 @@ public enum ExceptionCode {
 	NOT_FOUND_MEMBER(NOT_FOUND, "사용자를 찾을 수 없습니다."),
 	NOT_FOUND_EMAIL(NOT_FOUND, "이메일이 존재하지 않습니다."),
 	NOT_FOUND_CHATROOM(NOT_FOUND, "채팅방이 존재하지 않습니다."),
+	NOT_FOUND_COMMENT(NOT_FOUND, "댓글이 존재하지 않습니다."),
 	EXPIRED_TOKEN(UNAUTHORIZED, "토큰이 만료되었습니다."),
 	INCORRECT_TOKEN(UNAUTHORIZED, "올바르지 않는 토큰입니다."),
 	ALREADY_REGISTERED_EMAIL(CONFLICT, "이미 등록된 이메일입니다."),
